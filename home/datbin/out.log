@@ -1,0 +1,21 @@
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr/final
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr/final
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr/fcst
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/upr/fcst
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc/final
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc/final
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc/fcst
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/veri_dat/sfc/fcst
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp/bad_sams_input
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp/bad_sams_input
+recursive /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp/bad_sams_input/GWPME
+Removing files in /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM/tmp/bad_sams_input/GWPME

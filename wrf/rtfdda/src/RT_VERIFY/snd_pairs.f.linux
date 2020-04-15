@@ -1,0 +1,496 @@
+  program snd_pairs
+
+  USE MM5_HEADER
+
+  character(len=2) :: opt
+  integer :: end_index1,end_index2,end_index3
+
+  integer, parameter :: ks=40,badvalue=-8888.
+  real, dimension(ks) :: um,vm,tm,qm,pm,rhm,wsm,wdm
+  real, dimension(ks) :: t_int,u_int,v_int,q_int,rh_int,ws_int,wd_int
+  integer, dimension(ks) :: t_int_qc,u_int_qc,v_int_qc,q_int_qc,rh_int_qc, &
+                            ws_int_qc,wd_int_qc
+  real, allocatable, dimension(:,:,:) :: uc,vc,t,q,pp,prs
+  real, allocatable, dimension(:,:) :: pstr,ter,xlat,xlon
+  real, allocatable, dimension(:) :: sigma
+  real, allocatable, dimension(:,:,:,:) :: data
+  real, allocatable, dimension(:) :: t_ps,q_ps,u_ps,v_ps,prs_ps
+
+  integer, parameter :: snd_unit=61,mm5_unit=71,out_unit=81
+  integer :: domain_id
+  character :: adomain_id
+
+  integer :: AllocateStatus,flag
+
+  real, allocatable, dimension(:) :: prs_obs,t_obs,td_obs,q_obs,u_obs,v_obs, &
+                                     ws_obs,wd_obs
+  integer, allocatable, dimension(:) :: prs_qc,t_qc,td_qc,ws_qc,wd_qc,q_qc, &
+                                        u_qc,v_qc
+
+  character (len=10) :: atime_new,atime_old='aaaaaaaaaa',mm5_time
+  integer :: t_count
+  logical :: OUTPUT,found,early
+
+  real :: alon,alat,hs,elev
+  real, dimension(50) :: wk,wk1,pwk
+
+  character (len=14) :: atime
+  integer, parameter :: imissing=-8888
+  real, parameter :: missing=-8888.
+  real, parameter :: xn=0.716  !! Lambert Conformal Projection Factor
+  real :: rhcalc
+
+  j=iargc()
+  if(j > 0) then
+    call getarg(1,opt)
+    if(opt /= '-f') then
+      print*,'Flag ',opt,' unknown! Should be either -f or no flag'
+      stop
+    endif
+  endif
+!
+
+  pi=acos(-1.)
+
+  ierr=0
+  icnt=0         !! counter to determine when MM5 arrays need to be deallocated
+  icnt2=0        !! counter to determine when to open the output file
+  irec=0         !! counter for direct access record number
+
+  t_count=0      !! counter to keep track of the time period of MM5 output
+
+SND:  do while(ierr == 0)
+
+     read(snd_unit,*,IOSTAT=ierr) atime,alat,alon,n_levels
+     if(ierr /= 0) exit SND
+     call nearest_hour(atime,atime_new)
+
+     allocate(prs_obs(n_levels), stat=AllocateStatus)
+     allocate(prs_qc(n_levels),  stat=AllocateStatus)
+     allocate(t_obs(n_levels),   stat=AllocateStatus)
+     allocate(t_qc(n_levels),    stat=AllocateStatus)
+     allocate(td_obs(n_levels),  stat=AllocateStatus)
+     allocate(td_qc(n_levels),   stat=AllocateStatus)
+     allocate(ws_obs(n_levels),  stat=AllocateStatus)
+     allocate(ws_qc(n_levels),   stat=AllocateStatus)
+     allocate(wd_obs(n_levels),  stat=AllocateStatus)
+     allocate(wd_qc(n_levels),   stat=AllocateStatus)
+     allocate(q_obs(n_levels),   stat=AllocateStatus)
+     allocate(q_qc(n_levels),    stat=AllocateStatus)
+     allocate(u_obs(n_levels),   stat=AllocateStatus)
+     allocate(v_obs(n_levels),   stat=AllocateStatus)
+     allocate(u_qc(n_levels),    stat=AllocateStatus)
+     allocate(v_qc(n_levels),    stat=AllocateStatus)
+
+     do k=1,n_levels
+        read(snd_unit,*) iprs_obs,prs_qc(k),it_obs,t_qc(k),itd_obs,td_qc(k), &
+                   iws_obs,ws_qc(k),iwd_obs,wd_qc(k)
+
+        if(iprs_obs > imissing) then
+          prs_obs(k)=iprs_obs*0.01      ! now in mb
+        else
+          prs_obs(k)=missing
+        endif
+
+        if(it_obs > imissing) then
+          t_obs(k)=it_obs*0.01          ! in K
+        else
+          t_obs(k)=missing
+        endif
+
+        if(itd_obs > imissing) then
+          td_obs(k)=itd_obs*0.01        ! in K
+        else
+          td_obs(k)=missing
+        endif
+
+        if(iws_obs > imissing) then
+          ws_obs(k)=iws_obs*0.01           ! in m/s
+        else
+          ws_obs(k)=missing
+        endif
+
+        wd_obs=iwd_obs*1.             ! in deg
+        call qfromttd(t_obs(k),t_qc(k),td_obs(k),td_qc(k), &
+                      prs_obs(k),prs_qc(k),qv,iqc,missing)
+        q_obs(k)=qv
+        q_qc(k)=iqc
+
+        if(ws_obs(k) > missing .and. wd_obs(k) > missing) then
+          u_obs(k)=-ws_obs(k)*sin(wd_obs(k)*pi/180.)
+          v_obs(k)=-ws_obs(k)*cos(wd_obs(k)*pi/180.)
+        else
+          u_obs(k)=missing
+          v_obs(k)=missing
+        endif
+
+        u_qc(k)=max(ws_qc(k),wd_qc(k))
+        v_qc(k)=u_qc(k)
+
+     enddo
+!
+!    Find the matching MM5 output time
+!
+     if(atime_new /= atime_old) then      !! ready to ready new MM5 data
+
+       if(icnt > 0) then
+         deallocate(uc)
+         deallocate(vc)
+         deallocate(t)
+         deallocate(q)
+         deallocate(sigma)
+         deallocate(pp)
+         deallocate(pstr)
+         deallocate(xlat)
+         deallocate(xlon)
+         deallocate(ter)
+         deallocate(prs)
+       endif
+
+       found=.FALSE.    !! logical variable to keep track of whether a
+                        !! specific soundings have a matching time with MM5
+       read(mm5_unit,iostat=mm5_ierr) flag
+MM5:   do while(mm5_ierr == 0)
+
+          if(flag == 0) then
+            read(mm5_unit,iostat=ier) bhi,bhr,bhic,bhrc
+            if(ier/=0) then
+               write(*,'("Error reading big header")')
+               call abort()
+            endif
+
+            p0=bhr(2,5)
+            ptop=bhr(2,2)
+            p0mb=p0/100.
+            ts0=bhr(3,5)
+            tlp=bhr(4,5)
+            xlonc=bhr(3,1)        !! in degrees
+            domain_id=bhi(13,1)
+            write(adomain_id,'(i1)') domain_id
+
+          elseif(flag == 1) then
+
+            OUTPUT=.FALSE.   !! logical variable to keep track of whether a
+                             !! specific time period of MM5 should be
+                             !! considered in matching the soundings
+
+            read(mm5_unit,iostat=ier) ndim,start_index,end_index,time, &
+                staggering, ordering, current_date, name, units, description
+            if(ier/=0) then
+               write(*,'("Error reading subheader")')
+               call abort()
+            endif
+!
+            if(index(opt,'-p') > 0) then      !! When dealing with prilim only,
+              if(t_count < 3) OUTPUT=.TRUE.   !! only first 3 output times used.
+            elseif(index(opt,'-f') > 0) then  !! When dealing with fcst only,
+              if(t_count >= 3) OUTPUT=.TRUE.  !! skip first 3 output times.
+            else                              !! When dealing with FINAL,
+              OUTPUT=.TRUE.                   !! all output times are used.
+            endif
+
+            mm5_time=current_date(1:4)//current_date(6:7)// &
+                     current_date(9:10)//current_date(12:13)
+
+            if(mm5_time > atime_new) then
+
+              early=.TRUE.    !! if early is true, it means the specific snd
+                              !! time is before the 1st MM5 output time period
+            else
+              if(mm5_time == atime_new) then
+                found=.TRUE.
+              endif
+              early=.FALSE.
+            endif
+
+            if(.not. found .or. .not. OUTPUT) then
+              read(mm5_unit) dummy
+            else
+
+              icnt=icnt+1
+
+              if (ndim == 1) then
+                 allocate(data(end_index(1), 1, 1, 1))
+              elseif (ndim == 2) then
+                 allocate(data(end_index(1), end_index(2), 1, 1))
+              elseif (ndim == 3) then
+                 allocate(data(end_index(1), end_index(2), end_index(3), 1))
+              endif
+!
+              read(mm5_unit) data
+!
+              if(name(1:4) == 'U   ') then
+                allocate(uc(end_index(1),end_index(2),end_index(3)))
+                do k=1,end_index(3)
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   uc(i,j,k)=0.25*(data(i,j,k,1)+data(i+1,j,k,1)+ &
+                                   data(i,j+1,k,1)+data(i+1,j+1,k,1))
+                enddo
+                enddo
+                enddo
+              elseif(name(1:4) == 'V   ') then
+                allocate(vc(end_index(1),end_index(2),end_index(3)))
+                do k=1,end_index(3)
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   vc(i,j,k)=0.25*(data(i,j,k,1)+data(i+1,j,k,1)+ &
+                                   data(i,j+1,k,1)+data(i+1,j+1,k,1))
+                enddo
+                enddo
+                enddo
+              elseif(name(1:4) == 'T   ') then
+                allocate(t(end_index(1),end_index(2),end_index(3)))
+                do k=1,end_index(3)
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   t(i,j,k)=data(i,j,k,1)
+                enddo
+                enddo
+                enddo
+                end_index3=end_index(3)
+              elseif(name(1:4) == 'Q   ') then
+                allocate(q(end_index(1),end_index(2),end_index(3)))
+                do k=1,end_index(3)
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   q(i,j,k)=data(i,j,k,1)
+                enddo
+                enddo
+                enddo
+              elseif(name(1:4) == 'SIGM' ) then
+                allocate(sigma(end_index(1)))
+                do k=1,end_index(1)
+                   sigma(k)=data(k,1,1,1)
+                enddo
+              elseif(name(1:4) == 'PP  ') then
+                allocate(pp(end_index(1),end_index(2),end_index(3)))
+                do k=1,end_index(3)
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   pp(i,j,k)=data(i,j,k,1)
+                enddo
+                enddo
+                enddo
+              elseif(name(1:8) == 'PSTARCRS') then
+                allocate(pstr(end_index(1),end_index(2)))
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   pstr(i,j)=data(i,j,1,1)
+                enddo
+                enddo
+                end_index1=end_index(1)
+                end_index2=end_index(2)
+              elseif(name(1:8) == 'LATITCRS') then
+                allocate(xlat(end_index(1),end_index(2)))
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   xlat(i,j)=data(i,j,1,1)
+                enddo
+                enddo
+              elseif(name(1:8) == 'LONGICRS') then
+                allocate(xlon(end_index(1),end_index(2)))
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   xlon(i,j)=data(i,j,1,1)
+                enddo
+                enddo
+              elseif(name(1:8) == 'TERRAIN ') then
+                allocate(ter(end_index(1),end_index(2)))
+                do i=1,end_index(1)
+                do j=1,end_index(2)
+                   ter(i,j)=data(i,j,1,1)
+                enddo
+                enddo
+              endif                                                                 
+              deallocate(data)
+
+            endif
+
+          elseif(flag == 2) then
+
+            t_count=t_count+1      !! increment the MM5 time period count
+
+            if(found) then
+              if(OUTPUT) then
+                allocate(prs(end_index1,end_index2,end_index3))
+                do kk=1,end_index3
+                do ii=1,end_index1
+                do jj=1,end_index2
+                   prs(ii,jj,kk)=(pstr(ii,jj)*sigma(kk)+ptop+pp(ii,jj,kk))*0.01
+                enddo
+                enddo
+                enddo
+              endif
+              exit MM5
+            endif
+
+            if(early) exit MM5
+
+          endif
+
+          read(mm5_unit,iostat=mm5_ierr) flag
+
+       enddo MM5
+
+     endif
+
+     if(.not. found .and. .not. early) then
+       print*,'No matching MM5 output can be found for time: ',atime
+       call abort()
+     endif
+
+     atime_old=atime_new
+
+     if(.not. OUTPUT) cycle SND
+     if(early) cycle SND
+
+     allocate(t_ps(end_index3))
+     allocate(q_ps(end_index3))
+     allocate(u_ps(end_index3))
+     allocate(v_ps(end_index3))
+     allocate(prs_ps(end_index3))
+
+     call pseudo_snd(alat,alon,end_index1,end_index2,end_index3, &
+                     xlat,xlon,t,t_ps,ifound)
+     call pseudo_snd(alat,alon,end_index1,end_index2,end_index3, &
+                     xlat,xlon,q,q_ps,ifound)
+     call pseudo_snd(alat,alon,end_index1,end_index2,end_index3, &
+                     xlat,xlon,uc,u_ps,ifound)
+     call pseudo_snd(alat,alon,end_index1,end_index2,end_index3, &
+                     xlat,xlon,vc,v_ps,ifound)
+     call pseudo_snd(alat,alon,end_index1,end_index2,end_index3, &
+                     xlat,xlon,prs,prs_ps,ifound)
+
+
+     if(ifound == 1) then
+
+       call sig2p(t_ps,tm,prs_ps,2,end_index3,ks,missing)
+       call sig2p(u_ps,um,prs_ps,1,end_index3,ks,missing)
+       call sig2p(v_ps,vm,prs_ps,1,end_index3,ks,missing)
+       call sig2p(q_ps,qm,prs_ps,1,end_index3,ks,missing)
+
+       call vertical_interp(t_obs,t_int,t_qc,t_int_qc,prs_obs,ks, &
+                            n_levels,missing)
+       call vertical_interp(u_obs,u_int,u_qc,u_int_qc,prs_obs,ks, &
+                            n_levels,missing)
+       call vertical_interp(v_obs,v_int,v_qc,v_int_qc,prs_obs,ks, &
+                            n_levels,missing)
+       call vertical_interp(q_obs,q_int,q_qc,q_int_qc,prs_obs,ks, &
+                            n_levels,missing)
+
+       arg=(alon-xlonc)*xn*pi/180.
+       do k=1,ks
+          if(um(k) > missing .and. vm(k) > missing) then
+            u=um(k)*cos(arg)+vm(k)*sin(arg)
+            v=-um(k)*sin(arg)+vm(k)*cos(arg)
+            wsm(k)=sqrt(um(k)**2+vm(k)**2)
+            wdm(k)=(1.5*pi-atan2(v,u))*180./pi
+            if(wdm(k) > 360.) wdm(k)=wdm(k)-360.
+          else
+            wsm(k)=missing
+            wdm(k)=missing
+          endif
+
+          if(u_int(k) > missing .and. v_int(k) > missing) then
+            ws_int(k)=sqrt(u_int(k)**2+v_int(k)**2)
+            wd_int(k)=(1.5*pi-atan2(v_int(k),u_int(k)))*180./pi
+            if(wd_int(k) >  360.) wd_int(k)=wd_int(k)-360.
+          else
+            ws_int(k)=missing
+            wd_int(k)=missing
+          endif
+          ws_int_qc(k)=max(u_int_qc(k),v_int_qc(k))
+          wd_int_qc(k)=ws_int_qc(k)
+
+!         Calculate RH for both MM5 and Obs
+
+          if(k == 1) then
+            p=1010.
+          else
+            p=1000.-(k-2)*25.
+          endif
+
+          if(tm(k) > missing .and. qm(k) > missing) then
+            rhm(k)=rhcalc(tm(k),qm(k),p)
+          else
+            rhm(k)=missing
+          endif
+
+          if(t_int(k) > missing .and. q_int(k) > missing) then
+            rh_int(k)=rhcalc(t_int(k),q_int(k),p)
+          else
+            rh_int(k)=missing
+          endif
+
+          rh_int_qc(k)=max(t_int_qc(k),q_int_qc(k))
+
+       enddo
+
+       icnt2=icnt2+1
+
+!      if(icnt2 == 1) open(out_unit,file='snd_pairs_domain'//adomain_id, &
+!                          status='REPLACE')
+       if(icnt2 == 1) open(out_unit,file='snd_pairs_domain'//adomain_id, &
+                           status="REPLACE", &
+                           access='direct', &
+                           recl=64)
+
+!      write(out_unit,'(a10,f7.2,f8.2,i2)') atime_new, alat, alon, domain_id
+
+       irec=irec+1
+       write(out_unit,rec=irec) atime_new, alat, alon, domain_id
+!      call write_snd_pairs(out_unit,ks,tm,t_int,t_int_qc,qm,q_int,q_int_qc, &
+!                           rhm,rh_int,rh_int_qc,wsm,ws_int,ws_int_qc, &
+!                           wdm,wd_int,wd_int_qc,missing)
+
+       call write_snd_pairs1(out_unit,ks,tm,t_int,t_int_qc,qm,q_int,q_int_qc, &
+                            rhm,rh_int,rh_int_qc,wsm,ws_int,ws_int_qc, &
+                            wdm,wd_int,wd_int_qc,missing,irec)
+
+     endif
+
+     !deallocate(t_ps)      !! PGF does not need to deallocate these arrays
+     !deallocate(q_ps)      !! because they have been passed on to subroutine
+     !deallocate(u_ps)      !! sig2p and dealloacated there after exiting the
+     !deallocate(v_ps)      !! subroutine
+     !deallocate(prs_ps)
+
+     deallocate(prs_obs)
+     deallocate(prs_qc)
+     deallocate(t_obs)
+     deallocate(t_qc)
+     deallocate(td_obs)
+     deallocate(td_qc)
+     deallocate(ws_obs)
+     deallocate(ws_qc)
+     deallocate(wd_obs)
+     deallocate(wd_qc)
+     deallocate(q_obs)
+     deallocate(q_qc)
+     deallocate(u_obs)
+     deallocate(u_qc)
+     deallocate(v_obs)
+     deallocate(v_qc)
+
+  enddo SND
+
+  end program snd_pairs
+!
+!
+!
+  function rhcalc(t,q,pm)
+!
+!   To ensure this function works properly, temperature "t" has to be in K,
+!   whereas mixing ration "q" has to be in kg/kg (or g/g), and pressure "pm"
+!   in mb.
+! 
+    es=10**(-2937.4/t-4.9283*log10(t)+23.5518)  !! in mb
+    re=q/(1.-q)
+    ee=pm*re/(0.622+re)
+    rhcalc=ee/es*100.
+    if(rhcalc < 0.) rhcalc=0.
+    if(rhcalc > 100.) rhcalc=100.
+
+  return
+  end function rhcalc

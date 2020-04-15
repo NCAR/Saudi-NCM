@@ -1,0 +1,18 @@
+1,1           number of tiles and factor
+30.,  -78.,   start lat and lon
+1301,1001, 21   total size of the matched tiles(nxrad,nyrad,nzrad) 
+tile10b/mosaic3d_nc
+tile10a/mosaic3d_nc
+tile8/mosaic3d_nc
+tile9/mosaic3d_nc
+tile2a/mosaic3d_nc
+tile4/mosaic3d_nc
+tile5/mosaic3d_nc
+tile7/mosaic3d_nc
+tile3/mosaic3d_nc
+tile6a/mosaic3d_nc
+tile6b/mosaic3d_nc
+
+tile1a/mosaic3d_nc
+tile1b/mosaic3d_nc
+tile2b/mosaic3d_nc

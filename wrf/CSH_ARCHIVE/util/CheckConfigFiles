@@ -1,0 +1,75 @@
+#!/bin/csh -f
+#---------------------------------------------------------
+# 
+# check if all the configuration files exist.
+# This script returns TWO non-error values
+#   0   Config files exist - use $MM5HOST suffix
+#   1   Config files exist - use default DPG configuration
+#
+#  Any other value indicates an error
+#  D. Hansen, NCAR (Sep, 98)
+#
+#---------------------------------------------------------
+    
+if ( $#argv != 0 ) then
+  echo "Usage:" $0 
+  exit 2
+endif
+
+setenv SUBSYSTEM MM5_UTILITIES
+
+if ( ! ${?MM5HOME} ) then
+  echo "CSH variable MM5HOME not set"
+  logger -p local4.emerg -t "${SUBSYSTEM}" "CSH variable MM5HOME not set"
+  exit 3
+endif
+if ( ! ${?MM5HOST} ) then
+  echo "CSH variable MM5HOST not set"
+  logger -p local4.emerg -t "${SUBSYSTEM}" "CSH variable MM5HOST not set"
+  setenv MM5HOST `hostname`
+  if ( ! ${?MM5HOST} ) then
+    exit 4
+  else 
+    logger -p local4.info -t "${SUBSYSTEM}" "HOST set to $MM5HOST"
+  endif
+endif
+
+set CFILE="${MM5HOME}/cycle_code/CONFIG_FILES/cshrc_"
+
+# CHECK TO SEE IF USING MM5HOST SUFFIX
+if ( -e ${CFILE}user.mm5sys.${MM5HOST} ) then
+ echo "Using $MM5HOST specific CSH ENVIRONMENT"
+ setenv  USRFILE ${CFILE}user.mm5sys.${MM5HOST};    
+ setenv  FTPFILE ${CFILE}ftpsites.mm5sys.${MM5HOST};    
+ setenv  SIZFILE ${CFILE}sizes.mm5sys.${MM5HOST};    
+ setenv USEHOST TRUE
+else
+ echo "Using DEFAULT (DUGWAY) CSH ENVIRONMENT"
+ setenv  USRFILE ${CFILE}user.mm5sys;
+ setenv  FTPFILE ${CFILE}ftpsites.mm5sys;
+ setenv  SIZFILE ${CFILE}sizes.mm5sys;
+ setenv USEHOST FALSE
+endif
+
+if ( ! -e $USRFILE ) then
+  logger -p local4.emerg -t "${SUBSYSTEM}" "MISSING FILE -> $USRFILE"
+  echo "MISSING FILE -> $USRFILE"
+  exit 5
+endif
+#if ( ! -e $FTPFILE ) then
+#  echo "MISSING FILE -> $FTPFILE"
+#  logger -p local4.emerg -t "${SUBSYSTEM}" "MISSING FILE -> $FTPFILE"
+#  exit 6
+#endif
+if ( ! -e $SIZFILE ) then
+  echo "MISSING FILE -> $SIZFILE"
+  logger -p local4.emerg -t "${SUBSYSTEM}" "MISSING FILE -> $SIZFILE"
+  exit 7
+endif
+
+# success
+if ( $USEHOST == "TRUE" ) then
+  exit 0
+else 
+  exit 1
+endif

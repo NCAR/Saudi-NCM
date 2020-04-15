@@ -1,0 +1,32 @@
+11-JAN-2011		Compiling RIP v4.6
+===================================================================
+1. Modify arch/configure.defaults
+
+17c17
+< LOCAL_LIBS    = -L/usr/X11R6/lib -lX11 -L/usr/local/pgi/linux86/lib -lpgftnrtl -lpgc -L/usr/lib/gcc/i386-redhat-linux/3.4.6 -lg2c
+---
+> LOCAL_LIBS    = 
+
+
+2. Modify arch/preamble
+
+27c27
+< NETCDFLIB     = -L${NETCDF}/lib -lnetcdf
+---
+> NETCDFLIB     = -L${NETCDF}/lib -lnetcdff -lnetcdf
+31c31
+< NCARGLIBS     = -L${NCARG_ROOT}/lib -lncarg -lcgm -lncarg_gks -lncarg_c -lX11 -lm
+---
+> NCARGLIBS     = -L${NCARG_ROOT}/lib -lncarg -lcgm -lncarg_gks -lncarg_c -L/usr/lib64 -lX11 -lm
+
+3. Create _Makefile.auto_build
+===================================================================
+RAL code change: (Apr 23, 2012, Sheu):
+
+  -- src/frtitle.f, line 79, change from
+
+     ilast(icount)=47 to
+
+     ilast(icount)=60
+
+     to accommodate more characters in the title string.

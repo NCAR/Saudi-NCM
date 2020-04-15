@@ -1,0 +1,28 @@
+207a208
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+208a210,211
+>                         grid%RQRNDGDTEN, grid%RQSNDGDTEN, grid%RQGNDGDTEN,&
+>                         grid%RQCNDGDTEN, grid%RQINDGDTEN,                 &
+209a213
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1387a1392
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+1388a1394,1396
+>                   RQRNDGDTEN=grid%rqrndgdten,RQSNDGDTEN=grid%rqsndgdten,RQGNDGDTEN=grid%rqgndgdten, &
+>                   RQCNDGDTEN=grid%rqcndgdten,RQINDGDTEN=grid%rqindgdten,  &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+1407a1416
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+1408a1418,1427
+>                   qr_ndg_old=fdda3d(ims,kms,jms,P_qr_ndg_old),            &
+>                   qs_ndg_old=fdda3d(ims,kms,jms,P_qs_ndg_old),            &
+>                   qg_ndg_old=fdda3d(ims,kms,jms,P_qg_ndg_old),            &
+>                   qc_ndg_old=fdda3d(ims,kms,jms,P_qc_ndg_old),            &
+>                   qi_ndg_old=fdda3d(ims,kms,jms,P_qi_ndg_old),            &
+>                   qr_ndg_new=fdda3d(ims,kms,jms,P_qr_ndg_new),            &
+>                   qs_ndg_new=fdda3d(ims,kms,jms,P_qs_ndg_new),            &
+>                   qg_ndg_new=fdda3d(ims,kms,jms,P_qg_ndg_new),            &
+>                   qc_ndg_new=fdda3d(ims,kms,jms,P_qc_ndg_new),            &
+>                   qi_ndg_new=fdda3d(ims,kms,jms,P_qi_ndg_new),            &
+1409a1429
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods

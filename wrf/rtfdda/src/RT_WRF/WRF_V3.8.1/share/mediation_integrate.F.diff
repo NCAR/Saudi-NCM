@@ -1,0 +1,16 @@
+198a199
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation
+213,216c214,219
+<    CALL calc_ts(grid)
+< 
+<    ! Compute track variables 
+<    CALL track_driver(grid)
+---
+>    !
+>    ! modified by WC: 2011-03-21
+>    ! only call this when MM5 time series not active
+>    !
+>    if (grid%use_mm5_ts .NE. 1 ) CALL calc_ts(grid)
+>    !
+219a223
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation

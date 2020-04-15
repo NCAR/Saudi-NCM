@@ -1,0 +1,6 @@
+no wind rotation -- let little_r do it.
+no average (zebra may have done it).
+
+--- Jun 29, 2015, Sheu ---
+New implementation uses crfil.f90, which strictly uses dynamically allocated
+memory and rids many legacy code.

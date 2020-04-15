@@ -1,0 +1,133 @@
+#! /bin/csh -f
+#
+# $RUNDIR/mm5home/cycle_code/CONFIG_FILES/cshrc_sizes.mm5sys
+# This file contains csh environment variables
+# used in the right_size comparisons
+#
+#setenv DGOUTSIZE 10373816    
+setenv DGOUTSIZE -1
+# DATAGRID OUTPUT FILE SIZE, used in A_degrib_eta.csh, degrib_eta.csh, degrib_historical.csh
+#
+#setenv DGTINTSIZE 93364344    
+setenv DGTINTSIZE -1    
+# DATAGRID time interpolated FILE SIZE, used in B_missing_times.csh, C_no_super.csh, 
+# D_new_sfc.csh, add_snow_rawins_fdda.csh, missing_times.csh, new_sfc.csh, 
+# new_sfc_fdda.csh, no_super.csh, rap_fdda.csh, three_h_fdda.csh
+#
+#setenv RAPOUTSIZE 51869080
+setenv RAPOUTSIZE -1
+# RAP OUTPUT FILE SIZE, used in G_rap.csh, J_add_snow.csh, add_snow.csh, 
+# add_snow_rawins.csh, no_super_fdda.csh, rap.csh, H_plot_obs.csh, plot_obs.csh
+#
+#setenv BDYOUTSIZE 10982600
+setenv BDYOUTSIZE -1
+# BDYOUT FILE SIZE, used in J_interp_front.csh, K_interp_front.csh
+#
+# setenv MMIND1SIZE 49564120
+setenv MMIND1SIZE -1
+# Domain 1 MMINPUT FILE SIZE, used in J_interp_front.csh, K_add_snow.csh, K_interp_front.csh
+setenv LOWBDY1SIZE -1
+# Domain 1 LOWBDY FILE SIZE, used in J_interp_front.csh
+#
+setenv MMIND2SIZE 35466960
+# Domain 2 MMINPUT FILE SIZE, used in J_interp_front.csh, K_add_snow.csh, K_interp_front.csh
+#
+setenv MMIND3SIZE 31610340
+# Domain 3 MMINPUT FILE SIZE, used in J_interp_front.csh, K_add_snow.csh, K_interp_front.csh
+#
+setenv MMIND4SIZE 20625540
+# Domain 4 MMINPUT FILE SIZE, used in J_interp_front.csh, K_interp_front.csh
+#
+setenv MMIND4VSIZE 20924040
+# Domain 4 MMINPUT FILE SIZE (V?), used in J_interp_front.csh, K_interp_front.csh
+#
+#setenv MMOUTD1SIZE 303799800
+setenv MMOUTD1SIZE -1
+# Domain 1 MMOUTPUT FILE SIZE, used in L_mm5.csh, mm5_fdda.csh
+#
+#setenv MMOUTD2SIZE 209228400
+setenv MMOUTD2SIZE -1
+# Domain 2 MMOUTPUT FILE SIZE, used in L_mm5.csh, mm5_fdda.csh
+#
+# setenv MMOUTD3SIZE 183356100
+setenv MMOUTD3SIZE -1
+# Domain 3 MMOUTPUT FILE SIZE, used in L_mm5.csh, mm5_fdda.csh
+#
+#setenv MMOUTD1SIZE_840 182279880
+setenv MMOUTD1SIZE_840 -1
+# Domain 1 MMOUTPUT FILE SIZE for 840 minute run, used in L_mm5.csh, mm5_fdda.csh
+#
+# setenv MMOUTD2SIZE_840 125537040
+setenv MMOUTD2SIZE_840 -1
+# Domain 2 MMOUTPUT FILE SIZE for 840 minute run, used in L_mm5.csh, mm5_fdda.csh
+#
+# setenv MMOUTD3SIZE_840 110013660
+setenv MMOUTD3SIZE_840 -1
+# Domain 3 MMOUTPUT FILE SIZE for 840 minute run, used in L_mm5.csh, mm5_fdda.csh
+#
+# setenv FMMIND1SIZE 89215416
+setenv FMMIND1SIZE -1
+# Domain 1 FDDA MMINPUT FILE SIZE, used in add_snow_fdda.csh
+#
+setenv FMMIND2SIZE 63840528
+# Domain 2 FDDA MMINPUT FILE SIZE, used in add_snow_fdda.csh
+#
+setenv FMMIND3SIZE 56898612
+# Domain 3 FDDA MMINPUT FILE SIZE, used in add_snow_fdda.csh
+#
+setenv FMMIND4SIZE 37125972
+# Domain 4 FDDA MMINPUT FILE SIZE, used in add_snow_fdda.csh
+#
+setenv FMMIND4VSIZE 37663272
+# Domain 4 FDDA MMINPUT FILE SIZE (V?), used in add_snow_fdda.csh
+#
+setenv BBDYOUTSIZE 12380360
+# BDYOUT FILE SIZE, used in interp_front.csh
+#
+setenv BMMIND1SIZE 53515480
+# Domain 1 MMINPUT FILE SIZE, used in interp_front.csh
+#
+setenv BMMIND2SIZE 37718160
+# Domain 2 MMINPUT FILE SIZE, used in interp_front.csh
+#
+setenv BMMIND3SIZE 33396420
+# Domain 3 MMINPUT FILE SIZE, used in interp_front.csh
+#
+setenv BMMIND4SIZE 21086820
+# Domain 4 MMINPUT FILE SIZE, used in interp_front.csh
+#
+setenv BMMIND4VSIZE 21421320
+# Domain 4 MMINPUT FILE SIZE (V?), used in interp_front.csh
+#
+setenv CBDYOUTSIZE 21932264
+# BDYOUT FILE SIZE, used in interp_front_fdda.csh
+#
+setenv CMMIND1SIZE 89215416
+# Domain 1 MMINPUT FILE SIZE, used in interp_front_fdds.csh
+#
+setenv CMMIND2SIZE 63840528
+# Domain 2 MMINPUT FILE SIZE, used in interp_front_fdda.csh
+#
+setenv CMMIND3SIZE 56898612
+# Domain 3 MMINPUT FILE SIZE, used in interp_front_fdda.csh
+#
+setenv CMMIND4SIZE 37125972
+# Domain 4 MMINPUT FILE SIZE, used in interp_front_fdda.csh
+#
+setenv CMMIND4VSIZE 37663272 
+# Domain 4 MMINPUT FILE SIZE (V?), used in interp_front_fdda.csh
+#
+setenv BMMOUTD1SIZE 326025200 
+# Domain 1 MMOUTPUT FILE SIZE, used in mm5.csh
+#
+setenv BMMOUTD2SIZE 221890400
+# Domain 2 MMOUTPUT FILE SIZE, used in mm5.csh
+#
+setenv BMMOUTD3SIZE 193401800
+# Domain 3 MMOUTPUT FILE SIZE, used in mm5.csh
+#
+setenv SFCFD1SIZE 32611464
+# Domain 1 SFC FDDA FILE SIZE, used in sfc_fdda.csh
+#
+setenv SFCFD2SIZE 31591368
+# Domain 2 SFC FDDA FILE SIZE, used in sfc_fdda.csh

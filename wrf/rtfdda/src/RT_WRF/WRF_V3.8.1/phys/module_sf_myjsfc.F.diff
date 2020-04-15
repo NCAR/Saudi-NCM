@@ -1,0 +1,40 @@
+163a164
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - MODIS
+165c166,168
+<         PBLH(I,J)=-1.
+---
+> ! yliu 20081112 - use PBLH from the last time step.
+> !       PBLH(I,J)=-1.
+> ! yliu 20081112 end
+167a171
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - MODIS
+259a264
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - MODIS
+262,268c267,274
+<           LPBL=LMH
+<           DO K=LMH-1,1,-1
+<             IF(Q2K(K)<=EPSQ2*FH) THEN
+<               LPBL=K
+<               GO TO 110
+<             ENDIF
+<           ENDDO
+---
+> ! yliu 20081112: use PBLH from the last timestep
+> !!          LPBL=LMH
+> !!          DO K=LMH-1,1,-1
+> !!            IF(Q2K(K)<=EPSQ2*FH) THEN
+> !!              LPBL=K
+> !!              GO TO 110
+> !!            ENDIF
+> !!          ENDDO
+270c276
+<           LPBL=1
+---
+> !!          LPBL=1
+276c282,283
+<  110      PBLH(I,J)=ZHK(LPBL)-ZHK(LMH+1)
+---
+> !! 110      PBLH(I,J)=ZHK(LPBL)-ZHK(LMH+1)
+> ! yliu 20081112 end
+280a288
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - MODIS

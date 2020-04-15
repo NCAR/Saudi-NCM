@@ -1,0 +1,559 @@
+#!/usr/bin/env python
+
+#*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# * Copyright (c) 2018 UCAR
+# * University Corporation for Atmospheric Research (UCAR)
+# * National Center for Atmospheric Research (NCAR)
+# * Research Applications Laboratory (RAL)
+# * P.O. Box 3000, Boulder, Colorado, 80307-3000 USA
+# * All rights reserved. Licenced use only.
+# * Do not copy or distribute without authorization.
+# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+#
+############################################################
+
+'''
+Created on March 16, 2017
+'''
+
+import os
+import sys
+from datetime import date, datetime, timedelta
+import traceback
+import numpy
+import math
+
+from atec.util.DateUtil import LogTime
+from atec.dao.DbActor import DbActor, create_db_actor
+from MapHandler import get_singleton as get_map_handler_singleton
+from Table_QcFieldClimaticData import make_key as make_key_ClimaticData
+from Table_QcThreshold import get_1min_map, get_5min_map, get_15min_map
+from Table_QcThreshold import make_key as make_threshold_key
+try:
+    from Table_SurfaceObsData import Table_SurfaceObsData
+except ImportError:
+    from atec.veri_pair.Table_SurfaceObsData import Table_SurfaceObsData
+try:
+    from BaseObject import BaseObject, debug_message
+except ImportError:
+    from atec.dao.BaseObject import BaseObject, debug_message
+try:
+    from DbConfig import DbConfig
+except ImportError:
+    from atec.config.DbConfig import DbConfig
+
+Use_PyNIO = False
+try:
+    from netCDF4 import Dataset
+except:
+    Use_PyNIO = True
+    import Nio 
+    import PyNIO 
+
+MODULE_NAME = 'sams_qc'
+MODULE_VERSION = '1.0.0.0001'
+
+class sams_qc(BaseObject):
+
+    #DATE_FORMAT_IN_FILE = "%y%m%d"
+    #DATE_FORMAT_YMD = "%Y-%m-%d"
+    
+    #INPUT_SUB_DIRS='final'
+
+    TEMPORAL_TIME_DIFF = 300
+    TEMPORAL_TIME_DIFF_MIN =  60
+    TEMPORAL_TIME_DIFF_MAX = 900
+    
+    SCORE_MAX            =  100
+    SCORE_NOT_DONE       =  -1      # -1
+    SCORE_MISSING        =  -1000   # -2
+    SCORE_NOT_IN_RANGE   =  -2000   # -3
+    SCORE_NOT_IN_RANGE_C =  -4000   # -4
+
+    VAR_LIST = [ 'temp', 'pres', 'wspd' ]
+
+    def __init__(self, range_name=None):
+        super(sams_qc, self).__init__()
+        self.db_actor = None
+        self.map_handler = None
+        if range_name is not None and len(range_name) > 0:
+            self.set_range(range_name)
+ 
+#     def __init__(self):
+#         super(sams_qc, self).__init__()
+#         
+#         self.db_actor = None
+#         self.db_config = None
+#         self.map_handler = None
+#         #if range_name is not None and len(range_name) > 0:
+#         #    self.set_range(range_name)
+
+    def compute_score(self, value, prev_value, time_diff, climatic_data, threshold,
+                      missing_value, threshold_required=True):
+        method_name = 'sams_qc.compute_score()'
+        qc_score = sams_qc.SCORE_MISSING
+        #print('{n}   0. value: {v} score: {sc}'.format(n=method_name, v=value, sc=qc_score))
+        if value is not None and value != missing_value:
+            qc_score = sams_qc.SCORE_NOT_IN_RANGE_C
+            #print('{n}  1. value: {v} score: {sc}'.format(n=method_name, v=value, sc=qc_score))
+            do_temporal_score = True
+            if climatic_data is not None:
+                if value < climatic_data.get_min_value() or value > climatic_data.get_max_value():
+                    do_temporal_score = False
+                #elif prev_value is not numpy.ma.masked:
+                elif prev_value is None or prev_value == missing_value:
+                    print(' Missing previous value ({v})'.format(v=prev_value))
+                    do_temporal_score = False
+            if do_temporal_score:
+                qc_score = sams_qc.SCORE_MAX
+                #print('{n}  2. value: {v} score: {sc}'.format(n=method_name, v=value, sc=qc_score))
+                if math.fabs(time_diff) > sams_qc.TEMPORAL_TIME_DIFF_MAX:
+                    print(' The previous data is too old [{t}]'.format(t=time_diff))
+                else:
+                    diff_value = value - prev_value
+                    if threshold is not None:
+                        qc_score = sams_qc_tools.compute_score(diff_value,
+                                threshold.get_threshold(), threshold.get_threshold_max())
+                        #print('{n}  4. value: {v} score: {sc}'.format(n=method_name, v=value, sc=qc_score))
+                    elif threshold_required:
+                        print(' == ERROR == The temporal threshold is required but does not exist!')
+            #else:
+            #    print('{n} skip temporal QC!!!'.format(n=method_name))
+        #else:
+        #    print('{n}   value is missing:, {v}, {m}'.format(
+        #            n=method_name, v=value, m=missing_value))
+        if self.options.debug:
+            print('     {n}  value: {v} score: {sc}  prev: {pv} time_diff: {td}'.format(
+                    n=method_name, v=value, sc=qc_score, pv=prev_value, td=time_diff))
+        return qc_score
+        
+    def do_QC(self,time_delta,temp,pres,wspd,wdir,prev_temp,prev_pres,prev_wspd,prev_wdir, missing_value):
+        threshold_index = 1
+        if time_delta <= sams_qc.TEMPORAL_TIME_DIFF_MIN:
+            threshold_index = 0
+        elif time_delta <= sams_qc.TEMPORAL_TIME_DIFF:
+            threshold_index = 1
+        if time_delta <= sams_qc.TEMPORAL_TIME_DIFF_MAX:
+            threshold_index = 2
+        temp_qc = self.compute_score(temp, prev_temp, time_delta, self.climatic_data_temp,
+                self.temporal_threshold_temps[threshold_index], missing_value)
+        pres_qc = self.compute_score(pres,prev_pres, time_delta, self.climatic_data_pres,
+                self.temporal_threshold_press[threshold_index], missing_value)
+        wspd_qc = self.compute_score(wspd, prev_wspd, time_delta, self.climatic_data_wspd,
+                self.temporal_threshold_wspds[threshold_index], missing_value)
+        wdir_qc = self.compute_score(wdir, prev_wdir, time_delta, self.climatic_data_wdir,
+                self.temporal_threshold_wdirs[threshold_index], missing_value, threshold_required=False)
+        return (temp_qc,pres_qc,wspd_qc,wdir_qc)
+
+    def find_obs_data_entity(self, station_id, obs_time_str):
+        data_entity = None
+        entity_list = self.dao_entities.get(str(station_id), None)
+        if entity_list is not None:
+            data_entity = entity_list.get(obs_time_str, None)
+        return data_entity
+    
+    #@abstractmethod
+    def get_table_name(self):
+        return sams_qc.TABLE_NAME
+    
+    def get_time_interval(self, time_offset_list):
+        debug = False
+        debug = not debug
+        count_01min = 0
+        count_05min = 0
+        count_15min = 0
+        for t_idx in range(0, len(time_offset_list)-2):
+            time_diff = time_offset_list[t_idx+1] - time_offset_list[t_idx]
+            if time_diff <= sams_qc.TEMPORAL_TIME_DIFF_MIN:
+                count_01min += 1
+            elif time_diff <= sams_qc.TEMPORAL_TIME_DIFF:
+                count_05min += 1
+            elif time_diff <= sams_qc.TEMPORAL_TIME_DIFF_MAX:
+                count_15min += 1
+        time_interval = sams_qc.TEMPORAL_TIME_DIFF     # default is 5 minutes
+        if count_05min >= count_15min:
+            time_interval = sams_qc.TEMPORAL_TIME_DIFF if (count_05min >= count_01min) else 60
+        else:
+            time_interval = sams_qc.TEMPORAL_TIME_DIFF_MAX if (count_15min >= count_01min) else 60
+        if debug:
+            debug_msg = "Time interval: {t} from".format(t=time_interval)
+            if len(time_offset_list) < 10:
+                debug_msg = "{d} {tl}".format(d=debug_msg, tl=time_offset_list)
+            else:
+                debug_msg = "{d} {tl1} .. {tl2}".format(d=debug_msg,
+                        tl1=time_offset_list[:5], tl2=time_offset_list[-5:])
+            debug_msg = "{d}, [{c1}, {c5}, {c15}]".format(d=debug_msg,
+                    c1=count_01min,c5=count_05min,c15=count_15min)
+            self.debug_message(debug_msg, debug)
+        return time_interval
+
+    def set_range(self, range_name):
+        if range_name is None or range_name == "" :
+            print(' === ERROR === %s range_name is missing' % (method_name))
+            sys.exit(-2)
+
+        self.range_name_F = range_name.strip().upper()
+        self.range_name   = self.range_name_F.replace('2','')
+        self.range_name_l = self.range_name.lower()
+        
+        if not hasattr(self, 'db_config'):
+            self.db_config = DbConfig()
+        self.db_name_key = '%s_verification' % (self.range_name_l)
+        self.db_actor  = create_db_actor(self.db_config, self.db_name_key)
+        self.db_conn   = self.db_actor.dbConn
+        self.cursor    = self.db_config.get_db_cursor(self.db_conn)
+        self.map_handler = get_map_handler_singleton(self.db_actor)
+
+        #if self.station_list is None:
+        #    self.station_list = []
+        #if len(self.station_list) == 0:
+        #    self.stations = Stations(self.cursor)
+        #    self.stations.add_stations(base_import_verification.STATION_TABLE_NAME)
+        #print(' stations: [%r]' % stations.get_range_codes())
+        
+        self.field_id_temp = None
+        self.field_id_pres = None
+        self.field_id_wspd = None
+        self.field_id_wdir = None
+        self.field_data_temp = None
+        self.field_data_pres = None
+        self.field_data_wspd = None
+        self.field_data_wdir = None
+        self.climatic_data_temp = None
+        self.climatic_data_pres = None
+        self.climatic_data_wspd = None
+        self.climatic_data_wdir = None
+        self.temporal_threshold_temps = [None, None, None]
+        self.temporal_threshold_press = [None, None, None]
+        self.temporal_threshold_wspds = [None, None, None]
+        self.temporal_threshold_wdirs = [None, None, None]
+        self.dao_entities = {}
+    
+    def setup_qc_data_climatic(self, range_id, climatic_month):
+        climatic_data_map  = self.map_handler.get_climatic_data_map()
+        qc_field_table_map = self.map_handler.qc_field_table_map
+        self.field_data_temp = qc_field_table_map.get('temp')
+        self.field_data_pres = qc_field_table_map.get('pres')
+        self.field_data_wspd = qc_field_table_map.get('wspd_10m')
+        self.field_data_wdir = qc_field_table_map.get('wdir_10m')
+        if self.field_data_temp is not None:
+            self.field_id_temp = self.field_data_temp.get_qc_field_id()
+            self.climatic_data_temp = sams_qc_tools.get_climatic_data(
+                    climatic_data_map, range_id, self.field_id_temp, climatic_month)
+        if self.field_data_pres is not None:
+            self.field_id_pres = self.field_data_pres.get_qc_field_id()
+            self.climatic_data_pres = sams_qc_tools.get_climatic_data(
+                    climatic_data_map, range_id, self.field_id_pres, climatic_month)
+        if self.field_data_wspd is not None:
+            self.field_id_wspd = self.field_data_wspd.get_qc_field_id()
+            self.climatic_data_wspd = sams_qc_tools.get_climatic_data(
+                    climatic_data_map, range_id, self.field_id_wspd, climatic_month)
+        if self.field_data_wdir is not None:
+            self.field_id_wdir = self.field_data_wdir.get_qc_field_id()
+            self.climatic_data_wdir = sams_qc_tools.get_climatic_data(
+                    climatic_data_map, range_id, self.field_id_wdir, climatic_month)
+                    
+        climate_list = [ self.climatic_data_temp, self.climatic_data_pres, self.climatic_data_wspd ]
+        for var_name, climate in zip(sams_qc.VAR_LIST, climate_list):
+            if climate is None:
+                print('Error: check climatic min/max for {v}'.format(v=var_name))
+        
+    def setup_qc_data_temporal(self, range_id, time_interval):
+        #time_offset = QcScoreHandler.get_time_interval_for_threshold(time_interval)
+        
+        if self.field_id_temp is None or self.field_data_pres is None \
+                or self.field_id_wspd is None or self.field_data_wdir is None:
+            qc_field_table_map = self.map_handler.qc_field_table_map
+            if self.field_id_temp is None:
+                self.field_data_temp = qc_field_table_map.get('temp')
+                if self.field_data_temp is not None:
+                    self.field_id_temp = self.field_data_temp.get_qc_field_id()
+            if self.field_data_pres is None:
+                self.field_data_pres = qc_field_table_map.get('pres')
+                if self.field_data_pres is not None:
+                    self.field_id_pres = self.field_data_pres.get_qc_field_id()
+            if self.field_id_wspd is None:
+                self.field_data_wspd = qc_field_table_map.get('wspd_10m')
+                if self.field_data_wspd is not None:
+                    self.field_id_wspd = self.field_data_wspd.get_qc_field_id()
+            if self.field_data_wdir is None:
+                self.field_data_wdir = qc_field_table_map.get('wdir_10m')
+                if self.field_data_wdir is not None:
+                    self.field_id_wdir = self.field_data_wdir.get_qc_field_id()
+            
+        
+        self.time_interval = time_interval
+        time_offset = sams_qc.TEMPORAL_TIME_DIFF
+        thread_index = 1
+        check_thread_index = 1
+        temporal_threshold_map = sams_qc_tools.get_temporal_threshold_map(
+                self.db_actor, time_offset)
+        if temporal_threshold_map is not None:
+            if self.field_id_temp is not None:
+                key = make_threshold_key(range_id, self.field_id_temp)
+                self.temporal_threshold_temps[thread_index] = temporal_threshold_map.get(key, None)
+            if self.field_id_pres is not None:
+                key = make_threshold_key(range_id, self.field_id_pres)
+                self.temporal_threshold_press[thread_index] = temporal_threshold_map.get(key, None)
+            if self.field_id_wspd is not None:
+                key = make_threshold_key(range_id, self.field_id_wspd)
+                self.temporal_threshold_wspds[thread_index] = temporal_threshold_map.get(key, None)
+            if self.field_id_wdir is not None:
+                key = make_threshold_key(range_id, self.field_id_wdir)
+                self.temporal_threshold_wdirs[thread_index] = temporal_threshold_map.get(key, None)
+        
+        thread_index = 0
+        time_offset = sams_qc.TEMPORAL_TIME_DIFF_MIN
+        if time_offset == time_interval:
+            check_thread_index = thread_index
+        temporal_threshold_map_1m = sams_qc_tools.get_temporal_threshold_map(
+                self.db_actor, time_offset)
+        if temporal_threshold_map_1m is not None:
+            if self.field_id_temp is not None:
+                key = make_threshold_key(range_id, self.field_id_temp)
+                self.temporal_threshold_temps[thread_index] = temporal_threshold_map_1m.get(key, None)
+            if self.field_id_pres is not None:
+                key = make_threshold_key(range_id, self.field_id_pres)
+                self.temporal_threshold_press[thread_index] = temporal_threshold_map_1m.get(key, None)
+            if self.field_id_wspd is not None:
+                key = make_threshold_key(range_id, self.field_id_wspd)
+                self.temporal_threshold_wspds[thread_index] = temporal_threshold_map_1m.get(key, None)
+            if self.field_id_wdir is not None:
+                key = make_threshold_key(range_id, self.field_id_wdir)
+                self.temporal_threshold_wdirs[thread_index] = temporal_threshold_map_1m.get(key, None)
+                
+        thread_index = 2
+        time_offset = sams_qc.TEMPORAL_TIME_DIFF_MAX
+        if time_offset == time_interval:
+            check_thread_index = thread_index
+        temporal_threshold_map_15m = sams_qc_tools.get_temporal_threshold_map(
+                self.db_actor, time_offset)
+        if temporal_threshold_map_15m is not None:
+            if self.field_id_temp is not None:
+                key = make_threshold_key(range_id, self.field_id_temp)
+                self.temporal_threshold_temps[thread_index] = temporal_threshold_map_15m.get(key, None)
+            if self.field_id_pres is not None:
+                key = make_threshold_key(range_id, self.field_id_pres)
+                self.temporal_threshold_press[thread_index] = temporal_threshold_map_15m.get(key, None)
+            if self.field_id_wspd is not None:
+                key = make_threshold_key(range_id, self.field_id_wspd)
+                self.temporal_threshold_wspds[thread_index] = temporal_threshold_map_15m.get(key, None)
+            if self.field_id_wdir is not None:
+                key = make_threshold_key(range_id, self.field_id_wdir)
+                self.temporal_threshold_wdirs[thread_index] = temporal_threshold_map_15m.get(key, None)
+                
+        temopral_list = [ self.temporal_threshold_temps[check_thread_index],
+                          self.temporal_threshold_press[check_thread_index],
+                          self.temporal_threshold_wspds[check_thread_index] ]
+        for var_name, temopral in zip(sams_qc.VAR_LIST, temopral_list):
+            if temopral is None:
+                print('Error: check temporal difference for {v}, time interval={t} index={i}'.format(
+                        v=var_name, t=time_interval, i=check_thread_index))
+        print('self.temporal_threshold_temps ',self.temporal_threshold_temps)
+        print('self.temporal_threshold_press ',self.temporal_threshold_press)
+        print('self.temporal_threshold_wspds ',self.temporal_threshold_wspds)
+        
+class convert_tools(object):
+
+    #where:
+    #   e = vapor pressure in mb;
+    #   Td = dew point in deg C;
+    #   p = surface pressure in mb;
+    #   q = specific humidity in kg/kg.
+    #(Note the final specific humidity units are in g/kg = (kg/kg)*1000.0)
+    @staticmethod
+    def compute_specific_humidity1(pres, dew_point):
+        e = 6.112 *math.exp((17.67*dew_point)/(dew_point + 243.5));
+        q = (0.622 * e)/(pres - (0.378 * e))
+        return q * 1000
+
+    @staticmethod
+    def compute_specific_humidity2(pres, dew_point):
+        e = 6.112 *math.exp((17.67*dew_point)/(dew_point + 243.5));
+        r = (0.622 * e)/(pres - e)
+        q = r / (1 + r)
+        return q * 1000
+
+
+#     if ( (t_obs > 0.) .and. (td_obs > 0.) .and. (psfc_obs > 0.) ) then
+#        call qfromttd(t_obs,t_obs_qc,td_obs,td_obs_qc, &
+#                      psfc_obs,psfc_obs_qc,q_obs,q_obs_qc,rmissing)
+#        if(q_obs > rmissing) q_obs=q_obs*1000.    !! in g/kg
+#     elseif ( rh_obs > 0. .and. (t_obs > 0.) .and. (psfc_obs > 0.)) then
+#        call qfromrh(rh_obs,rh_obs_qc,t_obs,t_obs_qc,psfc_obs,psfc_obs_qc, &
+#                     q_obs,q_obs_qc)
+#        if(q_obs > rmissing) q_obs=q_obs*1000.    !! in g/kg
+#     else
+#        q_obs = rmissing
+#        q_obs_qc = -8888
+#     endif
+
+
+#  subroutine qfromttd(t,t_qc,td,td_qc,pp,pp_qc,q,q_qc,rmissing)
+#
+#  real :: t,td,q,xlv,x,rh,es,ee,pp,rmissing
+#  integer :: t_qc,td_qc,pp_qc,q_qc
+#  real, parameter :: eps=0.622, xrv=461.51
+#
+#  if((t < 0.) .or. (td < 0.) .or. (pp < 0.)) then
+#    q=rmissing
+#  else
+#    xlv=(2.5-0.002274*(t-273.15))*1000000.
+#    x=xlv/xrv*(t-td)/t/td
+#    rh=exp(-x)
+#    if(rh > 1.) rh=1.
+#    if(rh < 0.) rh =0.
+#    es=10**(-2937.4/t-4.9283*log10(t)+23.5518)   !! in mb
+#    ee=rh*es                                     !! in mb
+#    q=eps*ee/(pp-ee)                      !! pp needs to be in mb
+#    if (q > 0.1 .or. q < 0.) q=rmissing
+#  endif
+
+#  q_qc=min(t_qc,td_qc,pp_qc)
+#
+#  return
+
+    @staticmethod
+    def compute_specific_humidity_dp(pres, temp, dp, missing_value):
+        eps=0.622
+        xrv=461.51
+        q = missing_value
+        temp_F = temp + 273.15
+        dp_F = dp + 273.15
+        if dp_F >= 0.0 and temp_F >= 0. and pres >= 0.:
+            xlv=(2.5-0.002274*(temp))*1000000.
+            x=xlv/xrv*(temp_F-dp_F)/temp_F/dp_F
+            rh=math.exp(-x)
+            if rh > 1.: rh=1.
+            if rh < 0.: rh =0.
+            es=10**(-2937.4/temp_F-4.9283*math.log10(temp_F)+23.5518)   # in mb
+            ee=rh*es                                     # in mb
+            q=eps*ee/(pres-ee)                      # pp needs to be in mb
+            if q > 0.1 or q < 0.:
+                print('debug reset specific humidity because invalid range {i}'.format(i=q))
+                q = missing_value
+            else:
+                q *= 1000
+        return q
+
+    @staticmethod
+    def compute_specific_humidity_rh(pres, temp, rh, missing_value):
+        q = missing_value
+        temp_F = temp + 273.15
+        eps=0.622
+        if rh >= 0.0 and temp >= 0. and pres >= 0.:
+            es = 10 *(-2937.4/temp_F-4.9283*math.log10(temp_F)+23.5518)    # in mb
+            ee = rh*0.01*es                                       # in mb
+            q = eps * ee / (pres - ee)                                    # pres needs to be in mb
+            if q > 0.1 or q < 0.:
+                print('debug reset specific humidity because invalid range {i}'.format(i=q))
+                q = missing_value
+            else:
+                q *= 1000
+        return q
+
+class sams_qc_tools(object):
+    SCORE_PASSED         = 100
+    SCORE_FAILED         =   0
+    SCORE_NOT_TESTED     =  -1
+    SCORE_UNTESTED       =  -1
+    
+    @staticmethod
+    def compute_score(diff_value, threshold, threshold_max,
+            default_score=SCORE_NOT_TESTED):
+        debug = False
+        #debug = not debug
+        fname = "%s.%s" % (MODULE_NAME, 'compute_score()')
+        
+        if debug:   debug_message("%s is called" % (fname))
+        
+        score = default_score
+        min_score = sams_qc_tools.SCORE_FAILED
+        max_score = sams_qc_tools.SCORE_PASSED
+        
+        abs_value = math.fabs(diff_value)
+        if abs_value <= threshold:
+            score = max_score
+        #elif abs_value >= (threshold_max - threshold):
+        elif abs_value >= threshold_max:
+            score = min_score
+        else:
+            score = max_score * (1 - (abs_value - threshold) / (threshold_max - threshold) )
+            if 1 > score:
+                score = min_score + 1
+            elif max_score <= score:
+                score = max_score - 1   # One less than max_score because difference is over threshold
+        
+        if score < max_score:
+            print("{m} score: {s:2} [|value|={v} threshold={t} threshold_max={tm}]".format(
+                m=fname, s=score, v=abs_value, t=threshold, tm=threshold_max))
+        #print (' %s score at compute_score: ' % (fname), score, threshold_max, threshold)
+        return int(score)
+
+    @staticmethod
+    def get_climatic_data(climatic_data_map, range_id, field_id, climatic_month):
+        climatic_data_key = make_key_ClimaticData(range_id, field_id, climatic_month)
+        return climatic_data_map.get(climatic_data_key, None)
+
+    @staticmethod
+    def get_range_id_from_site_id(unique_site_id, range_map):
+        range_id = 3    # DPG
+        if range_map is not None and unique_site_id is not None:
+            range_part = unique_site_id.split('_')[0]
+            range_data = range_map.get(range_part)
+            if range_data is not None:
+                range_id = range_data.get_id()
+        return range_id
+  
+    @staticmethod
+    def get_temporal_threshold_map(db_actor, interval_in_seconds):
+        method_name = '%s.%s()' % ('sams_qc_tools', 'get_temporal_threshold_map')
+        debug = False
+        debug = not debug
+        threshold_map = None
+        if   interval_in_seconds >= 300:
+            threshold_map = get_15min_map(db_actor)
+            if debug:   print('called get_15min_map', threshold_map)
+        elif interval_in_seconds > 60:
+            threshold_map = get_5min_map(db_actor)
+            if debug:   print('called get_5min_map', threshold_map)
+            if threshold_map is None:   threshold_map = get_15min_map(db_actor)
+        else:
+            threshold_map = get_1min_map(db_actor)
+            if debug:   print('called get_1min_map', threshold_map)
+            if threshold_map is None:
+                threshold_map = get_5min_map(db_actor)
+                if debug:   print('called get_5min_map', threshold_map)
+                if threshold_map is None:   threshold_map = get_15min_map(db_actor)
+        if threshold_map is None:
+            print (' %s  ERROR can not find threshold for %d minutes temporal difference' % (method_name, interval_in_seconds/60))
+        #if debug:   print (' %s  threshold for %d minutes, %r' % (method_name, interval_in_seconds/60, threshold_map))
+        return threshold_map
+
+        
+def main(argv = None):
+    sys.argv_back = None
+    #if argv is not None:
+    #    sys.argv_back = sys.argv
+    #    sys.argv = []
+    #    sys.argv.extend(argv)
+    
+    job_user = 'atecuser'
+    actor = sams_qc(job_user)
+    #print(' input_name = %s' % actor.options.input_name)
+    actor.import_to_db()
+        
+    # Cleanup
+    actor.cursor.close()
+    actor.db_conn.close()
+    #if argv is not None and sys.argv_back is not None:
+    #    sys.argv = sys.argv_back
+
+if __name__ == '__main__':
+    log_time = LogTime()
+    main()
+    (duration_wall, duration_process) = log_time.get_durations()
+    print ("      === Done {m}, took {w:.3} [{w1}], process time: {p:.3} [{p1}]".format(
+            m=MODULE_NAME, w=duration_wall, w1=log_time.format(duration_wall),
+            p=duration_process, p1=log_time.format(duration_process)))
+    

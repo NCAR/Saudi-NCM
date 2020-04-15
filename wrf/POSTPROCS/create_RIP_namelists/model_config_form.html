@@ -1,0 +1,643 @@
+<HTML>
+<HEAD><TITLE>ATEC 4DWX WRF Model Configuration Test Form</TITLE></HEAD>
+<BODY bgcolor="#DDDDDD">
+<H1>ATEC 4DWX WRF Model Configuration Test Form</H1>
+<FONT SIZE="3">
+<table border=1>
+<tr>
+<td><a href="#surface">Surface Plots</a></td>
+<td><a href="#upper">Upper Air Plots</a></td>
+<td><a href="#others">Other Plots</a></td>
+<td><a href="#xs">Cross Sections</a></td>
+<td><a href="#sounding">Soundings</a></td>
+<td><a href="#overlays">Overlays</a></td>
+</tr>
+</table>
+<H3>Master Model Configuration Information</H3>
+<form method=POST action="/cgi-bin/rip/generate_for_ncl.pl">
+Range
+<input type="radio" name="Range" value="ATC" /> ATC &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="CRTC" /> CRTC &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="DPG" CHECKED /> DPG &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="EPG" /> EPG &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="NVL" /> NVL &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="RTC" /> RTC &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="WSMR" /> WSMR &nbsp;&nbsp;&nbsp
+<input type="radio" name="Range" value="YPG" /> YPG &nbsp;&nbsp;&nbsp<br>
+
+Number of Domains
+<input type="radio" name="N_doms" value="3" /> 3 &nbsp;&nbsp;&nbsp
+<input type="radio" name="N_doms" value="4" CHECKED /> 4 &nbsp;&nbsp;&nbsp<br>
+
+One full wind barb equals
+<input type="radio" name="wind_barb" value="5mps" CHECKED /> 5 m/s &nbsp;&nbsp;&nbsp
+<input type="radio" name="wind_barb" value="10kts" /> 10 knots &nbsp;&nbsp;&nbsp<br><br>
+
+<a name="surface"><H3>Surface Plots</H3>
+
+<input type="checkbox" name="T2mWnd_name" value="T2mWnd" CHECKED />
+MSLP (contoured), 2-m Temperature (shaded) and 10-m Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;MSLP contour intervals for each domain 
+<input type="radio" name="T2mWnd_ctr_int" value="4,3,2,2" CHECKED />4, 3, 2, 2 hPa
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_ctr_int" value="2,2,2,2" />2, 2, 2, 2 hPa
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_ctr_int" value="none,none,none,none" />no MSLP field<br>
+&nbsp;&nbsp;&nbsp;2-m Temperature contour intervals for each domain 
+<input type="radio" name="T2mWnd_sha_int" value="4,3,2,2" CHECKED />4, 3, 2, 2 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_sha_int" value="4,4,4,4" />4, 4, 4, 4 F; -12/88F (summer); -52/48F (winter)<br>
+&nbsp;&nbsp;&nbsp;2-m Temperature summer shading value range
+<input type="radio" name="T2mWnd_rng_smr" value="48;-12" CHECKED/>-12 to 48 C<br>
+&nbsp;&nbsp;&nbsp;2-m Temperature winter maximum shading value
+<input type="radio" name="T2mWnd_rng_wtr" value="12;-60" />-60 to 12 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_rng_wtr" value="24;-48" CHECKED />-48 to 24 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_rng_wtr" value="36;-36" />-36 to 36 C<br>
+&nbsp;&nbsp;&nbsp;2-m Temperature Color Table<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_color" value="T5StepCBCust" CHECKED />
+<img src="T4StepCBCust.jpg">&nbsp;&nbsp;&nbsp;4-Hue Colorblind Friendly ("T4StepCBCust")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="T2mWnd_color" value="Temperature" />
+<img src="Temperature.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Temperature")<br>
+
+<br>
+
+<input type="checkbox" name="RHsfcWnd_name" value="RHsfcWnd" CHECKED />Surface Humidity (shaded) and Winds Barbs<br>
+&nbsp;&nbsp;&nbsp;RH contour interval: 10%<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="RHsfcWnd_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="RHsfcWnd_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+
+<input type="checkbox" name="Td2mWnd_name" value="Td2mWnd" CHECKED />2-m Dewpoint (shaded) and Winds Barbs<br>
+&nbsp;&nbsp;&nbsp;Td contour interval:  4, 4, 2, 2 C<br>
+&nbsp;&nbsp;&nbsp;2-m Td summer shading value range
+<input type="radio" name="Td2mWnd_rng_smr" value="32;-24" CHECKED/>-24 to 32 C<br>
+&nbsp;&nbsp;&nbsp;2-m Td winter shading value range
+<input type="radio" name="Td2mWnd_rng_wtr" value="32;-24" CHECKED/>-24 to 32 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Td2mWnd_rng_wtr" value="24;-40" CHECKED/>-40 to 24 C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Td2mWnd_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Td2mWnd_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+
+<input type="checkbox" name="Qv2mWnd_name" value="Qv2mWnd" CHECKED />2-m Mixing Ratio (shaded) and Winds Barbs<br>
+&nbsp;&nbsp;&nbsp;Qv contour interval: 2, 2, 1, 1 g/kg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Qv2mWnd_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Qv2mWnd_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+
+<input type="checkbox" name="ThEsfcWnd_name" value="ThEsfcWnd" CHECKED />Theta-E (shaded) and Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;Theta-E contour interval: 5, 5, 2.5, 2.5 K<br>
+&nbsp;&nbsp;&nbsp;Theta-E summer shading value range
+<input type="radio" name="ThEsfcWnd_rng_smr" value="340;240" />240 to 340 K
+&nbsp;&nbsp;&nbsp;<input type="radio" name="ThEsfcWnd_rng_smr" value="370;270" CHECKED />270 to 370 K<br>
+&nbsp;&nbsp;&nbsp;Theta-E winter shading value range
+<input type="radio" name="ThEsfcWnd_rng_wtr" value="340;240" />240 to 340 K
+&nbsp;&nbsp;&nbsp;<input type="radio" name="ThEsfcWnd_rng_wtr" value="370;270" CHECKED />270 to 370 K<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="ThEsfcWnd_color" value="ThE4StepCBCust" CHECKED />
+<img src="ThE4StepCBCust.jpg">&nbsp;&nbsp;&nbsp;4-Hue Colorblind Friendly ("ThE4StepCBCust")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="ThEsfcWnd_color" value="ThetaE" />
+<img src="ThetaE.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("ThetaE")<br>
+
+<br>
+
+<input type="checkbox" name="Strm10m_name" value="Strm10m" CHECKED />Terrain (shaded) and 10-m Streamlines<br>
+&nbsp;&nbsp;&nbsp;Terrain Height contour interval: <input type="radio" name="Strm10m_sha_int" value="250" CHECKED />250 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Strm10m_sha_int" value="150" />150 m<br>
+&nbsp;&nbsp;&nbsp;Minimum Terrain Height shading level
+<input type="radio" name="Strm10m_sha_min" value="0" CHECKED />0 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Strm10m_sha_min" value="1200" />1200 m<br>
+&nbsp;&nbsp;&nbsp;Maximum Terrain Height shading level
+<input type="radio" name="Strm10m_sha_max" value="3000" CHECKED />3000 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Strm10m_sha_max" value="3500" />3500 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Strm10m_sha_max" value="4000" />4000 m<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Strm10m_color" value="Grayscale" CHECKED />
+<img src="Grayscale.jpg">&nbsp;&nbsp;&nbsp;Colorblind Friendly ("Grayscale")<br>
+
+<br>
+
+<input type="checkbox" name="sfcstrm_name" value="sfcstrm" CHECKED />10-m Wind Speed and Streamlines<br>
+&nbsp;&nbsp;&nbsp;Wind speed contour interval for each domain: 5 m/s (or 10 knots)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sfcstrm_color" value="PurpleMonoCB" CHECKED />
+<img src="PurpleMonoCB.jpg">&nbsp;&nbsp;&nbsp;1-Hue Colorblind Friendly ("PurpleMonoCB")<br>
+
+<br>
+
+<input type="checkbox" name="Pre1hr_name" value="Pre1hr" CHECKED />1-hour Precipitation (shaded). Contour interval: 2^n mm/hr<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hr_color" value="Rain3StepCust" CHECKED />
+<img src="Rain3StepCust.jpg">&nbsp;&nbsp;&nbsp;3-Hue Colorblind Friendly ("Rain3StepCust")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hr_color" value="RainfallCust" />
+<img src="RainfallCust.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("RainfallCust")<br>
+
+<br>
+
+<input type="radio" name="Pre1hrZ_name" value="Pre1hrZ" />1-hr Precip (shaded), MSLP (contoured), Thickness (contoured) and 10-m Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;MSLP contour intervals for each domain: <input type="radio" name="Pre1hrZ_ctr_int" value="4,2,1,0.5" CHECKED />4, 2, 1, 0.5 hPa
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hrZ_ctr_int" value="none,none,none,none" />No MSLP contoured<br>
+&nbsp;&nbsp;&nbsp;Precip Rate intervals: 2^n mm/hr<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hrZ_dsh_int" value="6,3,1,0.5" CHECKED/>1000 - 500 hPa (6, 3, 1, 0.5 hPa)
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hrZ_dsh_int" value="3,2,1,0.5" />850 - 700 hPa (3, 2, 1, 0.5 hPa)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hrZ_color" value="Rain3StepCust" CHECKED />
+<img src="Rain3StepCust.jpg">&nbsp;&nbsp;&nbsp;3-Hue Colorblind Friendly ("Rain3StepCust")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Pre1hrZ_color" value="RainfallCust" />
+<img src="RainfallCust.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("RainfallCust")<br>
+<br>
+
+<input type="checkbox" name="radar_name" value="radar" CHECKED />Radar Reflectivity (shaded). Contour interval: 5 dBZ<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radar_color" value="dBZ3StepCust" CHECKED />
+<img src="dBZ3StepCust.jpg">&nbsp;&nbsp;&nbsp;3-Hue Colorblind Friendly ("dBZ3StepCust")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radar_color" value="RadarCust" />
+<img src="RadarCust.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("RadarCust")<br>
+
+<br>
+
+<input type="checkbox" name="cape_name" value="cape" CHECKED />CAPE&nbsp;&nbsp;&nbsp; contour interval: 200 J/kg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cape_color" value="5StepCBCust" CHECKED />
+<img src="5StepCBCust.jpg">&nbsp;&nbsp;&nbsp;5-Hue Colorblind Friendly ("5StepCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="cin_name" value="cin" CHECKED />CIN&nbsp;&nbsp;&nbsp; contour interval: 50 J/kg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cin_color" value="BlueMonoCB" CHECKED />
+<img src="BlueMonoCB.jpg">&nbsp;&nbsp;&nbsp;1-Hue Colorblind Friendly ("BlueMonoCB")<br>
+
+<br>
+
+<input type="checkbox" name="pblhgt_name" value="pblhgt" CHECKED />PBL Height (shaded)&nbsp;&nbsp;&nbsp;contour interval: 250 m<br>
+&nbsp;&nbsp;&nbsp;Maximum PBL Height shading level
+<input type="radio" name="pblhgt_sha_max" value="3000" CHECKED />3000 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="pblhgt_sha_max" value="4000" />4000 m<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="pblhgt_color" value="5StepCBCust" CHECKED />
+<img src="5StepCBCust.jpg">&nbsp;&nbsp;&nbsp;4-Hue Colorblind Friendly ("5StepCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="sfcvis_name" value="sfcvis" CHECKED />Visibility (shaded)<br>
+&nbsp;&nbsp;&nbsp;Visibility contour interval
+<input type="radio" name="sfcvis_sha_int" value="1" CHECKED/>1 km contour interval
+&nbsp;&nbsp;&nbsp;<input type="radio" name="sfcvis_sha_int" value=".5" />0.5 km contour interval<br>
+&nbsp;&nbsp;&nbsp;Maximum Visibility level
+<input type="radio" name="sfcvis_sha_max" value="16" CHECKED/>16 km
+&nbsp;&nbsp;&nbsp;<input type="radio" name="sfcvis_sha_max" value="30" />30 km<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sfcvis_color" value="VisCBCust" CHECKED />
+<img src="VisCBCust.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("VisCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="snowcv_name" value="snowcv" />Snow Cover (contoured) and Terrain (shaded)<br>
+&nbsp;&nbsp;&nbsp;Snow Cover > 0.01 contoured<br>
+&nbsp;&nbsp;&nbsp;Terrain contour interval 100 m<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="snowcv_color" value="Grayscale" CHECKED />
+<img src="Grayscale.jpg">&nbsp;&nbsp;&nbsp;1-Hue Colorblind Friendly ("Grayscale")<br>
+
+<br>
+
+<input type="checkbox" name="ms500h_name" value="ms500h" CHECKED />
+MSLP (contoured) and 1000-500hPa Thickness (dashed)<br>
+&nbsp;&nbsp;&nbsp;MSLP contour intervals for each domain: 4, 2, 1, 1 hPa<br>
+&nbsp;&nbsp;&nbsp;1000-500hPa Thickness intervals: <input type="radio" name="ms500h_ctr_int" value="3,2.5,1.5,1" CHECKED />3, 2.5, 1.5, 1 dam
+&nbsp;&nbsp;&nbsp;<input type="radio" name="ms500h_ctr_int" value="6,3,1,0.5" />6, 3, 1, 0.5 dam<br>
+
+<br>
+
+<input type="checkbox" name="Z925MSLP_name" value="Z925MSLP" CHECKED />MSLP (contoured) 925 hPa Height (dashed)<br>
+&nbsp;&nbsp;&nbsp;MSLP contour intervals for each domain: 4, 2, 1, 1 hPa<br>
+&nbsp;&nbsp;&nbsp;1000-500hPa Thickness intervals: 30, 30, 7.5, 7.5 m<br>
+
+<br>
+
+<a name="upper"><H3>Upper Air Plots</H3>
+
+Upper Level Temperature (shaded), Heights (contoured) and Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;Temperature contour intervals for each domain: 4, 3, 2, 2 C<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="TXXXWnd_color" value="TCBUniform" CHECKED />
+<img src="TCBUniform.jpg">&nbsp;&nbsp;&nbsp;5-Hue Colorblind Friendly ("TCBUniform")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="TXXXWnd_color" value="Temperature" />
+<img src="Temperature.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Temperature")<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T975Wnd_name" value="T975Wnd" CHECKED />975 hPa with 30 m Geopotential Height contour interval<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T950Wnd_name" value="T950Wnd" CHECKED />950 hPa with 30 m Geopotential Height contour interval<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T925Wnd_name" value="T925Wnd" CHECKED />925 hPa with 30 m Geopotential Height contour interval<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T850Wnd_name" value="T850Wnd" CHECKED />850 hPa with 30 m Geopotential Height contour interval<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer Temperature shading range
+<input type="radio" name="T850Wnd_rng_smr" value="40;-24" CHECKED />-24 to 40 C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winter Temperature shading range
+<input type="radio" name="T850Wnd_rng_wtr" value="32;-24" />-24 to 32 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T850Wnd_rng_wtr" value="24;-40" CHECKED />-40 to 24 C<br>
+
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T700Wnd_name" value="T700Wnd" CHECKED />700 hPa with 30 m Geopotential Height contour interval<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summer Temperature shading range
+<input type="radio" name="T700Wnd_rng_smr" value="24;-40" CHECKED />-40 to 24 C
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T700Wnd_rng_smr" value="40;-24" />-24 to 40 C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winter Temperature shading range
+&nbsp;&nbsp;&nbsp;<input type="radio" name="T700Wnd_rng_wtr" value="24;-40" CHECKED />-40 to 24 C<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T600Wnd_name" value="T600Wnd" CHECKED />600 hPa with 60 m Geopotential Height contour interval<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T500Wnd_name" value="T500Wnd" CHECKED />500 hPa with 60 m Geopotential Height contour interval<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="T200Wnd_name" value="T200Wnd" CHECKED />200 hPa with 120 m Geopotential Height contour interval<br>
+
+<br>
+
+Upper Level Relative Humidity (shaded) and Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;RH contour intervals for each domain: 10%<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="RHXXXWnd_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="RHXXXWnd_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH975Wnd_name" value="RH975Wnd" CHECKED />975 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH950Wnd_name" value="RH950Wnd" CHECKED />950 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH925Wnd_name" value="RH925Wnd" CHECKED />925 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH850Wnd_name" value="RH850Wnd" CHECKED />850 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH700Wnd_name" value="RH700Wnd" CHECKED />700 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="RH500Wnd_name" value="RH500Wnd" CHECKED />500 hPa<br>
+
+<br>
+
+<input type="checkbox" name="VV600m_name" value="VV600m" CHECKED />600 m AGL vertical motion (contoured) and Terrain (shaded)<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="VV600m_sha_int" value="250" CHECKED />250 m
+&nbsp;&nbsp;&nbsp;<input type="radio" name="VV600m_sha_int" value="150" />150 m<br>
+&nbsp;&nbsp;&nbsp;Vertical motion contour interval: 2, 10, 25, 25 cm/s<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="VV600m_color" value="Grayscale" CHECKED />
+<img src="Grayscale.jpg">&nbsp;&nbsp;&nbsp;1-Hue Colorblind Friendly ("Grayscale")<br>
+
+<br>
+
+<input type="checkbox" name="Omeg700RH_name" value="Omeg700RH" CHECKED />700 hPa Omega (dashed), Relative Humidity (shaded) and Height (contoured)<br>
+&nbsp;&nbsp;&nbsp;Omega contour interval for each domain: 2.500,5,10,20 Pa/s<br>
+&nbsp;&nbsp;&nbsp;RH contour interval: 10%<br>
+&nbsp;&nbsp;&nbsp;Geopotential height contour interval: 30 m<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Omeg700RH_color" value="HumidityDimCB" CHECKED />
+<img src="HumidityDimCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityDimCB")<br>
+
+<br>
+
+<input type="checkbox" name="Vor500Z_name" value="Vor500Z" CHECKED />500 hPa Vorticity (shaded) and Geopotential Height (contoured)<br>
+&nbsp;&nbsp;&nbsp;Vorticity contour interval for each domain 5 s^-5<br>
+&nbsp;&nbsp;&nbsp;Geopotential height contour interval: 60 m<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Vor500Z_color" value="PosNegCB" CHECKED />
+<img src="PosNegCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("PosNegCB")<br>
+
+<br>
+
+Upper Level Wind Speed (shaded and Barbs) and Geopotential Height (contoured)<br>
+&nbsp;&nbsp;&nbsp;Wind speed contour interval for each domain: 10 m/s (or 20 knots)<br>
+&nbsp;&nbsp;&nbsp;Geopotential height contour interval: 120 m<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="WndXXXZ_color" value="PurpleMonoCB" CHECKED />
+<img src="PurpleMonoCB.jpg">&nbsp;&nbsp;&nbsp;1-Hue Colorblind Friendly ("PurpleMonoCB")<br>
+<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="Wnd300Z_name" value="Wnd300Z" CHECKED />300 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="Wnd250Z_name" value="Wnd250Z" CHECKED />250 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="Wnd200Z_name" value="Wnd200Z" CHECKED />200 hPa<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="Wnd100Z_name" value="Wnd100Z" CHECKED />100 hPa<br>
+<br>
+
+<input type="checkbox" name="Div250Z_name" value="Div250Z" CHECKED />250 hPa Divergence (shaded) and Geopotential Height (contoured)<br>
+&nbsp;&nbsp;&nbsp;Divergence contour interval for each domain: 2.5, 5, 5, 5 1/s<br>
+&nbsp;&nbsp;&nbsp;Geopotential height contour interval: 120 m<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="Div250Z_color" value="PosNegCB" CHECKED />
+<img src="PosNegCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("PosNegCB")<br>
+
+<br>
+
+<input type="checkbox" name="cust_plts_name" value="cust_plts" CHECKED />Include Custom plots for this range<br>
+
+<br>
+
+<a name="others"><H3>Other Plan View Plots</H3>
+
+<input type="checkbox" name="IRsat_name" value="IRsat" CHECKED />Cloud Top Temperatures (shaded)<br>
+&nbsp;&nbsp;&nbsp;Cloud top temperature contour interval for each domain: 5 C<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="IRsat_color" value="Cloud3StepCBCust" CHECKED />
+<img src="Cloud3StepCBCust.jpg">&nbsp;&nbsp;&nbsp;3-Hue Colorblind Friendly ("Cloud3StepCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="slhflux_name" value="slhflux" CHECKED />Surface Latent Heat Flux (shaded)<br>
+&nbsp;&nbsp;&nbsp;Latent heat flux contour interval for each domain: 50,50,50,50<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="slhflux_color" value="FluxCBCust" CHECKED />
+<img src="FluxCBCust.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("FluxCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="sshflux_name" value="sshflux" CHECKED />Surface Sensible Heat Flux (shaded)<br>
+&nbsp;&nbsp;&nbsp;Latent heat flux contour interval for each domain: 50,50,50,50<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="sshflux_color" value="FluxCBCust" CHECKED />
+<img src="FluxCBCust.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("FluxCBCust")<br>
+
+<br>
+
+<input type="checkbox" name="soilt1_name" value="soilt1" CHECKED />Soil Layer 1 Temperature (shaded)<br>
+&nbsp;&nbsp;&nbsp;Soil temperature contour interval for each domain: 3, 3, 2, 2 K<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="soilt1_color" value="T5StepCBCust" CHECKED />
+<img src="T4StepCBCust.jpg">&nbsp;&nbsp;&nbsp;4-Hue Colorblind Friendly ("T4StepCBCust")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="soilt1_color" value="Temperature" />
+<img src="Temperature.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Temperature")<br>
+
+<br>
+
+<input type="checkbox" name="soilm1_name" value="soilm1" CHECKED />Soil Layer 1 Moisture (shaded)<br>
+&nbsp;&nbsp;&nbsp;Soil moisture contour interval for each domain: 0.05<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="soilm1_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="soilm1_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+
+<input type="checkbox" name="cust_plts_name" value="cust_plts" CHECKED />Include Custom plots<br>
+
+<br>
+
+<a name="xs"><H3>Cross Sections</H3>
+
+<input type="checkbox" name="xsthw_name" value="xsthw" CHECKED />XS(s) of Potential Temperature (shaded) and Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;Potential Temperature contour interval for each domain: 5 K<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsthw_color" value="ThE3StepCBCust" CHECKED />
+<img src="ThE3StepCBCust.jpg">&nbsp;&nbsp;&nbsp;3-Hue Colorblind Friendly ("ThE3StepCBCust")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsthw_color" value="ThetaE" />
+<img src="ThetaE.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("ThetaE")<br>
+
+<br>
+
+<input type="checkbox" name="xsrhw_name" value="xsrhw" CHECKED />XS(s) of Relative Humidity (shaded) and Wind Barbs<br>
+&nbsp;&nbsp;&nbsp;Relative Humidity contour interval for each domain: 10%<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsrhw_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsrhw_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+
+<input type="checkbox" name="xswWnd_name" value="xswWnd" CHECKED />XS(s) of Vertical Motion and Wind into the XS<br>
+&nbsp;&nbsp;&nbsp;Vertical motion contour interval for each domain: 5, 5, 20, 20 cm/s<br>
+&nbsp;&nbsp;&nbsp;Wind speed contour interval: 4 m/s<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xswWnd_color" value="PosNegCB" CHECKED />
+<img src="PosNegCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("PosNegCB")<br>
+
+<br>
+
+<input type="checkbox" name="xsrhcv_name" value="xsrhcv" CHECKED />XS(s) of RH (shaded), Pot. Temp. (contoured) and Circulation Vectors<br>
+&nbsp;&nbsp;&nbsp;Domain 3 only<br>
+&nbsp;&nbsp;&nbsp;Relative Humidity contour interval: 10%<br>
+&nbsp;&nbsp;&nbsp;Potential Temperature contour interval: 2 K<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsrhcv_color" value="HumidityCB" CHECKED />
+<img src="HumidityCB.jpg">&nbsp;&nbsp;&nbsp;2-Hue Colorblind Friendly ("HumidityCB")<br>
+&nbsp;&nbsp;&nbsp;<input type="radio" name="xsrhcv_color" value="Humidity" />
+<img src="Humidity.jpg">&nbsp;&nbsp;&nbsp;Old Color Scale ("Humidity")<br>
+
+<br>
+<b>Cross Section Endpoints</b><br><br>
+Domain1<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs1_d1_name" value="xs1_d1" CHECKED />Cross Section 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs1_d1_lat_lf" size="8" value="33.250" /> deg N, 
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d1_lon_lf" size="8" value = "-82.650" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs1_d1_lat_rt" size="8" value="45.520" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d1_lon_rt" size="8" value = "-68.250" /> deg E<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs2_d1_name" value="xs2_d1" CHECKED />Cross Section 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs2_d1_lat_lf" size="8" value="40.000" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d1_lon_lf" size="8" value = "-90.000" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs2_d1_lat_rt" size="8" value="30.000" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d1_lon_rt" size="8" value = "-70.000" /> deg E<br>
+<br>
+
+Domaini 2<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs1_d2_name" value="xs1_d2" CHECKED />Cross Section 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs1_d2_lat_lf" size="8" value="40.700" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d2_lon_lf" size="8" value = "-78.000" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs1_d2_lat_rt" size="8" value="38.300" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d2_lon_rt" size="8" value = "-74.350" /> deg E<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs2_d2_name" value="xs2_d2" CHECKED />Cross Section 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs2_d2_lat_lf" size="8" value="37.000" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d2_lon_lf" size="8" value = "-81.000" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs2_d2_lat_rt" size="8" value="42.000" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d2_lon_rt" size="8" value = "-75.000" /> deg E<br>
+<br>
+
+Domain 3<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs1_d3_name" value="xs1_d3" CHECKED />Cross Section 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs1_d3_lat_lf" size="8" value="40.100" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d3_lon_lf" size="8" value = "-75.200" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs1_d3_lat_rt" size="8" value="40.100" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d3_lon_rt" size="8" value = "-77.000" /> deg E<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs2_d3_name" value="xs2_d3" CHECKED />Cross Section 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs2_d3_lat_lf" size="8" value="39.000" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d3_lon_lf" size="8" value = "-77.200" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs2_d3_lat_rt" size="8" value="40.100" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d3_lon_rt" size="8" value = "-75.200" /> deg E<br>
+<br>
+
+Domain 4<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs1_d4_name" value="xs1_d4" CHECKED />Cross Section 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs1_d4_lat_lf" size="8" value="39.550" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d4_lon_lf" size="8" value = "-82.650" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs1_d4_lat_rt" size="8" value="39.140" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs1_d4_lon_rt" size="8" value = "-68.250" /> deg E<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="xs2_d4_name" value="xs2_d4" />Cross Section 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Lat: <input type="text" name="xs2_d4_lat_lf" size="8" value="AA.aaa" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d4_lon_lf" size="8" value = "-OOO.ooo" /> deg E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right Lat: <input type="text" name="xs2_d4_lat_rt" size="8" value="AA.aaa" /> deg N,
+&nbsp;&nbsp;&nbsp;Lon: <input type="text" name="xs2_d4_lon_rt" size="8" value = "-OOO.ooo" /> deg E<br>
+<br>
+
+<a name="sounding"><H3>Model Soundings</H3>
+
+<i>Please provide either the 3-letter station location (e.g., DEN) or the lat/lon coordinates (e.g., 40.000,-105.000) for each sounding location</i><br>
+
+<br>
+
+Domain1<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd1_d1_name" value="snd1_d1" CHECKED />Sounding 1
+Location: <input type="text" name="snd1_d1_loc" size="12" value="CRW" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd2_d1_name" value="snd2_d1" CHECKED />Sounding 2
+Location: <input type="text" name="snd2_d1_loc" size="12" value="BUF" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd3_d1_name" value="snd3_d1" CHECKED />Sounding 3
+Location: <input type="text" name="snd3_d1_loc" size="12" value="ALB" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd4_d1_name" value="snd4_d1" CHECKED />Sounding 4
+Location: <input type="text" name="snd4_d1_loc" size="12" value="RDU" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd5_d1_name" value="snd5_d1" />Sounding 5
+Location: <input type="text" name="snd5_d1_loc" size="12" value="" /><br>
+<br>
+Domain2<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd1_d2_name" value="snd1_d2" CHECKED />Sounding 1
+Location: <input type="text" name="snd1_d2_loc" size="12" value="SBY" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd2_d2_name" value="snd2_d2" CHECKED />Sounding 2
+Location: <input type="text" name="snd2_d2_loc" size="12" value="IAD" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd3_d2_name" value="snd3_d2" CHECKED />Sounding 3
+Location: <input type="text" name="snd3_d2_loc" size="12" value="PIT" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd4_d2_name" value="snd4_d2" CHECKED />Sounding 4
+Location: <input type="text" name="snd4_d2_loc" size="12" value="MDT" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd5_d2_name" value="snd5_d2" />Sounding 5
+Location: <input type="text" name="snd5_d2_loc" size="12" value="" /><br>
+<br>
+Domain3<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd1_d3_name" value="snd1_d3" CHECKED />Sounding 1
+Location: <input type="text" name="snd1_d3_loc" size="12" value="BWI" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd2_d3_name" value="snd2_d3" CHECKED />Sounding 2
+Location: <input type="text" name="snd2_d3_loc" size="12" value="DOV" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd3_d3_name" value="snd3_d3" CHECKED />Sounding 3
+Location: <input type="text" name="snd3_d3_loc" size="12" value="39.33,-76.42" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd4_d3_name" value="snd4_d3" CHECKED />Sounding 4
+Location: <input type="text" name="snd4_d3_loc" size="12" value="39.43,-76.18" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd5_d3_name" value="snd5_d3" />Sounding 5
+Location: <input type="text" name="snd5_d3_loc" size="12" value="" /><br>
+<br>
+Domain4<br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd1_d4_name" value="snd1_d4" CHECKED />Sounding 1
+Location: <input type="text" name="snd1_d4_loc" size="12" value="39.431,-76.178" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd2_d4_name" value="snd2_d4" CHECKED />Sounding 2
+Location: <input type="text" name="snd2_d4_loc" size="12" value="39.443,-76.102" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd3_d4_name" value="snd3_d4" CHECKED />Sounding 3
+Location: <input type="text" name="snd3_d4_loc" size="12" value="39.392,-76.237" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd4_d4_name" value="snd4_d4" CHECKED />Sounding 4
+Location: <input type="text" name="snd4_d4_loc" size="12" value="39.474,-76.166" /><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="snd5_d4_name" value="snd5_d4" />Sounding 5
+Location: <input type="text" name="snd5_d4_loc" size="12" value="" /><br>
+<br>
+
+<a name="overlays"><H3>Overlays</H3>
+
+<b>Provide the outlines for the range on which domains?</b><br>
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="range_overlay_d1" value="1" />D01
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="range_overlay_d2" value="2" />D02
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="range_overlay_d3" value="3" CHECKED />D03
+&nbsp;&nbsp;&nbsp;<input type="checkbox" name="range_overlay_d4" value="4" CHECKED />D04<br>
+
+<br>
+<b>Mark the following locations on each map</b><br>
+<table border=1>
+<tr>
+<td>Location</td>
+<td>Label</td>
+<td>Lat/Lon or STID</td>
+<td>D1</td>
+<td>D2</td>
+<td>D3</td>
+<td>D4</td>
+</tr>
+<tr>
+<td>1</td>
+<td><input type="text" name="sta1_mark_name" size="8" value="TST" /></td>
+<td><input type="text" name="sta1_mark_loc" size="12" value="38.000,-85.000" /></td>
+<td><input type="checkbox" name="sta1_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta1_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta1_mark_d3" value="3" CHECKED /></td>
+<td><input type="checkbox" name="sta1_mark_d4" value="4" CHECKED /></td>
+</tr>
+<tr>
+<td>2</td>
+<td><input type="text" name="sta2_mark_name" size="8" value="TS2" /></td>
+<td><input type="text" name="sta2_mark_loc" size="12" value="40.000,-75.500" /></td>
+<td><input type="checkbox" name="sta2_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta2_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta2_mark_d3" value="3" CHECKED /></td>
+<td><input type="checkbox" name="sta2_mark_d4" value="4" CHECKED /></td>
+</tr>
+<tr>
+<td>3</td>
+<td><input type="text" name="sta3_mark_name" size="8" value="BWI" /></td>
+<td><input type="text" name="sta3_mark_loc" size="12" value="39.175,-76.668" /></td>
+<td><input type="checkbox" name="sta3_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta3_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta3_mark_d3" value="3" CHECKED /></td>
+<td><input type="checkbox" name="sta3_mark_d4" value="4" CHECKED /></td>
+</tr>
+<tr>
+<td>4</td>
+<td><input type="text" name="sta4_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta4_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta4_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta4_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta4_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta4_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>5</td>
+<td><input type="text" name="sta5_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta5_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta5_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta5_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta5_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta5_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>6</td>
+<td><input type="text" name="sta6_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta6_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta6_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta6_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta6_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta6_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>7</td>
+<td><input type="text" name="sta7_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta7_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta7_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta7_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta7_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta7_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>8</td>
+<td><input type="text" name="sta8_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta8_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta8_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta8_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta8_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta8_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>9</td>
+<td><input type="text" name="sta9_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta9_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta9_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta9_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta9_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta9_mark_d4" value="4" /></td>
+</tr>
+<tr>
+<td>10</td>
+<td><input type="text" name="sta10_mark_name" size="8" value="" /></td>
+<td><input type="text" name="sta10_mark_loc" size="12" value="" /></td>
+<td><input type="checkbox" name="sta10_mark_d1" value="1" /></td>
+<td><input type="checkbox" name="sta10_mark_d2" value="2" /></td>
+<td><input type="checkbox" name="sta10_mark_d3" value="3" /></td>
+<td><input type="checkbox" name="sta10_mark_d4" value="4" /></td>
+</tr>
+</table>
+
+<p>
+
+<input type="submit" value="Submit" />
+</form></FONT>
+<br>
+
+</BODY>
+</HTML>

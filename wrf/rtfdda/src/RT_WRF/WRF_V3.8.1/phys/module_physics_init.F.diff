@@ -1,0 +1,363 @@
+90a91
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods 1
+91a93,95
+>                          RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,       &    !  Optional
+>                          RQCNDGDTEN,RQINDGDTEN,                  &    !  Optional
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods 1
+506c510,513
+<              RUNDGDTEN, RVNDGDTEN, RTHNDGDTEN, RPHNDGDTEN, RQVNDGDTEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods 2
+>              RUNDGDTEN, RVNDGDTEN, RTHNDGDTEN, RPHNDGDTEN, RQVNDGDTEN,    &
+>              RQRNDGDTEN, RQSNDGDTEN, RQGNDGDTEN, RQCNDGDTEN, RQINDGDTEN
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods 2
+1288a1296
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods 3
+1290a1299,1301
+>                 RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,               &
+>                 RQCNDGDTEN,RQINDGDTEN,                          &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods 3
+1300a1312
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Obs-nudging call to fdob_init
+1308c1320,1327
+<                   model_config_rec%restart,                     &
+---
+>                   config_flags%restart,                         &
+>                   model_config_rec%obs_dmax_nobs,               &
+>                   model_config_rec%obs_dmax_nkalman,            &
+>                   model_config_rec%obs_read_kalman,             &
+>                   TRIM(model_config_rec%obs_nudge_terms(id)),   &    !ajb 01042014
+>                   model_config_rec%obs_qc_domain,               &
+>                   model_config_rec%obs_adjust_ht,               &
+>                   model_config_rec%nobs_scans,                  &
+1311,1343c1330,1365
+<                   model_config_rec%obs_no_pbl_nudge_uv,         &
+<                   model_config_rec%obs_no_pbl_nudge_t,          &
+<                   model_config_rec%obs_no_pbl_nudge_q,          &
+<                   model_config_rec%obs_sfc_scheme_horiz,        &
+<                   model_config_rec%obs_sfc_scheme_vert,         &
+<                   model_config_rec%obs_max_sndng_gap,           &
+<                   model_config_rec%obs_sfcfact,                 &
+<                   model_config_rec%obs_sfcfacr,                 &
+<                   model_config_rec%obs_dpsmx,                   &
+<                   model_config_rec%obs_nudge_wind,              &
+<                   model_config_rec%obs_nudge_temp,              &
+<                   model_config_rec%obs_nudge_mois,              &
+<                   model_config_rec%obs_nudgezfullr1_uv,         &
+<                   model_config_rec%obs_nudgezrampr1_uv,         &
+<                   model_config_rec%obs_nudgezfullr2_uv,         &
+<                   model_config_rec%obs_nudgezrampr2_uv,         &
+<                   model_config_rec%obs_nudgezfullr4_uv,         &
+<                   model_config_rec%obs_nudgezrampr4_uv,         &
+<                   model_config_rec%obs_nudgezfullr1_t,          &
+<                   model_config_rec%obs_nudgezrampr1_t,          &
+<                   model_config_rec%obs_nudgezfullr2_t,          &
+<                   model_config_rec%obs_nudgezrampr2_t,          &
+<                   model_config_rec%obs_nudgezfullr4_t,          &
+<                   model_config_rec%obs_nudgezrampr4_t,          &
+<                   model_config_rec%obs_nudgezfullr1_q,          &
+<                   model_config_rec%obs_nudgezrampr1_q,          &
+<                   model_config_rec%obs_nudgezfullr2_q,          &
+<                   model_config_rec%obs_nudgezrampr2_q,          &
+<                   model_config_rec%obs_nudgezfullr4_q,          &
+<                   model_config_rec%obs_nudgezrampr4_q,          &
+<                   model_config_rec%obs_nudgezfullmin,           &
+<                   model_config_rec%obs_nudgezrampmin,           &
+<                   model_config_rec%obs_nudgezmax,               &
+---
+>                   dx,                                           &
+>                   model_config_rec%obs_rinxy,                   &
+>                   model_config_rec%obs_rinxy_sfc,               &
+>                   model_config_rec%obs_rinxy_meta,              &
+>                   model_config_rec%obs_rinxy_spec,              &
+>                   model_config_rec%obs_rinxy_ship,              &
+>                   model_config_rec%obs_rinxy_syno,              &
+>                   model_config_rec%obs_rinxy_temp,              &
+>                   model_config_rec%obs_rinxy_pilo,              &
+>                   model_config_rec%obs_rinxy_satw,              &
+>                   model_config_rec%obs_rinxy_sams,              &
+>                   model_config_rec%obs_rinxy_prof,              &
+>                   model_config_rec%obs_rinxy_sl10,              &
+>                   model_config_rec%obs_rinxy_sl11,              &
+>                   model_config_rec%obs_rinxy_sl12,              &
+>                   model_config_rec%obs_rinxy_sl13,              &
+>                   model_config_rec%obs_rinxy_sl14,              &
+>                   model_config_rec%obs_rinxy_sl15,              &
+>                   model_config_rec%obs_twindo,                  &
+>                   model_config_rec%obs_twindo_sfc,              &
+>                   model_config_rec%obs_twindo_meta,             &
+>                   model_config_rec%obs_twindo_spec,             &
+>                   model_config_rec%obs_twindo_ship,             &
+>                   model_config_rec%obs_twindo_syno,             &
+>                   model_config_rec%obs_twindo_temp,             &
+>                   model_config_rec%obs_twindo_pilo,             &
+>                   model_config_rec%obs_twindo_satw,             &
+>                   model_config_rec%obs_twindo_sams,             &
+>                   model_config_rec%obs_twindo_prof,             &
+>                   model_config_rec%obs_twindo_sl10,             &
+>                   model_config_rec%obs_twindo_sl11,             &
+>                   model_config_rec%obs_twindo_sl12,             &
+>                   model_config_rec%obs_twindo_sl13,             &
+>                   model_config_rec%obs_twindo_sl14,             &
+>                   model_config_rec%obs_twindo_sl15,             &
+>                   model_config_rec%obs_rinfmx,                  &
+1352,1353d1373
+<                   p00, t00, tlp,                                &
+<                   zhalf, p_top,                                 &
+1354a1375,1377
+>                   model_config_rec%obs_ndirpow,                 &
+>                   model_config_rec%obs_ndir,                    &
+>                   model_config_rec%obs_npow,                    &
+1355a1379
+> 
+1358a1383
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Obs-nudging call to fdob_init
+3782a3808
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods 4
+3784a3811,3813
+>                 RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,               &
+>                 RQCNDGDTEN,RQINDGDTEN,                          &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods 4
+3815c3844,3852
+<                                                           RQVNDGDTEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods 5
+>                                                           RQVNDGDTEN, &
+>                                                           RQRNDGDTEN, &
+>                                                           RQSNDGDTEN, &
+>                                                           RQGNDGDTEN, &
+>                                                           RQCNDGDTEN, &
+>                                                           RQINDGDTEN
+> 
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods 5
+3842a3880
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods 6
+3843a3882,3883
+>                rqrndgdten,rqsndgdten,rqgndgdten,rqcndgdten,rqindgdten, &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods 6
+3854a3895
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods 7
+3855a3897,3900
+>                config_flags%if_zfac_qr, &
+>                config_flags%k_zfac_qr, &
+>                config_flags%if_zfac_qc, &
+>                config_flags%k_zfac_qc, &
+3856a3902,3903
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods 7
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods 8
+3857a3905
+>                config_flags%gqr, config_flags%gqc, config_flags%clh, &
+3858a3907
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods 8
+3900a3950
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Obs-nudging arguments for fdob_init
+3903,3920c3953,3970
+<                         obs_twindo_cg, obs_twindo, itimestep,      &
+<                         no_pbl_nudge_uv,                           &
+<                         no_pbl_nudge_t,                            &
+<                         no_pbl_nudge_q,                            &
+<                         sfc_scheme_horiz, sfc_scheme_vert,         &
+<                         maxsnd_gap,                                &
+<                         sfcfact, sfcfacr, dpsmx,                   &
+<                         nudge_wind, nudge_temp, nudge_mois,        &
+<                         nudgezfullr1_uv, nudgezrampr1_uv,          &
+<                         nudgezfullr2_uv, nudgezrampr2_uv,          &
+<                         nudgezfullr4_uv, nudgezrampr4_uv,          &
+<                         nudgezfullr1_t,  nudgezrampr1_t,           &
+<                         nudgezfullr2_t,  nudgezrampr2_t,           &
+<                         nudgezfullr4_t,  nudgezrampr4_t,           &
+<                         nudgezfullr1_q,  nudgezrampr1_q,           &
+<                         nudgezfullr2_q,  nudgezrampr2_q,           &
+<                         nudgezfullr4_q,  nudgezrampr4_q,           &
+<                         nudgezfullmin, nudgezrampmin, nudgezmax,   &
+---
+>                         niobf, kalmax, read_kalman,                &
+>                         nudge_terms,                               &      ! ajb 10032013
+>                         qc_domain, adjust_ht,                      &
+>                         nobs_scans, obs_twindo_cg,                 &
+>                         obs_twindo, itimestep, dx,                 &
+>                         rinxy,      rinxy_sfc,                     &
+>                         rinxy_meta, rinxy_spec, rinxy_ship,        &
+>                         rinxy_syno, rinxy_temp, rinxy_pilo,        &
+>                         rinxy_satw, rinxy_sams, rinxy_prof,        &
+>                         rinxy_sl10, rinxy_sl11, rinxy_sl12,        &
+>                         rinxy_sl13, rinxy_sl14, rinxy_sl15,        &
+>                         twindo,      twindo_sfc,                   &
+>                         twindo_meta, twindo_spec, twindo_ship,     &
+>                         twindo_syno, twindo_temp, twindo_pilo,     &
+>                         twindo_satw, twindo_sams, twindo_prof,     &
+>                         twindo_sl10, twindo_sl11, twindo_sl12,     &
+>                         twindo_sl13, twindo_sl14, twindo_sl15,     &
+>                         rinfmx,                                    &
+3924,3926c3974,3975
+<                         p00, t00, tlp,                             &
+<                         znu, p_top,                                &
+<                         fdob, ipf_init,                            &
+---
+>                         fdob,                                      &
+>                         obs_ndirpow, obs_ndir, obs_npow, ipf_init, &
+3930a3980
+> 
+3934d3983
+<    USE module_llxy
+3946c3995
+<    REAL    , INTENT(IN)    :: dtramp          ! time period for ramping (idynin)
+---
+>    REAL    , INTENT(IN)    :: dtramp          ! time period for idynin ramping (min)
+3948a3998,4004
+>    INTEGER , INTENT(IN)    :: niobf           ! maximum number of observations
+>    INTEGER , INTENT(IN)    :: kalmax          ! max number of kalman type obs
+>    INTEGER , INTENT(IN)    :: read_kalman(maxdom)  ! flag for reading kalman gain data
+>    CHARACTER(LEN=*), INTENT(IN) :: nudge_terms   ! var/covar terms (ex: UU UV TVr) for nudging
+>    INTEGER , INTENT(IN)    :: qc_domain(maxdom)  ! domain used to set qc for this nest
+>    LOGICAL , INTENT(IN)    :: adjust_ht          ! near-surf height adjustment switch
+>    INTEGER , INTENT(IN)    :: nobs_scans
+3950c4006
+<    REAL    , INTENT(IN)    :: obs_twindo
+---
+>    REAL    , INTENT(INOUT) :: obs_twindo
+3952,3986c4008,4045
+<    INTEGER , INTENT(IN)    :: no_pbl_nudge_uv(maxdom)  ! flags for no wind nudging in pbl
+<    INTEGER , INTENT(IN)    :: no_pbl_nudge_t(maxdom)   ! flags for no temperature nudging in pbl
+<    INTEGER , INTENT(IN)    :: no_pbl_nudge_q(maxdom)   ! flags for no moisture nudging in pbl
+<    INTEGER , INTENT(IN)    :: sfc_scheme_horiz ! horizontal spreading scheme for surf obs (wrf or orig mm5)
+<    INTEGER , INTENT(IN)    :: sfc_scheme_vert  ! vertical   spreading scheme for surf obs (orig or regime vif)
+<    REAL    , INTENT(IN)    :: maxsnd_gap       ! max allowed pressure gap in soundings for interp (centibars) 
+<    REAL    , INTENT(IN)    :: sfcfact      ! scale factor applied to time window for surface obs
+<    REAL    , INTENT(IN)    :: sfcfacr      ! scale fac applied to horiz rad of infl for sfc obs
+<    REAL    , INTENT(IN)    :: dpsmx        ! max pressure change allowed within horiz. infl. range
+<    INTEGER , INTENT(IN)    :: nudge_wind(maxdom)       ! wind-nudging flag
+<    INTEGER , INTENT(IN)    :: nudge_temp(maxdom)       ! temperature-nudging flag
+<    INTEGER , INTENT(IN)    :: nudge_mois(maxdom)       ! moisture-nudging flag
+<    REAL    , INTENT(IN)    :: nudgezfullr1_uv  ! vert infl fcn, regime=1 full-wt   hght, winds
+<    REAL    , INTENT(IN)    :: nudgezrampr1_uv  ! vert infl fcn, regime=1 ramp down hght, winds
+<    REAL    , INTENT(IN)    :: nudgezfullr2_uv  ! vert infl fcn, regime=2 full-wt   hght, winds
+<    REAL    , INTENT(IN)    :: nudgezrampr2_uv  ! vert infl fcn, regime=2 ramp down hght, winds
+<    REAL    , INTENT(IN)    :: nudgezfullr4_uv  ! vert infl fcn, regime=4 full-wt   hght, winds
+<    REAL    , INTENT(IN)    :: nudgezrampr4_uv  ! vert infl fcn, regime=4 ramp down hght, winds
+<    REAL    , INTENT(IN)    :: nudgezfullr1_t   ! vert infl fcn, regime=1 full-wt   hght, temp
+<    REAL    , INTENT(IN)    :: nudgezrampr1_t   ! vert infl fcn, regime=1 ramp down hght, temp
+<    REAL    , INTENT(IN)    :: nudgezfullr2_t   ! vert infl fcn, regime=2 full-wt   hght, temp
+<    REAL    , INTENT(IN)    :: nudgezrampr2_t   ! vert infl fcn, regime=2 ramp down hght, temp
+<    REAL    , INTENT(IN)    :: nudgezfullr4_t   ! vert infl fcn, regime=4 full-wt   hght, temp
+<    REAL    , INTENT(IN)    :: nudgezrampr4_t   ! vert infl fcn, regime=4 ramp down hght, temp
+<    REAL    , INTENT(IN)    :: nudgezfullr1_q   ! vert infl fcn, regime=1 full-wt   hght, mois
+<    REAL    , INTENT(IN)    :: nudgezrampr1_q   ! vert infl fcn, regime=1 ramp down hght, mois
+<    REAL    , INTENT(IN)    :: nudgezfullr2_q   ! vert infl fcn, regime=2 full-wt   hght, mois
+<    REAL    , INTENT(IN)    :: nudgezrampr2_q   ! vert infl fcn, regime=2 ramp down hght, mois
+<    REAL    , INTENT(IN)    :: nudgezfullr4_q   ! vert infl fcn, regime=4 full-wt   hght, mois
+<    REAL    , INTENT(IN)    :: nudgezrampr4_q   ! vert infl fcn, regime=4 ramp down hght, mois
+<    REAL    , INTENT(IN)    :: nudgezfullmin    ! min dpth thru which vert infl fcn remains 1.0 (m)
+<    REAL    , INTENT(IN)    :: nudgezrampmin    ! min dpth thru which vif decreases 1.0 to 0.0 (m)
+<    REAL    , INTENT(IN)    :: nudgezmax        ! max dpth in which vif is nonzero (m)
+<    REAL    , INTENT(IN)    :: xlat ( ims:ime, jms:jme )        ! latitudes on mass-point grid
+<    REAL    , INTENT(IN)    :: xlong( ims:ime, jms:jme )        ! longitudes on mass-point grid
+---
+>    REAL    , INTENT(IN)    :: dx                 ! this domain grid size (m)
+>    REAL    , INTENT(IN)    :: rinxy(maxdom)      ! horizontal Radius Of Influence (km)
+>    REAL    , INTENT(IN)    :: rinxy_sfc(maxdom)  ! horizontal Radius Of Influence for surface obs (km)
+>    REAL    , INTENT(IN)    :: rinxy_meta(maxdom) ! horiz ROI, platfm type metar   (km)
+>    REAL    , INTENT(IN)    :: rinxy_spec(maxdom) ! horiz ROI, platfm type speci   (km)
+>    REAL    , INTENT(IN)    :: rinxy_ship(maxdom) ! horiz ROI, platfm type ship    (km)
+>    REAL    , INTENT(IN)    :: rinxy_syno(maxdom) ! horiz ROI, platfm type synop   (km)
+>    REAL    , INTENT(IN)    :: rinxy_temp(maxdom) ! horiz ROI, platfm type temp    (km)
+>    REAL    , INTENT(IN)    :: rinxy_pilo(maxdom) ! horiz ROI, platfm type pilot   (km)
+>    REAL    , INTENT(IN)    :: rinxy_satw(maxdom) ! horiz ROI, platfm type satwnds (km)
+>    REAL    , INTENT(IN)    :: rinxy_sams(maxdom) ! horiz ROI, platfm type sams    (km)
+>    REAL    , INTENT(IN)    :: rinxy_prof(maxdom) ! horiz ROI, platfm type profiler(km)
+>    REAL    , INTENT(IN)    :: rinxy_sl10(maxdom) ! horiz ROI, platfm type slot10  (km)
+>    REAL    , INTENT(IN)    :: rinxy_sl11(maxdom) ! horiz ROI, platfm type slot11  (km)
+>    REAL    , INTENT(IN)    :: rinxy_sl12(maxdom) ! horiz ROI, platfm type slot12  (km)
+>    REAL    , INTENT(IN)    :: rinxy_sl13(maxdom) ! horiz ROI, platfm type slot13  (km)
+>    REAL    , INTENT(IN)    :: rinxy_sl14(maxdom) ! horiz ROI, platfm type slot14  (km)
+>    REAL    , INTENT(IN)    :: rinxy_sl15(maxdom) ! horiz ROI, platfm type slot15  (km)
+>    REAL    , INTENT(IN)    :: twindo(maxdom)      ! half-period time window       (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sfc(maxdom)  ! half-period time window for surface obs (hrs)
+>    REAL    , INTENT(IN)    :: twindo_meta(maxdom) ! h-p twindo for platfm metar   (hrs)
+>    REAL    , INTENT(IN)    :: twindo_spec(maxdom) ! h-p twindo for platfm speci   (hrs)
+>    REAL    , INTENT(IN)    :: twindo_ship(maxdom) ! h-p twindo for platfm ship    (hrs)
+>    REAL    , INTENT(IN)    :: twindo_syno(maxdom) ! h-p twindo for platfm synop   (hrs)
+>    REAL    , INTENT(IN)    :: twindo_temp(maxdom) ! h-p twindo for platfm temp    (hrs)
+>    REAL    , INTENT(IN)    :: twindo_pilo(maxdom) ! h-p twindo for platfm pilot   (hrs)
+>    REAL    , INTENT(IN)    :: twindo_satw(maxdom) ! h-p twindo for platfm satwnds (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sams(maxdom) ! h-p twindo for platfm sams    (hrs)
+>    REAL    , INTENT(IN)    :: twindo_prof(maxdom) ! h-p twindo for platfm profiler(hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl10(maxdom) ! h-p twindo for platfm slot10  (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl11(maxdom) ! h-p twindo for platfm slot11  (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl12(maxdom) ! h-p twindo for platfm slot12  (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl13(maxdom) ! h-p twindo for platfm slot13  (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl14(maxdom) ! h-p twindo for platfm slot14  (hrs)
+>    REAL    , INTENT(IN)    :: twindo_sl15(maxdom) ! h-p twindo for platfm slot15  (hrs)
+>    REAL    , INTENT(IN)    :: rinfmx(maxdom)  ! scale for max horiz radius of influence
+>    REAL, DIMENSION( ims:ime, jms:jme ),                            &
+>          INTENT(IN )       :: xlat, xlong     ! lat/long locations on mass point grid
+3993,3998d4051
+<    REAL    , INTENT(IN)    :: p00                      ! base state pressure
+<    REAL    , INTENT(IN)    :: t00                      ! base state temperature
+<    REAL    , INTENT(IN)    :: tlp                      ! base state lapse rate
+<    REAL    , INTENT(IN)    :: znu( kms:kme )           ! eta values on half (mass) levels
+<    REAL    , INTENT(IN)    :: p_top                    ! pressure at top of model
+<    TYPE(fdob_type), INTENT(INOUT)  :: fdob
+4000c4053,4056
+<    INTEGER                 :: e_sn         ! ending   north-south grid index
+---
+>    TYPE(fdob_type), INTENT(INOUT)  :: fdob
+>    INTEGER , INTENT(IN)    :: obs_ndirpow     ! dimension for raw Kalman gain data
+>    INTEGER , INTENT(IN)    :: obs_ndir        ! dim for reduced gain data: half-length
+>    INTEGER , INTENT(IN)    :: obs_npow        ! dim for reduced gain data: jump
+4007,4028c4063,4081
+<       e_sn = jde
+<       CALL fddaobs_init(obs_nudge_opt, maxdom, inest, parid,       &
+<                         idynin, dtramp, fdaend, restart,           &
+<                         obs_twindo_cg,                             &
+<                         obs_twindo, itimestep,                     &
+<                         no_pbl_nudge_uv,                           &
+<                         no_pbl_nudge_t,                            &
+<                         no_pbl_nudge_q,                            &
+<                         sfc_scheme_horiz, sfc_scheme_vert,         &
+<                         maxsnd_gap,                                &
+<                         sfcfact, sfcfacr, dpsmx,                   &
+<                         nudge_wind, nudge_temp, nudge_mois,        &
+<                         nudgezfullr1_uv, nudgezrampr1_uv,          &
+<                         nudgezfullr2_uv, nudgezrampr2_uv,          &
+<                         nudgezfullr4_uv, nudgezrampr4_uv,          &
+<                         nudgezfullr1_t,  nudgezrampr1_t,           &
+<                         nudgezfullr2_t,  nudgezrampr2_t,           &
+<                         nudgezfullr4_t,  nudgezrampr4_t,           &
+<                         nudgezfullr1_q,  nudgezrampr1_q,           &
+<                         nudgezfullr2_q,  nudgezrampr2_q,           &
+<                         nudgezfullr4_q,  nudgezrampr4_q,           &
+<                         nudgezfullmin,  nudgezrampmin, nudgezmax,  &
+---
+>       CALL fddaobs_init(obs_nudge_opt, maxdom, inest, parid,       &  
+>                         restart, niobf, kalmax, read_kalman,       &
+>                         nudge_terms,                               &   !ajb 10032013
+>                         qc_domain, adjust_ht, nobs_scans,          &
+>                         obs_twindo_cg, obs_twindo, itimestep,      &
+>                         dx,                                        &
+>                         rinxy,      rinxy_sfc,                     &
+>                         rinxy_meta, rinxy_spec, rinxy_ship,        &
+>                         rinxy_syno, rinxy_temp, rinxy_pilo,        &
+>                         rinxy_satw, rinxy_sams, rinxy_prof,        &
+>                         rinxy_sl10, rinxy_sl11, rinxy_sl12,        &
+>                         rinxy_sl13, rinxy_sl14, rinxy_sl15,        &
+>                         twindo,      twindo_sfc,                   &
+>                         twindo_meta, twindo_spec, twindo_ship,     &
+>                         twindo_syno, twindo_temp, twindo_pilo,     &
+>                         twindo_satw, twindo_sams, twindo_prof,     &
+>                         twindo_sl10, twindo_sl11, twindo_sl12,     &
+>                         twindo_sl13, twindo_sl14, twindo_sl15,     &
+>                         rinfmx,                                    &
+4032,4036c4085,4088
+<                         p00, t00, tlp,                             &
+<                         znu, p_top,                                &
+<                         fdob, ipf_init,                            &
+<                         ids,ide, jds,jde, kds,kde,                 &
+<                         ims,ime, jms,jme, kms,kme,                 &
+---
+>                         fdob,                                      &
+>                         obs_ndirpow, obs_ndir, obs_npow, ipf_init, &
+>                         ids,ide, jds,jde, kds,kde,                 &  
+>                         ims,ime, jms,jme, kms,kme,                 &  
+4039a4092
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Obs-nudging arguments for fdob_init

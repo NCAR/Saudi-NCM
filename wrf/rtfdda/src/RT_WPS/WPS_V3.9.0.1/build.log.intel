@@ -1,0 +1,943 @@
+============================================================================================== 
+ 
+Version 3.9
+ 
+Linux cdl2 4.12.14-150.38-default #1 SMP Mon Oct 7 10:54:05 UTC 2019 (3106fa5) x86_64 x86_64 x86_64 GNU/Linux
+ 
+Not sure how to figure out the version of this compiler: ftn
+ 
+============================================================================================== 
+ 
+ 
+**** Compiling WPS and all utilities ****
+ 
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/geogrid/src'
+/bin/rm -f cio.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID  -c cio.c	
+/bin/rm -f constants_module.o constants_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include constants_module.F > constants_module.f90
+ftn -FR -convert big_endian -c constants_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f misc_definitions_module.o misc_definitions_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include misc_definitions_module.F > misc_definitions_module.f90
+ftn -FR -convert big_endian -c misc_definitions_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f parallel_module.o parallel_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include parallel_module.F > parallel_module.f90
+ftn -FR -convert big_endian -c parallel_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_debug.o module_debug.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_debug.F > module_debug.f90
+ftn -FR -convert big_endian -c module_debug.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f gridinfo_module.o gridinfo_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include gridinfo_module.F > gridinfo_module.f90
+ftn -FR -convert big_endian -c gridinfo_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f wrf_debug.o wrf_debug.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include wrf_debug.F > wrf_debug.f90
+ftn -FR -convert big_endian -c wrf_debug.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f bitarray_module.o bitarray_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include bitarray_module.F > bitarray_module.f90
+ftn -FR -convert big_endian -c bitarray_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_stringutil.o module_stringutil.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_stringutil.F > module_stringutil.f90
+ftn -FR -convert big_endian -c module_stringutil.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f hash_module.o hash_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include hash_module.F > hash_module.f90
+ftn -FR -convert big_endian -c hash_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_map_utils.o module_map_utils.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_map_utils.F > module_map_utils.f90
+ftn -FR -convert big_endian -c module_map_utils.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f list_module.o list_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include list_module.F > list_module.f90
+ftn -FR -convert big_endian -c list_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f llxy_module.o llxy_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include llxy_module.F > llxy_module.f90
+ftn -FR -convert big_endian -c llxy_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f source_data_module.o source_data_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include source_data_module.F > source_data_module.f90
+ftn -FR -convert big_endian -c source_data_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f output_module.o output_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include output_module.F > output_module.f90
+ftn -FR -convert big_endian -c output_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f queue_module.o queue_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include queue_module.F > queue_module.f90
+ftn -FR -convert big_endian -c queue_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f interp_module.o interp_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include interp_module.F > interp_module.f90
+ftn -FR -convert big_endian -c interp_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f proc_point_module.o proc_point_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include proc_point_module.F > proc_point_module.f90
+ftn -FR -convert big_endian -c proc_point_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f smooth_module.o smooth_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include smooth_module.F > smooth_module.f90
+ftn -FR -convert big_endian -c smooth_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f process_tile_module.o process_tile_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include process_tile_module.F > process_tile_module.f90
+ftn -FR -convert big_endian -c process_tile_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f geogrid.o geogrid.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include geogrid.F > geogrid.f90
+ftn -FR -convert big_endian -c geogrid.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f read_geogrid.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GEOGRID  -c read_geogrid.c	
+read_geogrid.c(23): warning #47: incompatible redefinition of macro "BIG_ENDIAN" (declared at line 46 of "/usr/include/endian.h")
+  #define BIG_ENDIAN    0
+          ^
+
+read_geogrid.c(24): warning #47: incompatible redefinition of macro "LITTLE_ENDIAN" (declared at line 45 of "/usr/include/endian.h")
+  #define LITTLE_ENDIAN 1
+          ^
+
+read_geogrid.c(124): warning #63: shift count is too large
+              if ((*isigned) && (ival > (1 << 31))) ival -= (1 << 32);
+                                                                  ^
+
+ftn  -o geogrid.exe cio.o wrf_debug.o bitarray_module.o constants_module.o module_stringutil.o geogrid.o gridinfo_module.o hash_module.o interp_module.o list_module.o llxy_module.o misc_definitions_module.o module_debug.o module_map_utils.o output_module.o parallel_module.o process_tile_module.o proc_point_module.o queue_module.o read_geogrid.o smooth_module.o source_data_module.o \
+	/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_driver_constants.o \
+	/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/pack_utils.o /home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_machine.o \
+	/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_internal_header_util.o \
+	-I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include \
+	-L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -lio_grib1 -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -lio_grib_share -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -lwrfio_int -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -lwrfio_nf -L/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/lib -lnetcdff -lnetcdf \
+	
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/geogrid/src'
+( cd src/ngl ; make -i -r DEV_TOP="/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1" CC="cc" FC="ftn" RANLIB="echo" all )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+( cd w3 ; make -i -r DEV_TOP="/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1" all ; echo libw3.a )
+make[2]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl/w3'
+Makefile:44: warning: overriding recipe for target '.f.o'
+/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/configure.wps:103: warning: ignoring old recipe for target '.f.o'
+Makefile:48: warning: overriding recipe for target '.c.o'
+/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/configure.wps:99: warning: ignoring old recipe for target '.c.o'
+/bin/rm -f bacio_module.o
+ftn -FI -convert big_endian -c bacio_module.f 
+/bin/rm -f getgb.o
+ftn -FI -convert big_endian -c getgb.f 
+/bin/rm -f getgbmh.o
+ftn -FI -convert big_endian -c getgbmh.f 
+/bin/rm -f putgbex.o
+ftn -FI -convert big_endian -c putgbex.f 
+/bin/rm -f w3fi73.o
+ftn -FI -convert big_endian -c w3fi73.f 
+/bin/rm -f getgb1r.o
+ftn -FI -convert big_endian -c getgb1r.f 
+/bin/rm -f getgbmp.o
+ftn -FI -convert big_endian -c getgbmp.f 
+/bin/rm -f putgbn.o
+ftn -FI -convert big_endian -c putgbn.f 
+/bin/rm -f w3fi74.o
+ftn -FI -convert big_endian -c w3fi74.f 
+/bin/rm -f getgb1re.o
+ftn -FI -convert big_endian -c getgb1re.f 
+/bin/rm -f getgbp.o
+ftn -FI -convert big_endian -c getgbp.f 
+/bin/rm -f r63w72.o
+ftn -FI -convert big_endian -c r63w72.f 
+/bin/rm -f w3fi75.o
+ftn -FI -convert big_endian -c w3fi75.f 
+/bin/rm -f getgb1s.o
+ftn -FI -convert big_endian -c getgb1s.f 
+/bin/rm -f getgi.o
+ftn -FI -convert big_endian -c getgi.f 
+/bin/rm -f sbyte.o
+ftn -FI -convert big_endian -c sbyte.f 
+/bin/rm -f w3fi76.o
+ftn -FI -convert big_endian -c w3fi76.f 
+/bin/rm -f getgbe.o
+ftn -FI -convert big_endian -c getgbe.f 
+/bin/rm -f getgir.o
+ftn -FI -convert big_endian -c getgir.f 
+/bin/rm -f sbytes.o
+ftn -FI -convert big_endian -c sbytes.f 
+/bin/rm -f w3fi82.o
+ftn -FI -convert big_endian -c w3fi82.f 
+/bin/rm -f getgbeh.o
+ftn -FI -convert big_endian -c getgbeh.f 
+/bin/rm -f idsdef.o
+ftn -FI -convert big_endian -c idsdef.f 
+/bin/rm -f w3fi83.o
+ftn -FI -convert big_endian -c w3fi83.f 
+/bin/rm -f getgbem.o
+ftn -FI -convert big_endian -c getgbem.f 
+/bin/rm -f iw3jdn.o
+ftn -FI -convert big_endian -c iw3jdn.f 
+/bin/rm -f w3difdat.o
+ftn -FI -convert big_endian -c w3difdat.f 
+/bin/rm -f w3fs26.o
+ftn -FI -convert big_endian -c w3fs26.f 
+/bin/rm -f getgbemh.o
+ftn -FI -convert big_endian -c getgbemh.f 
+/bin/rm -f ixgb.o
+ftn -FI -convert big_endian -c ixgb.f 
+/bin/rm -f w3doxdat.o
+ftn -FI -convert big_endian -c w3doxdat.f 
+/bin/rm -f w3log.o
+ftn -FI -convert big_endian -c w3log.f 
+/bin/rm -f getgbemp.o
+ftn -FI -convert big_endian -c getgbemp.f 
+/bin/rm -f lengds.o
+ftn -FI -convert big_endian -c lengds.f 
+/bin/rm -f w3fi01.o
+ftn -FI -convert big_endian -c w3fi01.f 
+/bin/rm -f w3movdat.o
+ftn -FI -convert big_endian -c w3movdat.f 
+/bin/rm -f getgbens.o
+ftn -FI -convert big_endian -c getgbens.f 
+/bin/rm -f pdsens.o
+ftn -FI -convert big_endian -c pdsens.f 
+/bin/rm -f w3fi58.o
+ftn -FI -convert big_endian -c w3fi58.f 
+/bin/rm -f w3reddat.o
+ftn -FI -convert big_endian -c w3reddat.f 
+/bin/rm -f getgbep.o
+ftn -FI -convert big_endian -c getgbep.f 
+/bin/rm -f pdseup.o
+ftn -FI -convert big_endian -c pdseup.f 
+/bin/rm -f w3fi59.o
+ftn -FI -convert big_endian -c w3fi59.f 
+/bin/rm -f w3tagb.o
+ftn -FI -convert big_endian -c w3tagb.f 
+/bin/rm -f errmsg.o
+ftn -FI -convert big_endian -c errmsg.f 
+/bin/rm -f getgbex.o
+ftn -FI -convert big_endian -c getgbex.f 
+/bin/rm -f putgb.o
+ftn -FI -convert big_endian -c putgb.f 
+/bin/rm -f w3fi63.o
+ftn -FI -convert big_endian -c w3fi63.f 
+/bin/rm -f gbytes.o
+ftn -FI -convert big_endian -c gbytes.f 
+/bin/rm -f getgbexm.o
+ftn -FI -convert big_endian -c getgbexm.f 
+/bin/rm -f putgbe.o
+ftn -FI -convert big_endian -c putgbe.f 
+/bin/rm -f w3fi68.o
+ftn -FI -convert big_endian -c w3fi68.f 
+/bin/rm -f gbytes_char.o
+ftn -FI -convert big_endian -c gbytes_char.f 
+/bin/rm -f getgbh.o
+ftn -FI -convert big_endian -c getgbh.f 
+/bin/rm -f putgben.o
+ftn -FI -convert big_endian -c putgben.f 
+/bin/rm -f getbit.o
+ftn -FI -convert big_endian -c getbit.f 
+/bin/rm -f getgbm.o
+ftn -FI -convert big_endian -c getgbm.f 
+/bin/rm -f putgbens.o
+ftn -FI -convert big_endian -c putgbens.f 
+/bin/rm -f w3fi72.o
+ftn -FI -convert big_endian -c w3fi72.f 
+/bin/rm -f fparsei.o
+ftn -FI -convert big_endian -c fparsei.f 
+/bin/rm -f fparser.o
+ftn -FI -convert big_endian -c fparser.f 
+/bin/rm -f instrument.o
+ftn -FI -convert big_endian -c instrument.f 
+/bin/rm -f start.o
+ftn -FI -convert big_endian -c start.f 
+/bin/rm -f summary.o
+ftn -FI -convert big_endian -c summary.f 
+/bin/rm -f w3utcdat.o
+ftn -FI -convert big_endian -c w3utcdat.f 
+/bin/rm -f w3fs21.o
+ftn -FI -convert big_endian -c w3fs21.f 
+/bin/rm -f w3locdat.o
+ftn -FI -convert big_endian -c w3locdat.f 
+/bin/rm -f w3fi71.o
+ftn -FI -convert big_endian -c w3fi71.f 
+/bin/rm -f baciof.o
+ftn -FI -convert big_endian -c baciof.f 
+/bin/rm -f bacio.v1.3.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -c bacio.v1.3.c 
+/bin/rm -f errexit.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -c errexit.c 
+ar ru  libw3.a bacio_module.o getgb.o     getgbmh.o   putgbex.o   w3fi73.o getgb1r.o   getgbmp.o   putgbn.o    w3fi74.o getgb1re.o  getgbp.o    r63w72.o    w3fi75.o getgb1s.o   getgi.o     sbyte.o     w3fi76.o getgbe.o    getgir.o    sbytes.o    w3fi82.o getgbeh.o   idsdef.o                w3fi83.o getgbem.o   iw3jdn.o    w3difdat.o  w3fs26.o getgbemh.o  ixgb.o      w3doxdat.o  w3log.o getgbemp.o  lengds.o    w3fi01.o    w3movdat.o getgbens.o  pdsens.o    w3fi58.o    w3reddat.o getgbep.o   pdseup.o    w3fi59.o    w3tagb.o errmsg.o    getgbex.o   putgb.o     w3fi63.o gbytes.o    getgbexm.o  putgbe.o    w3fi68.o gbytes_char.o           getgbh.o    putgben.o getbit.o    getgbm.o    putgbens.o  w3fi72.o fparsei.o   fparser.o   instrument.o start.o     summary.o   w3utcdat.o  w3fs21.o w3locdat.o  w3fi71.o    baciof.o bacio.v1.3.o errexit.o
+ar: creating libw3.a
+echo libw3.a
+libw3.a
+make[2]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl/w3'
+libw3.a
+ln -sf w3/libw3.a .
+( cd g2 ; make -i -r DEV_TOP="/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1" all ; echo libg2_4.a )
+make[2]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl/g2'
+Makefile:67: warning: overriding recipe for target '.F.o'
+/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/configure.wps:107: warning: ignoring old recipe for target '.F.o'
+Makefile:72: warning: overriding recipe for target '.f.o'
+/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/configure.wps:103: warning: ignoring old recipe for target '.f.o'
+Makefile:75: warning: overriding recipe for target '.c.o'
+/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/configure.wps:99: warning: ignoring old recipe for target '.c.o'
+ftn -c -FI -convert big_endian gridtemplates.f
+ftn -c -FI -convert big_endian pdstemplates.f
+ftn -c -FI -convert big_endian drstemplates.f
+ftn -c -FI -convert big_endian gribmod.f
+ftn -c -FI -convert big_endian realloc.f
+ftn -c -FI -convert big_endian intmath.f
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG addfield.F > addfield.f90
+ftn -c -FI -convert big_endian addfield.f90
+/bin/rm -f addfield.f90
+ftn -c -FI -convert big_endian addgrid.f
+ftn -c -FI -convert big_endian addlocal.f
+ftn -c -FI -convert big_endian getfield.f
+ftn -c -FI -convert big_endian gb_info.f
+ftn -c -FI -convert big_endian gf_getfld.f
+ftn -c -FI -convert big_endian gf_free.f
+ftn -c -FI -convert big_endian gf_unpack1.f
+ftn -c -FI -convert big_endian gf_unpack2.f
+ftn -c -FI -convert big_endian gf_unpack3.f
+ftn -c -FI -convert big_endian gf_unpack4.f
+ftn -c -FI -convert big_endian gf_unpack5.f
+ftn -c -FI -convert big_endian gf_unpack6.f
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG gf_unpack7.F > gf_unpack7.f90
+ftn -c -FI -convert big_endian gf_unpack7.f90
+/bin/rm -f gf_unpack7.f90
+ftn -c -FI -convert big_endian gettemplates.f
+ftn -c -FI -convert big_endian getlocal.f
+ftn -c -FI -convert big_endian getdim.f
+ftn -c -FI -convert big_endian getpoly.f
+ftn -c -FI -convert big_endian gribcreate.f
+ftn -c -FI -convert big_endian gribend.f
+ftn -c -FI -convert big_endian gribinfo.f
+ftn -c -FI -convert big_endian mkieee.f
+ftn -c -FI -convert big_endian rdieee.f
+ftn -c -FI -convert big_endian simpack.f
+ftn -c -FI -convert big_endian simunpack.f
+ftn -c -FI -convert big_endian cmplxpack.f
+ftn -c -FI -convert big_endian compack.f
+ftn -c -FI -convert big_endian misspack.f
+ftn -c -FI -convert big_endian pack_gp.f
+ftn -c -FI -convert big_endian reduce.f
+ftn -c -FI -convert big_endian comunpack.f
+ftn -c -FI -convert big_endian specpack.f
+ftn -c -FI -convert big_endian specunpack.f
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG jpcpack.F > jpcpack.f90
+ftn -c -FI -convert big_endian jpcpack.f90
+/bin/rm -f jpcpack.f90
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG jpcunpack.F > jpcunpack.f90
+ftn -c -FI -convert big_endian jpcunpack.f90
+/bin/rm -f jpcunpack.f90
+cc -c  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -I/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/include/ -I -DUSE_JPEG2000 -DUSE_PNG -D__64BIT__ enc_jpeg2000.c
+cc -c  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -I/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/include/ -I -DUSE_JPEG2000 -DUSE_PNG -D__64BIT__ dec_jpeg2000.c
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG pngpack.F > pngpack.f90
+ftn -c -FI -convert big_endian pngpack.f90
+/bin/rm -f pngpack.f90
+/lib/cpp -P -traditional -DUSE_JPEG2000 -DUSE_PNG pngunpack.F > pngunpack.f90
+ftn -c -FI -convert big_endian pngunpack.f90
+/bin/rm -f pngunpack.f90
+cc -c  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -I/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/include/ -I -DUSE_JPEG2000 -DUSE_PNG -D__64BIT__ enc_png.c
+cc -c  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -I/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/include/ -I -DUSE_JPEG2000 -DUSE_PNG -D__64BIT__ dec_png.c
+ftn -c -FI -convert big_endian gbytesc.f
+ftn -c -FI -convert big_endian skgb.f
+ftn -c -FI -convert big_endian ixgb2.f
+ftn -c -FI -convert big_endian getidx.f
+ftn -c -FI -convert big_endian getg2i.f
+ftn -c -FI -convert big_endian getg2ir.f
+ftn -c -FI -convert big_endian getgb2s.f
+ftn -c -FI -convert big_endian getgb2r.f
+ftn -c -FI -convert big_endian getgb2l.f
+ftn -c -FI -convert big_endian getgb2.f
+ftn -c -FI -convert big_endian getgb2p.f
+ftn -c -FI -convert big_endian getgb2rp.f
+ftn -c -FI -convert big_endian putgb2.f
+ftn -c -FI -convert big_endian g2grids.f
+ftn -c -FI -convert big_endian gdt2gds.f
+ftn -c -FI -convert big_endian params.f
+ftn -c -FI -convert big_endian params_ecmwf.f
+cc -c  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -I/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/include/ -I -DUSE_JPEG2000 -DUSE_PNG -D__64BIT__ mova2i.c
+/bin/rm -f libg2_4.a
+ar ru  libg2_4.a gridtemplates.o pdstemplates.o drstemplates.o gribmod.o realloc.o intmath.o addfield.o addgrid.o addlocal.o getfield.o gb_info.o gf_getfld.o gf_free.o gf_unpack1.o gf_unpack2.o gf_unpack3.o gf_unpack4.o gf_unpack5.o gf_unpack6.o gf_unpack7.o gettemplates.o getlocal.o getdim.o getpoly.o gribcreate.o gribend.o gribinfo.o mkieee.o rdieee.o simpack.o simunpack.o cmplxpack.o compack.o misspack.o pack_gp.o reduce.o comunpack.o specpack.o specunpack.o jpcpack.o jpcunpack.o enc_jpeg2000.o dec_jpeg2000.o pngpack.o pngunpack.o enc_png.o dec_png.o gbytesc.o skgb.o ixgb2.o getidx.o getg2i.o getg2ir.o getgb2s.o getgb2r.o getgb2l.o getgb2.o getgb2p.o getgb2rp.o putgb2.o g2grids.o gdt2gds.o params.o params_ecmwf.o mova2i.o
+ar: creating libg2_4.a
+echo libg2_4.a
+libg2_4.a
+make[2]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl/g2'
+libg2_4.a
+ln -sf g2/libg2_4.a .
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r ungrib.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+Makefile:90: warning: overriding recipe for target '.F.o'
+../../configure.wps:107: warning: ignoring old recipe for target '.F.o'
+Makefile:95: warning: overriding recipe for target '.c.o'
+../../configure.wps:99: warning: ignoring old recipe for target '.c.o'
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG misc_definitions_module.F > misc_definitions_module.f90
+ftn -c -FR -convert big_endian misc_definitions_module.f90
+/bin/rm -f debug_cio.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB  -c debug_cio.c
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG module_debug.F > module_debug.f90
+ftn -c -FR -convert big_endian module_debug.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG module_stringutil.F > module_stringutil.f90
+ftn -c -FR -convert big_endian module_stringutil.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG table.F > table.f90
+ftn -c -FR -convert big_endian table.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG module_datarray.F > module_datarray.f90
+ftn -c -FR -convert big_endian module_datarray.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG gridinfo.F > gridinfo.f90
+ftn -c -FR -convert big_endian gridinfo.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG new_storage.F > new_storage.f90
+ftn -c -FR -convert big_endian new_storage.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG filelist.F > filelist.f90
+ftn -c -FR -convert big_endian filelist.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG ungrib.F > ungrib.f90
+ftn -c -FR -convert big_endian ungrib.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG output.F > output.f90
+ftn -c -FR -convert big_endian output.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG rrpr.F > rrpr.f90
+ftn -c -FR -convert big_endian rrpr.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG rd_grib1.F > rd_grib1.f90
+ftn -c -FR -convert big_endian rd_grib1.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG file_delete.F > file_delete.f90
+ftn -c -FR -convert big_endian file_delete.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG datint.F > datint.f90
+ftn -c -FR -convert big_endian datint.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB rd_grib2.F > rd_grib2.f90
+ftn -c -FI -convert big_endian  rd_grib2.f90 -I. -I./ngl/g2
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG build_hdate.F > build_hdate.f90
+ftn -c -FR -convert big_endian build_hdate.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG geth_newdate.F > geth_newdate.f90
+ftn -c -FR -convert big_endian geth_newdate.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG geth_idts.F > geth_idts.f90
+ftn -c -FR -convert big_endian geth_idts.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG swap.F > swap.f90
+ftn -c -FR -convert big_endian swap.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG parse_table.F > parse_table.f90
+ftn -c -FR -convert big_endian parse_table.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG gbytesys.F > gbytesys.f90
+ftn -c -FR -convert big_endian gbytesys.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG gribcode.F > gribcode.f90
+ftn -c -FR -convert big_endian gribcode.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB -DUSE_JPEG2000 -DUSE_PNG read_namelist.F > read_namelist.f90
+ftn -c -FR -convert big_endian read_namelist.f90
+/bin/rm -f cio.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UNGRIB  -c cio.c
+cio.c(52): warning #303: explicit type is missing ("int" assumed)
+  c_open(unit, nunit, name, mode, err, oflag)
+  ^
+
+cio.c(117): warning #303: explicit type is missing ("int" assumed)
+  bn_seek(fd, bread, mode, iprint)
+  ^
+
+cio.c(155): warning #303: explicit type is missing ("int" assumed)
+  bn_read(fd, buf, nbuf, bread, ios, idiag)
+  ^
+
+cio.c(201): warning #303: explicit type is missing ("int" assumed)
+  bnwrit_(fd, buf, nbuf, bwritten, err, idiag)
+  ^
+
+cio.c(235): warning #303: explicit type is missing ("int" assumed)
+  c_close(nunit, iprint, err)
+  ^
+
+/bin/rm -f libpgu.a
+ar ru libpgu.a build_hdate.o geth_newdate.o geth_idts.o swap.o table.o parse_table.o gbytesys.o gribcode.o read_namelist.o cio.o
+ar: creating libpgu.a
+echo libpgu.a
+libpgu.a
+/bin/rm -f ungrib.exe
+if [ -z  ] ; then \
+		  ftn -o ungrib.exe  misc_definitions_module.o debug_cio.o module_debug.o module_stringutil.o table.o module_datarray.o gridinfo.o new_storage.o filelist.o ungrib.o output.o rrpr.o rd_grib1.o file_delete.o datint.o rd_grib2.o  \
+			-L./ngl -lw3 -lg2_4 \
+			-L/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/lib -L -ljasper -lpng -lz \
+			-L. -lpgu ; \
+                        else \
+		  ftn -o ungrib.exe  misc_definitions_module.o debug_cio.o module_debug.o module_stringutil.o table.o module_datarray.o gridinfo.o new_storage.o filelist.o ungrib.o output.o rrpr.o rd_grib1.o file_delete.o datint.o rd_grib2.o  \
+			./ngl/w3/libw3.a ./ngl/g2/libg2_4.a \
+			-L/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/lib -L -ljasper -lpng -lz \
+			libpgu.a ; \
+                        fi
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+if [ -h ungrib.exe ] ; then \
+        /bin/rm -f ungrib.exe ; \
+fi ; \
+if [ -h ../ungrib.exe ] ; then \
+	/bin/rm -f ../ungrib.exe ; \
+fi ; \
+if [ -e src/ungrib.exe ] ; then \
+	ln -sf src/ungrib.exe . ; \
+fi
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/metgrid/src'
+/bin/rm -f cio.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID  -c cio.c	
+/bin/rm -f misc_definitions_module.o misc_definitions_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include misc_definitions_module.F > misc_definitions_module.f90
+ftn -FR -convert big_endian -c misc_definitions_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f parallel_module.o parallel_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include parallel_module.F > parallel_module.f90
+ftn -FR -convert big_endian -c parallel_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_debug.o module_debug.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_debug.F > module_debug.f90
+ftn -FR -convert big_endian -c module_debug.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f gridinfo_module.o gridinfo_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include gridinfo_module.F > gridinfo_module.f90
+ftn -FR -convert big_endian -c gridinfo_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f wrf_debug.o wrf_debug.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include wrf_debug.F > wrf_debug.f90
+ftn -FR -convert big_endian -c wrf_debug.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f bitarray_module.o bitarray_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include bitarray_module.F > bitarray_module.f90
+ftn -FR -convert big_endian -c bitarray_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f constants_module.o constants_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include constants_module.F > constants_module.f90
+ftn -FR -convert big_endian -c constants_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f datatype_module.o datatype_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include datatype_module.F > datatype_module.f90
+ftn -FR -convert big_endian -c datatype_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_stringutil.o module_stringutil.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_stringutil.F > module_stringutil.f90
+ftn -FR -convert big_endian -c module_stringutil.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f list_module.o list_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include list_module.F > list_module.f90
+ftn -FR -convert big_endian -c list_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f interp_option_module.o interp_option_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include interp_option_module.F > interp_option_module.f90
+ftn -FR -convert big_endian -c interp_option_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_date_pack.o module_date_pack.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_date_pack.F > module_date_pack.f90
+ftn -FR -convert big_endian -c module_date_pack.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f queue_module.o queue_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include queue_module.F > queue_module.f90
+ftn -FR -convert big_endian -c queue_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f input_module.o input_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include input_module.F > input_module.f90
+ftn -FR -convert big_endian -c input_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f interp_module.o interp_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include interp_module.F > interp_module.f90
+ftn -FR -convert big_endian -c interp_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_map_utils.o module_map_utils.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_map_utils.F > module_map_utils.f90
+ftn -FR -convert big_endian -c module_map_utils.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f llxy_module.o llxy_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include llxy_module.F > llxy_module.f90
+ftn -FR -convert big_endian -c llxy_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_mergesort.o module_mergesort.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_mergesort.F > module_mergesort.f90
+ftn -FR -convert big_endian -c module_mergesort.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f minheap_module.o minheap_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include minheap_module.F > minheap_module.f90
+ftn -FR -convert big_endian -c minheap_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f storage_module.o storage_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include storage_module.F > storage_module.f90
+ftn -FR -convert big_endian -c storage_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f output_module.o output_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include output_module.F > output_module.f90
+ftn -FR -convert big_endian -c output_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f met_data_module.o met_data_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include met_data_module.F > met_data_module.f90
+ftn -FR -convert big_endian -c met_data_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f read_met_module.o read_met_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include read_met_module.F > read_met_module.f90
+ftn -FR -convert big_endian -c read_met_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f rotate_winds_module.o rotate_winds_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include rotate_winds_module.F > rotate_winds_module.f90
+ftn -FR -convert big_endian -c rotate_winds_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f scan_input.o scan_input.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include scan_input.F > scan_input.f90
+ftn -FR -convert big_endian -c scan_input.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f mpas_mesh.o mpas_mesh.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include mpas_mesh.F > mpas_mesh.f90
+ftn -FR -convert big_endian -c mpas_mesh.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f target_mesh.o target_mesh.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include target_mesh.F > target_mesh.f90
+ftn -FR -convert big_endian -c target_mesh.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f remapper.o remapper.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include remapper.F > remapper.f90
+ftn -FR -convert big_endian -c remapper.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f process_domain_module.o process_domain_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include process_domain_module.F > process_domain_module.f90
+ftn -FR -convert big_endian -c process_domain_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+process_domain_module.f90(1): warning #5462: Global name too long, shortened from: process_domain_module_mp_process_intermediate_fields_$blk.parallel_module_mp_mpi_statuses_ignore_ to: rocess_domain_module_mp_process_intermediate_fields_$blk.parallel_module_mp_mpi_statuses_ignore_
+
+^
+process_domain_module.f90(1): warning #5462: Global name too long, shortened from: process_domain_module_mp_process_intermediate_fields_$blk.parallel_module_mp_mpi_errcodes_ignore_ to: rocess_domain_module_mp_process_intermediate_fields_$blk.parallel_module_mp_mpi_errcodes_ignore_
+
+^
+/bin/rm -f metgrid.o metgrid.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include metgrid.F > metgrid.f90
+ftn -FR -convert big_endian -c metgrid.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f write_met_module.o write_met_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_METGRID -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include write_met_module.F > write_met_module.f90
+ftn -FR -convert big_endian -c write_met_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn  -o metgrid.exe cio.o wrf_debug.o bitarray_module.o constants_module.o datatype_module.o module_stringutil.o gridinfo_module.o metgrid.o input_module.o interp_module.o interp_option_module.o list_module.o llxy_module.o met_data_module.o minheap_module.o misc_definitions_module.o module_date_pack.o module_debug.o module_map_utils.o module_mergesort.o output_module.o parallel_module.o process_domain_module.o queue_module.o read_met_module.o rotate_winds_module.o storage_module.o write_met_module.o scan_input.o mpas_mesh.o target_mesh.o remapper.o \
+                /home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_driver_constants.o \
+	/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/pack_utils.o /home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_machine.o \
+	/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/frame/module_internal_header_util.o \
+                -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include \
+                -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -lio_grib1 -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -lio_grib_share -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -lwrfio_int -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -lwrfio_nf -L/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/lib -lnetcdff -lnetcdf \
+                
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/metgrid/src'
+( cd src/ngl ; make -i -r DEV_TOP="/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1" CC="cc" FC="ftn" RANLIB="echo" all )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r g1print.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GRIBUTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+Makefile:90: warning: overriding recipe for target '.F.o'
+../../configure.wps:107: warning: ignoring old recipe for target '.F.o'
+Makefile:95: warning: overriding recipe for target '.c.o'
+../../configure.wps:99: warning: ignoring old recipe for target '.c.o'
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GRIBUTIL -DUSE_JPEG2000 -DUSE_PNG g1print.F > g1print.f90
+ftn -c -FR -convert big_endian g1print.f90
+ftn -o g1print.exe  g1print.o gribcode.o module_debug.o debug_cio.o libpgu.a
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+if [ -h g1print.exe ] ; then \
+        /bin/rm -f g1print.exe ; \
+fi ; \
+if [ -h ../g1print.exe ] ; then \
+	/bin/rm -f ../g1print.exe ; \
+fi ; \
+if [ -e src/g1print.exe ] ; then \
+	ln -sf src/g1print.exe . ; \
+fi
+( cd src/ngl ; make -i -r DEV_TOP="/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1" CC="cc" FC="ftn" RANLIB="echo" all )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src/ngl'
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r g2print.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GRIBUTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+Makefile:90: warning: overriding recipe for target '.F.o'
+../../configure.wps:107: warning: ignoring old recipe for target '.F.o'
+Makefile:95: warning: overriding recipe for target '.c.o'
+../../configure.wps:99: warning: ignoring old recipe for target '.c.o'
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_GRIBUTIL g2print.F > g2print.f90
+ftn -c -FR -convert big_endian  g2print.f90 -I. -I./ngl/g2
+if [ -z  ] ; then \
+		  ftn -o g2print.exe  g2print.o \
+			filelist.o gridinfo.o \
+			-L. -lpgu \
+			-L./ngl -lw3 -lg2_4 \
+			-L/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/lib -L -ljasper -lpng -lz ; \
+                        else \
+		  ftn -o g2print.exe  g2print.o \
+			filelist.o gridinfo.o \
+			libpgu.a  \
+			./ngl/w3/libw3.a ./ngl/g2/libg2_4.a \
+			-L/sw/xc40cle7/grib2/1.4.0/sles15_gcc7.4.1/lib -L -ljasper -lpng -lz ; \
+                        fi
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/ungrib/src'
+if [ -h g2print.exe ] ; then \
+        /bin/rm -f g2print.exe ; \
+fi ; \
+if [ -h ../g2print.exe ] ; then \
+	/bin/rm -f ../g2print.exe ; \
+fi ; \
+if [ -e src/g2print.exe ] ; then \
+	ln -sf src/g2print.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r plotfmt.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f misc_definitions_module.o misc_definitions_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include misc_definitions_module.F > misc_definitions_module.f90
+ftn -FR -convert big_endian -c misc_definitions_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f met_data_module.o met_data_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include met_data_module.F > met_data_module.f90
+ftn -FR -convert big_endian -c met_data_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f constants_module.o constants_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include constants_module.F > constants_module.f90
+ftn -FR -convert big_endian -c constants_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f cio.o
+cc  -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL  -c cio.c	
+/bin/rm -f module_debug.o module_debug.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_debug.F > module_debug.f90
+ftn -FR -convert big_endian -c module_debug.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f read_met_module.o read_met_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include read_met_module.F > read_met_module.f90
+ftn -FR -convert big_endian -c read_met_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL plotfmt.F > plotfmt.f90
+ftn -FR -convert big_endian -c plotfmt.f90
+ftn -o plotfmt.exe  plotfmt.o read_met_module.o module_debug.o \
+	misc_definitions_module.o cio.o met_data_module.o \
+	-L/sw/xc40cle6/ncl/6.4.0/sles12.3_intel18.0.1.163//lib -lncarg -lncarg_gks -lncarg_c -lX11 -lXext -lpng -lz -lcairo -lfontconfig -lpixman-1 -lfreetype -lexpat -lpthread -lbz2 -lXrender -lgfortran -lgcc 
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h plotfmt.exe ] ; then \
+	/bin/rm -f plotfmt.exe ; \
+fi ; \
+if [ -h ../plotfmt.exe ] ; then \
+	/bin/rm -f ../plotfmt.exe ; \
+fi ; \
+if [ -e src/plotfmt.exe ] ; then \
+	ln -sf src/plotfmt.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r rd_intermediate.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f rd_intermediate.o rd_intermediate.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include rd_intermediate.F > rd_intermediate.f90
+ftn -FR -convert big_endian -c rd_intermediate.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn -o rd_intermediate.exe  rd_intermediate.o read_met_module.o \
+	module_debug.o misc_definitions_module.o cio.o met_data_module.o constants_module.o
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h rd_intermediate.exe ] ; then \
+	/bin/rm -f rd_intermediate.exe ; \
+fi ; \
+if [ -h ../rd_intermediate.exe ] ; then \
+	/bin/rm -f ../rd_intermediate.exe ; \
+fi ; \
+if [ -e src/rd_intermediate.exe ] ; then \
+	ln -sf src/rd_intermediate.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r plotgrids.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f module_map_utils.o module_map_utils.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_map_utils.F > module_map_utils.f90
+ftn -FR -convert big_endian -c module_map_utils.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/cp plotgrids.F plotgrids.f90
+ftn -FR -convert big_endian -c plotgrids.f90
+ftn -o plotgrids.exe  module_map_utils.o module_debug.o cio.o constants_module.o misc_definitions_module.o \
+	plotgrids.o -L/sw/xc40cle6/ncl/6.4.0/sles12.3_intel18.0.1.163//lib -lncarg -lncarg_gks -lncarg_c -lX11 -lXext -lpng -lz -lcairo -lfontconfig -lpixman-1 -lfreetype -lexpat -lpthread -lbz2 -lXrender -lgfortran -lgcc 
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h plotgrids.exe ] ; then \
+	/bin/rm -f plotgrids.exe ; \
+fi ; \
+if [ -h ../plotgrids.exe ] ; then \
+	/bin/rm -f ../plotgrids.exe ; \
+fi ; \
+if [ -e src/plotgrids.exe ] ; then \
+	ln -sf src/plotgrids.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r mod_levs.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f write_met_module.o write_met_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include write_met_module.F > write_met_module.f90
+ftn -FR -convert big_endian -c write_met_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f mod_levs.o mod_levs.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include mod_levs.F > mod_levs.f90
+ftn -FR -convert big_endian -c mod_levs.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn -o mod_levs.exe  mod_levs.o module_debug.o read_met_module.o \
+	write_met_module.o misc_definitions_module.o cio.o met_data_module.o constants_module.o
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h mod_levs.exe ] ; then \
+	/bin/rm -f mod_levs.exe ; \
+fi ; \
+if [ -h ../mod_levs.exe ] ; then \
+	/bin/rm -f ../mod_levs.exe ; \
+fi ; \
+if [ -e src/mod_levs.exe ] ; then \
+	ln -sf src/mod_levs.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r avg_tsfc.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f gridinfo_module.o gridinfo_module.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include gridinfo_module.F > gridinfo_module.f90
+ftn -FR -convert big_endian -c gridinfo_module.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f module_date_pack.o module_date_pack.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_date_pack.F > module_date_pack.f90
+ftn -FR -convert big_endian -c module_date_pack.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f avg_tsfc.o avg_tsfc.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include avg_tsfc.F > avg_tsfc.f90
+ftn -FR -convert big_endian -c avg_tsfc.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn  -o avg_tsfc.exe avg_tsfc.o cio.o module_debug.o gridinfo_module.o \
+	read_met_module.o write_met_module.o module_date_pack.o \
+	misc_definitions_module.o met_data_module.o constants_module.o
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h avg_tsfc.exe ] ; then \
+	/bin/rm -f avg_tsfc.exe ; \
+fi ; \
+if [ -h ../avg_tsfc.exe ] ; then \
+	/bin/rm -f ../avg_tsfc.exe ; \
+fi ; \
+if [ -e src/avg_tsfc.exe ] ; then \
+	ln -sf src/avg_tsfc.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r calc_ecmwf_p.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f module_stringutil.o module_stringutil.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include module_stringutil.F > module_stringutil.f90
+ftn -FR -convert big_endian -c module_stringutil.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+/bin/rm -f calc_ecmwf_p.o calc_ecmwf_p.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include calc_ecmwf_p.F > calc_ecmwf_p.f90
+ftn -FR -convert big_endian -c calc_ecmwf_p.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn  -o calc_ecmwf_p.exe calc_ecmwf_p.o cio.o module_debug.o module_stringutil.o gridinfo_module.o \
+	read_met_module.o write_met_module.o module_date_pack.o \
+	misc_definitions_module.o met_data_module.o constants_module.o
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h calc_ecmwf_p.exe ] ; then \
+	/bin/rm -f calc_ecmwf_p.exe ; \
+fi ; \
+if [ -h ../calc_ecmwf_p.exe ] ; then \
+	/bin/rm -f ../calc_ecmwf_p.exe ; \
+fi ; \
+if [ -e src/calc_ecmwf_p.exe ] ; then \
+	ln -sf src/calc_ecmwf_p.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r height_ukmo.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f height_ukmo.o height_ukmo.mod
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL -DUSE_JPEG2000 -DUSE_PNG -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include height_ukmo.F > height_ukmo.f90
+ftn -FR -convert big_endian -c height_ukmo.f90 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include
+ftn  -o height_ukmo.exe height_ukmo.o cio.o module_debug.o gridinfo_module.o \
+	read_met_module.o write_met_module.o module_date_pack.o \
+	misc_definitions_module.o met_data_module.o constants_module.o
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h height_ukmo.exe ] ; then \
+	/bin/rm -f height_ukmo.exe ; \
+fi ; \
+if [ -h ../height_ukmo.exe ] ; then \
+	/bin/rm -f ../height_ukmo.exe ; \
+fi ; \
+if [ -e src/height_ukmo.exe ] ; then \
+	ln -sf src/height_ukmo.exe . ; \
+fi
+( cd src ; \
+        if [ "" = yes ] ; then \
+          WRF_DIR2=../WRFV3 ; \
+        else \
+          WRF_DIR2=/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3 ; \
+        fi ; \
+make -i -r int2nc.exe \
+	WRF_DIR="$WRF_DIR2" \
+	FC="ftn" \
+	CC="cc " \
+	CPP="/lib/cpp -P -traditional" \
+	FFLAGS="-FR -convert big_endian" \
+	CFLAGS="" \
+	LDFLAGS="" \
+	CPPFLAGS="-D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL" )
+make[1]: Entering directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+/bin/rm -f int2nc.f90
+/lib/cpp -P -traditional -D_UNDERSCORE -DBYTESWAP -DLINUX -DIO_NETCDF -DIO_BINARY -DIO_GRIB1 -DBIT32 -D_MPI -D_UTIL int2nc.F > int2nc.f90
+ftn -FR -convert big_endian -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include -c int2nc.f90
+ftn -o int2nc.exe  -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -I/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/inc -I/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/include int2nc.o module_debug.o misc_definitions_module.o read_met_module.o cio.o -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib1 -lio_grib1 -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_grib_share -lio_grib_share -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_int -lwrfio_int -L/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/../WRFV3/external/io_netcdf -lwrfio_nf -L/opt/cray/pe/netcdf/4.6.3.2/INTEL/19.0/lib -lnetcdff -lnetcdf 
+make[1]: Leaving directory '/home/x_fisherh/build/build_work/4DWX-Modeling/rtfdda/src/RT_WPS/WPS_V3.9.0.1/util/src'
+if [ -h int2nc.exe ] ; then \
+	/bin/rm -f int2nc.exe ; \
+fi ; \
+if [ -h ../int2nc.exe ] ; then \
+	/bin/rm -f ../int2nc.exe ; \
+fi ; \
+if [ -e src/int2nc.exe ] ; then \
+	ln -sf src/int2nc.exe . ; \
+fi

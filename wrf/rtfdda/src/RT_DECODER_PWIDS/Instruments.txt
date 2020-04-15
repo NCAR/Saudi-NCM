@@ -1,0 +1,35 @@
+Dugway Instrumentation Location				
+Pentagon Shield Test				
+Date Created:	4/17/2004	Date Updated:	5/05/2004	
+Instrument	Location Elv(m)	Latitude(°N)    Longitude(°W) Alternative Name
+PWID             1      14              38.87453        -77.05696
+PWID		 2	40		38.87219	-77.05763
+PWID		 3	40		38.87284	-77.05472
+PWID		 4	10		38.87284	-77.05122
+PWID		 5	16		38.87098	-77.06209
+PWID		 6	37		38.87156	-77.05665
+PWID		 7	37		38.87166	-77.05548
+PWID		 8	37		38.87069	-77.05681
+PWID		 9	37		38.87088	-77.05496
+PWID		10	40		38.87006	-77.05833
+PWID		11	37		38.87021	-77.05579
+PWID		12	40		38.87064	-77.05336
+PWID		13	40		38.86892	-77.05560
+PWID		14	19		38.86797	-77.05813
+PWID		15	16		38.86798	-77.05230
+Super PWID       1      16              38.87366        -77.05679       Helipad 38.87366
+Super PWID	 2	19		38.87117        -77.05912 	Construction Area	
+Super PWID	 3	20		38.87099        -77.05584 	Gazebo
+Super PWID	 4	16		38.87221        -77.05235 	Parade ground
+Super PWID	 5 	19		38.86870	-77.05766 	Parking Lot	
+Super PWID	 6	18		38.86866        -77.05403  	Metro Station
+SODAR			16		38.87102	-77.06189
+Net Radiometer		16		38.87083	-77.06219
+LIDAR                   70              38.86881        -77.06797
+Tower                   16              38.87076 	-77.06233
+BLIMP                   13              38.86820        -77.05950
+
+LIDAR      38.86881        -77.06797
+PENTAGON   38.87099        -77.05584
+SODAR	   38.87102	   -77.06189
+Parking    38.86870	   -77.05766 

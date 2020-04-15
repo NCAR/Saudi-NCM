@@ -1,0 +1,181 @@
+713a714
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Yubao mods
+714a716,736
+> 
+> !yliu 200905 begin - PSU + YLIU mods
+> !Begin MM5 PBL Height Diagnosis Method Modifications
+>       INTEGER :: KK                                       ! yliu local variable
+>       REAL, PARAMETER :: PTKEMAX=1.20, PTKEFRACT=0.50, PTKEWEAK=0.25  ! yliu PTKEWEAK = 0.4
+> !!    REAL, PARAMETER :: PTKEMAX=1.20, PTKEFRACT=0.50, PTKEWEAK=0.4   ! PSU default
+> !     REAL, PARAMETER :: PTKEMAX=1.20, PTKEFRACT=0.50, PTKEWEAK=0.2
+>       REAL, PARAMETER :: PTKEZMIN=150.0
+>       INTEGER, PARAMETER :: ZIDIAGMETH=2 !PBL Height diagnosis method
+>                             !1=WRF default, 2=MM5 default-based
+>                             !3=MM5 internal PBL method
+>                             !4=WRF default, but with 0.201 threshold
+>       INTEGER :: KTEMP1 !Lowest model level with decreasing TKE
+>       INTEGER :: KTEMP2 !First layer above 150m AGL
+>       INTEGER :: KTEMP !Top model level in region to check for max TKE
+>       REAL,DIMENSION(KTS:KTE+1) :: TEMPTKE !Hold TKE
+>       REAL :: TKEMAX !Maximum TKE in column
+>       REAL :: TKELIM
+>       REAL :: FRACT
+>       REAL :: TKECUTOFF
+> !End MM5 PBL Height Diagnosis Method Modifications
+716a739
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Yubao mods
+717a741
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Yubao mods
+719,726c743,761
+<       LPBL=LMH
+< !
+<       DO K=LMH-1,1,-1
+<         IF(Q2(K)<=EPSQ2L*FH)THEN
+<           LPBL=K
+<           GO TO 110
+<         ENDIF
+<       ENDDO
+---
+> !Begin MM5 PBL Height Diagnosis Method Modifications
+>       !Default WRF method or default WRF method with different TKE cutoff
+>       IF((ZIDIAGMETH==1).OR.(ZIDIAGMETH==4)) THEN
+>        LPBL=LMH
+> !
+>        IF(ZIDIAGMETH==1) THEN
+>         TKECUTOFF=(EPSQ2*FH)/2.0
+>        ELSEIF(ZIDIAGMETH==4) THEN
+>         TKECUTOFF=0.201
+>        ELSE
+>         STOP 'Unknown ZIDIAGMETH where 1 or 4 is expected (MYJ)'
+>        ENDIF
+>        DO K=LMH-1,1,-1
+> !        IF(Q2(K)<=EPSQ2*FH)THEN
+>          IF(Q2(K)<=TKECUTOFF*2.0)THEN
+>            LPBL=K
+>            GO TO 110
+>          ENDIF
+>        ENDDO
+728c763
+<       LPBL=1
+---
+>        LPBL=1
+732c767,881
+<  110  PBLH=Z(LPBL)-Z(LMH+1)
+---
+>  110  PBLH=Z(LPBL+1)-Z(LMH+1)
+>       ELSEIF(ZIDIAGMETH==2) THEN !Default MM5 method
+> 
+>        !Create TKE variable on true full layers but ordered from top to bottom
+>        !as for Q2
+>        !1. Divide Q2 in half to get TKE (Removed since MM5 effectively used Q2)
+>        !2. Shift to actual full layers
+>        DO K=LMH+1,2,-1
+>         TEMPTKE(K)=Q2(K-1)
+>        ENDDO
+>        TEMPTKE(1)=0
+> 
+>        !Note that vertical level labels are flipped compared to most of WRF
+>        !Level=1 is at the top of the model
+>        !LMH is the first full layer ABOVE the ground (LMH+1 is at the ground)
+>        !Loop over full layers from first above surface to model top
+>        KTEMP1=LMH
+>        DO K=LMH,1,-1
+>         IF(TEMPTKE(K-1).LT.TEMPTKE(K)) THEN
+>          KTEMP1=K-1
+>          GOTO 115
+>         ENDIF !If above PTKEZMIN AGL
+>        ENDDO !Loop over full layers
+>  115   CONTINUE
+>        !Loop over full layers from first above surface to model top
+>        KTEMP2=LMH
+>        DO K=LMH,1,-1
+>         IF((Z(K)-Z(LMH+1))>PTKEZMIN) THEN !If above PTKEZMIN AGL
+>          KTEMP2=K
+>          GOTO 120
+>         ENDIF !If above PTKEZMIN AGL
+>        ENDDO !Loop over full layers
+>  120   CONTINUE
+>        KTEMP=MIN(KTEMP1,KTEMP2)
+> 
+>        !Find the maximum TKE below KTEMP
+>        TKEMAX=TEMPTKE(LMH)
+>        DO K=LMH,KTEMP,-1
+>         IF(TKEMAX.LT.TEMPTKE(K)) THEN
+>          TKEMAX=TEMPTKE(K)
+>         ENDIF
+>        ENDDO
+>        !Cases of no turbulence in lowest 3 levels
+>        ! - need check for LLJ conditions
+>        IF(Q2(LMH) <= 0.22 .AND. Q2(LMH-1) <= 0.22) THEN
+>         LPBL=LMH
+>         PBLH = Z(LMH)-Z(LMH+1)
+>         GO TO 130
+>        ENDIF
+>        !Cases of weak turbulance
+>        IF(TKEMAX.LT.PTKEWEAK) THEN
+> ! yliu start - use the wrf default in this case
+> !            -- we do not like zero PBL height
+> !            -- EPSQ2 is minimum TKE(=0.2), FH=1.01
+>          PBLH = Z(LMH)-Z(LMH+1)
+>          LPBL=LMH
+>          DO KK=LMH-1,1,-1
+>           IF(Q2(KK)<=EPSQ2*FH)THEN
+> !           IF(Q2(KK)<=TKECUTOFF*2.0)THEN
+>            LPBL=KK
+>            PBLH=Z(LPBL)-Z(LMH+1)
+>            GO TO 130
+>           ENDIF
+>          ENDDO
+> ! yliu end
+>        ELSE
+>        !Cases of stronger turbulence
+>         TKELIM=PTKEFRACT*MIN(TKEMAX,PTKEMAX)
+>        ! yliu 20120606: > PTKEWEAK (0.25) --> overshoot a bit.
+>          TKELIM=MAX(TKELIM,PTKEWEAK)
+>        ! TKELIM (0.25 ~ 0.6)
+>        ! yliu end
+>         DO K=LMH,1,-1
+>      !    IF((TEMPTKE(K).LT.TKELIM).AND.(TEMPTKE(K).LT.TEMPTKE(K+1))) THEN
+>          IF((TEMPTKE(K).LT.TKELIM).AND.(TKELIM.LT.TEMPTKE(K+1))) THEN
+>           FRACT=(TEMPTKE(K+1)-TKELIM)/(TEMPTKE(K+1)-TEMPTKE(K))
+>           IF(FRACT.GE.0.0.AND.FRACT.LE.1.0)THEN
+>            PBLH=Z(K+1)+FRACT*(Z(K)-Z(K+1))-Z(LMH+1)
+> 
+>            !Set LPBL to closest full level
+>            IF(FRACT.LE.0.5) THEN
+>             LPBL=K+1
+>            ELSE
+>             LPBL=K
+>            ENDIF
+>            GOTO 130
+>           ENDIF !FRACT>=0,<=1
+>          ELSEIF((Z(K)-Z(LMH+1)).GT.5000.) THEN
+>           PBLH=5000.
+>           LPBL=K
+> ! yliu start - use the wrf default in this case
+> !            -- we are not sure if PBLH shoot 5000 is a right thing
+>           DO KK=LMH-1,1,-1
+>           IF(Q2(KK)<=EPSQ2*FH)THEN
+> !           IF(Q2(KK)<=TKECUTOFF*2.0)THEN
+>            LPBL=KK
+>            PBLH=Z(LPBL)-Z(LMH+1)
+>            GO TO 130
+>           ENDIF
+>           ENDDO
+> ! yliu end
+>           GOTO 130
+>          ENDIF
+>         ENDDO
+> 
+>        ENDIF
+>  130   CONTINUE
+>       ELSEIF(ZIDIAGMETH==3) THEN !Old internal MM5 method
+>        !Calculated later
+>       ELSE !Unknown method chosen
+>        PRINT *,'ERROR: Unknown PBL diagnosis method =',zidiagmeth
+>        STOP 'Unknown PBL diagnosis method in MYJ'
+>       ENDIF !IF regarding zi diagnosis method (ZIDIAGMETH)
+> !End MM5 PBL Height Diagnosis Method Modifications
+> !yliu 200905 end
+735a885
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Yubao mods

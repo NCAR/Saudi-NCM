@@ -1,0 +1,18 @@
+  LAT    LON     STA  STATION
+  (deg/min)      ID   NAME 
+-----  -----     ---  --------------------
+ 40.135 -113.451 SLT SL Test Site                            
+ 40.046 -113.046 S04 Target S                                
+ 40.157 -112.894 S05 White Sage                              
+ 40.710 -112.250 UT9 I80/Kennecott (Lake Point)              
+ 40.742 -112.653 SKU I80/Skull Valley                        
+ 40.333 -112.567 JNP Johnson Pass                            
+ 40.117 -112.560 LKP Lookout Pass                            
+ 40.243 -113.093 S09 Playa Station                           
+ 40.900 -112.350 HAT Hat Island                              
+ 40.227 -112.726 S07 Main Gate                              
+ 39.330 -112.580 DEL Delta , UT                           
+ 40.733 -114.033 ENV Wendover , UT                           
+ 40.783 -111.967 SLC Salt Lake City, UT                      
+ 37.700 -113.100 CDC Cedar City, UT                          
+ 37.700 -112.150 BCE Bryce Canyon, UT                        

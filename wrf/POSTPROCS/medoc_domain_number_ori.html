@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>MEDOC Retrieval</title>
+</head>
+<body bgcolor="#FFFFFF">
+  <h1><center>MEDOC Retrieval</center></h1>
+  <h2><center>Source: gs-c1</center></h2>
+  <h2><center>Domain: 3</center></h2>
+
+<APPLET code="edu.ucar.rap.miniapps.medoc.MEDOCApplet" archive="/medoc/MEDOCApplet.jar" codebase="."
+        height="300" width="640">
+<PARAM NAME="FcstColor" VALUE="0xFF6060">
+<PARAM NAME="PrelimColor" VALUE="0x8080FF">
+<PARAM NAME="FinalColor" VALUE="0x60FF60">
+<PARAM NAME="MEDOCDataDirectory" VALUE="/www/htdocs/images/gmod/${path}/medoc/">
+<PARAM NAME="Domain" VALUE="3">
+</APPLET>
+
+<br><hr>
+
+    <h1><center>Instructions</center></h1>
+    <ul>
+      <li>Green, blue and red blocks indicate available final-fdda, preliminary-fdda and forecast data, gray blocks indicate missing data.
+      <li>Light green, light blue, light red and light gray blocks indicate selected times.
+      <li><strong>&lt</strong> and <strong>&gt</strong> step backward and
+        forward 1 hour, respectively.
+      <li><strong>&lt<</strong> and <strong>&gt></strong> step backward
+        and forward 24 hours.
+      <li>Select data by clicking on the desired times, then click the
+        <strong>Download</strong> button to save the data.
+      <li>The applet will automatically refresh the available data every
+        60 seconds.  Turn off the auto-update feature if you want to 
+        browse through older data.
+    </ul>
+</body>
+</html>      
+

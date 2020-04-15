@@ -1,0 +1,49 @@
+9a10
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Mods 1 from Badri, Oct 6, 2010
+12a14,21
+> ! Badrinath Nagarajan, RAL/NCAR/UCAR
+> ! 6 Oct 2010
+> ! - Minor bug fix to correct time step computation at model start
+> !   Impact was huge: First time step (deltat) was incorrect
+> !                    Model crashed due to cfl errors during spin-up phase
+> ! 28 Oct 2010
+> ! - Removed if condition for call lbc_fcx_gcx routine
+> !
+13a23
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Mods 1 from Badri, Oct 6, 2010
+65a76
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Mods 2 from Badri, Oct 6, 2010
+70,73c81,84
+< 
+<   if (grid%last_step_updated == grid%itimestep) then
+<      return
+<   else
+---
+>   !Badri (Oct 2010) Bug fix (commented following three lines and the endif)
+> ! if (grid%last_step_updated == grid%itimestep) then
+> !    return
+> ! else
+75c86
+<   endif
+---
+> ! endif
+78a90
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Mods 2 from Badri, Oct 6, 2010
+420a433
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Mods 3 from Badri, Oct 28, 2010
+422,423c435,440
+<   !
+<   if (grid%id == 1) then
+---
+>   ! Badri -Oct 28 2010 Bug fix:
+>   ! Removed if condition to enable computation of blending weights for LBC
+>   ! for ALL nests instead of just domain 1
+>   ! Severity: Affected restart runs with random cfl errors near j=1 boundary
+>   !           on nests.
+>   !if (grid%id == 1) then
+427c444
+<   endif
+---
+>   !endif
+429a447
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Mods 3 from Badri, Oct 28, 2010

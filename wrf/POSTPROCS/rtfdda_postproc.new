@@ -1,0 +1,678 @@
+#! /usr/bin/perl
+
+#
+# This script is the master control script for all of the post-processors
+# from the RT-FDDA system.  
+#
+# 1. Initialize and make any needed directories
+# 2. Check for an MMOUTPUT file to process
+# 3. Copy the MMOUTPUT file to a date-stamped file name
+#  -- background a script to process this time-step:
+# 4. Call each post-processor, selected by config file
+#    RIP graphics
+#    MEDOC (domains 3&4)
+#    VERIF stats (final and fcst)
+#    NAPS (output files for interactive naps)
+#    MDV (output files for JVIZ/etc)
+#    NAPS (default case -- at the end of the cycle)
+#
+##
+## This is a range-specific version, several variables are "fixed" for
+## the range case, rather than GMOD!
+##
+# Command line args required:
+#  $RANGE  
+#  $NODE_MEM (0 for MPP/non-ensemble runs)
+#  $JOB_ID 
+#  $THIS_CYCLE
+
+# Command line args 
+if ( $#ARGV >= 2 ) {
+  $RANGE = @ARGV[0];
+  $NODE_MEM = @ARGV[1];
+  $JOB_ID =  @ARGV[2];
+  $THIS_CYCLE =  @ARGV[3];
+  $RUNDIR = "/data/cycles/$JOB_ID/$NODE_MEM";
+#  Be sure the job-control script has started so that directories are made
+  $cnt = 0;
+  while ( ! -e $RUNDIR && $cnt < 100 ) {
+    $cnt++;
+   sleep (30);
+  }
+  if ( ! -e $RUNDIR ) {
+   print ( " RUNDIR does not exist!  $RUNDIR \n");
+   exit (1);
+  }
+} else {
+  print ( " Usage:   $0  RANGE NODE_MEM JOB_ID <THIS_CYCLE>\n");
+  exit (1);
+}
+#
+# code and run-time directories
+$MM5HOME = "/data/fddahome";
+$RUNDIR = "/data/cycles/$JOB_ID/$NODE_MEM";
+$POSTPROCS_DIR = "/data/cycles/POSTPROCS";
+$WORK_DIR = "$RUNDIR/postprocs";
+$MM5HOST = $RANGE;
+#
+# Read these from the configuration file
+#
+require "/data/GMODJOBS/$JOB_ID/flexinput.pl";
+if ( -e  "/data/GMODJOBS/$JOB_ID/postprocinput.pl" ) {
+require "/data/GMODJOBS/$JOB_ID/postprocinput.pl";
+} else {
+   $USER = "ncaruser";
+}
+
+$IS_GEAPS=0;
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#               C O N S T A N T S                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# Turn the debugging information on(1) and off(0)
+#
+$DEBUG = 1;
+#
+# The number of seconds to sleep between file checks
+#
+$SLEEP_TIME = 20;
+$FINAL_SLEEP_TIME = 40;
+#
+# Will MM5 generate a new file for each output time step (i.e. each hour)?
+$HOURLY_OUTPUT_FLAG = 0;
+#
+# Which post processors to run
+$DO_MDV_1 = 1 if(! $DO_MDV_1);
+$DO_MDV_2 = 1 if(! $DO_MDV_2);
+$DO_MDV_3 = 0 if(! $DO_MDV_3);
+$DO_MDV_4 = 1 if(! $DO_MDV_4);
+$DO_NAPS_3 = 1 if(! $DO_NAPS_3);
+$DO_NAPS_DEFAULT = 0 if(! $DO_NAPS_DEFAULT);
+$DO_RIP = 1 if(! $DO_RIP);
+$DO_PLOTS_SMALL = 0 if(! $DO_PLOTS_SMALL);
+$DO_SITES = 1 if(! $DO_SITES);
+$DO_MEDOC_1 = 0 if(! $DO_MEDOC_1);
+$DO_MEDOC_2 = 0 if(! $DO_MEDOC_2);
+$DO_MEDOC_3 = 1 if(! $DO_MEDOC_3);
+$DO_MEDOC_4 = 1 if(! $DO_MEDOC_4);
+$DO_VERIF = 0 if(! $DO_VERIF);
+$DO_STEREO = 0 if(! $DO_STEREO);
+$DO_TILES = 0 if(! $DO_TILES);
+#
+# cycle control constants
+$FINAL_TIME_STEPS = $CYC_INT*60.0 / $OUT_INT + $FIN_END + 1;
+$PRELIM_TIME_STEPS = $FCST_LENGTH*60.0 / $OUT_INT ;
+$NDOMAINS = $NUM_DOMS;
+$MAX_ITER=120;
+#
+# Set an array of domain names -- set the length of the array to the
+# actual number of domains for this case
+@domains = ('1', '2', '3','4' );
+$#domains = $NDOMAINS;	
+# Domain to use to check for new output files
+$CHECK_DOMAIN = 2;
+
+# Set environment vars for other scripts
+$ENV{'MM5HOST'} = $MM5HOST;
+$ENV{'MM5HOME'} = $MM5HOME;
+$ENV{'RUNDIR'} = $RUNDIR;
+$ENV{'DATADIR'} = $DATADIR;
+$ENV{'DATA_DIR'} = $DATADIR;
+
+$CSH_ARCHIVE = $MM5HOME.'/cycle_code/CSH_ARCHIVE';
+$EXECUTABLE_ARCHIVE = $MM5HOME.'/cycle_code/EXECUTABLE_ARCHIVE';
+$MustHaveDir = "/home/fddasys/bin/musthavedir";
+#
+# Make the working directory
+system("$MustHaveDir $WORK_DIR");
+
+#       Build the UTC date as yy mm dd hh for this cycle
+$ttime = time - 0 *3600;
+($sec,$mm,$hh,$dd,$mm,$yy,@_) = gmtime($ttime);
+
+if ($yy<50){
+  $yy+=2000;
+} else {
+  $yy+=1900;
+}
+
+if ( $MM5MPP eq "yes" && ! $THIS_CYCLE ) {
+  # Force a 3-hr cycle time
+  $NOW_CYCLE =      sprintf("%04d%02d%02d%02d",$yy,$mm+1,$dd,$hh) if(! $THIS_CYCLE);
+  $rh = ($hh-2)%3;
+  $THIS_CYCLE = &hh_advan_date( $NOW_CYCLE, -$rh);
+
+} else {
+
+  $THIS_CYCLE =      sprintf("%04d%02d%02d%02d",$yy,$mm+1,$dd,$hh) if(! $THIS_CYCLE);
+}
+
+#
+# Critical time file
+#
+$CRITICAL_TIME_FILE = "$RUNDIR/critic.time";
+open(CRITIC, $CRITICAL_TIME_FILE); $time_max = <CRITIC>; close(CRITIC);
+chomp($time_max);
+
+#
+# Executable files
+#
+$MM5SPLIT = "$MM5HOME/cycle_code/EXECUTABLE_ARCHIVE/splitv3.exe";
+
+#
+# Scrub the working directory to 1-day...
+#
+system("/home/fddasys/bin/scrub .5 $WORK_DIR");
+
+#
+# If this is an ensemble run, submit the ensemble plot control script
+#
+##if ( $IS_GEAPS ) {
+##system("$POSTPROCS_DIR/do_ensplots.csh $THIS_CYCLE $RANGE $JOB_ID $USER > $POSTPROCS_DIR/ens_proc_$JOB_ID.log 2>&1 &");
+##}
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                      M A I N                        #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+&main;
+
+exit(0);
+
+
+
+#
+#
+#
+sub main
+{
+    # cd to a working directory which will have all of the hourly files in it...
+    chdir "$WORK_DIR";
+    # Construct the file names
+    ($FOUT_SUFFIX, $POUT_SUFFIX) = get_file_suffix();
+
+    if ( $IS_COLD_START == 1 ) {
+      $hr = substr( $THIS_CYCLE, 8, 2);
+      $fsteps1 = $hr - 12;
+      if ( $hr == 14 || $hr == 02 ) {
+        $fsteps1+=12;
+      }
+      if ( $fsteps1 > 0 ) {
+        $FINAL_TIME_STEPS = $fsteps1;
+      } else {
+        $FINAL_TIME_STEPS = $hr;
+      }
+      $COLD_START_FILE = ">$RUNDIR/cold_start.steps";
+      open(COLD, $COLD_START_FILE);
+      printf COLD "%10d\n",$FINAL_TIME_STEPS;
+      close(COLD);
+
+    }
+    &debug($DEBUG, "Number of final time steps is  ${FINAL_TIME_STEPS}\n");
+    # Get the domain
+    $this_domain = $DOMAIN;
+
+    # Process the final analysis cycle
+    $init_size = 0;
+    $post_count = 0;
+    for( $time_step = 0; $time_step < $FINAL_TIME_STEPS; $time_step++ )
+    {
+       $FINAL_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_F/MMOUT_DOMAIN${CHECK_DOMAIN}${FOUT_SUFFIX}";
+
+        next if(-e "${RUNDIR}/${THIS_CYCLE}/MM5_P");
+	# Wait for the file size to change (indicating that there was a new output)
+	&debug($DEBUG, "Waiting for file ${FINAL_FILE}\n");
+        ($file_ok) = &wait_for_file(${FINAL_FILE}, ${FINAL_SLEEP_TIME}, $init_size);
+
+        if ( $file_ok == 0 ) {
+        $WORK_DIR_STEP = "${WORK_DIR}${post_count}";
+#       Make the working directory for this output time step
+        system("$MustHaveDir $WORK_DIR_STEP");
+        chdir "$WORK_DIR_STEP";
+       
+#        foreach $d (@domains) {
+#           $MM5_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_F/MMOUT_DOMAIN$d${FOUT_SUFFIX}";
+#           if ( $HOURLY_OUTPUT_FLAG ) {
+# 	      # Name the latest hourly file with valid time 
+#              $MM5_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_F/MMOUT_DOMAIN$d${FOUT_SUFFIX}";
+#              &debug($DEBUG, "Get valid time from ${MM5_FILE}\n");
+#              $HOURLY_FILE = &mm5name($WORK_DIR_STEP, $MM5_FILE);
+#           } else {
+#              # Splitting MM5 output into hourly files
+#              &debug($DEBUG, "Spliting ${MM5_FILE} into hourly files\n");
+#              $HOURLY_FILE = &mm5split($WORK_DIR_STEP, $MM5_FILE);
+#           }
+#           $valid_time = substr( $HOURLY_FILE, 0, 12);
+#           $valid_time_m1 = hh_advan_date($valid_time, -1);
+#           $HOURLY_FILE_M1 = "${valid_time_m1}00_MMOUTPUT_DOMAIN$d.$RANGE";
+#           $OUTPUT_FILE = "MMOUT." . $d;
+#           if ( -e $HOURLY_FILE_M1 ) {
+#             system("cat $HOURLY_FILE_M1 $HOURLY_FILE > $OUTPUT_FILE");
+#             system("mv $OUTPUT_FILE $HOURLY_FILE");
+#           }
+#           if ( $d == 2 ) {$POST_FILE = $HOURLY_FILE}
+#        }
+#
+        system("cp ${RUNDIR}/${THIS_CYCLE}/*qc_obs_for_assimilation_s $WORK_DIR_STEP");
+        system("cp ${RUNDIR}/${THIS_CYCLE}/*qc_obs_for_assimilation_s $WORK_DIR_STEP");
+
+        $CYCLE_TAG = "final";
+        system("$POSTPROCS_DIR/do_output_new.pl $RUNDIR $JOB_ID $THIS_CYCLE $WORK_DIR_STEP $FOUT_SUFFIX $CYCLE_TAG $NDOMAINS $RANGE > $WORK_DIR_STEP/output.log 2>&1 &");
+
+## End if the output file exists
+        }
+        if ( $HOURLY_OUTPUT_FLAG ) { 
+           ($FOUT_SUFFIX) = increment_file_suffix($FOUT_SUFFIX);
+        }
+        $post_count++;
+    }
+
+    # Process the preliminary & forecast cycle
+    $prelim_count = 0; 
+    $init_size = 0; 
+#   decrement this so that the first step of prelim is in the same dir as last step of final...
+    $post_count--;
+    for( $time_step = 0; $time_step < $PRELIM_TIME_STEPS; $time_step++ )
+    {
+       $PRELIM_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_P/MMOUT_DOMAIN${CHECK_DOMAIN}${POUT_SUFFIX}";
+
+        # Wait for the file size to change (indicating that there was a new output)
+        &debug($DEBUG, "Waiting for file ${PRELIM_FILE}\n");
+        ($file_ok) = &wait_for_file(${PRELIM_FILE}, ${SLEEP_TIME},$init_size);
+
+        if ( $file_ok == 0 ) {
+
+	# Count the number of output times (the first three are preliminary analysis
+	$prelim_count++; 
+
+        $WORK_DIR_STEP = "${WORK_DIR}${post_count}";
+#       Make the working directory for this output time step
+        system("$MustHaveDir $WORK_DIR_STEP");
+        chdir "$WORK_DIR_STEP";
+#        foreach $d (1..$NDOMAINS) {
+#           $MM5_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_P/MMOUT_DOMAIN$d${POUT_SUFFIX}";
+#           if ( $HOURLY_OUTPUT_FLAG ) {
+#              # Name the latest hourly file with valid time 
+#              $MM5_FILE = "${RUNDIR}/${THIS_CYCLE}/MM5_P/MMOUT_DOMAIN$d${POUT_SUFFIX}";
+#              &debug($DEBUG, "Get valid time from ${MM5_FILE}\n");
+#              $HOURLY_FILE = &mm5name($WORK_DIR_STEP, $MM5_FILE);
+#           } else {
+#              # Splitting MM5 output into hourly files
+#              &debug($DEBUG, "Spliting ${MM5_FILE} into hourly files\n");
+#              $HOURLY_FILE = &mm5split($WORK_DIR_STEP, $MM5_FILE);
+#
+#           }
+#           $valid_time = substr( $HOURLY_FILE, 0, 12);
+#           $valid_time_m1 = hh_advan_date($valid_time, -1);
+#           $HOURLY_FILE_M1 = "${valid_time_m1}00_MMOUTPUT_DOMAIN$d.$RANGE";
+#           $OUTPUT_FILE = "MMOUT." . $d;
+#           if ( -e $HOURLY_FILE_M1 ) {
+#             system("cat $HOURLY_FILE_M1 $HOURLY_FILE > $OUTPUT_FILE");
+#             system("mv $OUTPUT_FILE $HOURLY_FILE");
+#           } 
+#
+#           if ( $d == 2 ) {$POST_FILE = $HOURLY_FILE}
+#        }
+#
+        system("cp ${RUNDIR}/${THIS_CYCLE}/*qc_obs_for_assimilation_s $WORK_DIR_STEP");
+        system("cp ${RUNDIR}/${THIS_CYCLE}/*qc_obs_for_assimilation_s $WORK_DIR_STEP");
+
+        &debug($DEBUG, "prelim count is ${prelim_count}\n");
+        if ( $prelim_count < 4 ) {
+        $CYCLE_TAG = "preli";
+        system("$POSTPROCS_DIR/do_output_new.pl $RUNDIR $JOB_ID $THIS_CYCLE $WORK_DIR_STEP $POUT_SUFFIX $CYCLE_TAG $NDOMAINS $RANGE > $WORK_DIR_STEP/output.log 2>&1 &");
+        } else {
+        $CYCLE_TAG = "fcst";
+        system("$POSTPROCS_DIR/do_output_new.pl $RUNDIR $JOB_ID $THIS_CYCLE $WORK_DIR_STEP $POUT_SUFFIX $CYCLE_TAG$NDOMAINS $RANGE > $WORK_DIR_STEP/output.log 2>&1 &");
+        }
+
+        $post_count++;
+# End if the file exists
+        }
+        if ( $HOURLY_OUTPUT_FLAG ) {
+           ($POUT_SUFFIX) = increment_file_suffix($POUT_SUFFIX);
+        }
+    }
+}
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#               S U B R O U T I N E S                 #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+#
+# Sleep until the size of the specified file changes 
+#
+sub wait_for_file
+{
+    local($filename) = @_[0];
+    local($sleep)    = @_[1];
+    local($start_size) = @_[2];
+
+    # Get the initial file size
+    $current_size = &get_file_size($filename);
+    $j = 0;
+
+    # Sleep while the file size has not changed
+    while( $start_size == $current_size && $j < 60)
+    {
+	sleep($sleep);
+        $j++;
+	$current_size = &get_file_size($filename);
+	&debug($DEBUG, "    Checking file $filename $current_size\n");
+    }
+    
+    # File is removed when this cycle is finished. So, this program exit. 
+    exit if($current_size < $start_size);
+
+    # Sleep for an additional 20 seconds to make sure the output is finished writing
+    sleep(10);
+
+    $current_size = &get_file_size($filename);
+    if ( $current_size > 0 ) {
+    $start_size   = $current_size;
+    @_[2]  = $current_size;
+    &debug($DEBUG, "About to process MM5 out file with size $current_size\n");
+    return 0 ;
+    } else {
+    return 1 ;
+    }
+}
+
+
+
+#
+# Returns the file size of the specified file
+#
+sub get_file_size
+{
+    local($filename) = @_[0];
+
+    # If the file doesn't exist, then its size is zero
+    if( ! -e $filename )
+    {
+	return 0;
+    }
+
+    # Stat the file and get the size
+    local(@file_info) = lstat( $filename );
+    local($file_size) = @file_info[7];
+
+    return $file_size;
+}
+
+
+
+#
+# Return the file name with the latest date since we only want to convert the last time period
+#
+# @args - 0 - Directory to look in
+#
+sub get_hourly_file_name
+{
+    local($dir) = $_[0];
+    my $file;
+
+    $file=`ls -1 $dir | tail -1`;
+
+    return $file;
+}
+
+
+
+#
+# Split this MM5 file into hourly files
+#
+# @args - 0 - directory
+# @args - 1 - MM5 file
+#
+sub mm5name
+{
+    local($dir,$file,$filename) = @_;
+    my ($fn,$bytes,$domain);
+    my ($buf,$year,$month,$day,$hour);
+
+    &debug($DEBUG, "    Find valid time for $file\n");
+    chdir $dir;
+
+      open(IN,"$file");
+
+      seek(IN,64,0);        # move the file pointer position to after bhi(12,1)
+      $bytes=read(IN,$buf,4);   # this is bhi(13,1)
+      $domain=unpack "N",$buf;
+
+      seek(IN,117684,0);
+      $bytes=read(IN,$buf,24); # this is the 24-character date/time string
+      close(IN);
+
+      $buf=~ /^(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/;
+      $year=$1;
+      $month=$2;
+      $day=$3;
+      $hour=$4;
+      $min=$5;
+      $sec=$6;
+ 
+# Round to nearest 5 minutes to account for non-zero seconds in the time-stamp
+      $r5 = $min%5;
+      $n5 = $min - $r5;
+      if ($r5 > 2 ) {
+       $min5 = $n5+5;
+      } else {
+       $min5 = $n5;
+      }
+
+      $filename="${year}${month}${day}${hour}${min5}_MMOUTPUT_DOMAIN${domain}.${RANGE}";
+      $filename = sprintf("%04d%02d%02d%02d%02d_MMOUTPUT_DOMAIN%s.%s",$year,$month,$day,$hour,$min5,$domain,$RANGE);
+      system("cp $file $filename");
+      chdir ($WORK_DIR_STEP);
+      return ($filename);
+}
+
+#
+# Advance the date by the given number of hours
+# 
+# @args - 0 - Date
+# @args - 1 - Number of hours to advance the date
+#
+sub hh_advan_date
+{
+    %mon_days = (1,31,2,28,3,31,4,30,5,31,6,30,7,31,8,31,9,30,10,31,11,30,12,31);
+    (my $s_date, my $advan_hh) = @_ ;
+
+    my $yy = substr($s_date,0,4);
+    my $mm = substr($s_date,4,2);
+    my $dd = substr($s_date,6,2);
+    my $hh = substr($s_date,8,2);
+
+    my $feb = 2;
+    $mon_days{$feb} = 29 if ($yy%4 == 0 && ($yy%400 == 0 || $yy%100 != 0));
+
+    $hh = $hh + $advan_hh;
+
+    while($hh > 23)
+    {
+        $hh -= 24;
+        $dd++;
+    }
+
+    while($dd > $mon_days{$mm+0})
+    {
+        $dd = $dd - $mon_days{$mm+0};
+        $mm++;
+
+        while($mm > 12)
+        {
+            $mm -= 12;
+            $yy++;
+        }
+    }
+
+    while($hh < 0)
+    {
+        $hh += 24;
+        $dd--;
+    }
+
+    if($dd < 1)
+    {
+        $mm--;
+        $dd += $mon_days{$mm+0};
+    }
+
+    while($mm < 1)
+    {
+        $mm += 12;
+        $dd += $mon_days{$mm+0};
+        $yy--;
+    }
+
+    my $new_date = sprintf("%04d%02d%02d%02d",$yy,$mm,$dd,$hh);
+
+    return $new_date;
+}
+
+
+
+#
+# Determine the suffix of the file to look at
+#
+sub get_file_suffix
+{
+    open(CRITIC, $CRITICAL_TIME_FILE);
+    $time_max = <CRITIC>;
+    close(CRITIC);
+    chomp($time_max);
+
+    $COLD_START_FILE = "$RUNDIR/cold_start.steps";
+    open(COLD, $COLD_START_FILE);
+    $COLD_START_STEPS = <COLD>;
+    close(COLD);
+
+    if( ($time_max == 0) || (! $time_max) )
+    {
+	&debug($DEBUG, "Previous cycle failed and $THIS_CYCLE is not good for cold-start\n");
+	exit(0);
+    }
+
+    elsif( $time_max == 1 )
+    {
+	&debug($DEBUG, "Previous cycle failed and $THIS_CYCLE is a cold-start\n");
+	$FOUT_SUFFIX = "";
+	$POUT_SUFFIX = "_001";
+	$IS_COLD_START = 1;
+    }
+
+    else
+    {
+	$IS_COLD_START = 0;
+	&debug($DEBUG, "The cycle $THIS_CYCLE is a normal cycle\n");
+        $cycle_duration = $CYC_INT * 60.0;
+        $cycle_final_dur = $COLD_START_STEPS * 60.0;
+	$FOUT_SUFFIX = sprintf( "%003.0f", ($time_max - $cycle_final_dur) / $cycle_duration + 1 );
+	$POUT_SUFFIX = "_".sprintf( "%003d", ($FOUT_SUFFIX + 1) );
+	$FOUT_SUFFIX = "_".$FOUT_SUFFIX;
+#       if ( $HOURLY_OUTPUT_FLAG ) { 
+#          foreach $i (1..$FINAL_TIME_STEPS) {
+#          ($POUT_SUFFIX) = increment_file_suffix($POUT_SUFFIX);
+#          }
+#       }
+    }
+
+    return ($FOUT_SUFFIX, $POUT_SUFFIX);
+}
+
+#
+# Increment the suffix of the file for the next hour
+#
+sub increment_file_suffix
+{
+    $CURRENT_SUFFIX= @_[0];
+    {
+        $HOUR = substr( $CURRENT_SUFFIX, 1,3);
+        $NEW_SUFFIX = "_".sprintf( "%003d", ($HOUR + 1) );
+    }
+
+    return ($NEW_SUFFIX);
+}
+
+
+
+#
+# If the debugging information is turned on, then print the message
+#
+sub debug
+{
+    $debug_on = @_[0];
+    $debug_message = @_[1];
+
+    if( $debug_on == 1 )
+    {
+	$| =1;
+	print( $debug_message );
+    }
+}
+#
+# @args - 0 - directory
+# @args - 1 - MM5 file
+#
+sub mm5split
+{
+    local($dir,$file) = @_;
+    my ($fn,$bytes,$domain);
+    my ($buf,$year,$month,$day,$hour);
+    my $filename;
+
+    &debug($DEBUG, "    Executing: $MM5SPLIT $file\n");
+    chdir $dir;
+    system("ln -sf $file fort.10");
+    system("$MM5SPLIT");
+
+    foreach $fn (<fort.*>) {
+
+      @f=stat $fn;
+      if($fn eq 'fort.10' || $f[7] < 120000) {
+        unlink $fn;
+        next;
+      }
+
+      open(IN,"$fn");
+
+      seek(IN,64,0);        # move the file pointer position to after bhi(12,1)
+      $bytes=read(IN,$buf,4);   # this is bhi(13,1)
+      $domain=unpack "N",$buf;
+
+      seek(IN,117684,0);
+      $bytes=read(IN,$buf,24); # this is the 24-character date/time string
+      close(IN);
+
+      $buf=~ /^(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/;
+      $year=$1;
+      $month=$2;
+      $day=$3;
+      $hour=$4;
+      $min=$5;
+      $sec=$6;
+      if ( $sec > 0 ) {
+        $min++;
+      } 
+# Round to nearest 5 minutes to account for non-zero seconds in the time-stamp
+      $r5 = $min%5;
+      $n5 = $min - $r5;
+      if ($r5 > 2 ) {
+       $min5 = $n5+5;
+      } else {
+       $min5 = $n5;
+      }
+
+
+      $filename="${year}${month}${day}${hour}${min5}_MMOUTPUT_DOMAIN${domain}.${RANGE}";
+      $filename = sprintf("%04d%02d%02d%02d%02d_MMOUTPUT_DOMAIN%s.%s",$year,$month,$day,$hour,$min5,$domain,$RANGE);
+      rename($fn,$filename);
+    }
+    chdir "$WORK_DIR_STEP";
+    return ($filename);
+}
+

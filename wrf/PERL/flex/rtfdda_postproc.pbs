@@ -1,0 +1,4 @@
+#!/bin/tcsh
+
+cd $MM5HOME/cycle_code/PERL/flex 
+srun ./rtfdda_postproc.pl 

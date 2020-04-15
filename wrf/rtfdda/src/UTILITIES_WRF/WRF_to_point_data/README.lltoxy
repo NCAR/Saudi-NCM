@@ -1,0 +1,49 @@
+=============================================================================
+               User's Guide for WRF_lltoxy.exe
+
+               Sept 2005 - J. Schramm - first version
+=============================================================================
+
+This code calculates (i,j), in WRF model dot or cross point indices, given 
+a reference latitude and longitude.  (i,j) are currently written to standard out.
+
+The dot or cross distinction will depend on the reflat, reflon, refx,
+and refy values.  
+
+For example, if you have the latitude and longitude of the lower-left
+dot point of your grid, you can use that as the reflat and reflon, and
+provide refx = 1.0, refy = 1.0, and get results with respect to the
+dot-point grid.  Refx and refy are added to the distance of the lat/lon
+point from the reference point, so if these points are the same, 1 is added
+on to adjust the indices to a base of (1,1).
+
+With that same lat/lon of the lower-left dot point, you can provide a
+refx and refy = (-0.5,-0.5), and get results with respect to the
+cross-point grid.
+
+Or if you have the lat/lon of the lower-left cross point, you can
+provide refx and refy = (1.0, 1.0), and get results with respect to
+the cross point grid.  Providing refx and refy = (1.5,1.5) will give
+you results for the dot point grid.
+
+In general, if you provide the reference x/y which refers to that point
+in the dot-point grid, you will get results in the dot-point grid.  If
+you provide the reference x/y in the cross-point grid, you will get
+cross-point results.
+
+
+To make the executable:
+
+make WRF_lltoxy.exe
+
+This code shares subroutines with readWRF.exe, but runs independently.
+
+Usage: WRF_lltoxy.exe [-h] -inp_file WRF_file.nc -lat lat -lon lon
+
+ With:
+  inp_file : Name of WRF netCDF input file to read
+  lat      : Latitude of point
+  lon      : Longitude of point
+  h        : Print this help message and exit.
+
+

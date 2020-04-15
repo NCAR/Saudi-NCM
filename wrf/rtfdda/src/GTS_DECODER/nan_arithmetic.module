@@ -1,0 +1,135 @@
+
+MODULE nan_arithmetic
+
+   INTERFACE remainder
+      FUNCTION remainder_ii ( val1 , val2 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER , INTENT(in)  :: val2
+         INTEGER               :: val
+      ENDFUNCTION
+      FUNCTION remainder_rr ( val1 , val2 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: val
+      ENDFUNCTION
+   ENDINTERFACE
+
+   !----------------------------------------------------------------------
+
+   INTERFACE minus
+      FUNCTION minus_i ( val1 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER               :: val
+      ENDFUNCTION
+      FUNCTION minus_r ( val1 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         REAL                  :: val
+      ENDFUNCTION
+   ENDINTERFACE
+
+   !----------------------------------------------------------------------
+
+   INTERFACE add
+      FUNCTION add_ii ( val1 , val2 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER , INTENT(in)  :: val2
+         INTEGER               :: val
+      ENDFUNCTION
+      FUNCTION add_ir ( val1 , val2 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: val
+      ENDFUNCTION
+      FUNCTION add_ri ( val1 , val2 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         INTEGER , INTENT(in)  :: val2
+         REAL                  :: val
+      ENDFUNCTION
+      FUNCTION add_rr ( val1 , val2 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: val
+      ENDFUNCTION
+   ENDINTERFACE
+
+   !----------------------------------------------------------------------
+
+   INTERFACE subtract
+      FUNCTION subtract_ii ( val1 , val2 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER , INTENT(in)  :: val2
+         INTEGER               :: val
+      ENDFUNCTION
+      FUNCTION subtract_ir ( val1 , val2 ) RESULT ( val )
+         INTEGER , INTENT(in)  :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: val
+      ENDFUNCTION
+      FUNCTION subtract_ri ( val1 , val2 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         INTEGER , INTENT(in)  :: val2
+         REAL                  :: val
+      ENDFUNCTION
+      FUNCTION subtract_rr ( val1 , val2 ) RESULT ( val )
+         REAL , INTENT(in)     :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: val
+      ENDFUNCTION
+   ENDINTERFACE
+
+   !----------------------------------------------------------------------
+
+   INTERFACE multiply
+      FUNCTION multiply_ii ( val1 , val2 ) RESULT ( prod )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER , INTENT(in)  :: val2
+         INTEGER               :: prod
+      ENDFUNCTION
+      FUNCTION multiply_ir ( val1 , val2 ) RESULT ( prod )
+         INTEGER , INTENT(in)  :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+      FUNCTION multiply_ri ( val1 , val2 ) RESULT ( prod )
+         REAL , INTENT(in)     :: val1
+         INTEGER , INTENT(in)  :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+      FUNCTION multiply_rr ( val1 , val2 ) RESULT ( prod )
+         REAL , INTENT(in)     :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+   ENDINTERFACE
+
+   !----------------------------------------------------------------------
+
+   INTERFACE divide
+      FUNCTION divide_ii ( val1 , val2 ) RESULT ( prod )
+         INTEGER , INTENT(in)  :: val1
+         INTEGER , INTENT(in)  :: val2
+         INTEGER               :: prod
+      ENDFUNCTION
+      FUNCTION divide_ir ( val1 , val2 ) RESULT ( prod )
+         INTEGER , INTENT(in)  :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+      FUNCTION divide_ri ( val1 , val2 ) RESULT ( prod )
+         REAL , INTENT(in)     :: val1
+         INTEGER , INTENT(in)  :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+      FUNCTION divide_rr ( val1 , val2 ) RESULT ( prod )
+         REAL , INTENT(in)     :: val1
+         REAL , INTENT(in)     :: val2
+         REAL                  :: prod
+      ENDFUNCTION
+   ENDINTERFACE
+
+!----------------------------------------------------------------------
+
+ENDMODULE nan_arithmetic
+
+!======================================================================
+

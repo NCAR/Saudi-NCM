@@ -1,0 +1,12 @@
+62,63c62,67
+<    CALL calc_ts_locations( grid )
+<    CALL calc_track_locations( grid )
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation
+>    ! modified by WC: 2011-03-21
+>    ! only call this when MM5 time series not active
+>    !
+>    if (grid%use_mm5_ts .NE. 1 ) CALL calc_ts_locations( grid )
+>    !
+64a69
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation

@@ -1,0 +1,133 @@
+#-----------------------------------------------------------------------------
+#
+# Setup to select intel fortran compiler.  Makes compiler switching easy.
+#
+# 2009-dec-13	Original version for ifort.  By Dave Allured.
+#		Adapted from gfortran setup, version 2009-dec-09 for inyel mac.
+# 2010-mar-25	Add $LIB_FGSL, $FGSL_ROOT, $GSL_ROOT, etc.
+# 2010-apr-06	Add -lgslcblas library reference with GSL.
+#		Suppress ifort temp array warnings.
+# 2010-apr-25	Add -assume byterecl for f2003 compatibility.
+# 2010-jul-21	Refresh the *_INCLUDE lists of hidden source dependencies.
+# 2010-oct-14	Use ~/lib indirect links for netopen and udunits.
+#		Add -heap-arrays to prevent stack overflows.
+#		Move optimize to -O2.
+#		-- This may create optimizer warnings with large arrays;
+#		-- users must manually reduce to -O1 or -O0 as needed.
+# 2010-dec-21	Add -fstack-security-check.
+#		Add $F90_RELAXED to support new "relax" command in .alias.
+# 2011-nov-07	Add -assume noold_maxminloc.
+#
+# 2012-feb-21	Add $nclib support for Netcdf-4 library versions.
+# 2012-aug-07	Add -warn nodeclarations to relaxed mode.  This allows
+#		  implicit var type declarations such as in xgsubs.f90.
+#
+# 2014-mar-12	Experimental for ifort 14.0, and allocate on assignment.
+#		For CMAQ bias correction, which makes extensive use of LHS
+#		  reallocate on assignment.
+# 2014-mar-12	Add optional $F90_IEEE_SUP, inactive for ifort.
+#		Add optional $F03_ALLOCATE for F2003+ allocation rules.
+#
+# This file must be source'd, not just executed.
+# To make this the default compiler, source this file from .cshrc or .login.
+#
+# This selector requires environment variables in make files,
+# not hard coded.  For example, "Link.f90 = $(F90_CMD) $(F90_FLAGS)".
+#
+# Environment vars must be set up for ALL differences, in particular:
+#
+#    Fortran command			(F90_CMD)
+#    Command line compiler options	(F90_FLAGS)
+#    Compiler-specific libraries	(LIB_NETCDF, etc.)
+#    Compiler-specific subroutines	(F90_RENAME, etc.)
+#    Run time environment vars		(GFORTRAN_UNBUFFERED_PRECONNECTED, etc.)
+#
+# LIB vars must define the include and module options, if used, AS
+# WELL AS the library options.  Because of non-standardization of F90
+# module file formats, compiler-specific subdirectories may be in use.
+#
+#-----------------------------------------------------------------------------
+
+# Selectors for codependent setup commands.
+
+setenv  LD_LIBRARY_PATH /usr/local/ifort/lib
+
+setenv	FORTRAN_SELECT	ifort
+
+if ( ! $?NETCDF_SELECT ) then
+   setenv NETCDF_SELECT	netcdf3		# if missing, default to netcdf 3
+endif
+
+if ( $NETCDF_SELECT == netcdf3 ) then
+   set nclib = 		netcdf
+else
+   set nclib = 		netcdff
+endif
+
+# Library root paths.
+
+setenv	FGSL_ROOT	~/lib/ifort/fgsl64
+setenv	GSL_ROOT	~/lib/ifort/gsl64
+setenv	NETCDF_ROOT	~/lib/ifort/$NETCDF_SELECT
+setenv	NETOPEN_ROOT	~/lib/ifort/netopen
+setenv	UDUNITS_ROOT	~/lib/ifort/udunits
+
+# Command line related.
+
+setenv	F90_CMD		ifort		# depends on $PATH and aliases!
+
+setenv	NCARGF90_CMD	ncargf90_ifort
+
+set	ff1 =	'-g -heap-arrays -assume byterecl -assume noold_maxminloc'
+##set	ff2 =	'-traceback -check all -check noarg_temp_created'
+set	ff2 =	'-traceback -check noarg_temp_created'
+set	ff3 =	'-warn all -warn errors'
+set	ff4 =	'-fstack-security-check'
+
+set	allflags =	"$ff1 $ff2 $ff3 $ff4"
+
+# Alternate settings for normal and relaxed error checking.
+
+##set	ff_normal =	'-O2 -fpe-all=0'
+set	ff_normal =	'-O1 -fpe-all=0'
+##set	ff_normal =	'-O0 -fpe-all=0'
+
+set	ff_relax =	'-O0 -fpe-all=3 -warn nounused -warn nodeclarations'
+
+setenv	F90_FLAGS	"$allflags $ff_normal"
+setenv	F90_RELAXED	"$allflags $ff_relax"
+
+setenv	F03_ALLOCATE	'-assume realloc_lhs'	# use F2003+ allocation rules
+
+setenv	F90_CLEANUP	'*.o *.mod *__genmod.f90 *.dwarf'   # for rm statement
+
+# Libraries.  All of these selections are specific to the compiler.
+# Module paths must also be included with -I (Macs) or -M (Sun).
+
+if ( ! $?NETCDF_SELECT ) then
+   setenv NETCDF_SELECT	netcdf3		# if missing, default to netcdf 3
+endif
+
+set	opt_gsl =	"-L$GSL_ROOT/lib -lgsl -lgslcblas"
+setenv	LIB_FGSL	"-I$FGSL_ROOT/include -L$FGSL_ROOT/lib -lfgsl $opt_gsl"
+
+setenv	LIB_NETCDF	"-I$NETCDF_ROOT/include -L$NETCDF_ROOT/lib -l$nclib"
+setenv	LIB_NETOPEN	"-L$NETOPEN_ROOT -lnetopen"
+setenv	LIB_UDUNITS	"-I$UDUNITS_ROOT/include -L$UDUNITS_ROOT/lib -ludunits"
+
+# Local library routines, via $LIB_F90.
+
+setenv	F90_CONFIG	f90_config.gfortran.f90  # compiler-specific constants
+						 # probably needs fix for ifort
+
+setenv	F90_RENAME	rename_file.sunws.f90	# rename file; SunWS vers. okay
+						# probably needs fix for ifort
+
+setenv	F90_IEEE_SUP	''	# no supplement needed, ifort has IEEE arith.
+
+# Refresh the *_INCLUDE lists of hidden source dependencies.
+# This operates on the current $LIB_F90.
+
+source	~/setup/get-lib-includes
+
+unset	ff1 ff2 ff3 ff4 opt_gsl			# clean up local temp vars

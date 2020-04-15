@@ -1,0 +1,204 @@
+#! /bin/csh
+
+set path = ( /usr/sbin /sbin /usr/bsd /usr/bin /bin ~/bin /usr/bin/X11 \
+	    /usr/explorer/bin /usr/local/bin /usr/ucb /usr/etc /usr/local/pgi/linux86/bin)
+
+rehash
+#source $HOME/.cshrc
+#setenv MM5HOME  /data/fddahome
+#setenv RUNDIR   /data/cycles
+#setenv DATA_DIR /data/input
+#setenv MM5HOST  WSMR
+
+setenv LDAS_DIR               $DATA_DIR/HRLDAS
+setenv DATA_ETA_DIR           $DATA_DIR/eta
+setenv SAMS_DATA_DIR_ATC      $DATA_DIR/atc/sams
+setenv SAMS_DATA_DIR_CRTC     $DATA_DIR/crtc/sams
+setenv SAMS_DATA_DIR_DPG      $DATA_DIR/dpg/sams
+setenv SAMS_DATA_DIR_EPG      $DATA_DIR/epg/sams
+setenv SAMS_DATA_DIR_NVL      $DATA_DIR/nvl/sams
+setenv SAMS_DATA_DIR_RTTC     $DATA_DIR/rtc/sams
+setenv SAMS_DATA_DIR_WSMR     $DATA_DIR/wsmr/sams
+setenv SAMS_DATA_DIR_YPG      $DATA_DIR/ypg/sams
+setenv PROF_DATA_DPG_DIR      $DATA_DIR/dpg/profiler
+setenv PROF_DATA_DPG_DIRA     $DATA_DIR/dpg/prof-924a
+setenv PROF_DATA_DPG_DIRB     $DATA_DIR/dpg/prof-924b
+setenv PROF_DATA_YPG_DIRA     $DATA_DIR/ypg/prof924
+setenv PROF_DATA_WSMR_DIRA    $DATA_DIR/wsmr/prof924
+#setenv NPN_PROF_DATA_DIR     $DATA_DIR/npn_profiler
+setenv NPN_PROF_DATA_DIR      $DATA_DIR/npn
+setenv NIDSVAD_DATA_DIR       $DATA_DIR/nidsvad
+setenv NIDS_VAD_DATA_DIR      $DATA_DIR/nidsvad
+setenv BLP_PROF_DATA_DIR      $DATA_DIR/blp
+setenv CLASS_DATA_DIR_YPG     $DATA_DIR/ypg/soundings
+setenv CLASS_DATA_DIR_WSMR    $DATA_DIR/wsmr/soundings
+setenv CLASS_DATA_DIR_ATC     $DATA_DIR/atc/soundings
+setenv CLASS_DATA_DIR_CRTC    $DATA_DIR/crtc/soundings
+setenv ACARS_DATA_DIR         $DATA_DIR/acars
+setenv ACARS_CDF_DATA_DIR     $DATA_DIR/acars-test
+setenv RAWS_DATA_DIR          $DATA_DIR/raws
+setenv OKMESO_DATA_DIR        $DATA_DIR/okmeso
+setenv HSFW_DATA_DIR          $DATA_DIR/pmrf/surface
+setenv HSND_DATA_DIR          $DATA_DIR/pmrf/sounding
+setenv MICROSTEPS_DATA_DIR    $DATA_DIR/uae_stations/microstep
+setenv MADIS_DATA_DIR         $DATA_DIR/madisDecoded
+setenv QWND_DATA_DIR          $DATA_DIR/qwnd_decoded
+setenv WMO_D_DATA_DIR         $DATA_DIR/wmoDecoded
+setenv TAMDAR_DATA_DIR        $DATA_DIR/tamdar_decoded
+setenv QCOUT_DATA_DIR         $DATA_DIR/qcout
+setenv SPECIAL_DATA_DIR       $DATA_DIR/special
+setenv WVR_DATA_DIR           $DATA_DIR/wvr
+setenv SODAR_DATA_DIR         $DATA_DIR/DC/sodar
+setenv PWIDS_DATA_DIR         $DATA_DIR/DC/pwids
+setenv LIDPROF_DATA_DIR       $DATA_DIR/DC/lidar_prof
+setenv DCNET_DATA_DIR         $DATA_DIR/DC/surface
+setenv WMO_DATA_DIR           $DATA_DIR/wmo
+setenv SATWV_DATA_DIR         $DATA_DIR/satwinds
+setenv SATWV_DATA_DIR_1H      $DATA_DIR/satwinds1h
+setenv RADAR_VVP_DATA_DIR     $DATA_DIR/radarVVP
+setenv NSSL_MOSAIC_DATA_DIR   $DATA_DIR/nsslMosaic
+setenv IAF_DATA_DIR           $DATA_DIR/iaf
+setenv IAF_SFC_DIR            $DATA_DIR/surfaceIAF  # only for OPA case studies
+setenv IAF_UPR_DIR            $DATA_DIR/upperairIAF # only for OPA case studies
+setenv SPDB_URL               spdbp:://shield-vdras-test::/d1/wmi_test/spdb/vdras_vlas_soundings
+setenv AMV_DATA_DIR           $DATA_DIR/amv
+
+setenv GTS_DATA_DIR       $RUNDIR/data/gts
+
+setenv LOGFILES           $MM5HOME/logfiles 
+
+setenv CYCLE_CODE         $MM5HOME/cycle_code
+setenv CONFIG_FILES       $CYCLE_CODE/CONFIG_FILES 
+setenv CONSTANT_FILES     $CYCLE_CODE/CONSTANT_FILES 
+setenv CSH_ARCHIVE        $CYCLE_CODE/CSH_ARCHIVE 
+setenv EXECUTABLE_ARCHIVE $CYCLE_CODE/EXECUTABLE_ARCHIVE 
+setenv SOURCE             $CYCLE_CODE/SOURCE
+
+# for non flex script only
+setenv DEGRIB_TEMPLATE $CONSTANT_FILES/TERRAIN/Domain1_New_LU.V
+
+
+setenv CSH_HEAD_SRC       $CSH_ARCHIVE/csh_head.src
+
+setenv FDDA_DATA_DIR      $RUNDIR/fdda_data
+setenv OUTPUT_DATA_DIR    $RUNDIR/data
+setenv FDDA_OUTPUT_DATA_DIR    /analysis/fddasys/data
+
+setenv MustHaveDir $EXECUTABLE_ARCHIVE/MustHaveDir
+setenv ADD_SNOW_EXE $EXECUTABLE_ARCHIVE/add_snow.exe
+
+setenv PREGRID_NML_TEMPL $CONSTANT_FILES/PREGRID.namelist.template
+setenv PREGRID_VTABLE $CONSTANT_FILES/PREGRID_VTABLE.ETA212
+setenv PREGRID_EXE $EXECUTABLE_ARCHIVE/pregrid_grib.exe
+
+setenv TERRAIN_DIR $CONSTANT_FILES/TERRAIN
+setenv REGRIDDER_NML_TEMPL $CONSTANT_FILES/REGRIDDER.namelist.template
+setenv REGRIDDER_EXE $EXECUTABLE_ARCHIVE/regridder.exe
+setenv REGRIDDER_V3R3_EXE $EXECUTABLE_ARCHIVE/regridder_v3r3.exe
+
+setenv PREGRID_VTABLE_AVN $CONSTANT_FILES/PREGRID_VTABLE.AVN
+setenv PREGRID_VTABLE_AVN_ALL $CONSTANT_FILES/PREGRID_VTABLE.AVN_ALL
+setenv PREGRID_VTABLE_AVN_2SL $CONSTANT_FILES/PREGRID_VTABLE.AVN_2SL
+setenv PREGRID_AVN_EXE $EXECUTABLE_ARCHIVE/pregrid_grib.exe
+setenv MOSAIC_EXE $EXECUTABLE_ARCHIVE/build_mosaic.exe
+setenv REGRIDDER_AVN_NML_TEMPL $CONSTANT_FILES/REGRIDDER_AVN.namelist.template
+setenv REGRIDDER_ALL_TEMPL $CONSTANT_FILES/REGRIDDER.namelist.avnall.template
+setenv REGRIDDER_AVN_EXE $EXECUTABLE_ARCHIVE/regridder.exe
+
+setenv GRIB_EXE $EXECUTABLE_ARCHIVE/grib.exe
+
+setenv RD_PROF_EXE $EXECUTABLE_ARCHIVE/rd_prof.exe
+setenv RD_ACARS_EXE $EXECUTABLE_ARCHIVE/rd_acars.exe
+setenv RD_ACARS_NETCDF_EXE $EXECUTABLE_ARCHIVE/rd_acars_netcdf.exe 
+setenv RD_ACARS_NETCDF_1H_EXE $EXECUTABLE_ARCHIVE/rd_acars_netcdf_1h.exe 
+setenv RD_CLASS_EXE $EXECUTABLE_ARCHIVE/rd_class.exe
+setenv RD_IAF_EXE $EXECUTABLE_ARCHIVE/decode_iaf.exe
+setenv RD_SPDB_EXE $EXECUTABLE_ARCHIVE/decode_spdb.exe
+setenv SPDB_QUERY $EXECUTABLE_ARCHIVE/SpdbQuery
+setenv RD_AMV_EXE $EXECUTABLE_ARCHIVE/rd_amv_bufr.exe
+
+setenv CALCAVG_EXE $EXECUTABLE_ARCHIVE/calcavg.exe
+
+setenv GTS_DECODER_DIR $SOURCE/GTS_DECODER
+setenv GTS_DECODER_EXE $EXECUTABLE_ARCHIVE/gtsdecoder.exe
+setenv GTS_STTNID      $CONSTANT_FILES/gts_sttnid_final
+setenv GTS_ICAO        $CONSTANT_FILES/gts_sttnid_final.icao
+
+# v2 interpf
+setenv INTERP_FRONT_DIR $SOURCE/INTERP_FRONT
+setenv INTERP_FRONT_EXE $EXECUTABLE_ARCHIVE/interp.exe
+setenv INTERP_TEMPLATE $CONSTANT_FILES/INTERP.namelist.template
+# v2 interpb
+setenv INTERP_BCK_RT_TEMPLATE $CONSTANT_FILES/INTERP_BCK_RT.namelist.template
+setenv INTERP_BACK_EXE $EXECUTABLE_ARCHIVE/interp_bck.exe
+# v3 interpb
+setenv INTERPBV3_RT_TEMPLATE $CONSTANT_FILES/INTERPBV3_RT.namelist.template
+setenv INTERPBV3_RT_EXE $EXECUTABLE_ARCHIVE/interpbv3_rt.exe
+
+setenv NESTDOWN_EXE $EXECUTABLE_ARCHIVE/nestdown.exe
+setenv NESTDOWN_TEMPLATE $CONSTANT_FILES/NESTDOWN.namelist.template
+
+setenv CYCLESOIL_EXE $EXECUTABLE_ARCHIVE/cyclesoil
+
+setenv MISSING_TIMES_EXE $EXECUTABLE_ARCHIVE/missing_times.exe
+
+setenv MM5_ehtran $CONSTANT_FILES/ehtran
+setenv MM5_EXE $EXECUTABLE_ARCHIVE/mm5.exe
+setenv MM5_MPICH $EXECUTABLE_ARCHIVE/mm5.mpich
+setenv WRF_EXE $EXECUTABLE_ARCHIVE/wrf.exe
+setenv WRF_MPICH $EXECUTABLE_ARCHIVE/wrf.mpich
+setenv REAL_EXE $EXECUTABLE_ARCHIVE/real.exe
+setenv MM5_TEMPLATE $CONSTANT_FILES/MM5.namelist.template
+setenv REAL_MPICH $EXECUTABLE_ARCHIVE/real.mpich
+setenv GEOGRID_EXE $EXECUTABLE_ARCHIVE/geogrid.exe
+setenv GEOGRID_MPICH $EXECUTABLE_ARCHIVE/geogrid.mpich
+setenv UNGRIB_EXE $EXECUTABLE_ARCHIVE/ungrib.exe
+setenv UNGRIB_MPICH $EXECUTABLE_ARCHIVE/ungrib.mpich
+setenv METGRID_EXE $EXECUTABLE_ARCHIVE/metgrid.exe
+setenv METGRID_MPICH $EXECUTABLE_ARCHIVE/metgrid.mpich
+
+setenv USE_NEWSFC TRUE
+setenv NEW_SFC_EXE $EXECUTABLE_ARCHIVE/new_sfc.exe
+
+setenv USE_NOSUPER TRUE
+setenv NO_SUPER_EXE $EXECUTABLE_ARCHIVE/no_super.exe
+
+setenv ONE_DATE_EXE $EXECUTABLE_ARCHIVE/one_date.exe
+
+setenv RAP_EXE $EXECUTABLE_ARCHIVE/rap_fdda.exe
+setenv RAP_TEMPLATE $CONSTANT_FILES/RAP.namelist.template
+setenv RAP_RTFDDA_EXE $EXECUTABLE_ARCHIVE/rap_rtfdda.exe 
+setenv RAP_TEMPLATE1_RTFDDA $CONSTANT_FILES/RAPV3.namelist.template1_rtfdda
+setenv RAP_TEMPLATE2_RTFDDA $CONSTANT_FILES/RAPV3.namelist.template2_rtfdda
+
+setenv LITTLE_R_TEMPLATE $CONSTANT_FILES/LITTLE_R.namelist.template
+
+setenv RD_RAWS_DIR $SOURCE/RD_RAWS
+setenv RD_RAWS_EXE $EXECUTABLE_ARCHIVE/rd_raws.exe
+
+setenv RD_OKMESO_EXE $EXECUTABLE_ARCHIVE/rd_okmeso.exe
+
+setenv RD_WVR_EXE $EXECUTABLE_ARCHIVE/rd_wvr.exe
+
+setenv RD_SODAR_EXE $EXECUTABLE_ARCHIVE/rd_sodar.exe
+
+setenv RD_PWIDS_EXE $EXECUTABLE_ARCHIVE/rd_pwids.exe
+
+setenv SFC_FDDA_EXE $EXECUTABLE_ARCHIVE/sfc_fdda.exe
+
+setenv SWAP_EXE $EXECUTABLE_ARCHIVE/swap_terrain.exe
+
+setenv THREE_H_EXE $EXECUTABLE_ARCHIVE/three_h.exe
+
+setenv TOVIS5D_EXE $EXECUTABLE_ARCHIVE/tovis5d
+setenv TOSAMS_EXE $EXECUTABLE_ARCHIVE/mm5viewer
+
+setenv RD_QC_RF_EXE $EXECUTABLE_ARCHIVE/rd_qc_rf.exe
+setenv RD_QC_SORT_EXE $EXECUTABLE_ARCHIVE/rd_qc_sort.exe
+
+setenv INTERP_BACK_RT_EXE $EXECUTABLE_ARCHIVE/interp_bck_rt.exe
+setenv V32V2_EXE $EXECUTABLE_ARCHIVE/v32v2.exe
+setenv V22V3_EXE $EXECUTABLE_ARCHIVE/v22v3.exe
+
+setenv USE_PERL_FTP TRUE
+setenv SIZECMD "stat -q -s"

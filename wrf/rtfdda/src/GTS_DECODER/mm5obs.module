@@ -1,0 +1,232 @@
+MODULE mm5obs_def
+
+   INCLUDE 'inc.mm5obs'     ! Part of Dave Hart's observation module
+
+   TYPE mm5_hdr
+      TYPE ( location_type ) :: location
+      TYPE ( source_info   ) :: info
+      TYPE ( time_info     ) :: valid_time
+      TYPE ( terrestrial   ) :: ground
+   END TYPE mm5_hdr
+
+   TYPE ( mm5_hdr   )        :: empty_hdr
+   TYPE ( meas_data )        :: empty_upa
+
+   REAL , PARAMETER :: fake_stnpre = 101301.00
+
+   INTEGER :: obs_yymmdd , obs_hhmmss , rev_yymmdd , rev_hhmmss
+   INTEGER :: fm           ! FM-xx  WMO format number
+   INTEGER :: nvalid       ! number of fields decoded
+   INTEGER :: nlevel       ! number of vertical level written
+
+   ! mainly used in sounding data
+   INTEGER :: vert_id      ! indicate whether data is pressure
+                           !    (+ve) or height (-ve) based
+   LOGICAL :: wrote_hdr    ! whether header has been written out
+
+CONTAINS
+
+!----------------------------------------------------------------------
+
+SUBROUTINE init_wr_rap_emptyobs
+
+   IMPLICIT NONE
+   INCLUDE 'inc.special_symbols'
+
+   TYPE ( location_type ) :: empty_location
+   TYPE ( source_info   ) :: empty_info
+   TYPE ( time_info     ) :: empty_time
+   TYPE ( field         ) :: empty_field
+   TYPE ( terrestrial   ) :: empty_ground
+
+   rev_yymmdd               = MISSING
+   rev_hhmmss               = MISSING
+
+   empty_location%latitude  = MISSING
+   empty_location%longitude = MISSING
+   empty_location%id        = BLANK_LINE
+   empty_location%name      = BLANK_LINE
+
+   empty_info%platform      = BLANK_LINE
+   empty_info%source        = 'GTS (ROHK)'
+   empty_info%elevation     = MISSING
+   empty_info%num_vld_fld   = MISSING
+   empty_info%num_error     = MISSING
+   empty_info%num_warning   = MISSING
+   empty_info%seq_num       = MISSING
+   empty_info%num_dups      = MISSING
+
+   empty_info%is_sound      = .FALSE.    ! need to discuss with Dave
+   empty_info%bogus         = .FALSE.    ! need to discuss with Dave
+   empty_info%discard       = .FALSE.    ! need to discuss with Dave
+  
+   empty_time%sut           = MISSING
+   empty_time%julian        = MISSING
+   empty_time%date_char     = BLANK_LINE
+
+   empty_field%data         = MISSING
+   empty_field%qc           = 0          ! need to discuss with Dave
+
+   empty_ground%slp         = empty_field
+   empty_ground%ref_pres    = empty_field
+   empty_ground%ground_t    = empty_field
+   empty_ground%sst         = empty_field
+   empty_ground%psfc        = empty_field
+   empty_ground%precip      = empty_field
+   empty_ground%t_max       = empty_field
+   empty_ground%t_min       = empty_field
+   empty_ground%t_min_night = empty_field  
+   empty_ground%p_tend03    = empty_field  
+   empty_ground%p_tend24    = empty_field  
+   empty_ground%cloud_cvr   = empty_field
+   empty_ground%ceiling     = empty_field
+
+   empty_upa%pressure       = empty_field
+   empty_upa%height         = empty_field
+   empty_upa%temperature    = empty_field
+   empty_upa%dew_point      = empty_field
+   empty_upa%speed          = empty_field
+   empty_upa%direction      = empty_field
+   empty_upa%u              = empty_field
+   empty_upa%v              = empty_field
+   empty_upa%rh             = empty_field
+   empty_upa%thickness      = empty_field
+
+   empty_hdr%location       = empty_location
+   empty_hdr%info           = empty_info
+   empty_hdr%valid_time     = empty_time
+   empty_hdr%ground         = empty_ground
+
+ENDSUBROUTINE
+
+!----------------------------------------------------------------------
+
+SUBROUTINE write_rpt_hdr ( iwrite , rpt_seq_num, hdr , ieor )
+
+   IMPLICIT NONE
+   INCLUDE 'inc.special_symbols'
+   INTEGER ,          INTENT ( IN )    :: iwrite, rpt_seq_num
+   TYPE ( mm5_hdr ) , INTENT ( INOUT ) :: hdr 
+   INTEGER ,          INTENT ( OUT )   :: ieor
+
+   CHARACTER                           :: cdate*14
+
+   IF ( iwrite < 1 ) THEN
+      ! PRINT *, 'write_rpt_hdr iounit < 0, IGNORE WRITE ', iwrite
+      RETURN
+   ENDIF
+
+   IF ( nvalid .LE. 0 ) THEN
+      ! print *, ' **** write_rpt_hdr : NO valid field'
+      ieor = 1
+
+   ELSE IF ( rev_yymmdd .EQ. UNDEFINED .OR. rev_hhmmss .EQ. UNDEFINED ) THEN
+      ! print *, ' **** write_rpt_hdr : UNEXPECTED rev_yymmdd IS UNDEFINED'
+      ieor = 2
+
+   ELSE IF ( rev_yymmdd .EQ. MISSING .OR. rev_hhmmss .EQ. MISSING ) THEN
+      ! print *, ' **** write_rpt_hdr : UNEXPECTED rev_yymmdd IS MISSING'
+      ieor = 2
+
+   ELSE IF ( nint ( hdr%location%latitude  ) .EQ. MISSING   .OR.  &
+             nint ( hdr%location%longitude ) .EQ. MISSING ) THEN
+      ! print *, ' **** write_rpt_hdr : latitude or longitude IS MISSING'
+      ieor = 3
+
+   ELSE
+      SELECT CASE ( fm ) 
+         CASE (12) ; hdr%info%platform = 'FM-12 SYNOP'
+                     hdr%info%is_sound = .FALSE.
+         CASE (13) ; hdr%info%platform = 'FM-13 SHIP '
+                     hdr%info%is_sound = .FALSE.
+         CASE (15) ; hdr%info%platform = 'FM-15 METAR'
+                     hdr%info%is_sound = .FALSE.
+         CASE (16) ; hdr%info%platform = 'FM-16 SPECI'
+                     hdr%info%is_sound = .FALSE.
+         CASE (32) ; hdr%info%platform = 'FM-32 PILOT'
+                     hdr%info%is_sound = .TRUE.
+         CASE (33) ; hdr%info%platform = 'FM-33 PILOT SHIP'
+                     hdr%info%is_sound = .TRUE.
+         CASE (34) ; hdr%info%platform = 'FM-34 PILOT MOBIL'
+                     hdr%info%is_sound = .TRUE.
+         CASE (35) ; hdr%info%platform = 'FM-35 TEMP'
+                     hdr%info%is_sound = .TRUE.
+         CASE (36) ; hdr%info%platform = 'FM-36 TEMP SHIP'
+                     hdr%info%is_sound = .TRUE.
+         CASE (37) ; hdr%info%platform = 'FM-37 TEMP DROP'
+                     hdr%info%is_sound = .TRUE.
+         CASE (38) ; hdr%info%platform = 'FM-38 TEMP MOBIL'
+                     hdr%info%is_sound = .TRUE.
+         CASE (86) ; hdr%info%platform = 'FM-86 SATEM'
+                     hdr%info%is_sound = .TRUE.
+         CASE (88) ; hdr%info%platform = 'FM-88 SATOB'
+                     hdr%info%is_sound = .FALSE.
+         CASE (97) ; hdr%info%platform = 'FM-97 AIREP'
+                     hdr%info%is_sound = .TRUE.
+      END SELECT
+   
+      write ( cdate , '(I8.8,I6.6)' ) rev_yymmdd, rev_hhmmss
+!     rpt_seq_num = rpt_seq_num + 1
+   
+      hdr%info%seq_num         = rpt_seq_num
+      hdr%info%num_vld_fld     = nvalid
+      hdr%valid_time%date_char = cdate
+   
+      WRITE ( iwrite , fmt = rpt_format ) hdr
+      ieor = 0
+      nlevel = 0
+      wrote_hdr = .TRUE.
+      vert_id = MISSING
+
+   ENDIF
+
+ENDSUBROUTINE
+
+!----------------------------------------------------------------------
+
+SUBROUTINE write_rpt_upa ( iwrite , upa , ieor )
+
+   IMPLICIT NONE
+   INTEGER ,            INTENT ( IN ) :: iwrite , ieor
+   TYPE ( meas_data ) , INTENT ( IN ) :: upa
+
+   IF ( iwrite < 1 ) THEN
+      PRINT *, 'write_rpt_upa iounit < 0, IGNORE WRITE ', iwrite
+      RETURN
+   ENDIF
+
+   IF ( ieor .EQ. 0 ) THEN
+      WRITE ( iwrite , fmt = meas_format ) upa
+      nlevel = nlevel + 1
+   ENDIF
+
+ENDSUBROUTINE
+
+!----------------------------------------------------------------------
+
+SUBROUTINE write_rpt_end ( iwrite , nerror , nwarn , ieor )
+
+   IMPLICIT NONE
+   INTEGER , INTENT ( IN )  :: iwrite, nerror, nwarn, ieor
+   TYPE ( meas_data )       :: upa_tmp
+
+   IF ( iwrite < 1 ) THEN
+      PRINT *, 'write_rpt_end iounit < 0, IGNORE WRITE ', iwrite
+      RETURN
+   ENDIF
+
+   IF ( ieor .EQ. 0 ) THEN
+      upa_tmp                  = empty_upa
+      upa_tmp%pressure%data    = end_data
+      upa_tmp%height%data      = end_data
+      upa_tmp%temperature%data = nlevel
+      WRITE ( iwrite , fmt = meas_format ) upa_tmp
+      WRITE ( iwrite , fmt = end_format ) nvalid, nerror, nwarn
+      wrote_hdr = .FALSE.
+   ENDIF
+
+ENDSUBROUTINE
+
+!----------------------------------------------------------------------
+
+ENDMODULE mm5obs_def

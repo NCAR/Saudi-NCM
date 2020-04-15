@@ -1,0 +1,78 @@
+204a205
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mod
+205a207
+>                             xtime, use_adaptive_time_step,        & ! xtime,use_adaptive_time_step added by WC: 2015-07-12
+206a209
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mod
+265a269
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Will Cheng mod
+267a272,276
+>  ! === WC: 2015-07-12 ========
+>  LOGICAL, INTENT(IN   ) :: use_adaptive_time_step
+>  REAL, INTENT(IN   ) :: xtime
+>  ! ============================
+> 
+268a278
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Will Cheng mod
+301a312
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Will Cheng mod
+304c315,322
+< !-----------------------------------------------------------------
+---
+>  ! ====== WC: 2015-07-12 ========
+>  REAL :: xtime_wrf_time_seconds  ! model time in sec 
+>  REAL :: lightning_dt_use
+>  ! ============================
+> !-----------------------------------------------------------------
+>  ! ======= WC: 2015-07-12 ========
+>  xtime_wrf_time_seconds = xtime*60.   ! sec
+>  ! ============================
+308c326,327
+<  IF ( itimestep * dt .lt. lightning_start_seconds ) RETURN
+---
+>  ! ==== commented out by WC: 2015-07-13 ====
+>  !IF ( itimestep * dt .lt. lightning_start_seconds ) RETURN
+310c329,352
+<  IF ( MOD((itimestep * dt - lightning_start_seconds), lightning_dt ) .ne. 0 ) RETURN
+---
+>  ! ==== commented out by WC: 2015-07-12 ====
+>  !IF ( MOD((itimestep * dt - lightning_start_seconds), lightning_dt ) .ne. 0 ) RETURN
+>  IF ( (xtime_wrf_time_seconds - lightning_start_seconds).lt.0.) THEN
+>   RETURN
+>  ELSE
+>   IF (use_adaptive_time_step) THEN
+>    !IF ( (lightning_dt .gt. 0.) .AND.                   &
+>    !      (abs(INT(1000*xtime_wrf_time_seconds)-        & 
+>    !       (1000*lightning_dt)*INT(1000*xtime_wrf_time_seconds/(1000*lightning_dt))).gt.   &
+>    !                            (1000*1.5*dt)) ) RETURN
+>    lightning_dt_use = dt
+>   ELSE
+>    !IF ( (lightning_dt .gt. 0.) .AND. (MOD((INT(xtime * 1000)), INT(1000*lightning_dt) ) .ne. 0) ) RETURN
+>    IF (lightning_dt .gt. 0.) THEN
+>     IF (MOD( INT(xtime_wrf_time_seconds), INT(lightning_dt) ) .ne. 0) THEN
+>      RETURN
+>     ELSE
+>      lightning_dt_use = lightning_dt
+>     ENDIF
+>    ELSE
+>     lightning_dt_use = dt
+>    ENDIF
+>   ENDIF
+>  ENDIF
+311a354
+>  ! =======================================
+313a357
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Will Cheng mod
+563a608
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Will Cheng mod
+566,567c611,615
+<  ic_flashcount(its:ite,jts:jte) = ic_flashcount(its:ite,jts:jte) + ic_flashrate(its:ite,jts:jte) * lightning_dt
+<  cg_flashcount(its:ite,jts:jte) = cg_flashcount(its:ite,jts:jte) + cg_flashrate(its:ite,jts:jte) * lightning_dt
+---
+> ! ==== WC: 2015-07-12 =====
+> ! ic_flashcount(its:ite,jts:jte) = ic_flashcount(its:ite,jts:jte) + ic_flashrate(its:ite,jts:jte) * lightning_dt
+> ! cg_flashcount(its:ite,jts:jte) = cg_flashcount(its:ite,jts:jte) + cg_flashrate(its:ite,jts:jte) * lightning_dt
+>  ic_flashcount(its:ite,jts:jte) = ic_flashcount(its:ite,jts:jte) + ic_flashrate(its:ite,jts:jte) * lightning_dt_use
+>  cg_flashcount(its:ite,jts:jte) = cg_flashcount(its:ite,jts:jte) + cg_flashrate(its:ite,jts:jte) * lightning_dt_use
+569a618
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Will Cheng mod

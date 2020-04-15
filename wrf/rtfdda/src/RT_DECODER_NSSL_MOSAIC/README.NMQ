@@ -1,0 +1,27 @@
+2006.06.23
+This directory stores code for processing NSSL MOSAIC 
+ reflectivity data to rain/snow mixing ratio fields on MM5 grid
+
+RT_MERGE_TILE  
+   MERGTILE
+    code for reading netcdf files of individual tiles and 
+    map reflectivity data horizontally to a model domain 
+    no vertical interpolation - data are on vertical Cartesian grid
+RT_DBZ2QR
+  dbz_2_mm5grid.exe
+    read reflectivity data for a domain and vertically interpolate
+    to the model grid
+  radar_for_nudge.exe 
+    convert dbz to QR based on background T and temporally filter
+    insert to MMINPUT prepared for grid nudging
+run_script
+  crontab_NMQ_mergtile.csh/pl  clean_NMQ_data.csh/pl 
+    script for running mergetile and cleaning old merged data 
+    set src_dir in crontab_NMQ_mergtile.pl to where MERGTILE & namelist.mosaic are
+    may be put in $GMODJOB_DIR
+  RT_S_decode_nsslMosaic_rtfdda.csh
+    script for launching dbz_2_mm5grid & radar_for_nudge in model cycle run  
+    assumes dbz_2_mm5grid.exe & radar_for_nudge.exe in $EXECUTABLE_ARCHIVE
+    may be put in $CSH_ARCHIVE/Forecast
+    
+    

@@ -1,0 +1,185 @@
+#!/bin/csh 
+#
+#   Script for converting an NCGM file to a GIF file
+#
+#   This script should be invoked with:
+#
+#       ncgm2gif ncgm_filename
+#      
+#   If the file "ncgm_filename" is of the form "xxx.ncgm", then the GIF
+#   file will be called "xxx.gif".  Otherwise, the GIF file will be
+#   called "ncgm_filename.gif"
+#
+#   The basic conversion steps taken are:
+#
+#     NCGM -> raster file -> GIF
+#
+#   Several pieces of software are required to run this script:
+#       1. NCAR Graphics (ctrans, ncgmstat)
+#       2. imconv (Image Tools)
+#
+#  No options yet.  Eventually may want to allow the following options:
+#     1. changing resolution
+#     2. Changing raster output used
+#     3. "-clean" option
+#     4. Allow to select which frames you want
+#        (like Tom's ncgmgrab script)
+#     5. Allow to change output file name
+#
+
+if ($#argv != 1) goto usage
+
+
+#***********************#
+#                       #
+# Get the root filename #
+#                       #
+#***********************#
+set ncgmfile = $1
+
+if (! -f $ncgmfile) then
+  echo ""
+  echo "    $ncgmfile doesn't exist"
+  echo ""
+  exit 1
+endif
+
+if ($ncgmfile:e == "ncgm") then
+  set rootname = $ncgmfile:r
+else
+  set rootname = $ncgmfile
+endif
+
+
+#************#
+#            #
+# Initialize #
+#            #
+#************#
+set wresltn = 800
+set hresltn = 800
+set rasfmt = sun
+set rasfile = $rootname.$rasfmt
+set giffile = $rootname.gif
+
+#****************************************#
+#                                        #
+# Make sure we have all the apps we need #
+#                                        #
+#****************************************#
+#set apps = (ctrans ncgmstat imconv)
+#
+#echo ""
+#echo "    Checking to be sure we have all the necessary applications..."
+#
+#foreach app($apps)
+#  echo -n "        $app..."
+#  which $app >& /dev/null
+#  if ($status != 0) then
+#    echo "not found"
+#    echo ""
+#    exit 1
+#  endif
+#  echo "okay"
+#end
+#
+
+#***************************#
+#                           #
+# Count frames in NCGM file #
+#                           #
+#***************************#
+set nframes = `ncgmstat -c $ncgmfile`
+
+if ($nframes == 0) then 
+  echo ""
+  echo "    Not measuring any frames in '$ncgmfile'."
+  echo "    Are you sure it's a valid metafile?"
+  echo ""
+  exit 1
+endif
+
+if ($nframes > 1) then 
+  echo ""
+  echo "    You can only have a one-frame NCGM file."
+  echo "    $ncgmfile has $nframes frames."
+  echo ""
+  exit 1
+endif
+
+#*******************************#
+#                               #
+# Convert NCGM to a raster file #
+# and then to GIF               #
+#                               #
+#*******************************#
+
+#
+# First check to be sure we don't overwrite existing files.
+#
+if (-f $rasfile) then
+  echo ""
+#yliu 030606 comment out the following interactive stuff
+  echo "  Warning  '$rasfile' already exists."
+# echo -n "    Overwrite? (y/n) (n) "
+# set answer = $<
+# if ("$answer" != "y" && "$answer" != "Y") then
+#   exit 1
+# endif
+endif
+
+if (-f $giffile) then
+  echo ""
+#yliu 030606 comment out the following interactive stuff
+  echo " Warning   '$giffile' already exists."
+#  echo -n "    Overwrite? (y/n) (n) "
+#  set answer = $<
+#  if ("$answer" != "y" && "$answer" != "Y") then
+#    exit 1
+#  endif
+endif
+
+
+#
+# Now convert it.
+#
+#echo ""
+#echo "    Converting your metafile to a GIF file..."
+ $MM5HOME/cycle_code/EXECUTABLE_ARCHIVE/ctrans -d $rasfmt -res ${wresltn}x${hresltn} $ncgmfile >! $rasfile
+if ($status != 0) then
+  echo ""
+  echo "    The 'ctrans' command failed. Please check your metafile"
+  echo "    to be sure it is valid."
+  echo ""
+  exit 1
+endif
+
+#imconv -infile $rasfile -outfile $giffile
+/usr/bin/convert $rasfile $giffile
+if ($status != 0) then
+  echo ""
+  echo "    The 'imconv' command failed."
+  echo ""
+  exit 1
+endif
+
+/bin/rm $rasfile
+
+#echo ""
+#echo "    'ncgm2gif' completed successfully."
+#echo "     GIF file is named '$giffile'."
+#echo ""
+
+exit
+
+#***************************#
+#                           #
+# ncgm2gif usage statement #
+#                           #
+#***************************#
+usage:
+#echo ""
+#echo "    usage: ncgm2gif NCGM_filename"
+#echo ""
+exit
+

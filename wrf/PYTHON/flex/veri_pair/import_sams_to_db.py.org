@@ -1,0 +1,174 @@
+#!/usr/bin/env python
+
+'''
+Created on Mar 23, 2017
+
+@author: hsoh
+'''
+
+import os
+import sys
+import time
+import datetime
+from os.path import expanduser
+from optparse import OptionParser
+import subprocess
+from multiprocessing import Process
+
+#from sams2db_vdb import main as sams2db_main
+ 
+MODULE_NAME    = 'import_sams_to_db' 
+MODULE_VERSION = "1.0.0000"
+
+RANGE_STR = '__RANGE_HERE__'
+ 
+def create_parser():
+    usage_str = "%prog [options] "
+    default_input_dir = os.path.join(os.path.sep, 'datainput', '{r}'.format(r=RANGE_STR),'sams')
+    if not os.path.exists(default_input_dir) and os.path.exists('/p'):
+        tmp_input_dir = os.path.join(os.path.sep, 'p', 'work1', os.path.basename(expanduser("~"))) 
+        if os.path.exists(tmp_input_dir):
+            default_input_dir = "{b}{d}".format(b=tmp_input_dir, d=default_input_dir)
+    parser = OptionParser(usage = usage_str, version="%prog " + MODULE_VERSION)
+    parser.add_option('-r', '--ranges', '--ranges', dest='ranges',
+            default='atc,crtc,dpg,epg,rtc,wsmr,ypg',
+            help=" Range names, comma separated - required")
+    parser.add_option('--serial', dest='serial',
+            default=False, action='store_true',
+            help=" Run as serial mode (default: multiprocess)")
+    parser.add_option('-d', '--dir_pattern',  '--dir-pattern', dest='dir_pattern',
+            default=default_input_dir, help=" Path for sams NetcDF")
+    parser.add_option('--debug', dest='debug', action='store_true',
+            default=False, help=" Enable debug - optional")
+    return parser
+
+def format_duration(duration):
+    t_seconds = duration
+    if 60 <= t_seconds:
+        t_minutes = int(t_seconds / 60)
+        t_seconds = t_seconds % 60
+        if 60 <= t_minutes:
+            t_hours = int(t_minutes / 60)
+            t_minutes = t_minutes % 60
+            str_duration = '%d:%02d:%02d' % (t_hours, t_minutes, t_seconds)
+        else:
+            str_duration = '%d:%02d' % (t_minutes, t_seconds)
+    else:
+        str_duration = '%d' % t_seconds
+    return str_duration
+    
+def make_sams_nc_name(sams_date = None):
+    if sams_date is None:
+        sams_date = datetime.datetime.now()
+    yymmdd = sams_date.strftime('%y%m%d')
+    return 'sams.{d}.000000.cdf'.format(d=yymmdd)
+
+def run_shell_command(shell_commands, print_commands=True,
+        print_output=True, executable=None):
+    if print_commands:
+        if list == type(shell_commands):
+            print('   command: %s' % ' '.join(shell_commands))
+        else:
+            print('   command: %s' % shell_commands)
+    proc = subprocess.Popen(shell_commands,shell=True,executable=executable,
+            stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    (std_output, std_error) = proc.communicate()
+    #if print_output:    print('    output: %s' % output)
+    if print_output:
+        if 0 < len(std_output): print(std_output)
+        if 0 < len(std_error):  print(std_error)
+    return (proc.returncode, std_output, std_error)
+
+class import_sams_to_db(object):
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self, parser):
+        '''
+        Constructor
+        '''
+        (self.options, self.args) = parser.parse_args()
+        
+    def do_import(self):
+        sys.argv_back = sys.argv
+        
+        python_script = os.path.join(os.path.dirname(__file__),'sams2db.py')
+        ranges = self.options.ranges.split(',')
+        #print('   ranges: {r}'.format(r=ranges))
+        
+        cur_time = datetime.datetime.now()
+        #print('   cur hour: {h}'.format(r=ranges, h=cur_time.hour))
+        sams_yesterday = make_sams_nc_name(cur_time - datetime.timedelta(days=1))
+        sams_today = make_sams_nc_name(cur_time)
+
+        processes = []
+        use_parallel_call = not self.options.serial
+        
+        for range_name in ranges:
+            sams_dir = self.options.dir_pattern.replace(RANGE_STR, range_name)
+            input_sams = os.path.join(sams_dir, sams_today)
+            #print('   sams_dir {d} for {r} from {t}'.format(r=range_name, d=sams_dir, t=self.options.dir_pattern))
+            if os.path.exists(input_sams):
+                #argv = [python_script, '-r', range_name, '-i', input_sams]
+                python_cmd = '{s} -r {r} -i {i}'.format(s=python_script,
+                        r=range_name, i=input_sams)
+                if self.options.debug: 
+                    python_cmd = '{c} --debug'.format(c=python_cmd)
+                if use_parallel_call: 
+                    process_argments = (python_cmd, False,)
+                    p = Process(target=run_shell_command, args=process_argments)
+                    processes.append(p) 
+                    p.start()
+                else:
+                    run_shell_command(python_cmd,print_commands=False)
+            else:
+                print('   Input SAMS {s} does not exist'.format(s=input_sams))
+            
+            if cur_time.hour <= 2:
+                input_sams = os.path.join(sams_dir, sams_yesterday)
+                if os.path.exists(input_sams):
+                    #argv = [python_script, '-r', range_name, '-i', input_sams]
+                    #sams2db_main(argv)
+                    python_cmd = '{s} -r {r} -i {i}'.format(s=python_script,
+                            r=range_name, i=input_sams) 
+                    if self.options.debug: 
+                        python_cmd = '{c} --debug'.format(c=python_cmd)
+                    if use_parallel_call: 
+                        process_argments = (python_cmd, False,)
+                        p = Process(target=run_shell_command, args=process_argments)
+                        processes.append(p) 
+                        p.start()
+                    else:
+                        run_shell_command(python_cmd,print_commands=False)
+                else:
+                    print('   Input SAMS {s} does not exist'.format(s=input_sams))
+            
+        if use_parallel_call:
+            for i in range(len(processes)):
+                processes[i].join()
+        
+        #self.cursor.close()
+        #self.db_conn.close()
+        
+def main():
+    
+    parser = create_parser()
+    #add_more_parse_optigns(parser)
+    #(options, args) = parser.parse_args()
+    actor = import_sams_to_db(parser)
+    if actor.options.ranges is None:
+        print('   === ERROR === range is missing')
+    else:
+        actor.do_import()
+
+if __name__ == '__main__':
+    start_time_wall    = time.time()
+    start_time_process = time.clock()
+    main()
+    duration_wall    = time.time()  - start_time_wall
+    duration_process = time.clock() - start_time_process
+    print ("      === Done %s, took %d [%s], process time: %d [%s]" % (
+            MODULE_NAME, duration_wall, format_duration(duration_wall),
+            duration_process, format_duration(duration_process)))

@@ -1,0 +1,17 @@
+# Module dependencies
+find_analog_v1.o: shell-sort.bc.o stdevTNcirc.o wind_dir_error.o
+find_analog_v1.lo: shell-sort.bc.lo stdevTNcirc.lo wind_dir_error.lo
+find_analog_v1.obj: shell-sort.bc.obj stdevTNcirc.obj wind_dir_error.obj
+kf_analog.o: find_analog_v1.o kf_luca.o
+kf_analog.lo: find_analog_v1.lo kf_luca.lo
+kf_analog.obj: find_analog_v1.obj kf_luca.obj
+main_analog.o: find_analog_v1.o kf_luca.o only_analog.o read_point_data.o
+main_analog.lo: find_analog_v1.lo kf_luca.lo only_analog.lo read_point_data.lo
+main_analog.obj: find_analog_v1.obj kf_luca.obj only_analog.obj \
+	read_point_data.obj
+only_analog.o: find_analog_v1.o kf_luca.o
+only_analog.lo: find_analog_v1.lo kf_luca.lo
+only_analog.obj: find_analog_v1.obj kf_luca.obj
+stdevTNcirc.o: std_dev.o
+stdevTNcirc.lo: std_dev.lo
+stdevTNcirc.obj: std_dev.obj

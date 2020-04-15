@@ -1,0 +1,7 @@
+# Module dependencies
+config.o: f90_config.gfortran.o
+config.lo: f90_config.gfortran.lo
+config.obj: f90_config.gfortran.obj
+netcdf_sup.o: netcdf_sup.o
+netcdf_sup.lo: netcdf_sup.lo
+netcdf_sup.obj: netcdf_sup.obj

@@ -1,0 +1,66 @@
+#!/bin/tcsh  -f
+#
+###############################################################################
+echo  ""
+echo  " ----------------------------------------------------------------------"
+echo  " ---------------- NIDS VAD_Profile decoder starts  --------------------"
+echo "$0 $argv[*]"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+set timestamp
+setenv SUBSYSTEM NSSL_MOSAIC_FDDA
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};    
+#set echo
+
+#	Check usage
+
+if ( ${#argv} == 2 ) then
+    set cycle_date = $1
+    set obs_date = $2
+else
+    echo "usage: $0 cycle_date obs_date "
+    echo "where cycle_date and obs_date are CCYYMMDDHH"
+    exit ( 4 )
+endif
+
+if(-d $GEAPSTMP) then
+ if( ! -d $GEAPSTMP/DECODE_NSSL_MOSAIC) then
+  $MustHaveDir $GEAPSTMP/DECODE_NSSL_MOSAIC
+  ln -s $GEAPSTMP/DECODE_NSSL_MOSAIC $RUNDIR/${cycle_date}/DECODE_NSSL_MOSAIC
+ endif
+else
+ $MustHaveDir $RUNDIR/${cycle_date}/DECODE_NSSL_MOSAIC
+endif
+cd ${RUNDIR}/${cycle_date}/DECODE_NSSL_MOSAIC
+
+echo "Now working in  $cwd"
+
+set ccyy = `echo $obs_date | cut -b 1-4`
+set date8 = `echo $obs_date | cut -b 1-8`
+set hh = `echo $obs_date | cut -b 9-10`
+
+  if( -e CIWS_D2.$obs_date) rm CIWS_D2.$obs_date
+  if( -e CIWS_D3.$obs_date) rm CIWS_D3.$obs_date
+  cp ${NSSL_MOSAIC_DATA_DIR}/DECODE_CIWS/${obs_date}_CIWS_DOMAIN2 CIWS_D2.$obs_date
+  cp ${NSSL_MOSAIC_DATA_DIR}/DECODE_CIWS/${obs_date}_CIWS_DOMAIN3 CIWS_D3.$obs_date
+
+  cat CIWS_D2.$obs_date >> ../RADAR_DOMAIN2
+  cat CIWS_D3.$obs_date >> ../RADAR_DOMAIN3
+  cp ../RADAR_DOMAIN2 ../RADAR2_DOMAIN2
+  cp ../RADAR_DOMAIN3 ../RADAR2_DOMAIN3
+
+echo "NSSL_MOSAIC DATA for $obs_date is processed"
+exit 0

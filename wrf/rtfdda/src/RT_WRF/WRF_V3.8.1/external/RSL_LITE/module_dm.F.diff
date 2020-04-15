@@ -1,0 +1,780 @@
+2137a2138
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Replace fddaobs message passing routines with versions for consensed vobs, errf arrays
+2141,2142c2142,2146
+<                                    mp_local_cobmask, errf )
+<       
+---
+>                                    mp_local_cobmask,            &
+>                                    ob_var_type, errf )
+> 
+> !   USE module_fddaobs_utilities, ONLY : U, V, T, Q, Vr, Spt, Spu, Spv, Rk
+>     IMPLICIT NONE
+2146c2150,2152
+< !       
+---
+> !
+> !  ***** IMPORTANT: The PARAMETERS U, V, etc must be defined (see below)
+> !                   exactly as defined in share/module_fddaobs_utilities.F
+2154a2161
+>     INTEGER, INTENT(IN)   :: ob_var_type(niobf)  ! Observation variable type (U,V,T,etc)
+2157c2164,2175
+< #ifndef STUBMPI
+---
+>     INTEGER, PARAMETER :: U = 1        ! varobs & errf index for U wind component
+>     INTEGER, PARAMETER :: V = 2        ! varobs & errf index for V wind component
+>     INTEGER, PARAMETER :: T = 3        ! varobs & errf index for temperature
+>     INTEGER, PARAMETER :: Q = 4        ! varobs & errf index for moisture 
+>     INTEGER, PARAMETER :: Vr = 5       ! varobs & errf index for radial wind (radar)
+>     INTEGER, PARAMETER :: SPt = 2      ! errf index for surface pressure on t-stagger
+>     INTEGER, PARAMETER :: SPu = 3      ! errf index for surface pressure on u-stagger
+>     INTEGER, PARAMETER :: SPv = 4      ! errf index for surface pressure on v-stagger
+>     INTEGER, PARAMETER :: Rk = 5       ! errf index for vertical level of ob (real value)
+> 
+> #ifndef STUBMPI 
+>     INCLUDE 'mpif.h'
+2162c2180
+<     REAL QRK_BUFFER(NIOBF)    ! Buffer for holding Q or RKO
+---
+>     REAL QRK_BUFFER(NIOBF)    ! Buffer for holding Q or Rk
+2164,2165d2181
+<     REAL PBL_BUFFER(NIOBF)    ! Buffer for holding (real) KPBL index
+<     REAL QATOB_BUFFER(NIOBF)  ! Buffer for holding QV at the ob location
+2181a2198,2225
+> ! DO Rk
+>    NLOCAL_DOT = 0
+>    DO N = 1, NSTA
+>        IF ( MP_LOCAL_UOBMASK(N) ) THEN         ! USE U-POINT MASK
+>          NLOCAL_DOT = NLOCAL_DOT + 1
+>          QRK_BUFFER(NLOCAL_DOT) = ERRF(Rk,N)  ! Rk
+>          N_BUFFER(NLOCAL_DOT) = N
+>        ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL_DOT,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+> 
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_DOT, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> 
+>    CALL MPI_ALLGATHERV( QRK_BUFFER, NLOCAL_DOT, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>        ERRF(Rk,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>    ENDDO
+> 
+2185c2229
+<      IF ( MP_LOCAL_UOBMASK(N) ) THEN      ! USE U-POINT MASK
+---
+>      IF ( MP_LOCAL_UOBMASK(N) ) THEN           ! USE U-POINT MASK
+2187,2189d2230
+<        UVT_BUFFER(NLOCAL_DOT) = ERRF(1,N)        ! U WIND COMPONENT
+<        SFP_BUFFER(NLOCAL_DOT) = ERRF(7,N)        ! SURFACE PRESSURE
+<        QRK_BUFFER(NLOCAL_DOT) = ERRF(9,N)        ! RKO
+2191,2192c2232,2235
+<      END IF
+<    END DO
+---
+>        UVT_BUFFER(NLOCAL_DOT) = ERRF(1,N)    ! U WIND COMPONENT
+>        SFP_BUFFER(NLOCAL_DOT) = ERRF(SPu,N)  ! SURFACE PRESSURE
+>      ENDIF
+>    ENDDO
+2196d2238
+<    I = 1
+2201c2243
+<    END DO
+---
+>    ENDDO
+2204a2247
+> 
+2208a2252
+> 
+2210,2211c2254,2258
+<      ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.U ) then
+>        ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+2217,2225c2264,2267
+<      ERRF(7,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+< ! RKO
+<    CALL MPI_ALLGATHERV( QRK_BUFFER, NLOCAL_DOT, MPI_REAL,     &
+<                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+<                         MPI_REAL, MPI_COMM_COMP, IERR)
+<    DO N = 1, NSTA
+<      ERRF(9,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.U) then
+>        ERRF(SPu,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+2230c2272
+<      IF ( MP_LOCAL_VOBMASK(N) ) THEN         ! USE V-POINT MASK
+---
+>      IF ( MP_LOCAL_VOBMASK(N) ) THEN           ! USE U-POINT MASK
+2232,2233d2273
+<        UVT_BUFFER(NLOCAL_DOT) = ERRF(2,N)    ! V WIND COMPONENT
+<        SFP_BUFFER(NLOCAL_DOT) = ERRF(8,N)    ! SURFACE PRESSURE
+2235,2236c2275,2278
+<      END IF
+<    END DO
+---
+>        UVT_BUFFER(NLOCAL_DOT) = ERRF(1,N)    ! V WIND COMPONENT
+>        SFP_BUFFER(NLOCAL_DOT) = ERRF(SPv,N)  ! SURFACE PRESSURE
+>      ENDIF
+>    ENDDO
+2240d2281
+<    I = 1
+2245c2286
+<    END DO
+---
+>    ENDDO
+2252a2294
+> 
+2254,2255c2296,2300
+<      ERRF(2,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.V) then
+>        ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+2261,2262c2306,2309
+<      ERRF(8,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.V) then
+>        ERRF(SPv,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+2267c2314
+<      IF ( MP_LOCAL_COBMASK(N) ) THEN       ! USE MASS-POINT MASK
+---
+>      IF ( MP_LOCAL_COBMASK(N) ) THEN            ! USE MASS-POINT MASK
+2269,2273d2315
+<        UVT_BUFFER(NLOCAL_CRS) = ERRF(3,N)     ! TEMPERATURE
+<        QRK_BUFFER(NLOCAL_CRS) = ERRF(4,N)     ! MOISTURE
+<        PBL_BUFFER(NLOCAL_CRS) = ERRF(5,N)     ! KPBL
+<        SFP_BUFFER(NLOCAL_CRS) = ERRF(6,N)     ! SURFACE PRESSURE
+<        QATOB_BUFFER(NLOCAL_CRS) = ERRF(10,N)     ! Model Mixing ratio itself (NOT ERROR)
+2275,2276c2317,2320
+<      END IF
+<    END DO
+---
+>          UVT_BUFFER(NLOCAL_CRS) = ERRF(1,N)     ! TEMPERATURE
+>          SFP_BUFFER(NLOCAL_CRS) = ERRF(SPt,N)   ! SURFACE PRESSURE
+>      ENDIF
+>    ENDDO
+2279a2324
+> 
+2283c2328
+<    END DO
+---
+>    ENDDO
+2293,2294c2338,2352
+<      ERRF(3,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.T) then
+>        ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> ! SURF PRESS AT MASS POINTS FOR T
+>    CALL MPI_ALLGATHERV( SFP_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.T) then
+>        ERRF(SPt,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+2295a2354,2363
+>    NLOCAL_CRS = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_COBMASK(N) ) THEN       ! USE MASS-POINT MASK
+>        NLOCAL_CRS = NLOCAL_CRS + 1
+>        N_BUFFER(NLOCAL_CRS) = N
+>        QRK_BUFFER(NLOCAL_CRS) = ERRF(1,N)     ! MOISTURE
+>        SFP_BUFFER(NLOCAL_CRS) = ERRF(SPt,N)   ! SURFACE PRESSURE
+>      ENDIF
+>    ENDDO
+> 
+2298a2367
+> 
+2300,2303c2369,2375
+<      ERRF(4,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+< ! KPBL
+<    CALL MPI_ALLGATHERV( PBL_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+---
+>       if (ob_var_type(IFULL_BUFFER(N)).eq.Q) then
+>        ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> ! SURF PRESS AT MASS POINTS FOR Q
+>    CALL MPI_ALLGATHERV( SFP_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+2307,2310c2379,2394
+<      ERRF(5,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+< ! SURF PRESS AT MASS POINTS
+<    CALL MPI_ALLGATHERV( SFP_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.Q) then
+>        ERRF(SPt,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> ! Vr
+>    NLOCAL_CRS = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_COBMASK(N) ) THEN       ! USE MASS-POINT MASK
+>        NLOCAL_CRS = NLOCAL_CRS + 1
+>        N_BUFFER(NLOCAL_CRS) = N
+>        QRK_BUFFER(NLOCAL_CRS) = ERRF(1,N)     ! MOISTURE
+>      ENDIF
+>    ENDDO
+> 
+>    CALL MPI_ALLGATHERV( QRK_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+2314,2315c2398,2401
+<      ERRF(6,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.Vr) then
+>        ERRF(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+2317,2318c2403,2404
+< ! Water vapor mixing ratio at the mass points (NOT THE ERROR)
+<    CALL MPI_ALLGATHERV( QATOB_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+---
+> ! SURF PRESS AT MASS POINTS FOR Vr
+>    CALL MPI_ALLGATHERV( SFP_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+2322,2323c2408,2411
+<      ERRF(10,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+<    END DO
+---
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.Vr) then
+>        ERRF(SPt,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+2327a2416,2668
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_full_kalman_flags( nsta, niobf,             &
+>                                    mp_local_dummask,          &
+>                                    ob_is_kalman )
+> !------------------------------------------------------------------------------
+>      IMPLICIT NONE
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation across processors so that the
+> !           kalman flag for each observation is known to all processors.
+> !           Specifically, make a global version of ob_is_kalman from the
+> !           local processor versions.
+> !
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN)   :: nsta                ! Observation index.
+>     INTEGER, INTENT(IN)   :: niobf               ! Number of observations.
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_DUMMASK(NIOBF)
+>     INTEGER, INTENT(INOUT) :: ob_is_kalman(niobf)
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+> 
+> ! Local declarations
+>     integer i, n, nlocal
+>     INTEGER KFLAGS_BUFFER(NIOBF)  ! Buffer for local ob_is_kalman flags
+>     INTEGER N_BUFFER(NIOBF)
+>     INTEGER FULL_BUFFER(NIOBF)    ! Buffer for global ob_is_kalman flags
+>     INTEGER IFULL_BUFFER(NIOBF)
+>     INTEGER IDISPLACEMENT(1024)   ! HARD CODED MAX NUMBER OF PROCESSORS
+>     INTEGER ICOUNT(1024)          ! HARD CODED MAX NUMBER OF PROCESSORS
+> 
+>     INTEGER :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER :: NPROCS             ! Number of processors
+>     INTEGER :: IERR               ! Error code from MPI routines
+> 
+> ! Get communicator for MPI operations.
+>     CALL WRF_GET_DM_COMMUNICATOR(MPI_COMM_COMP)
+> 
+> ! Get rank of monitor processor and broadcast to others.
+>     CALL MPI_COMM_SIZE( MPI_COMM_COMP, NPROCS, IERR )
+> 
+> ! DO THE U FIELD
+>    NLOCAL = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_DUMMASK(N) ) THEN
+>        NLOCAL = NLOCAL + 1
+>        KFLAGS_BUFFER(NLOCAL) = ob_is_kalman(N)
+>        N_BUFFER(NLOCAL) = N
+>      ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL,1,MPI_INTEGER,     &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+> 
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL, MPI_INTEGER,        &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> ! U
+>    CALL MPI_ALLGATHERV( KFLAGS_BUFFER, NLOCAL, MPI_INTEGER,   &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>      ob_is_kalman(IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>    ENDDO
+> #endif
+>    END SUBROUTINE get_full_kalman_flags
+> 
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_full_kalman_gain_vector(nksta, gdim, kalmax, totkal,     &
+>                                           mp_local_kalmask, gain_at_ob)
+>      IMPLICIT NONE
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation to gather the Kalman gain (kgain) data
+> !           for all observation points over all processors. (Before the
+> !           allgatherv, each processor contains kgain data only for observation
+> !           points inside its domain patch.
+> !
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN)   :: nksta              ! # Kalman-obs stations
+>     INTEGER, INTENT(IN)   :: gdim               ! Number of gain values per ob
+>     INTEGER, INTENT(IN)   :: kalmax             ! Max # of Kalman observations
+>     INTEGER, INTENT(IN)   :: totkal             ! Actual # of Kalman observations
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_KALMASK(kalmax)
+>     REAL, INTENT(INOUT)   :: gain_at_ob(gdim,kalmax)
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+> 
+>     INTEGER :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER :: NPROCS             ! Number of processors
+>     INTEGER :: IERR               ! Error code from MPI routines
+>     integer, parameter :: MAX_MSG_SIZ = 5000000   ! set max mpi msg size to 5M
+>     integer :: nobs_mp            ! # of obs to msg pass in each allgatherv
+>     integer :: kgain_size         ! total # kgain values to be gathered
+>     integer :: n_mpi              ! number of times to call get_partial_kgain_vector
+>     integer :: n                  ! loop counter
+>     integer :: nk_beg             ! Beginning Kalman-obs index
+> 
+> 
+> ! Get communicator for MPI operations.
+>     CALL WRF_GET_DM_COMMUNICATOR(MPI_COMM_COMP)
+> 
+> ! Get rank of monitor processor and broadcast to others.
+>     CALL MPI_COMM_SIZE( MPI_COMM_COMP, NPROCS, IERR )
+> 
+> ! Determine how many iterations of mpi_allgatherv will be required so that the
+> ! message size limit (MAX_MSG_SIZ) is not exceeded.
+>     kgain_size = gdim*totkal
+>     n_mpi = 1 + kgain_size/MAX_MSG_SIZ
+>     write(6,*) 'n_mpi = ',n_mpi
+> 
+>     nobs_mp = 1 + kgain_size/(n_mpi*gdim)
+> 
+> ! Get full kalman gain vector by gathering it in parts.
+>   do n = 1, n_mpi
+>     nk_beg = 1 + (n-1)*nobs_mp
+> 
+>     CALL get_partial_kgain_vector(MPI_COMM_COMP, NPROCS, IERR, gdim,   &
+>                                   kalmax, totkal, nobs_mp, nk_beg,     &
+>                                   MP_LOCAL_KALMASK, gain_at_ob)
+>   enddo
+> #endif
+>    END SUBROUTINE get_full_kalman_gain_vector
+> 
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_partial_kgain_vector(MPI_COMM_COMP, NPROCS, IERR, gdim,  &
+>                                        kalmax, totkal, nobs_mp, nk_beg,    &
+>                                        MP_LOCAL_KALMASK, gain_at_ob)
+> 
+>      IMPLICIT NONE
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation for a specified range of observation
+> !           points, to gather the Kalman gain (kgain) data on all processors.
+> !           (Before the allgatherv, each processor contains Kalman gain data
+> !           only for observation points inside its domain patch.
+> !
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN) :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER, INTENT(IN) :: NPROCS             ! Number of processors
+>     INTEGER, INTENT(IN) :: IERR               ! Error code from MPI routines
+>     INTEGER, INTENT(IN) :: gdim               ! Number of gain values per ob
+>     INTEGER, INTENT(IN) :: kalmax             ! Max # of Kalman observations
+>     INTEGER, INTENT(IN) :: totkal             ! Actual # of Kalman observations
+>     INTEGER, INTENT(IN) :: nobs_mp            ! # of obs to msg pass
+>     INTEGER, INTENT(IN) :: nk_beg             ! Beginning Kalman-obs index 
+>     LOGICAL, INTENT(IN) :: MP_LOCAL_KALMASK(kalmax)
+>     REAL, INTENT(INOUT) :: gain_at_ob(gdim,kalmax)
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+> 
+> ! Local declarations
+>     integer i, n                    ! loop counters
+>     integer nlocal                  ! send count for gather operations
+>     integer nk_end                  ! ending Kalman-obs index
+>     integer nn                      ! temp counter
+>     INTEGER N_BUFFER(nobs_mp)       ! send buffer holding ob indices  
+>     REAL GAIN_BUFFER(gdim,nobs_mp)  ! send buffer holding gains
+>     INTEGER IFULL_BUFFER(nobs_mp)   ! recv buffer holding ob indices
+>     REAL FULL_BUFFER(gdim,nobs_mp)  ! recv buffer holding gains
+>     INTEGER IDISPLACEMENT(1024)   ! HARD CODED MAX NUMBER OF PROCESSORS
+>     INTEGER ICOUNT(1024)          ! HARD CODED NUM KALMAN OBS ON EACH PROC
+> 
+> ! STORE THE LOCAL GAINS INTO THE GAIN BUFFER
+>    NLOCAL = 0
+>    GAIN_BUFFER = 0.
+>    nk_end = min(totkal, nk_beg+nobs_mp-1)
+> 
+>    DO N = nk_beg, nk_end
+>      IF ( MP_LOCAL_KALMASK(N) ) THEN      ! USE KALMAN OBS MASK
+>        NLOCAL = NLOCAL + 1
+>        GAIN_BUFFER(:,NLOCAL) = gain_at_ob(:,N)    ! KALMAN GAIN
+>        N_BUFFER(NLOCAL) = N
+>      ENDIF
+>    ENDDO
+> 
+> ! COLLECT NLOCAL FOR EACH PROCESSOR INTO THE GLOBAL ICOUNT BUFFER
+>    CALL MPI_ALLGATHER(NLOCAL,1,MPI_INTEGER,     &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+> 
+> ! GATHER LOCAL OB NUMBERS IN N_BUFFER INTO THE GLOBAL IFULL_BUFFER
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+> 
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL, MPI_INTEGER,        &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> 
+> ! GATHER LOCAL VALUES IN GAIN_BUFFER INTO THE GLOBAL FULL_BUFFER
+>    NLOCAL = gdim*NLOCAL
+>    DO I = 1, NPROCS
+>      ICOUNT(I) = gdim*ICOUNT(I)
+>    ENDDO
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+> 
+>    CALL MPI_ALLGATHERV( GAIN_BUFFER, NLOCAL, MPI_REAL,        &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+> 
+>    DO N = 1, nk_end-nk_beg+1
+>      gain_at_ob(:,IFULL_BUFFER(N)) = FULL_BUFFER(:,N)
+>    ENDDO
+> 
+> #endif
+>    END SUBROUTINE get_partial_kgain_vector
+> 
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_full_obs_qc( nsta, vdim, niobf,               &
+>                                    mp_local_uobmask,            &
+>                                    mp_local_vobmask,            &
+>                                    mp_local_cobmask,            &
+>                                    ob_var_type, varqc)
+> 
+>     IMPLICIT NONE
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation across processors to get the
+> !           errors at each observation point on all processors. 
+> !
+> !  ***** IMPORTANT: The PARAMETERS U, V, etc must be defined (see below)
+> !                   exactly as defined in share/module_fddaobs_utilities.F
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN)   :: nsta                ! Observation index.
+>     INTEGER, INTENT(IN)   :: vdim                ! Number of fields.
+>     INTEGER, INTENT(IN)   :: niobf               ! Number of observations.
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_UOBMASK(NIOBF)
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_VOBMASK(NIOBF)
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_COBMASK(NIOBF)
+>     INTEGER, INTENT(IN)   :: ob_var_type(niobf)  ! Observation variable type (U,V,T,etc)
+>     REAL, INTENT(INOUT)   :: varqc(vdim, niobf)
+> 
+> !
+>     INTEGER, PARAMETER :: U = 1        ! index for U wind component
+>     INTEGER, PARAMETER :: V = 2        ! index for V wind component
+>     INTEGER, PARAMETER :: T = 3        ! index for temperature
+>     INTEGER, PARAMETER :: Q = 4        ! index for moisture 
+>     INTEGER, PARAMETER :: Vr = 5       ! index for radial wind (radar)
+>     INTEGER, PARAMETER :: Rf = 6       ! index for reflectivity (radar)
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+2328a2670,2919
+> ! Local declarations
+>     integer i, n, nlocal_dot, nlocal_crs
+>     REAL UVT_BUFFER(NIOBF)    ! Buffer for holding U, V, or T
+>     REAL QRK_BUFFER(NIOBF)    ! Buffer for holding Q or Rk
+>     INTEGER N_BUFFER(NIOBF)
+>     REAL FULL_BUFFER(NIOBF)
+>     INTEGER IFULL_BUFFER(NIOBF)
+>     INTEGER IDISPLACEMENT(1024)   ! HARD CODED MAX NUMBER OF PROCESSORS
+>     INTEGER ICOUNT(1024)          ! HARD CODED MAX NUMBER OF PROCESSORS
+> 
+>     INTEGER :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER :: NPROCS             ! Number of processors
+>     INTEGER :: IERR               ! Error code from MPI routines
+> 
+> ! Get communicator for MPI operations.
+>     CALL WRF_GET_DM_COMMUNICATOR(MPI_COMM_COMP)
+> 
+> ! Get rank of monitor processor and broadcast to others.
+>     CALL MPI_COMM_SIZE( MPI_COMM_COMP, NPROCS, IERR )
+> 
+> ! DO THE U FIELD
+>    NLOCAL_DOT = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_UOBMASK(N) ) THEN          ! USE U-POINT MASK
+>        NLOCAL_DOT = NLOCAL_DOT + 1
+>        N_BUFFER(NLOCAL_DOT) = N
+>        UVT_BUFFER(NLOCAL_DOT) = varqc(1,N)    ! U WIND COMPONENT
+>      ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL_DOT,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+> 
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_DOT, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> ! U
+>    CALL MPI_ALLGATHERV( UVT_BUFFER, NLOCAL_DOT, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.U) then
+>        varqc(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> ! DO THE V FIELD
+>    NLOCAL_DOT = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_VOBMASK(N) ) THEN          ! USE V-POINT MASK
+>        NLOCAL_DOT = NLOCAL_DOT + 1
+>        N_BUFFER(NLOCAL_DOT) = N
+>        UVT_BUFFER(NLOCAL_DOT) = varqc(1,N)    ! V WIND COMPONENT
+>      ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL_DOT,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+> 
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_DOT, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> ! V
+>    CALL MPI_ALLGATHERV( UVT_BUFFER, NLOCAL_DOT, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.V) then
+>        varqc(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> ! DO THE CROSS FIELDS, T AND Q, and Vr
+>    NLOCAL_CRS = 0
+>    DO N = 1, NSTA
+>      IF ( MP_LOCAL_COBMASK(N) ) THEN            ! USE MASS-POINT MASK
+>        NLOCAL_CRS = NLOCAL_CRS + 1
+>        N_BUFFER(NLOCAL_CRS) = N
+>        UVT_BUFFER(NLOCAL_CRS) = varqc(1,N)      ! TEMPERATURE
+>      ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL_CRS,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>      IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_CRS, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> ! T,Q,Vr
+>    CALL MPI_ALLGATHERV( UVT_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+> 
+>    DO N = 1, NSTA
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.T) then
+>        varqc(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.Q) then
+>        varqc(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>      if (ob_var_type(IFULL_BUFFER(N)).eq.Vr) then
+>        varqc(1,IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>      endif
+>    ENDDO
+> 
+> #endif
+>    END SUBROUTINE get_full_obs_qc
+> 
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_full_gainname( nsta, niobf,mp_local_cobmask,filesave)
+> 
+>   IMPLICIT NONE
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation across processors to get the
+> !           errors at each observation point on all processors. 
+> !       
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN)   :: nsta                ! Observation index.
+>     INTEGER, INTENT(IN)   :: niobf               ! Number of observations.
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_COBMASK(NIOBF)
+>     INTEGER,dimension(niobf), INTENT(INOUT) :: filesave
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+> 
+> ! Local declarations
+>     integer i, n
+>     INTEGER,dimension(niobf):: QBUFFER, FULL_BUFFER
+>     INTEGER N_BUFFER(NIOBF)
+>     INTEGER IFULL_BUFFER(NIOBF)
+>     INTEGER IDISPLACEMENT(1024)   ! HARD CODED MAX NUMBER OF PROCESSORS
+>     INTEGER ICOUNT(1024)          ! HARD CODED MAX NUMBER OF PROCESSORS
+> 
+>     INTEGER :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER :: NPROCS             ! Number of processors
+>     INTEGER :: IERR               ! Error code from MPI routines
+>     INTEGER :: NLOCAL_CRS
+> ! Get communicator for MPI operations.
+>     CALL WRF_GET_DM_COMMUNICATOR(MPI_COMM_COMP)
+> 
+> ! Get rank of monitor processor and broadcast to others.
+>     CALL MPI_COMM_SIZE( MPI_COMM_COMP, NPROCS, IERR )
+> 
+> ! DO THE CROSS FIELDS, T AND Q
+>    NLOCAL_CRS = 0
+>    DO N = 1, NSTA
+>       IF ( MP_LOCAL_COBMASK(N) ) THEN           ! USE MASS-POINT MASK
+>        NLOCAL_CRS = NLOCAL_CRS + 1
+>        QBUFFER(NLOCAL_CRS) = filesave(N)        ! local file name
+>        N_BUFFER(NLOCAL_CRS) = N
+>       ENDIF
+>    ENDDO
+> 
+>    CALL MPI_ALLGATHER(NLOCAL_CRS,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>       IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_CRS, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+> 
+>    CALL MPI_ALLGATHERV( QBUFFER, NLOCAL_CRS, MPI_INTEGER,   &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+>    DO N = 1, NSTA
+>       filesave(IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>    ENDDO
+> #endif
+>    END SUBROUTINE get_full_gainname
+> 
+> !------------------------------------------------------------------------------
+>    SUBROUTINE get_full_t_qc( nsta,niobf, mp_local_cobmask, errf )
+> 
+> !------------------------------------------------------------------------------
+> !  PURPOSE: Do MPI allgatherv operation across processors to get the
+> !           errors at each observation point on all processors. 
+> !       
+> !------------------------------------------------------------------------------
+> 
+>     INTEGER, INTENT(IN)   :: nsta                ! Observation index.
+>     INTEGER, INTENT(IN)   :: niobf               ! Number of observations.
+>     LOGICAL, INTENT(IN)   :: MP_LOCAL_COBMASK(NIOBF)
+>     REAL, INTENT(INOUT)   :: errf(niobf)
+> 
+> #ifndef STUBMPI
+>     INCLUDE 'mpif.h'
+> 
+> ! Local declarations
+>     integer i, n, nlocal_crs
+>     REAL    UVT_BUFFER(NIOBF)        ! Buffer for holding T
+>     INTEGER N_BUFFER(NIOBF)
+>     REAL    FULL_BUFFER(NIOBF)
+>     INTEGER IFULL_BUFFER(NIOBF)
+>     INTEGER IDISPLACEMENT(1024)   ! HARD CODED MAX NUMBER OF PROCESSORS
+>     INTEGER ICOUNT(1024)          ! HARD CODED MAX NUMBER OF PROCESSORS
+> 
+>     INTEGER :: MPI_COMM_COMP      ! MPI group communicator
+>     INTEGER :: NPROCS             ! Number of processors
+>     INTEGER :: IERR               ! Error code from MPI routines
+> 
+> ! Get communicator for MPI operations.
+>     CALL WRF_GET_DM_COMMUNICATOR(MPI_COMM_COMP)
+> 
+> ! Get rank of monitor processor and broadcast to others.
+>     CALL MPI_COMM_SIZE( MPI_COMM_COMP, NPROCS, IERR )
+> 
+> ! DO THE CROSS FIELDS, T AND Q
+>    NLOCAL_CRS = 0
+>    DO N = 1, NSTA
+>       IF ( MP_LOCAL_COBMASK(N) ) THEN       ! USE MASS-POINT MASK
+>        NLOCAL_CRS = NLOCAL_CRS + 1
+>        UVT_BUFFER(NLOCAL_CRS) = ERRF(N)     ! TEMPERATURE
+>        N_BUFFER(NLOCAL_CRS) = N
+>       ENDIF
+>    ENDDO
+>    CALL MPI_ALLGATHER(NLOCAL_CRS,1,MPI_INTEGER, &
+>                       ICOUNT,1,MPI_INTEGER,     &
+>                       MPI_COMM_COMP,IERR)
+>    IDISPLACEMENT(1) = 0
+>    DO I = 2, NPROCS
+>       IDISPLACEMENT(I) = IDISPLACEMENT(I-1) + ICOUNT(I-1)
+>    ENDDO
+>    CALL MPI_ALLGATHERV( N_BUFFER, NLOCAL_CRS, MPI_INTEGER,    &
+>                         IFULL_BUFFER, ICOUNT, IDISPLACEMENT,  &
+>                         MPI_INTEGER, MPI_COMM_COMP, IERR)
+>    CALL MPI_ALLGATHERV( UVT_BUFFER, NLOCAL_CRS, MPI_REAL,     &
+>                         FULL_BUFFER, ICOUNT, IDISPLACEMENT,   &
+>                         MPI_REAL, MPI_COMM_COMP, IERR)
+> 
+>    DO N = 1, NSTA
+>       ERRF(IFULL_BUFFER(N)) = FULL_BUFFER(N)
+>    ENDDO
+> 
+> #endif
+>    END SUBROUTINE get_full_t_qc
+2330a2922
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Replace fddaobs message passing routines with versions for consensed vobs, errf arrays

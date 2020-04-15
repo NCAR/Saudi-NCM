@@ -1,0 +1,159 @@
+#!/bin/csh -f
+
+###############################################################################
+echo  " ----------------------------------------------------------------------"
+echo  " ---------------- Little_r reanalysis for BC and IC starts ------------"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+# set echo
+set timestamp
+setenv SUBSYSTEM RAP
+setenv RM "rm -rf"
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};    
+source ${CFILE}sizes.mm5sys.${MM5HOST}
+
+if ( ${#argv} != 5 ) then
+	echo "ERROR (usage): $0 eta_date start_date end_date cycle_date"
+	echo "where eta_date is initial time of the ETA forecast, and"
+	echo "start_date is the initial time of the MM5 forecast"
+	echo  $end_date is the final time of the MM5 forecast"
+	echo "all are in CCYYMMDDHH) "
+	exit ( 1 )
+endif
+
+set eta_date   = $1
+set start_date = $2
+set end_date   = $3
+set cycle_date   = $4
+set cold_start   = $5
+
+#	Get to the right directory
+
+if(-d $GEAPSTMP) then
+$MustHaveDir $GEAPSTMP/RAP
+ln -s $GEAPSTMP/RAP $RUNDIR/${cycle_date}/RAP
+else
+$MustHaveDir $RUNDIR/$cycle_date/RAP
+endif
+
+cd $RUNDIR/$cycle_date/RAP
+echo "Now working in  $cwd"
+
+
+#	Is this already finished
+
+if ( -e $RUNDIR/$cycle_date/${cycle_date}_ANALYSIS.${MM5HOST} ) then
+	right_size.csh $RUNDIR/$cycle_date/${cycle_date}_ANALYSIS.${MM5HOST} $RAPOUTSIZE
+	set OK = $status
+	if ( $OK == 0 ) then
+	  echo "INFO: RAP has already run"
+	  exit ( 0 ) 
+	else
+	  echo "INFO: previous RAP run has wrong size data
+	endif
+endif
+
+#	Bring stuff over that we need
+
+if ( ! -e ${RAP_TEMPLATE} ) then
+ echo "${SUBSYSTEM} -- Missing Template ${RAP_TEMPLATE} -> exiting"
+ exit (3)
+endif
+cp ${RAP_TEMPLATE} namelist.input
+
+#	Do we have the obs files?
+
+if ( -e all.obs) rm all.obs
+cat ../DECODE_BLP_PROF/PROF_* ../DECODE_NPN_PROF/PROF_* ../DECODE_CLASS/CLASS*all ../DECODE_SAMS/*SAMS.allrange ../DECODE_PROF/PROF_QC* ../DECODE_GTS/*_GTS_data.${MM5HOST} ../RD_RAWS/*_RAWS_data.${MM5HOST} ../RD_OKMESO/*_OKMESO_data.${MM5HOST} >! all.obs
+
+## yliu -- any special obs in all.obs format
+cat /data/inputspecial/* >> all.obs
+
+$CSH_ARCHIVE/Forecast/RT_all.obs_trim.domain.USA
+mv all.obs all.obs.glob
+
+# do reanalysis at cold-start, but do nothing on normal restart 
+if ($cold_start == 5 || $cold_start == 17 || $cold_start == 99) mv all.obs.trim all.obs
+
+rm all.obs  # do not use any obs, compare to WRF SI coldstart
+touch all.obs
+
+ln -s ../${cycle_date}_REGRIDv3.${MM5HOST} REGRID
+set ok = $status
+if ( $ok != 0 ) then
+  cp ../${cycle_date}_REGRIDv3.${MM5HOST} REGRID
+endif
+
+#	Modify namelist
+
+set rstart_y = `echo $start_date | cut -b 1-4`
+set rstart_m = `echo $start_date | cut -b 5-6`
+set rstart_d = `echo $start_date | cut -b 7-8`
+set rstart_h = `echo $start_date | cut -b 9-10`
+set rstart_date = ${rstart_y}-${rstart_m}-${rstart_d}_${rstart_h}
+
+set rend_y = `echo  $end_date | cut -b 1-4`
+set rend_m = `echo  $end_date | cut -b 5-6`
+set rend_d = `echo  $end_date | cut -b 7-8`
+set rend_h = `echo  $end_date | cut -b 9-10`
+set rend_date = ${rend_y}-${rend_m}-${rend_d}_${rend_h}
+
+set time_int = 3600
+if ($cold_start == 1 ) set time_int = 10800
+ed namelist.input << EOF > /dev/null
+g/starting_date/s//$rstart_date/
+g/ending_date/s//$rend_date/
+g/time_int/s//$time_int/
+w
+q
+EOF
+
+if ( -e all.obs ) then
+  echo  "${SUBSYSTEM} -- all.obs being used for ANALYSIS"
+else
+  echo  "${SUBSYSTEM} -- all.obs IS GONE"
+  exit ( 2 )
+endif
+
+#	Run the program
+
+( time $RAP_EXE ) >! rap_print.out
+
+#	Is everything the right size
+
+pwd #KWM
+ls -l #KWM
+right_size.csh LITTLE_R_DOMAIN1 $RAPOUTSIZE ; set OK = $status #KWM
+if ( $OK != 0 ) then
+	echo  "alysis file from RAP is wrong size"
+	echo  "deleting analysis file"
+	exit ( 0 ) 
+endif
+
+#	Move the important files around
+
+mv rap_print.out $RUNDIR/$cycle_date/${cycle_date}_rap_print.out
+mv LITTLE_R_DOMAIN1 ../${cycle_date}_ANALYSIS.${MM5HOST} 
+
+if ( -e sum_out1 ) then
+cp sum_out1 $RUNDIR/$cycle_date/${cycle_date}_sum_out
+endif
+
+#	Clean up
+
+#rm input output
+
+

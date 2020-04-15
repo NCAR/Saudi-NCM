@@ -1,0 +1,4 @@
+/lustre/project/k1206/opt/bin/scrub 7 /lustre/project/k1206/datainput/ecmwf
+/lustre/project/k1206/opt/bin/scrub 7 /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM
+/lustre/project/k1206/opt/bin/scrub 4 /lustre/project/k1206/x_fisherh/distrib/GWPME
+/lustre/project/k1206/opt/bin/scrub -v 4 /lustre/project/k1206/x_fisherh/datainput

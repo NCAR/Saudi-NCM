@@ -1,0 +1,86 @@
+38a39
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+39a41,42
+>                       RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,                     &
+>                       RQCNDGDTEN,RQINDGDTEN,                                &
+40a44
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+103a108
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+104a110,114
+>                                                      RQRNDGDTEN, &
+>                                                      RQSNDGDTEN, &
+>                                                      RQGNDGDTEN, &
+>                                                      RQCNDGDTEN, &
+>                                                      RQINDGDTEN, &
+105a116
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+161a173
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+162a175,176
+>                       RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,        &
+>                       RQCNDGDTEN,RQINDGDTEN,                   &
+163a178
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+1605a1621
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+1607c1623,1626
+<                       ids, ide, jds, jde, kds, kde,              &
+---
+>                       RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,        &
+>                       RQCNDGDTEN,RQINDGDTEN,                   &
+>                       ids, ide, jds, jde, kds, kde,            &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+1626a1646
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+1628c1648,1653
+<                                                        RQVNDGDTEN
+---
+>                                                        RQVNDGDTEN, &
+>                                                        RQRNDGDTEN, &
+>                                                        RQSNDGDTEN, &
+>                                                        RQGNDGDTEN, &
+>                                                        RQCNDGDTEN, &
+>                                                        RQINDGDTEN
+1630a1656
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+1677a1704,1740
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods
+> ! meixu: for additional grid nudging variables
+>         if (P_QR .ge. PARAM_FIRST_SCALAR)                        &
+>            CALL add_a2a(moist_tendf(ims,kms,jms,P_QR),RQRNDGDTEN,  &
+>                 config_flags,                                    &
+>                 ids,ide, jds, jde, kds, kde,                     &
+>                 ims, ime, jms, jme, kms, kme,                    &
+>                 its, ite, jts, jte, kts, kte                     )
+> 
+>         if (P_QS .ge. PARAM_FIRST_SCALAR)                        &
+>            CALL add_a2a(moist_tendf(ims,kms,jms,P_QS),RQSNDGDTEN,  &
+>                 config_flags,                                    &
+>                 ids,ide, jds, jde, kds, kde,                     &
+>                 ims, ime, jms, jme, kms, kme,                    &
+>                 its, ite, jts, jte, kts, kte                     )
+> 
+>         if (P_QG .ge. PARAM_FIRST_SCALAR)                        &
+>            CALL add_a2a(moist_tendf(ims,kms,jms,P_QG),RQGNDGDTEN,  &
+>                 config_flags,                                    &
+>                 ids,ide, jds, jde, kds, kde,                     &
+>                 ims, ime, jms, jme, kms, kme,                    &
+>                 its, ite, jts, jte, kts, kte                     )
+> 
+>         if (P_QC .ge. PARAM_FIRST_SCALAR)                        &
+>            CALL add_a2a(moist_tendf(ims,kms,jms,P_QC),RQCNDGDTEN,  &
+>                 config_flags,                                    &
+>                 ids,ide, jds, jde, kds, kde,                     &
+>                 ims, ime, jms, jme, kms, kme,                    &
+>                 its, ite, jts, jte, kts, kte                     )
+> 
+>         if (P_QI .ge. PARAM_FIRST_SCALAR)                        &
+>            CALL add_a2a(moist_tendf(ims,kms,jms,P_QI),RQINDGDTEN,  &
+>                 config_flags,                                    &
+>                 ids,ide, jds, jde, kds, kde,                     &
+>                 ims, ime, jms, jme, kms, kme,                    &
+>                 its, ite, jts, jte, kts, kte                     )
+> 
+1680a1744
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods

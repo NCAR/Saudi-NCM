@@ -1,0 +1,72 @@
+#!/bin/tcsh -f
+#
+###############################################################################
+echo
+echo  " ----------------------------------------------------------------------"
+echo  " ---------------- SAMS decoder starts  --------------------------------"
+echo "$0 $argv[*]"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+set timestamp
+setenv SUBSYSTEM SAMS_FDDA
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};    
+#set echo
+
+#	Check usage
+
+if ( ${#argv} == 2 ) then
+    set cycle_date = $1
+    set obs_date = $2
+else
+    echo "usage: $0 cycle_date obs_date "
+    echo "where cycle_date and obs_date is CCYYMMDDHH"
+    exit ( 4 )
+endif
+
+$MustHaveDir $RUNDIR/${cycle_date}/DECODE_SAMS
+cd ${RUNDIR}/${cycle_date}/DECODE_SAMS
+echo "Now working in  $cwd"
+
+rm -rf sams*
+
+set sams_date = `echo "${obs_date}" | cut -c 3-8`
+echo "INFO: DATES=$sams_date"
+
+cp ${SAMS_DATA_DIR}/sams*${sams_date}* .
+
+rm -rf input output
+set f=`ls -1 sams*${sams_date}* | line`
+${EXECUTABLE_ARCHIVE}/samsproc -F $f
+mv $f ${f}.old
+mv fred $f
+echo "$f" > input
+chmod 777 *
+set fsn="../netcdf.stations"
+echo " &OPARAM" > $fsn
+echo " strname=" >> $fsn
+ncdump -v platform $f | grep \"  | sed 's/;//' >> $fsn
+echo " &END" >> $fsn
+${EXECUTABLE_ARCHIVE}/crfil_rt < input  > /dev/null
+
+set lss=`ls *_SAMS`
+
+@ n = 0
+foreach i ( $lss )
+@  n++
+end
+echo "${SUBSYSTEM} -- CREATED -> $n FILES OF SAMS DATA"
+
+exit 0

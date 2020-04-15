@@ -1,0 +1,259 @@
+#!/bin/csh 
+
+###############################################################################
+echo  " ----------------------------------------------------------------------"
+echo  " ---------------- MM5 FDDA and FCST start -----------------------------"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+# set echo
+set timestamp
+setenv SUBSYSTEM MM5
+setenv RM "rm -rf"
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+
+source ${CFILE}user.mm5sys.${MM5HOST};    
+source ${CFILE}sizes.mm5sys.${MM5HOST}
+
+limit stacksize unlimited # for linux
+
+if ( ${#argv} != 6) then
+	echo "usage: mm5.csh this_cycle fcst_id timemax resttime cpun d4start"
+	echo "where start_date and this_cycle is ccyymmddhh"
+	echo "fcst_id: = 1  Cold start; = 2 Restart for last cycle; = 3 restart in this cycle"
+	echo "timemax and resttime are fcst and restart time in minutes"
+	echo "cpun is the number of parallel processors"
+	echo "d4start is the time to begin domain 4 (minutes)"
+	exit ( 1 )
+endif
+
+set this_cycle = $1
+set fcst_id    = $2
+set timemax    = $3
+set resttime   = $4
+set cpun       = $5
+set d4start    = $6
+
+#	Get to the right directory
+
+if ( ($fcst_id == 1) || ($fcst_id == 2)) then   # Final FDDA cycle
+set dir_work = $RUNDIR/$this_cycle/MM5_F
+else
+set dir_work = $RUNDIR/$this_cycle/MM5_P
+endif
+MustHaveDir $dir_work
+cd $dir_work
+
+#	Is this already finished
+
+set sdir = $RUNDIR/$this_cycle
+if ( ( -e $sdir/${this_cycle}_MMOUTPUT_DOMAIN1.${MM5HOST} ) ) then
+	if      ( $fcst_id == 1 ) then
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN1.${MM5HOST}_F $MMOUTD1SIZE_240                      set OK1 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN2.${MM5HOST}_F $MMOUTD2SIZE_240
+                set OK2 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN3.${MM5HOST}_F $MMOUTD3SIZE_240
+                set OK3 = $status
+		if ( ( $OK1 == 0 ) && ( $OK2 == 0 ) && ( $OK3 == 0 ) ) then
+			echo "MM5 files with Final-FDDA already exist"
+			exit ( 0 ) 
+		endif
+	else if  ( $fcst_id == 2 ) then
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN1.${MM5HOST}_F $MMOUTD1SIZE_180
+                set OK1 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN2.${MM5HOST}_F $MMOUTD2SIZE_180
+                set OK2 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN3.${MM5HOST}_F $MMOUTD3SIZE_180
+                set OK3 = $status
+		if ( ( $OK1 == 0 ) && ( $OK2 == 0 ) && ( $OK3 == 0 ) ) then
+			echo "MM5 files with Final-FDDA already exist"
+			exit ( 0 ) 
+		endif
+	else if ( $fcst_id == 3 ) then
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN1.${MM5HOST}_P+FCST $MMOUTD1SIZE_480
+                set OK1 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN2.${MM5HOST}_P+FCST $MMOUTD2SIZE_480
+                set OK2 = $status
+		right_size.csh $sdir/${this_cycle}_MMOUTPUT_DOMAIN3.${MM5HOST}_P+FCST $MMOUTD3SIZE_480
+                set OK3 = $status
+		if ( ( $OK1 == 0 ) && ( $OK2 == 0 ) && ( $OK3 == 0 ) ) then
+			echo "MM5 files with Primary-FDDA and FCST already exist"
+			exit ( 0 ) 
+		endif
+	endif
+endif
+
+#	Bring stuff over that we need
+
+if ( ! -e ${MM5_TEMPLATE}.V.${MM5HOST} ) then
+ echo "${SUBSYSTEM} -- Missing Template ${MM5_TEMPLATE}.V.${MM5HOST} -> exiting"
+ exit (3)
+endif
+cp ${MM5_TEMPLATE}.V.${MM5HOST} mmlif
+
+if ( ( -l fort.8 ) || ( -e fort.8 ) ) ${RM} fort.8
+ln -s $MM5_ehtran fort.8
+set ok = $status
+if ( $ok != 0 ) then
+	cp $MM5_ehtran fort.8
+endif
+
+
+######## testing ##########################################
+#cp /home/fddasys/TERRAIN* .
+ foreach d ( 1 2 3 4)
+  ln -s -f ${TERRAIN_DIR}/Domain${d}_New_LU.V.${MM5HOST} TERRAIN_DOMAIN${d}
+ end
+
+# Input files
+
+ if ( ( -l BDYOUT_DOMAIN1 ) || ( -e BDYOUT_DOMAIN1) ) ${RM} BDYOUT_DOMAIN1
+ ln -s ../${this_cycle}_BDYOUT.${MM5HOST}          BDYOUT_DOMAIN1
+ set ok = $status
+ if ( $ok != 0 ) then
+	cp ../${this_cycle}_BDYOUT          BDYOUT_DOMAIN1
+ endif
+
+foreach i  (1 2 3 4)
+ if ( ( -l MMINPUT_DOMAIN$i ) || ( -e MMINPUT_DOMAIN$i ) ) ${RM} MMINPUT_DOMAIN$i
+ if ( ( -l LOWBDY_DOMAIN$i  ) || ( -e LOWBDY_DOMAIN$i  ) ) ${RM} LOWBDY_DOMAIN$i
+ ln -s ../${this_cycle}_MMINPUT_DOMAIN${i}.${MM5HOST} MMINPUT_DOMAIN$i
+ set ok = $status
+ if ( $ok != 0 ) then
+        cp ../${this_cycle}_MMINPUT_DOMAIN${i}.${MM5HOST} MMINPUT_DOMAIN${i}
+ endif
+ ln -s ../${this_cycle}_LOWBDY_DOMAIN${i}.${MM5HOST} LOWBDY_DOMAIN${i}
+ set ok = $status
+ if ( $ok != 0 ) then
+        cp ../${this_cycle}_LOWBDY_DOMAIN${i}.${MM5HOST} LOWBDY_DOMAIN${i}
+ endif
+end
+
+ # OBS nudging files
+foreach i ( 1 2 3 4)
+  set ii = 0
+#  foreach f  (`/bin/ls  ../*_s ../*cd ../*wv`)
+   foreach f  (`/bin/ls  ../*_s`)
+  @ ii ++
+  if($ii < 10) then
+   ln -f -s $f  MM5OBS_DOMAIN${i}0${ii}
+  else
+   ln -f -s $f  MM5OBS_DOMAIN${i}${ii}
+  endif
+  end
+end
+
+# Restart file
+foreach i  (1 2 3 4)
+ if ( ( -l RESTART_DOMAIN${i}) || ( -e RESTART_DOMAIN${i} ) ) ${RM} RESTART_DOMAIN${i}
+ if ($fcst_id == 2) then
+  ln -s ../${this_cycle}.RESTART_DOMAIN${i} RESTART_DOMAIN${i}
+  set ok = $status
+  if ( $ok != 0 ) then
+        cp ../${this_cycle}.RESTART_DOMAIN${i} RESTART_DOMAIN${i}
+  endif
+ else if ( $fcst_id == 3 ) then
+  ln -s ../${this_cycle}.SAVE_DOMAIN${i}_F RESTART_DOMAIN${i}
+  set ok = $status
+  if ( $ok != 0 ) then
+        cp ../${this_cycle}.SAVE_DOMAIN${i}_F RESTART_DOMAIN${i}
+  endif
+ endif
+end
+
+if ( $fcst_id == 1 ) then          # cold start for Final FDDA
+ set ifrest = FALSE
+ set savefrq  = 240
+else if ( $fcst_id == 2 ) then      # Normal Final FDDA
+ set ifrest = TRUE
+ set savefrq  = $timemax
+else if ( $fcst_id == 3 ) then      # Primary FDDA + FCST
+ set ifrest = TRUE
+ set savefrq  = 14400                # No savefile for restart is needed
+endif
+
+##
+## V3 wants ioverw=2 for all cases of d4start...
+##
+##if ( $d4start == 0 ) then
+	set ioverw = 2
+##else
+##	set ioverw = 0
+##endif
+
+#	Modify namelist
+
+ed mmlif << EOF > /dev/null
+g/D4Start/s//$d4start/
+g/IoverW/s//$ioverw/
+g/TimeMax/s//$timemax/
+g/Ifrest/s//$ifrest/
+g/Resttime/s//$resttime/
+g/Savefrq/s//$savefrq/
+w
+q
+EOF
+
+#	Run the program
+
+cp ${CONSTANT_FILES}/MM5.LANDUSE.TBL LANDUSE.TBL
+# cp ${CONSTANT_FILES}/V3.3MM5.LANDUSE.TBL LANDUSE.TBL
+
+#echo "${SUBSYSTEM} -- Starting MM5 on $cpun processors"
+setenv MP_SET_NUMTHREADS $cpun
+setenv OMP_SET_NUMTHREADS $cpun
+setenv _DSM_PLACEMENT ROUND_ROBIN
+setenv _DSM_WAIT SPIN
+setenv OMP_DYNAMIC FALSE
+setenv MPC_GANG OFF
+
+if ( ! -e $MM5_EXE && ! -e $MM5_MPICH && ! -e $MM5_MPP ) then
+   echo "${SUBSYSTEM} -- No MM5 executable - $MM5_EXE "
+endif
+#( time $MM5_EXE ) >! mm5_print.out
+ ln -s -f $RUNDIR/restart_files restrts
+# /opt/scali/bin/mpimon -stdin 0 -verbose $MM5_EXE -- n2 2 n3 2 n4 2 n5 2 n6 2 n7 2 n8 2 >>& mm5_print.out
+#rsh n2 "cd $dir_work; rm rsl* show*; /home/bourgeoi/mpich-1.2.0/bin/mpirun -np 14 -machinefile ~/hosts $MM5_MPICH >>& mm5_print.out"
+rm rsl* show*;
+cp $MM5_MPICH$cpun $MM5_MPICH
+mpirun -np $cpun $MM5_MPICH >>& mm5_print.out
+
+#	Move the important files around
+
+## /home/mm5sys/bin/snuff ingest_mm5.pl
+##sleep 5 
+
+foreach d ( 1 2 3 4)
+
+  if ( ($fcst_id == 1) || ($fcst_id == 2) ) then
+  set fn=${sdir}/${this_cycle}_MMOUTPUT_DOMAIN${d}.${MM5HOST}_F
+  set fnsave=${sdir}/${this_cycle}.SAVE_DOMAIN${d}_F
+  set fnpr=$sdir/${this_cycle}_mm5_f_print.out
+  else if ( $fcst_id == 3 ) then
+  set fn=${sdir}/${this_cycle}_MMOUTPUT_DOMAIN${d}.${MM5HOST}_P+FCST
+  set fnsave=${sdir}/${this_cycle}.SAVE_DOMAIN${d}_P+FCST
+  set fnpr=$sdir/${this_cycle}_mm5_p+fcst_print.out
+  endif
+
+  cat MMOUT_DOMAIN${d}* > $fn
+  if ( -e SAVE_DOMAIN${d} ) then
+  mv SAVE_DOMAIN${d} $fnsave 
+  endif
+
+end
+  cp mm5_print.out $fnpr
+ 
+exit ( 0 ) 
+
+#	Clean up

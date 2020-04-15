@@ -1,0 +1,38 @@
+33,1           number of tiles and factor
+38., -78.,   start lat and lon of match domain
+300, 500, 33   total size of the matched tiles(nxrad,nyrad,nzrad) 
+20., -130., 0.01000286, 0.01000143  start lat and lon of Mosaic
+00.50   500 var209_9_0_500mabovemeansealevel
+00.75   750 var209_9_0_750mabovemeansealevel
+01.00  1000 var209_9_0_1000mabovemeansealevel
+01.25  1250 var209_9_0_1250mabovemeansealevel
+01.50  1500 var209_9_0_1500mabovemeansealevel
+01.75  1750 var209_9_0_1750mabovemeansealevel
+02.00  2000 var209_9_0_2000mabovemeansealevel
+02.25  2250 var209_9_0_2250mabovemeansealevel
+02.50  2500 var209_9_0_2500mabovemeansealevel
+02.75  2750 var209_9_0_2750mabovemeansealevel
+03.00  3000 var209_9_0_3000mabovemeansealevel
+03.50  3500 var209_9_0_3500mabovemeansealevel
+04.00  4000 var209_9_0_4000mabovemeansealevel
+04.50  4500 var209_9_0_4500mabovemeansealevel
+05.00  5000 var209_9_0_5000mabovemeansealevel
+05.50  5500 var209_9_0_5500mabovemeansealevel
+06.00  6000 var209_9_0_6000mabovemeansealevel
+06.50  6500 var209_9_0_6500mabovemeansealevel
+07.00  7000 var209_9_0_7000mabovemeansealevel
+07.50  7500 var209_9_0_7500mabovemeansealevel
+08.00  8000 var209_9_0_8000mabovemeansealevel
+08.50  8500 var209_9_0_8500mabovemeansealevel
+09.00  9000 var209_9_0_9000mabovemeansealevel
+10.00 10000 var209_9_0_10000mabovemeansealevel
+11.00 11000 var209_9_0_11000mabovemeansealevel
+12.00 12000 var209_9_0_12000mabovemeansealevel
+13.00 13000 var209_9_0_13000mabovemeansealevel
+14.00 14000 var209_9_0_14000mabovemeansealevel
+15.00 15000 var209_9_0_15000mabovemeansealevel
+16.00 16000 var209_9_0_16000mabovemeansealevel
+17.00 17000 var209_9_0_17000mabovemeansealevel
+18.00 18000 var209_9_0_18000mabovemeansealevel
+19.00 19000 var209_9_0_19000mabovemeansealevel
+

@@ -1,0 +1,7 @@
+Run on saudi-c3 in pmeop account:
+
+ssh-keygen -b 2048 -t rsa -C "Key for rsync pme ops data transfers from saudi-c2 to saudi-c3" -N '' -f /home/pmeop/.ssh/saudi-c2-metpme-obs.rsa
+
+echo -n 'command="/usr/bin/rsync --server --sender -vlogDtpre.iLsf . /raid/input_pme/observations/" ' | cat - /home/pmeop/.ssh/saudi-c2-metpme-obs.rsa.pub | ssh metpme@saudi-c2 tee -a /home/metpme/.ssh/authorized_keys
+
+rsync -av -e "/usr/bin/ssh -i /home/pmeop/.ssh/saudi-c2-metpme-obs.rsa" metpme@saudi-c2:/raid/input_pme/observations/* /d1/pmeop/datainput_raw/pme_obs

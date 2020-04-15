@@ -1,0 +1,86 @@
+15-AUG-2017             Building WPS for RTFDDA
+-----------------------------------------------------------------------------
+Dependencies:
+
+ (1) WPS depends on compiled WRF .o files existing in ../WRFV3 directory
+     The ../WRFV3 link needs to exist and point to a valid directory.
+     If a "distribs" file (e.g., distribs/rtfdda_src_checkout.wrfv3.2)
+     was used to checkout the RTFDDA code, the ../WRFV3 link is created
+     when the distribs file is executed.
+
+ (2) HOWEVER, releasing it with WRF V3.8.1 for the purpose of handling
+     NCEP's GFS upgrade (effective starting 12Z cycle, Jul 19, 2017), we
+     only need to compile/install ungrib.exe, which does not depend on
+     WRF.
+
+
+For RTFDDA
+
+ (1) Need to add a _Makefile.auto_build to this directory
+
+ (2) In geogrid/src/source_data_module.F do the following:
+
+     a) Change Line 256,'source_filename_digits=5' to 'source_filename_digits=7'
+        Otherwise, in the 'index' file of each data set, a specification needs
+        to be added:
+
+        filename_digits = 7 (This is a lot work, as there are many data sets!)
+
+     b) below Line 3026, add:
+
+            case (7)
+               write(test_fname, '(a,i7.7,a1,i7.7,a1,i7.7,a1,i7.7)') trim(source_path(idx)), &
+                        nint(rx),'-',nint(rx)+source_tile_x(idx)-1,'.',nint(ry),'-',nint(ry)+source_tile_y(idx)-1
+
+     to handle RAL's high-resolution land surface datasets.
+
+ (3) In this version, 'plotfmt' and 'plotgrids' were taken out from names array
+     in the case when no command-line argument follows 'compile' command. They
+     are added back to names array. Additional required change is add two more
+     'UTIL' to NAMES array to deal with such a case.
+
+ (4) 'plofmt' and 'plotgrids' depends on Cairo library. A "NCARG_LIBS2 = lcairo"
+     line is added to all ifort sections in configure.defaults.
+
+
+Initially, the following files were symbolic links:
+
+./geogrid/GEOGRID.TBL -> GEOGRID.TBL.ARW
+./geogrid/src/module_stringutil.F -> ../../ungrib/src/module_stringutil.F
+./geogrid/util/plotgrid/src/cio.c -> ../../../src/cio.c
+./geogrid/util/plotgrid/src/gridinfo_module.F -> ../../../../metgrid/src/gridinfo_module.F
+./geogrid/util/plotgrid/src/input_module.F -> ../../../../metgrid/src/input_module.F
+./geogrid/util/plotgrid/src/misc_definitions_module.F -> ../../../src/misc_definitions_module.F
+./geogrid/util/plotgrid/src/module_debug.F -> ../../../src/module_debug.F
+./geogrid/util/plotgrid/src/parallel_module.F -> ../../../src/parallel_module.F
+./geogrid/util/plotgrid/src/queue_module.F -> ../../../src/queue_module.F
+./geogrid/util/plotgrid/src/wrf_debug.F -> ../../../src/wrf_debug.F
+./metgrid/METGRID.TBL -> METGRID.TBL.ARW
+./metgrid/src/bitarray_module.F -> ../../geogrid/src/bitarray_module.F
+./metgrid/src/cio.c -> ../../geogrid/src/cio.c
+./metgrid/src/constants_module.F -> ../../geogrid/src/constants_module.F
+./metgrid/src/interp_module.F -> ../../geogrid/src/interp_module.F
+./metgrid/src/list_module.F -> ../../geogrid/src/list_module.F
+./metgrid/src/llxy_module.F -> ../../geogrid/src/llxy_module.F
+./metgrid/src/misc_definitions_module.F -> ../../geogrid/src/misc_definitions_module.F
+./metgrid/src/module_debug.F -> ../../geogrid/src/module_debug.F
+./metgrid/src/module_map_utils.F -> ../../geogrid/src/module_map_utils.F
+./metgrid/src/module_stringutil.F -> ../../ungrib/src/module_stringutil.F
+./metgrid/src/output_module.F -> ../../geogrid/src/output_module.F
+./metgrid/src/parallel_module.F -> ../../geogrid/src/parallel_module.F
+./metgrid/src/queue_module.F -> ../../geogrid/src/queue_module.F
+./metgrid/src/wrf_debug.F -> ../../geogrid/src/wrf_debug.F
+./ungrib/src/debug_cio.c -> ../../geogrid/src/cio.c
+./ungrib/src/misc_definitions_module.F -> ../../geogrid/src/misc_definitions_module.F
+./ungrib/src/module_debug.F -> ../../geogrid/src/module_debug.F
+./util/src/cio.c -> ../../geogrid/src/cio.c
+./util/src/constants_module.F -> ../../geogrid/src/constants_module.F
+./util/src/gridinfo_module.F -> ../../metgrid/src/gridinfo_module.F
+./util/src/met_data_module.F -> ../../metgrid/src/met_data_module.F
+./util/src/misc_definitions_module.F -> ../../geogrid/src/misc_definitions_module.F
+./util/src/module_date_pack.F -> ../../metgrid/src/module_date_pack.F
+./util/src/module_debug.F -> ../../geogrid/src/module_debug.F
+./util/src/module_map_utils.F -> ../../geogrid/src/module_map_utils.F
+./util/src/module_stringutil.F -> ../../ungrib/src/module_stringutil.F
+./util/src/read_met_module.F -> ../../metgrid/src/read_met_module.F
+./util/src/write_met_module.F -> ../../metgrid/src/write_met_module.F

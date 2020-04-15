@@ -1,0 +1,63 @@
+-----------------------------------------------------------------
+                           COLOR TABLE
+COLOR                | RED  | GREEN | BLUE |
+-----------------------------------------------------------------
+def.background       | 1.00 | 1.00  | 1.00 | (DEFAULT BACKGROUND)
+def.foreground       | 0.00 | 0.00  | 0.00 | (DEFAULT FOREGROUND)
+white                | 1.00 | 1.00  | 1.00 |
+light.gray           | 0.75 | 0.75  | 0.75 |
+med.gray             | 0.50 | 0.50  | 0.50 |
+dark.gray            | 0.25 | 0.25  | 0.25 |
+black                | 0.00 | 0.00  | 0.00 |
+very.light.red       | 1.00 | 0.85  | 0.85 |
+pastel.red           | 1.00 | 0.68  | 0.80 |
+red.coral            | 1.00 | 0.56  | 0.74 |
+dark.salmon          | 1.00 | 0.58  | 0.58 |
+light.red            | 1.00 | 0.50  | 0.50 |
+red                  | 1.00 | 0.00  | 0.00 |
+med.red              | 0.75 | 0.00  | 0.00 |
+dark.red             | 0.50 | 0.00  | 0.00 |
+light.orange         | 1.00 | 0.75  | 0.50 |
+orange               | 1.00 | 0.50  | 0.00 |
+desert.tan           | 0.88 | 0.67  | 0.39 |
+tan.leather          | 0.80 | 0.40  | 0.00 |
+desert.brown         | 0.63 | 0.46  | 0.30 |
+dark.desert.brown    | 0.37 | 0.27  | 0.18 |
+brown                | 0.50 | 0.25  | 0.00 |
+brown.green          | 0.47 | 0.61  | 0.19 |
+parchment            | 1.00 | 1.00  | 0.82 |
+light.yellow         | 1.00 | 1.00  | 0.50 |
+lemon                | 1.00 | 1.00  | 0.43 |
+yellow               | 1.00 | 1.00  | 0.00 |
+gold                 | 0.98 | 0.82  | 0.16 |
+mustard              | 1.00 | 0.93  | 0.14 |
+dark.yellow          | 0.50 | 0.50  | 0.00 |
+very.light.green     | 0.75 | 1.00  | 0.75 |
+light.green          | 0.50 | 1.00  | 0.50 |
+neon.green           | 0.57 | 1.00  | 0.14 |
+avocado              | 0.91 | 0.93  | 0.50 |
+leaf.green           | 0.55 | 1.00  | 0.49 |
+aqua                 | 0.38 | 0.94  | 0.84 |
+green                | 0.00 | 1.00  | 0.00 |
+forest.green         | 0.00 | 0.75  | 0.00 |
+dark.green           | 0.00 | 0.50  | 0.00 |
+very.light.blue      | 0.85 | 0.85  | 1.00 |
+lavender             | 0.75 | 0.75  | 1.00 |
+light.blue           | 0.50 | 0.50  | 1.00 |
+cyan                 | 0.00 | 1.00  | 1.00 |
+blue                 | 0.00 | 0.00  | 1.00 |
+light.cerulean       | 0.39 | 0.87  | 0.98 |
+med.blue             | 0.00 | 0.00  | 0.75 |
+dark.blue            | 0.00 | 0.00  | 0.50 |
+very.dark.blue       | 0.00 | 0.00  | 0.30 |
+dusty.violet         | 0.97 | 0.66  | 1.00 |
+light.purple         | 0.87 | 0.69  | 1.00 |
+purple               | 0.88 | 0.00  | 1.00 |
+grape                | 0.69 | 0.00  | 1.00 |
+very.light.violet    | 0.90 | 0.70  | 0.90 | 
+light.violet         | 0.75 | 0.50  | 0.75 |
+violet               | 0.50 | 0.00  | 0.50 |
+magenta              | 0.60 | 0.00  | 0.50 |
+dark.violet          | 0.25 | 0.00  | 0.25 |
+neon.pink            | 1.00 | 0.00  | 0.56 |
+-----------------------------------------------------------------

@@ -1,0 +1,62 @@
+#! /bin/csh
+
+#
+# OSO/NIC server information
+#
+##set OSO_location =   140.90.6.103
+##if ( ${?yy} ) then
+##  set OSO_dir = ncep/erl/icwf.$yy$mm$dd
+##endif
+set OSO_location =   ftp.ncep.noaa.gov
+if ( ${?yy} ) then
+  set OSO_dir = pub/data1/eta/erl.$yy$mm$dd
+endif
+set AVN_location =   ftp.ncep.noaa.gov
+set AVN_dir = pub/data/grib/avn
+
+#
+# NESDIS satellite winds ftp server
+#
+setenv NESDIS_dir_wv /pub/g9hiwvap
+setenv NESDIS_dir_cd /pub/g9hicdrft
+setenv NESDIS_location orbit2a.nesdis.noaa.gov
+
+#
+# Utah mesonet
+#
+set UTAH_FTPSITE = ftp.met.utah.edu
+set UTAH_FTPDIR = pub/mesonet/data
+#
+# OK mesonet
+#
+set OKMESO_FTPSITE = ju2003@out.ocs.ou.edu
+set OKMESO_FTPDIR = /usr/data/netshare/mesonet/text/d05
+set OKMESO_DIR = /data/input/okmeso
+#
+# FSL Boundary Layer Profiler site (BLP)
+#
+set BLP_FTPSITE = oak.fsl.noaa.gov
+set BLP_FTPDIR = outgoing/blp
+#
+# FSL NPN Profiler site (BLP)
+#
+set NPN_FTPSITE = oak.fsl.noaa.gov
+set NPN_FTPDIR = outgoing/npn
+# UW SST grib file
+#
+##set SST_FTPSITE = ftp.atmos.washington.edu
+##set SST_FTPDIR = mm5rt/data/sst
+# NCEP SST grib file
+#
+set SST_FTPSITE = ftpprd.ncep.noaa.gov
+set SST_FTPDIR = pub/data/nccf/com/gfs/prod
+ 
+setenv ETADIR "/project/k1206/datainput/eta"
+setenv AVNDIR "/project/k1206/datainput/avn"
+setenv RAWSDIR "/project/k1206/datainput/raws"
+setenv SATDIR "/project/k1206/datainput/satwinds"
+setenv BLPDIR "/project/k1206/datainput/blp"
+setenv NPNDIR "/project/k1206/datainput/npn"
+setenv SSTDIR "/project/k1206/datainput/sst"
+setenv SST083DIR "/project/k1206/datainput/sst083"
+setenv NCEPPreBDIR "/project/k1206/datainput_raw/ncep_prepbufr"

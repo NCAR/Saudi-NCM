@@ -1,0 +1,6 @@
+191a192
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mod
+192a194
+>             grid%xtime, grid%use_adaptive_time_step,           &    ! grid%xtime,grid%use_adaptive_time_step added by WC: 2015-07-12
+193a196
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mod

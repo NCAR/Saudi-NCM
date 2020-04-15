@@ -1,0 +1,716 @@
+14a15,21
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+> !
+> ! meixu changes 2007-08-28
+> ! Added variable qr nudging, with no switch to turn off pbl nudging,
+> !   but has a switch to turn off nudging below certain layer (if_zfac_qr)
+> ! With qr from real obs, a provision is made for handling missing/bad data
+> !
+25,26c32,33
+<                guv, gt, gq, if_ramping, dtramp_min,  &
+< 
+---
+>                if_zfac_qr, k_zfac_qr,if_zfac_qc, k_zfac_qc, &
+>                guv, gt, gq, gqr,gqc,clh, if_ramping, dtramp_min,  &
+30d36
+< 
+32c38
+<                qv3d,     &
+---
+>                qv3d,qr3d,qs3d,qg3d,qc3d,qi3d,    &
+36,39c42,47
+<      u10_ndg_old, v10_ndg_old, t2_ndg_old, th2_ndg_old, q2_ndg_old, &
+<      rh_ndg_old, psl_ndg_old, ps_ndg_old, tob_ndg_old, odis_ndg_old, &
+<      u10_ndg_new, v10_ndg_new, t2_ndg_new, th2_ndg_new, q2_ndg_new, &
+<      rh_ndg_new, psl_ndg_new, ps_ndg_new, tob_ndg_new, odis_ndg_new, &
+---
+>                qr_ndg_old,qs_ndg_old,qg_ndg_old,qc_ndg_old,qi_ndg_old,   &
+>                qr_ndg_new,qs_ndg_new,qg_ndg_new,qc_ndg_new,qi_ndg_new,   &
+>                u10_ndg_old, v10_ndg_old, t2_ndg_old, th2_ndg_old, q2_ndg_old, &
+>                rh_ndg_old, psl_ndg_old, ps_ndg_old, tob_ndg_old, odis_ndg_old, &
+>                u10_ndg_new, v10_ndg_new, t2_ndg_new, th2_ndg_new, q2_ndg_new, &
+>                rh_ndg_new, psl_ndg_new, ps_ndg_new, tob_ndg_new, odis_ndg_new, &
+40a49,50
+>                RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,RQCNDGDTEN,RQINDGDTEN,   &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+99,100c109,112
+<    INTEGER,  INTENT(IN)   ::      if_zfac_uv, if_zfac_t, if_zfac_q
+<    INTEGER,  INTENT(IN)   ::      k_zfac_uv,  k_zfac_t,  k_zfac_q
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+>    INTEGER,  INTENT(IN)   ::      if_zfac_uv, if_zfac_t, if_zfac_q, if_zfac_qr, if_zfac_qc
+>    INTEGER,  INTENT(IN)   ::      k_zfac_uv,  k_zfac_t,  k_zfac_q, k_zfac_qr, k_zfac_qc
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+110a123
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+111a125,129
+>                                                qr3d, &
+>                                                qs3d, &
+>                                                qg3d, &
+>                                                qc3d, &
+>                                                qi3d, &
+117a136
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+119a139
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+123c143,149
+<                                          rqvndgdten
+---
+>                                          rqvndgdten, &
+>                                          rqrndgdten, &
+>                                          rqsndgdten, &
+>                                          rqgndgdten, &
+>                                          rqcndgdten, &
+>                                          rqindgdten
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+142a169
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+146a174,178
+>                                           qr_ndg_old, &
+>                                           qs_ndg_old, &
+>                                           qg_ndg_old, &
+>                                           qc_ndg_old, &
+>                                           qi_ndg_old, &
+150c182,188
+<                                           q_ndg_new
+---
+>                                           q_ndg_new, &
+>                                           qr_ndg_new, &
+>                                           qs_ndg_new, &
+>                                           qg_ndg_new, &
+>                                           qc_ndg_new, &
+>                                           qi_ndg_new
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+190c228,230
+<    REAL, INTENT(IN)    :: guv, gt, gq
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods
+>    REAL, INTENT(IN)    :: guv, gt, gq, gqr, gqc, clh
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods
+194c234,236
+<    REAL                :: xtime_old, xtime_new, coef, val_analysis
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods
+>    REAL                :: xtime_old, xtime_new, coef, val_analysis, clh2, rfactor
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods
+202c244,248
+<    REAL, DIMENSION( kts:kte, 4 )                   :: wzfac ! 1: u, 2: v, 3: t, 4: q
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods
+>    REAL, DIMENSION( kts:kte, 6 )                   :: wzfac ! 1: u, 2: v, 3: t, 4: q, 5: qr/qs/qg, 6: qc/qi
+> 
+>    REAL, DIMENSION(ims:ime, kms:kme, jms:jme) :: FRTH
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods
+210a257
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods
+212a260,281
+> ! meixu
+> ! in MM5:  XLS = 2.836E6  HWRF:  XLS = 2.834E6
+>    REAL           ::    CPM, CLS
+>    REAL, PARAMETER::    CP = 1004.5
+>    REAL, PARAMETER::    XLV1 = 2370.
+>    REAL, PARAMETER::    XLS = 2.834E6
+>    REAL, PARAMETER::    SVPT0 = 273.15
+>    REAL, PARAMETER::    rcp = 2.0/7.0
+>    REAL, PARAMETER::    badpt = -999.0
+> 
+> !!! wuyh added 20160423
+>    Real,Parameter:: tt_cri = 30., uu_cri = 30., qq_cri = 2.E-2, qr_cri = 2.E-2, qc_cri = 2.E-2
+>    Real,Parameter:: tt_wu  = 10., uu_wu  = 10., qq_wu  = 5.E-3, qr_wu  = 5.E-3, qc_wu  = 5.E-3
+>    Real :: var_ana
+>    Integer,Parameter :: wugdda = 1    !!! flag
+>    Real,Parameter :: wudamp = 13.     !!! in minutes (for every 30min time interval)
+>    Real :: twu_old,twu_new
+>    Real :: wupar
+> !!! wuyh added 20160423 end
+> 
+>    write(6,*) "start gfdda a!"
+>    call flush(6)
+214a284
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods
+236a307
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Radar mods
+237a309,313
+>        RQRNDGDTEN(i,k,j) = 0.0
+>        RQSNDGDTEN(i,k,j) = 0.0
+>        RQGNDGDTEN(i,k,j) = 0.0
+>        RQCNDGDTEN(i,k,j) = 0.0
+>        RQINDGDTEN(i,k,j) = 0.0
+238a315
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Radar mods
+309a387
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 11 - Radar mods
+314a393,410
+>          IF( gqr > 0.0 ) THEN
+>            DO k = kts, kte
+>              WRITE(message,'(a,i1,a,3i4,a,f10.4,a,f10.4)') &
+>                '    D0',id,' sample analysis values at i,k,j=', i0, k, j0, &
+>                ' qr_ndg_old=', qr_ndg_old(i0,k,j0), ' qr_ndg_new=', qr_ndg_new(i0,k,j0)
+>              CALL wrf_message( TRIM(message) )
+>            ENDDO
+>          ENDIF
+> 
+>          IF( gqc > 0.0 ) THEN
+>            DO k = kts, kte
+>              WRITE(message,'(a,i1,a,3i4,a,f10.4,a,f10.4)') &
+>                '    D0',id,' sample analysis values at i,k,j=', i0, k, j0, &
+>                ' qc_ndg_old=', qc_ndg_old(i0,k,j0), ' qc_ndg_new=', qc_ndg_new(i0,k,j0)
+>              CALL wrf_message( TRIM(message) )
+>            ENDDO
+>          ENDIF
+> 
+315a412
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 11 - Radar mods
+495a593
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 12 - Radar mods
+497c595,623
+<      ENDDO  
+---
+>      ENDDO
+>      ENDDO
+>      ENDDO
+> 
+>    ENDIF
+> 
+>    IF( if_zfac_qr == 1 ) THEN
+>      DO j=jts,jtf
+>      DO i=itsu,itf
+>      DO k=kts,ktf
+>        IF( k <= k_zfac_qr   ) wzfac(k, 5) = 0.0
+>        IF( k == k_zfac_qr+1 ) wzfac(k, 5) = 0.1
+>        IF( k >  k_zfac_qr+1 ) wzfac(k, 5) = 1.0
+>        IF( k > ktf*0.8) wzfac(k, 5) = (ktf - k)/(ktf*0.2) * 1.0
+>      ENDDO
+>      ENDDO
+>      ENDDO
+>    ENDIF
+> 
+>    IF( if_zfac_qc == 1 ) THEN
+> 
+>      DO j=jts,jtf
+>      DO i=itsu,itf
+>      DO k=kts,ktf
+>        IF( k <= k_zfac_qc   ) wzfac(k, 6) = 0.0
+>        IF( k == k_zfac_qc+1 ) wzfac(k, 6) = 0.1
+>        IF( k >  k_zfac_qc+1 ) wzfac(k, 6) = 1.0
+>        IF( k > ktf*0.8) wzfac(k, 6) = (ktf - k)/(ktf*0.2) * 1.0
+>      ENDDO
+501a628,641
+> 
+>    write(6,*) "start gfdda d!"
+>    call flush(6)
+> 
+> !!! wuyh added 20160520
+>    IF (wugdda .eq. 1)Then
+>       call wutwt(wugdda,xtime,xtime_old,wudamp,twu_old)
+>       call wutwt(wugdda,xtime,xtime_new,wudamp,twu_new)
+>       write(6,1106)xtime,xtime_old,twu_old,twu_new
+>       Call flush(6)
+>    ENDIF
+> 1106 Format("xtime xtime_old twu_old twu_new =",4(1x,F10.4))
+> !!! wuyh added 20160520 end
+> 
+503c643,644
+< ! If if_ramping and dtramp_min are defined by user, compute a time weighting function, tfac, 
+---
+> ! If if_ramping and dtramp_min are defined by user, comput a time weighting function, tfac,
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 12 - Radar mods
+577a719,722
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 13 - Radar mods
+>    print*,'if_ramping,dtramp_min=',if_ramping,dtramp_min
+>    print*,'xtime,actual_end_fdda_min,tfac=',xtime,actual_end_fdda_min,tfac
+> !
+578a724
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 13 - Radar mods
+609a756
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 14 - Radar mods
+610a758,970
+>  
+> !!! wuyh modified 20160520
+> IF(wugdda .eq. 1)Then
+>    write(6,*) "start wugdda"
+>    call flush(6)
+>    DO k=kts,ktf
+>     If(twu_old .gt. 1.E-6)then
+> !!! u
+>       wupar = guv*wzfac(k,1)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=itsu,itf
+>         var_ana = u_ndg_old(i,k,j)-u3d(i,k,j)
+>         If(abs(var_ana) .le. uu_cri)then
+>          if(var_ana .ge. 0.) then
+>            RUNDGDTEN(i,k,j)=RUNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,1)*min(var_ana,uu_wu)
+>          else
+>            RUNDGDTEN(i,k,j)=RUNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,1)*max(var_ana,-uu_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! v
+>       wupar = guv*wzfac(k,2)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jtsv,jtf
+>       do i=its,itf
+>         var_ana = v_ndg_old(i,k,j)-v3d(i,k,j)
+>         If(abs(var_ana) .le. uu_cri)then
+>          if(var_ana .ge. 0.) then
+>            RVNDGDTEN(i,k,j)=RVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,2)*min(var_ana,uu_wu)
+>          else
+>            RVNDGDTEN(i,k,j)=RVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,2)*max(var_ana,-uu_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! t
+>       wupar = gt*wzfac(k,3)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = t_ndg_old(i,k,j)+300. - th3d(i,k,j)
+>         IF(abs(var_ana) .le. tt_cri)then
+>          if(var_ana .ge. 0.) then
+>            RTHNDGDTEN(i,k,j)=RTHNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,3)*min(var_ana,tt_wu)
+>          else
+>            RTHNDGDTEN(i,k,j)=RTHNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,3)*max(var_ana,-tt_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qv
+>       wupar = gq*wzfac(k,4)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = q_ndg_old(i,k,j) - qv3d(i,k,j)
+>         IF(abs(var_ana) .le. qq_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQVNDGDTEN(i,k,j)=RQVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,4)*min(var_ana,qq_wu)
+>          else
+>            RQVNDGDTEN(i,k,j)=RQVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,4)*max(var_ana,-qq_wu)
+>           endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qr
+>       wupar = gqr*wzfac(k,5)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         rfactor = p3d(i,k,j)/(t3d(i,k,j)*287.0)
+>         var_ana = qr_ndg_old(i,k,j)/rfactor - qr3d(i,k,j) - qs3d(i,k,j)/4.98
+>         IF(abs(var_ana) .le. qr_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQRNDGDTEN(i,k,j)=RQRNDGDTEN(i,k,j)+wupar*min(var_ana,qr_wu)
+>          else
+>            RQRNDGDTEN(i,k,j)=RQRNDGDTEN(i,k,j)+wupar*max(var_ana,-qr_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qc
+>       wupar = gqc*wzfac(k,6)*twu_old
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = qc_ndg_old(i,k,j) - qc3d(i,k,j)
+>         IF(abs(var_ana) .le. qc_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQCNDGDTEN(i,k,j)=RQCNDGDTEN(i,k,j)+wupar*min(var_ana,qc_wu)
+>          else
+>            RQCNDGDTEN(i,k,j)=RQCNDGDTEN(i,k,j)+wupar*max(var_ana,-qc_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+>     Endif   !!! twu_old > 1.E-6
+> 
+>     If(twu_new .gt. 1.E-6)then
+> !!! u
+>       wupar = guv*wzfac(k,1)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=itsu,itf
+>         var_ana = u_ndg_new(i,k,j)-u3d(i,k,j)
+>         If(abs(var_ana) .le. uu_cri)then
+>          if(var_ana .ge. 0.) then
+>            RUNDGDTEN(i,k,j)=RUNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,1)*min(var_ana,uu_wu)
+>          else
+>            RUNDGDTEN(i,k,j)=RUNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,1)*max(var_ana,-uu_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! v
+>       wupar = guv*wzfac(k,2)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jtsv,jtf
+>       do i=its,itf
+>         var_ana = v_ndg_new(i,k,j)-v3d(i,k,j)
+>         If(abs(var_ana) .le. uu_cri)then
+>          if(var_ana .ge. 0.) then
+>            RVNDGDTEN(i,k,j)=RVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,2)*min(var_ana,uu_wu)
+>          else
+>            RVNDGDTEN(i,k,j)=RVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,2)*max(var_ana,-uu_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! t
+>       wupar = gt*wzfac(k,3)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = t_ndg_new(i,k,j)+300. - th3d(i,k,j)
+>         IF(abs(var_ana) .le. tt_cri)then
+>          if(var_ana .ge. 0.) then
+>            RTHNDGDTEN(i,k,j)=RTHNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,3)*min(var_ana,tt_wu)
+>          else
+>            RTHNDGDTEN(i,k,j)=RTHNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,3)*max(var_ana,-tt_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qv
+>       wupar = gq*wzfac(k,4)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = q_ndg_new(i,k,j) - qv3d(i,k,j)
+>         IF(abs(var_ana) .le. qq_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQVNDGDTEN(i,k,j)=RQVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,4)*min(var_ana,qq_wu)
+>          else
+>            RQVNDGDTEN(i,k,j)=RQVNDGDTEN(i,k,j)+wupar*wpbl(i,k,j,4)*max(var_ana,-qq_wu)
+>           endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qr
+>       wupar = gqr*wzfac(k,5)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         rfactor = p3d(i,k,j)/(t3d(i,k,j)*287.0)
+>         var_ana = qr_ndg_new(i,k,j)/rfactor - qr3d(i,k,j) - qs3d(i,k,j)/4.98
+>         IF(abs(var_ana) .le. qr_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQRNDGDTEN(i,k,j)=RQRNDGDTEN(i,k,j)+wupar*min(var_ana,qr_wu)
+>          else
+>            RQRNDGDTEN(i,k,j)=RQRNDGDTEN(i,k,j)+wupar*max(var_ana,-qr_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+> !!! qc
+>       wupar = gqc*wzfac(k,6)*twu_new
+>       if (wupar .gt. 1.E-6)then
+>       do j=jts,jtf
+>       do i=its,itf
+>         var_ana = qc_ndg_new(i,k,j) - qc3d(i,k,j)
+>         IF(abs(var_ana) .le. qc_cri)then
+>          if(var_ana .ge. 0.) then
+>            RQCNDGDTEN(i,k,j)=RQCNDGDTEN(i,k,j)+wupar*min(var_ana,qc_wu)
+>          else
+>            RQCNDGDTEN(i,k,j)=RQCNDGDTEN(i,k,j)+wupar*max(var_ana,-qc_wu)
+>          endif
+>         Endif
+>       enddo
+>       enddo
+>       endif
+>     Endif   !!! twu_new > 1.E-6
+> 
+>   End do !!!! k
+> 
+>    write(6,*) "end wugdda"
+>    call flush(6)
+> 
+>  ELSE    !!!! old approach
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 14 - Radar mods
+652a1013
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 15 - Radar mods
+656,658c1017,1022
+<    ENDDO
+<    ENDDO
+<    ENDDO
+---
+> ! meixu: add handlng of missing/bad obs data
+> ! for qr
+>      if ( qr_ndg_old(i,k,j) .eq. badpt .or. qr_ndg_new(i,k,j) .eq. badpt ) then
+>              RQRNDGDTEN(i,k,j) =  0.0
+>      else
+>        val_analysis = qr_ndg_old(i,k,j) *( 1.0 - coef ) + qr_ndg_new(i,k,j) * coef
+660c1024,1155
+<    !BPR BEGIN 
+---
+> ! meixu20130823
+>        rfactor = p3d(i,k,j)/(t3d(i,k,j)*287.0)
+>        val_analysis = val_analysis/rfactor
+> 
+> ! assume that all DBZ obs are converted as qr in decode_mosaic
+> ! so val_analysis contained both rain and snow; 
+> ! assume that snow DBZ is roughly 1/4.98 of rain DBZ
+> !
+>        RQRNDGDTEN(i,k,j) =  gqr * wzfac(k,5) * tfac * &
+>                           ( val_analysis - qr3d(i,k,j) - qs3d(i,k,j)/4.98 )
+>      endif
+> ! for qs
+> !    if ( qs_ndg_old(i,k,j) .eq. badpt .or. qs_ndg_new(i,k,j) .eq. badpt ) then
+>              RQSNDGDTEN(i,k,j) =  0.0 
+> !    else
+> !      val_analysis = qs_ndg_old(i,k,j) *( 1.0 - coef ) + qs_ndg_new(i,k,j) * coef
+> !      RQSNDGDTEN(i,k,j) =  gqr * wzfac(k,5) * tfac * &
+> !                         ( val_analysis - qs3d(i,k,j) )
+> !    endif
+> ! for qg
+> !    if ( qg_ndg_old(i,k,j) .eq. badpt .or. qg_ndg_new(i,k,j) .eq. badpt ) then
+>              RQGNDGDTEN(i,k,j) =  0.0
+> !    else
+> !      val_analysis = qg_ndg_old(i,k,j) *( 1.0 - coef ) + qg_ndg_new(i,k,j) * coef
+> !      RQGNDGDTEN(i,k,j) =  gqr * wzfac(k,5) * tfac * &
+> !                         ( val_analysis - qg3d(i,k,j) )
+> !    endif
+> ! for qc
+>      if ( qc_ndg_old(i,k,j) .eq. badpt .or. qc_ndg_new(i,k,j) .eq. badpt ) then
+>              RQCNDGDTEN(i,k,j) =  0.0
+>      else
+>        val_analysis = qc_ndg_old(i,k,j) *( 1.0 - coef ) + qc_ndg_new(i,k,j) * coef
+>        RQCNDGDTEN(i,k,j) =  gqc * wzfac(k,6) * tfac * &
+>                         ( val_analysis - qc3d(i,k,j) )
+>      endif
+> ! for qi
+> !    if ( qi_ndg_old(i,k,j) .eq. badpt .or. qi_ndg_new(i,k,j) .eq. badpt ) then
+>              RQINDGDTEN(i,k,j) =  0.0
+> !    else
+> !      val_analysis = qi_ndg_old(i,k,j) *( 1.0 - coef ) + qi_ndg_new(i,k,j) * coef
+> !      RQINDGDTEN(i,k,j) =  gqc * wzfac(k,6) * tfac * &
+> !                       ( val_analysis - qi3d(i,k,j) )
+> !    endif
+> 
+>      ENDDO
+>      ENDDO
+>      ENDDO
+> 
+>  Endif  !!! wugdda = 1
+> !
+> !  meixu: add latent heat associated with (qr_ndg_new-qr_ndg_old)
+> !
+>    if (clh > 0.0 .AND. gt <= 0.0 ) then
+>      print*, 'latent heating nudging is on with clh = ', clh
+>      print*, 'itimestep,dt,analysis_interval=',itimestep,dt,analysis_interval
+>      coef = 1.0 / analysis_interval /60.0
+> 
+>      DO j=jts,jtf
+>      DO k=kts,ktf
+>      DO i=its,itf
+> !
+> !      t3d temperature in K;  qv3d vapor in kg/kg
+>        if(t3d(i,k,j) .gt. SVPT0) then
+>           CLS=3.1484E6-XLV1*t3d(i,k,j)
+>        else
+>           CLS=XLS
+>        endif
+>        CPM=CP*(1.+0.8*qv3d(I,K,J))
+> !
+> ! TTEN = QRTEN * CLS/CPM
+> ! tendency in potential temp = TTEN * (100000/p)**0.286 with p in kpa?
+> ! assume QR dominates when t>273.15 and QS dominates when t<273.15
+> !
+> ! As of 20120111, radar DZ are processed to qr_ndg_new and qr_ndg_old only,
+> !   as a result, RQSNDGDTEN & RQGNDGDTEN = 0  and qs_ndg_### & qg_ndg_### = 0
+> !   In the case of snow, RQRNDGDTEN needs to be reverted to RQSNDGDTEN (of the same DZ)
+> !   and the RTHNDGDTEN needs to be adjusted accordingly
+> !
+> !      if(RQRNDGDTEN(i,k,j) .le. 0.0)  then
+> !
+> ! model generated too much rain - need cooling no matter obs show growth or decay
+> ! Note: no obs -> RQRNDGDTEN = 0 -> RTHNDGDTEN = 0
+> !
+>          RTHNDGDTEN(i,k,j) = clh*CLS/CPM *(1.0E5/p3d(i,k,j))**rcp &
+>                   *(RQRNDGDTEN(i,k,j)+RQSNDGDTEN(i,k,j)+RQGNDGDTEN(i,k,j))
+> !      else
+> !
+> ! model not generating enough rain
+> ! add obs heating tendency to model
+> !
+> !        clh2 = 3.0
+> !        RTHNDGDTEN(i,k,j) = clh2*clh*CLS/CPM *(1.0E5/p3d(i,k,j))**rcp &
+> !                *(qr_ndg_new(i,k,j)-qr_ndg_old(i,k,j) &
+> !                + qs_ndg_new(i,k,j)-qs_ndg_old(i,k,j) &
+> !                + qg_ndg_new(i,k,j)-qg_ndg_old(i,k,j)) * coef * wzfac(k,5) * tfac
+> !        if(RTHNDGDTEN(i,k,j) .le. 0.0) RTHNDGDTEN(i,k,j) = 0.0
+> !        rfactor = p3d(i,k,j)/(t3d(i,k,j)*287.0)
+> !        RTHNDGDTEN(i,k,j) = RTHNDGDTEN(i,k,j) / rfactor
+> !      endif
+> !
+> ! redistribute RQRNDGDTEN to QR and QS
+> !
+>        if (t3d(i,k,j) .lt. SVPT0) then
+>          RQSNDGDTEN(i,k,j) = RQRNDGDTEN(i,k,j) * 4.98
+>          RQRNDGDTEN(i,k,j) = 0.0
+>          RTHNDGDTEN(i,k,j) = 4.98 * RTHNDGDTEN(i,k,j)
+>        endif
+> 
+> ! may adjust QV here as well
+> ! moisturize air in updrafts where
+> 
+>      ENDDO
+>      ENDDO
+>      ENDDO
+> ! apply filters
+> !
+> !    FRTH=RTHNDGDTEN
+> !    DO j=jts+1,jtf-1
+> !    DO k=kts,ktf
+> !    DO i=its+1,itf-1
+> !      RTHNDGDTEN(i,k,j) = 0.125* (4.0*FRTH(i,k,j) + FRTH(i-1,k,j) + FRTH(i+1,k,j)  &
+> !                                    + FRTH(i,k,j-1) + FRTH(i+1,k,j+1) )
+> !    ENDDO
+> !    ENDDO
+> !    ENDDO
+> 
+>    else
+>      print*, 'latent heating nudging is off'
+>    endif
+> 
+>    !BPR BEGIN
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 15 - Radar mods
+1313a1809
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 16 - Radar mods
+1314a1811,1812
+>                rqrndgdten, rqsndgdten, rqgndgdten, rqcndgdten,rqindgdten,  &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 16 - Radar mods
+1318a1817
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 17 - Radar mods
+1320c1819,1820
+<                guv, gt, gq, if_ramping, dtramp_min, end_fdda_hour, &
+---
+>                if_zfac_qr, k_zfac_qr, if_zfac_qc, k_zfac_qc, &
+>                guv, gt, gq, gqr, gqc, clh, if_ramping, dtramp_min, end_fdda_hour, &
+1321a1822
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 17 - Radar mods
+1339c1840,1847
+<                                                       rqvndgdten
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 18 - Radar mods
+>                                                       rqvndgdten, &
+>                                                       rqrndgdten, &
+>                                                       rqsndgdten, &
+>                                                       rqgndgdten, &
+>                                                       rqcndgdten, &
+>                                                       rqindgdten
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 18 - Radar mods
+1356,1357c1864,1866
+<    INTEGER,  INTENT(IN)   ::      if_zfac_uv, if_zfac_t, if_zfac_q
+<    INTEGER,  INTENT(IN)   ::      k_zfac_uv,  k_zfac_t,  k_zfac_q
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 19 - Radar mods
+>    INTEGER,  INTENT(IN)   ::      if_zfac_uv, if_zfac_t, if_zfac_q, if_zfac_qr, if_zfac_qc
+>    INTEGER,  INTENT(IN)   ::      k_zfac_uv,  k_zfac_t,  k_zfac_q, k_zfac_qr, k_zfac_qc
+1358a1868
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 19 - Radar mods
+1360c1870,1872
+<    REAL, INTENT(IN)       ::      guv, gt, gq
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 20 - Radar mods
+>    REAL, INTENT(IN)       ::      guv, gt, gq, gqr, gqc, clh
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 20 - Radar mods
+1404a1917
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 21 - Radar mods
+1408a1922,1949
+>      IF( gqr > 0.0 ) THEN
+>        WRITE(message,'(a,i1,a,e12.4)') &
+>          'D0',id,' Analysis nudging for rain - radar reflectivity is turned on and Gqr= ', gqr
+>        CALL wrf_message(TRIM(message))
+>        if (clh > 0.0 .AND. gt <= 0.0) then
+>          WRITE(message,'(a,i1,a,e12.4)') &
+>            'D0',id,' latent heat associated with nudged rainfall is added and CLH = ', clh
+>          CALL wrf_message(TRIM(message))
+>        endif
+>      ELSE IF( gqr < 0.0 ) THEN
+>        CALL wrf_error_fatal('In grid FDDA, Gqr must be positive.')
+>      ELSE
+>        WRITE(message,'(a,i1,a,e12.4)') &
+>          'D0',id,' Analysis nudging for rain mixing ratio is turned off and Gqr= ', gqr
+>        CALL wrf_message(TRIM(message))
+>      ENDIF
+> 
+>      IF( gqc > 0.0 ) THEN
+>        WRITE(message,'(a,i1,a,e12.4)') &
+>          'D0',id,' Analysis nudging for cloud fields is turned on and Gqc= ', gqc
+>        CALL wrf_message(TRIM(message))
+>      ELSE IF( gqc < 0.0 ) THEN
+>        CALL wrf_error_fatal('In grid FDDA, Gqc must be positive.')
+>      ELSE
+>        WRITE(message,'(a,i1,a,e12.4)') &
+>          'D0',id,' Analysis nudging for cloud fields is turned off and Gqc= ', gqc
+>      ENDIF
+> 
+1409a1951
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 21 - Radar mods
+1440a1983
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 22 - Radar mods
+1445a1989,2003
+>      IF( gqr > 0.0 .AND. if_zfac_qr == 1 ) THEN
+>         WRITE(message,'(a,i1,a,i3)') &
+>           'D0',id,' Analysis nudging for rainwater mixing ratio is turned off below layer', &
+>            k_zfac_qr
+>         CALL wrf_message(TRIM(message))
+>      ENDIF
+> 
+>      IF( gqc > 0.0 .AND. if_zfac_qc == 1 ) THEN
+>         WRITE(message,'(a,i1,a,i3)') &
+>           'D0',id,' Analysis nudging for cloud water mixing ratio is turned off below layer', &
+>            k_zfac_qc
+>         CALL wrf_message(TRIM(message))
+>      ENDIF
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 22 - Radar mods
+> 
+1512a2071
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 23 - Radar mods
+1513a2073,2078
+>         rqrndgdten(i,k,j) = 0.
+>         rqsndgdten(i,k,j) = 0.
+>         rqgndgdten(i,k,j) = 0.
+>         rqcndgdten(i,k,j) = 0.
+>         rqindgdten(i,k,j) = 0.
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 23 - Radar mods
+1584a2150
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 24 - Radar mods
+1586a2153,2177
+> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+>   Subroutine wutwt(wugdda,modtime,obstime,wudamp,twt)
+> !!wuyh added for time weighting
+> !!Date: 20160520
+> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+> 
+>   Integer :: wugdda
+>   Real::modtime,obstime,wudamp,twt
+>   Real,Parameter:: alpha = 1.5
+>   IF(wugdda .eq. 1 .AND. wudamp .gt. 0.)THEN
+>     if(ABS(modtime-obstime) .LE. wudamp )then
+>        twt = 1.
+>     elseif(ABS(modtime-obstime) .LE. alpha*wudamp)then
+>        twt = (alpha - ABS(modtime-obstime)/wudamp)/(alpha - 1.)
+>     else
+>        twt = 0.
+>     endif
+>   ELSE
+>    twt = 0.
+>   ENDIF
+>   Return
+>   End Subroutine wutwt
+> 
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 24 - Radar mods
+> 

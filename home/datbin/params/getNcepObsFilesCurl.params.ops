@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<params>
+<!--
+# This param file was generated on: Fri Jul 29 21:32:24 UTC 2011
+-->
+<!--
+##########################################################
+#                process instance                        #
+##########################################################
+-->
+<instance>ops</instance>
+
+<!--
+##########################################################
+#                NCEP obs - Output Directory             #
+##########################################################
+-->
+<outputDir>/d1/pmeop/datainput_raw/ncep_obs-input</outputDir>
+
+<!--
+##########################################################
+#                MADIS subscribed platforms              #
+# Note: DC.vsndn/DS.prflr files are in prepbufr format!  #
+##########################################################
+-->
+<subscribedDir>DC.sflnd/DS.metar</subscribedDir>
+<subscribedDir>DC.sflnd/DS.synop</subscribedDir>
+<subscribedDir>DC.sflnd/DS.tafst</subscribedDir>
+<subscribedDir>DC.sfmar/DS.dbuoy</subscribedDir>
+<subscribedDir>DC.sfmar/DS.ships</subscribedDir>
+<subscribedDir>DC.sluan/DS.airep</subscribedDir>
+<subscribedDir>DC.sluan/DS.amdar</subscribedDir>
+<subscribedDir>DC.sluan/DS.pirep</subscribedDir>
+<subscribedDir>DC.vsndn/DS.dropw</subscribedDir>
+<subscribedDir>DC.vsndn/DS.raobf</subscribedDir>
+<subscribedDir>DC.vsndn/DS.raobs</subscribedDir>
+
+<!--
+#<subscribedDir>DC.sflnd/DS.sclim</subscribedDir>
+#<subscribedDir>DC.sluan/DS.recco</subscribedDir>
+#<subscribedDir>DC.vsndn/DS.prflr</subscribedDir>
+#<subscribedDir>DC.sfmar/DS.tideg</subscribedDir>
+#<subscribedDir>DC.sluan/DS.airmet</subscribedDir>
+#<subscribedDir>DC.sluan/DS.sigmt</subscribedDir>
+-->
+
+<!--
+##########################################################
+#             NCEP obs account username and password     #
+##########################################################
+-->
+<ftpHost>tgftp.nws.noaa.gov</ftpHost>
+<username>anonymous</username>
+<passwd>sheu\@ucar.edu</passwd>
+
+<!--
+##########################################################
+#           NCEP obs top-level directory on ftp site     #
+##########################################################
+-->
+<ftpHostDir>/SL.us008001/DF.an/</ftpHostDir>
+
+<!--
+##########################################################
+#                Timing options for data polling         #
+# Option A: specify a number of seconds to sleep between #
+#           checks for data,                             #
+#           e.g., <sleepCheck>300</sleepCheck>           #
+# Option B: specify a list of times (minutes) during an  #
+#           hour to check for data,                      #
+#           e.g., <checkTime>10</checkTime>              #
+#                 <checkTime>30</checkTime>              #
+##########################################################
+-->
+<checkTime>10</checkTime>
+<checkTime>30</checkTime>
+<checkTime>50</checkTime>
+</params>

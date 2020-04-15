@@ -1,0 +1,53 @@
+#!/bin/tcsh 
+#
+#       $1 comes in as local file name, typically, mmout
+#
+#if ( ${#argv} != 4 ) then
+#	echo "ERROR (usage): $0 mmout lat lon station_name"
+#	echo "which is in CCYYMMDDHH) "
+#	exit ( 1 )
+#endif
+
+   set mmout = $1
+####################
+   set FILNUM = 1
+####################
+   set LETTERS = (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
+#  set LETTERS = (a b c d e f g h i j k l m n o p q r s t u v w x y z)
+#
+#               set up fortran input files for rwv3
+#
+if ($FILNUM == 1) then
+ln -s    $mmout            fort.10
+else
+set UNIT   = 0
+set NUMFIL = 1
+while ( $NUMFIL <= $FILNUM )
+   set Local = $mmout$LETTERS[${NUMFIL}]
+   @ UNIT = 9 + $NUMFIL
+ ln -s     $Local         fort.$UNIT
+   @ NUMFIL ++
+end
+endif
+
+#               set up fortran output files for rwv3
+## sounding for NAPS and skewt
+ln -s    sndNAPS           fort.30
+#
+set UNIT   = 0
+set NUMFIL = 0
+while ( $NUMFIL <= 9 )
+   set Local = mmtmp${NUMFIL}
+   @ UNIT = 45 + $NUMFIL
+   ln -s     $Local             fort.$UNIT
+   @ NUMFIL ++
+end
+#
+#       run rwv3 utility
+#
+/data/fddahome/cycle_code/EXECUTABLE_ARCHIVE/rwv3_naps.exe 
+rm fort.*
+#
+#
+echo "finished SPLIT subprogram"
+#

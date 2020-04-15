@@ -1,0 +1,29 @@
+13a14
+> /*# ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Addition for Will Cheng's aux3 code*/
+14a16,17
+> dimspec    wcz     2     namelist=nsigout                  z     nsigout
+> /*# ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Addition for Will Cheng's aux3 code*/
+19a23
+> /*# ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - */
+20a25,26
+> dimspec    wcz     3     namelist=nsigout                  z     nsigout
+> /*# ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - */
+27,29c33,37
+< dimspec    obs     -     namelist=max_obs                  c     max_obs
+< dimspec    h       -     namelist=nobs_err_flds            c     nobs_err_flds
+< dimspec    nndgvar -     namelist=nobs_ndg_vars            c     nobs_ndg_vars
+---
+> /*# ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Make max obs domain dependent, remove h, add vobdim, errdim, add dims for multiple scans, Kalman gains, and date names*/
+> dimspec    obs     -     namelist=obs_dmax_nobs            c     max obs, this domain
+> dimspec    vobdim  -     namelist=obs_vobs_dim             c     number of vars in vobs, vobs_qc, for each ob
+> dimspec    errdim  -     namelist=obs_errf_dim             c     number of vars in errf for each ob
+> dimspec    nscans  -     namelist=nobs_scans               c     nobs_scans
+30a39,44
+> dimspec    obk     -     namelist=obs_dmax_nkalman         c     max kalman obs, this domain
+> dimspec    kc      -     namelist=obs_ndirpow              c     obs_ndirpow
+> dimspec    ni      -     namelist=obs_nkalman_we           c     obs_nkalman_we
+> dimspec    nj      -     namelist=obs_nkalman_sn           c     obs_nkalman_sn
+> dimspec    kv      -     constant=4                        c     nobs_kgain_vars
+> dimspec    obtian  -     constant=14                       c     obs date names
+31a46
+> /*# ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Make max obs domain dependent, remove h, add vobdim, errdim, add dims for multiple scans, Kalman gains, and date names*/

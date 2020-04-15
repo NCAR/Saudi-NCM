@@ -1,0 +1,1820 @@
+!STARTOFREGISTRYGENERATEDINCLUDE 'inc/nl_config.inc'
+!
+! WARNING This file is generated automatically by use_registry
+! using the data base in the file named Registry.
+! Do not edit. Your changes to this file will be lost.
+!
+SUBROUTINE nl_get_gsmdt ( id_id , gsmdt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gsmdt
+  INTEGER id_id
+  gsmdt = model_config_rec%gsmdt(id_id)
+  RETURN
+END SUBROUTINE nl_get_gsmdt
+SUBROUTINE nl_get_isfflx ( id_id , isfflx )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: isfflx
+  INTEGER id_id
+  isfflx = model_config_rec%isfflx
+  RETURN
+END SUBROUTINE nl_get_isfflx
+SUBROUTINE nl_get_ifsnow ( id_id , ifsnow )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ifsnow
+  INTEGER id_id
+  ifsnow = model_config_rec%ifsnow
+  RETURN
+END SUBROUTINE nl_get_ifsnow
+SUBROUTINE nl_get_icloud ( id_id , icloud )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: icloud
+  INTEGER id_id
+  icloud = model_config_rec%icloud
+  RETURN
+END SUBROUTINE nl_get_icloud
+SUBROUTINE nl_get_ideal_xland ( id_id , ideal_xland )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ideal_xland
+  INTEGER id_id
+  ideal_xland = model_config_rec%ideal_xland
+  RETURN
+END SUBROUTINE nl_get_ideal_xland
+SUBROUTINE nl_get_swrad_scat ( id_id , swrad_scat )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: swrad_scat
+  INTEGER id_id
+  swrad_scat = model_config_rec%swrad_scat
+  RETURN
+END SUBROUTINE nl_get_swrad_scat
+SUBROUTINE nl_get_surface_input_source ( id_id , surface_input_source )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: surface_input_source
+  INTEGER id_id
+  surface_input_source = model_config_rec%surface_input_source
+  RETURN
+END SUBROUTINE nl_get_surface_input_source
+SUBROUTINE nl_get_num_soil_layers ( id_id , num_soil_layers )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_soil_layers
+  INTEGER id_id
+  num_soil_layers = model_config_rec%num_soil_layers
+  RETURN
+END SUBROUTINE nl_get_num_soil_layers
+SUBROUTINE nl_get_maxpatch ( id_id , maxpatch )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: maxpatch
+  INTEGER id_id
+  maxpatch = model_config_rec%maxpatch
+  RETURN
+END SUBROUTINE nl_get_maxpatch
+SUBROUTINE nl_get_num_snow_layers ( id_id , num_snow_layers )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_snow_layers
+  INTEGER id_id
+  num_snow_layers = model_config_rec%num_snow_layers
+  RETURN
+END SUBROUTINE nl_get_num_snow_layers
+SUBROUTINE nl_get_num_snso_layers ( id_id , num_snso_layers )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_snso_layers
+  INTEGER id_id
+  num_snso_layers = model_config_rec%num_snso_layers
+  RETURN
+END SUBROUTINE nl_get_num_snso_layers
+SUBROUTINE nl_get_num_urban_layers ( id_id , num_urban_layers )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_urban_layers
+  INTEGER id_id
+  num_urban_layers = model_config_rec%num_urban_layers
+  RETURN
+END SUBROUTINE nl_get_num_urban_layers
+SUBROUTINE nl_get_num_urban_hi ( id_id , num_urban_hi )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_urban_hi
+  INTEGER id_id
+  num_urban_hi = model_config_rec%num_urban_hi
+  RETURN
+END SUBROUTINE nl_get_num_urban_hi
+SUBROUTINE nl_get_num_months ( id_id , num_months )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_months
+  INTEGER id_id
+  num_months = model_config_rec%num_months
+  RETURN
+END SUBROUTINE nl_get_num_months
+SUBROUTINE nl_get_sf_surface_mosaic ( id_id , sf_surface_mosaic )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: sf_surface_mosaic
+  INTEGER id_id
+  sf_surface_mosaic = model_config_rec%sf_surface_mosaic
+  RETURN
+END SUBROUTINE nl_get_sf_surface_mosaic
+SUBROUTINE nl_get_mosaic_cat ( id_id , mosaic_cat )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: mosaic_cat
+  INTEGER id_id
+  mosaic_cat = model_config_rec%mosaic_cat
+  RETURN
+END SUBROUTINE nl_get_mosaic_cat
+SUBROUTINE nl_get_mosaic_cat_soil ( id_id , mosaic_cat_soil )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: mosaic_cat_soil
+  INTEGER id_id
+  mosaic_cat_soil = model_config_rec%mosaic_cat_soil
+  RETURN
+END SUBROUTINE nl_get_mosaic_cat_soil
+SUBROUTINE nl_get_mosaic_lu ( id_id , mosaic_lu )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: mosaic_lu
+  INTEGER id_id
+  mosaic_lu = model_config_rec%mosaic_lu
+  RETURN
+END SUBROUTINE nl_get_mosaic_lu
+SUBROUTINE nl_get_mosaic_soil ( id_id , mosaic_soil )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: mosaic_soil
+  INTEGER id_id
+  mosaic_soil = model_config_rec%mosaic_soil
+  RETURN
+END SUBROUTINE nl_get_mosaic_soil
+SUBROUTINE nl_get_maxiens ( id_id , maxiens )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: maxiens
+  INTEGER id_id
+  maxiens = model_config_rec%maxiens
+  RETURN
+END SUBROUTINE nl_get_maxiens
+SUBROUTINE nl_get_maxens ( id_id , maxens )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: maxens
+  INTEGER id_id
+  maxens = model_config_rec%maxens
+  RETURN
+END SUBROUTINE nl_get_maxens
+SUBROUTINE nl_get_maxens2 ( id_id , maxens2 )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: maxens2
+  INTEGER id_id
+  maxens2 = model_config_rec%maxens2
+  RETURN
+END SUBROUTINE nl_get_maxens2
+SUBROUTINE nl_get_maxens3 ( id_id , maxens3 )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: maxens3
+  INTEGER id_id
+  maxens3 = model_config_rec%maxens3
+  RETURN
+END SUBROUTINE nl_get_maxens3
+SUBROUTINE nl_get_ensdim ( id_id , ensdim )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ensdim
+  INTEGER id_id
+  ensdim = model_config_rec%ensdim
+  RETURN
+END SUBROUTINE nl_get_ensdim
+SUBROUTINE nl_get_cugd_avedx ( id_id , cugd_avedx )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: cugd_avedx
+  INTEGER id_id
+  cugd_avedx = model_config_rec%cugd_avedx
+  RETURN
+END SUBROUTINE nl_get_cugd_avedx
+SUBROUTINE nl_get_clos_choice ( id_id , clos_choice )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: clos_choice
+  INTEGER id_id
+  clos_choice = model_config_rec%clos_choice
+  RETURN
+END SUBROUTINE nl_get_clos_choice
+SUBROUTINE nl_get_imomentum ( id_id , imomentum )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: imomentum
+  INTEGER id_id
+  imomentum = model_config_rec%imomentum
+  RETURN
+END SUBROUTINE nl_get_imomentum
+SUBROUTINE nl_get_ishallow ( id_id , ishallow )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ishallow
+  INTEGER id_id
+  ishallow = model_config_rec%ishallow
+  RETURN
+END SUBROUTINE nl_get_ishallow
+SUBROUTINE nl_get_convtrans_avglen_m ( id_id , convtrans_avglen_m )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: convtrans_avglen_m
+  INTEGER id_id
+  convtrans_avglen_m = model_config_rec%convtrans_avglen_m
+  RETURN
+END SUBROUTINE nl_get_convtrans_avglen_m
+SUBROUTINE nl_get_num_land_cat ( id_id , num_land_cat )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_land_cat
+  INTEGER id_id
+  num_land_cat = model_config_rec%num_land_cat
+  RETURN
+END SUBROUTINE nl_get_num_land_cat
+SUBROUTINE nl_get_num_soil_cat ( id_id , num_soil_cat )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: num_soil_cat
+  INTEGER id_id
+  num_soil_cat = model_config_rec%num_soil_cat
+  RETURN
+END SUBROUTINE nl_get_num_soil_cat
+SUBROUTINE nl_get_mp_zero_out ( id_id , mp_zero_out )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: mp_zero_out
+  INTEGER id_id
+  mp_zero_out = model_config_rec%mp_zero_out
+  RETURN
+END SUBROUTINE nl_get_mp_zero_out
+SUBROUTINE nl_get_mp_zero_out_thresh ( id_id , mp_zero_out_thresh )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: mp_zero_out_thresh
+  INTEGER id_id
+  mp_zero_out_thresh = model_config_rec%mp_zero_out_thresh
+  RETURN
+END SUBROUTINE nl_get_mp_zero_out_thresh
+SUBROUTINE nl_get_seaice_threshold ( id_id , seaice_threshold )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: seaice_threshold
+  INTEGER id_id
+  seaice_threshold = model_config_rec%seaice_threshold
+  RETURN
+END SUBROUTINE nl_get_seaice_threshold
+SUBROUTINE nl_get_sst_update ( id_id , sst_update )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: sst_update
+  INTEGER id_id
+  sst_update = model_config_rec%sst_update
+  RETURN
+END SUBROUTINE nl_get_sst_update
+SUBROUTINE nl_get_sst_skin ( id_id , sst_skin )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: sst_skin
+  INTEGER id_id
+  sst_skin = model_config_rec%sst_skin
+  RETURN
+END SUBROUTINE nl_get_sst_skin
+SUBROUTINE nl_get_tmn_update ( id_id , tmn_update )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: tmn_update
+  INTEGER id_id
+  tmn_update = model_config_rec%tmn_update
+  RETURN
+END SUBROUTINE nl_get_tmn_update
+SUBROUTINE nl_get_usemonalb ( id_id , usemonalb )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: usemonalb
+  INTEGER id_id
+  usemonalb = model_config_rec%usemonalb
+  RETURN
+END SUBROUTINE nl_get_usemonalb
+SUBROUTINE nl_get_rdmaxalb ( id_id , rdmaxalb )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: rdmaxalb
+  INTEGER id_id
+  rdmaxalb = model_config_rec%rdmaxalb
+  RETURN
+END SUBROUTINE nl_get_rdmaxalb
+SUBROUTINE nl_get_rdlai2d ( id_id , rdlai2d )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: rdlai2d
+  INTEGER id_id
+  rdlai2d = model_config_rec%rdlai2d
+  RETURN
+END SUBROUTINE nl_get_rdlai2d
+SUBROUTINE nl_get_ua_phys ( id_id , ua_phys )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: ua_phys
+  INTEGER id_id
+  ua_phys = model_config_rec%ua_phys
+  RETURN
+END SUBROUTINE nl_get_ua_phys
+SUBROUTINE nl_get_opt_thcnd ( id_id , opt_thcnd )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_thcnd
+  INTEGER id_id
+  opt_thcnd = model_config_rec%opt_thcnd
+  RETURN
+END SUBROUTINE nl_get_opt_thcnd
+SUBROUTINE nl_get_co2tf ( id_id , co2tf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: co2tf
+  INTEGER id_id
+  co2tf = model_config_rec%co2tf
+  RETURN
+END SUBROUTINE nl_get_co2tf
+SUBROUTINE nl_get_ra_call_offset ( id_id , ra_call_offset )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ra_call_offset
+  INTEGER id_id
+  ra_call_offset = model_config_rec%ra_call_offset
+  RETURN
+END SUBROUTINE nl_get_ra_call_offset
+SUBROUTINE nl_get_cam_abs_freq_s ( id_id , cam_abs_freq_s )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: cam_abs_freq_s
+  INTEGER id_id
+  cam_abs_freq_s = model_config_rec%cam_abs_freq_s
+  RETURN
+END SUBROUTINE nl_get_cam_abs_freq_s
+SUBROUTINE nl_get_levsiz ( id_id , levsiz )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: levsiz
+  INTEGER id_id
+  levsiz = model_config_rec%levsiz
+  RETURN
+END SUBROUTINE nl_get_levsiz
+SUBROUTINE nl_get_paerlev ( id_id , paerlev )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: paerlev
+  INTEGER id_id
+  paerlev = model_config_rec%paerlev
+  RETURN
+END SUBROUTINE nl_get_paerlev
+SUBROUTINE nl_get_cam_abs_dim1 ( id_id , cam_abs_dim1 )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: cam_abs_dim1
+  INTEGER id_id
+  cam_abs_dim1 = model_config_rec%cam_abs_dim1
+  RETURN
+END SUBROUTINE nl_get_cam_abs_dim1
+SUBROUTINE nl_get_cam_abs_dim2 ( id_id , cam_abs_dim2 )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: cam_abs_dim2
+  INTEGER id_id
+  cam_abs_dim2 = model_config_rec%cam_abs_dim2
+  RETURN
+END SUBROUTINE nl_get_cam_abs_dim2
+SUBROUTINE nl_get_lagday ( id_id , lagday )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: lagday
+  INTEGER id_id
+  lagday = model_config_rec%lagday
+  RETURN
+END SUBROUTINE nl_get_lagday
+SUBROUTINE nl_get_no_src_types ( id_id , no_src_types )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: no_src_types
+  INTEGER id_id
+  no_src_types = model_config_rec%no_src_types
+  RETURN
+END SUBROUTINE nl_get_no_src_types
+SUBROUTINE nl_get_alevsiz ( id_id , alevsiz )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: alevsiz
+  INTEGER id_id
+  alevsiz = model_config_rec%alevsiz
+  RETURN
+END SUBROUTINE nl_get_alevsiz
+SUBROUTINE nl_get_o3input ( id_id , o3input )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: o3input
+  INTEGER id_id
+  o3input = model_config_rec%o3input
+  RETURN
+END SUBROUTINE nl_get_o3input
+SUBROUTINE nl_get_aer_opt ( id_id , aer_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_opt
+  INTEGER id_id
+  aer_opt = model_config_rec%aer_opt
+  RETURN
+END SUBROUTINE nl_get_aer_opt
+SUBROUTINE nl_get_swint_opt ( id_id , swint_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: swint_opt
+  INTEGER id_id
+  swint_opt = model_config_rec%swint_opt
+  RETURN
+END SUBROUTINE nl_get_swint_opt
+SUBROUTINE nl_get_aer_type ( id_id , aer_type )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_type
+  INTEGER id_id
+  aer_type = model_config_rec%aer_type(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_type
+SUBROUTINE nl_get_aer_aod550_opt ( id_id , aer_aod550_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_aod550_opt
+  INTEGER id_id
+  aer_aod550_opt = model_config_rec%aer_aod550_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_aod550_opt
+SUBROUTINE nl_get_aer_angexp_opt ( id_id , aer_angexp_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_angexp_opt
+  INTEGER id_id
+  aer_angexp_opt = model_config_rec%aer_angexp_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_angexp_opt
+SUBROUTINE nl_get_aer_ssa_opt ( id_id , aer_ssa_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_ssa_opt
+  INTEGER id_id
+  aer_ssa_opt = model_config_rec%aer_ssa_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_ssa_opt
+SUBROUTINE nl_get_aer_asy_opt ( id_id , aer_asy_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: aer_asy_opt
+  INTEGER id_id
+  aer_asy_opt = model_config_rec%aer_asy_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_asy_opt
+SUBROUTINE nl_get_aer_aod550_val ( id_id , aer_aod550_val )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: aer_aod550_val
+  INTEGER id_id
+  aer_aod550_val = model_config_rec%aer_aod550_val(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_aod550_val
+SUBROUTINE nl_get_aer_angexp_val ( id_id , aer_angexp_val )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: aer_angexp_val
+  INTEGER id_id
+  aer_angexp_val = model_config_rec%aer_angexp_val(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_angexp_val
+SUBROUTINE nl_get_aer_ssa_val ( id_id , aer_ssa_val )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: aer_ssa_val
+  INTEGER id_id
+  aer_ssa_val = model_config_rec%aer_ssa_val(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_ssa_val
+SUBROUTINE nl_get_aer_asy_val ( id_id , aer_asy_val )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: aer_asy_val
+  INTEGER id_id
+  aer_asy_val = model_config_rec%aer_asy_val(id_id)
+  RETURN
+END SUBROUTINE nl_get_aer_asy_val
+SUBROUTINE nl_get_cu_rad_feedback ( id_id , cu_rad_feedback )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: cu_rad_feedback
+  INTEGER id_id
+  cu_rad_feedback = model_config_rec%cu_rad_feedback(id_id)
+  RETURN
+END SUBROUTINE nl_get_cu_rad_feedback
+SUBROUTINE nl_get_wlpi_use ( id_id , wlpi_use )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: wlpi_use
+  INTEGER id_id
+  wlpi_use = model_config_rec%wlpi_use(id_id)
+  RETURN
+END SUBROUTINE nl_get_wlpi_use
+SUBROUTINE nl_get_wlpi_dt ( id_id , wlpi_dt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: wlpi_dt
+  INTEGER id_id
+  wlpi_dt = model_config_rec%wlpi_dt(id_id)
+  RETURN
+END SUBROUTINE nl_get_wlpi_dt
+SUBROUTINE nl_get_wmxdbz_use ( id_id , wmxdbz_use )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: wmxdbz_use
+  INTEGER id_id
+  wmxdbz_use = model_config_rec%wmxdbz_use(id_id)
+  RETURN
+END SUBROUTINE nl_get_wmxdbz_use
+SUBROUTINE nl_get_wmxdbz_dt ( id_id , wmxdbz_dt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: wmxdbz_dt
+  INTEGER id_id
+  wmxdbz_dt = model_config_rec%wmxdbz_dt(id_id)
+  RETURN
+END SUBROUTINE nl_get_wmxdbz_dt
+SUBROUTINE nl_get_shallowcu_forced_ra ( id_id , shallowcu_forced_ra )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: shallowcu_forced_ra
+  INTEGER id_id
+  shallowcu_forced_ra = model_config_rec%shallowcu_forced_ra(id_id)
+  RETURN
+END SUBROUTINE nl_get_shallowcu_forced_ra
+SUBROUTINE nl_get_numbins ( id_id , numbins )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: numbins
+  INTEGER id_id
+  numbins = model_config_rec%numbins(id_id)
+  RETURN
+END SUBROUTINE nl_get_numbins
+SUBROUTINE nl_get_thbinsize ( id_id , thbinsize )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: thbinsize
+  INTEGER id_id
+  thbinsize = model_config_rec%thbinsize(id_id)
+  RETURN
+END SUBROUTINE nl_get_thbinsize
+SUBROUTINE nl_get_rbinsize ( id_id , rbinsize )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: rbinsize
+  INTEGER id_id
+  rbinsize = model_config_rec%rbinsize(id_id)
+  RETURN
+END SUBROUTINE nl_get_rbinsize
+SUBROUTINE nl_get_mindeepfreq ( id_id , mindeepfreq )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: mindeepfreq
+  INTEGER id_id
+  mindeepfreq = model_config_rec%mindeepfreq(id_id)
+  RETURN
+END SUBROUTINE nl_get_mindeepfreq
+SUBROUTINE nl_get_minshallowfreq ( id_id , minshallowfreq )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: minshallowfreq
+  INTEGER id_id
+  minshallowfreq = model_config_rec%minshallowfreq(id_id)
+  RETURN
+END SUBROUTINE nl_get_minshallowfreq
+SUBROUTINE nl_get_shcu_aerosols_opt ( id_id , shcu_aerosols_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: shcu_aerosols_opt
+  INTEGER id_id
+  shcu_aerosols_opt = model_config_rec%shcu_aerosols_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_shcu_aerosols_opt
+SUBROUTINE nl_get_icloud_cu ( id_id , icloud_cu )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: icloud_cu
+  INTEGER id_id
+  icloud_cu = model_config_rec%icloud_cu(id_id)
+  RETURN
+END SUBROUTINE nl_get_icloud_cu
+SUBROUTINE nl_get_pxlsm_smois_init ( id_id , pxlsm_smois_init )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: pxlsm_smois_init
+  INTEGER id_id
+  pxlsm_smois_init = model_config_rec%pxlsm_smois_init(id_id)
+  RETURN
+END SUBROUTINE nl_get_pxlsm_smois_init
+SUBROUTINE nl_get_omlcall ( id_id , omlcall )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: omlcall
+  INTEGER id_id
+  omlcall = model_config_rec%omlcall
+  RETURN
+END SUBROUTINE nl_get_omlcall
+SUBROUTINE nl_get_sf_ocean_physics ( id_id , sf_ocean_physics )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: sf_ocean_physics
+  INTEGER id_id
+  sf_ocean_physics = model_config_rec%sf_ocean_physics
+  RETURN
+END SUBROUTINE nl_get_sf_ocean_physics
+SUBROUTINE nl_get_traj_opt ( id_id , traj_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: traj_opt
+  INTEGER id_id
+  traj_opt = model_config_rec%traj_opt
+  RETURN
+END SUBROUTINE nl_get_traj_opt
+SUBROUTINE nl_get_tracercall ( id_id , tracercall )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: tracercall
+  INTEGER id_id
+  tracercall = model_config_rec%tracercall
+  RETURN
+END SUBROUTINE nl_get_tracercall
+SUBROUTINE nl_get_omdt ( id_id , omdt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: omdt
+  INTEGER id_id
+  omdt = model_config_rec%omdt
+  RETURN
+END SUBROUTINE nl_get_omdt
+SUBROUTINE nl_get_oml_hml0 ( id_id , oml_hml0 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: oml_hml0
+  INTEGER id_id
+  oml_hml0 = model_config_rec%oml_hml0
+  RETURN
+END SUBROUTINE nl_get_oml_hml0
+SUBROUTINE nl_get_oml_gamma ( id_id , oml_gamma )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: oml_gamma
+  INTEGER id_id
+  oml_gamma = model_config_rec%oml_gamma
+  RETURN
+END SUBROUTINE nl_get_oml_gamma
+SUBROUTINE nl_get_oml_relaxation_time ( id_id , oml_relaxation_time )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: oml_relaxation_time
+  INTEGER id_id
+  oml_relaxation_time = model_config_rec%oml_relaxation_time
+  RETURN
+END SUBROUTINE nl_get_oml_relaxation_time
+SUBROUTINE nl_get_isftcflx ( id_id , isftcflx )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: isftcflx
+  INTEGER id_id
+  isftcflx = model_config_rec%isftcflx
+  RETURN
+END SUBROUTINE nl_get_isftcflx
+SUBROUTINE nl_get_iz0tlnd ( id_id , iz0tlnd )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: iz0tlnd
+  INTEGER id_id
+  iz0tlnd = model_config_rec%iz0tlnd
+  RETURN
+END SUBROUTINE nl_get_iz0tlnd
+SUBROUTINE nl_get_shadlen ( id_id , shadlen )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: shadlen
+  INTEGER id_id
+  shadlen = model_config_rec%shadlen
+  RETURN
+END SUBROUTINE nl_get_shadlen
+SUBROUTINE nl_get_slope_rad ( id_id , slope_rad )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: slope_rad
+  INTEGER id_id
+  slope_rad = model_config_rec%slope_rad(id_id)
+  RETURN
+END SUBROUTINE nl_get_slope_rad
+SUBROUTINE nl_get_topo_shading ( id_id , topo_shading )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: topo_shading
+  INTEGER id_id
+  topo_shading = model_config_rec%topo_shading(id_id)
+  RETURN
+END SUBROUTINE nl_get_topo_shading
+SUBROUTINE nl_get_topo_wind ( id_id , topo_wind )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: topo_wind
+  INTEGER id_id
+  topo_wind = model_config_rec%topo_wind(id_id)
+  RETURN
+END SUBROUTINE nl_get_topo_wind
+SUBROUTINE nl_get_no_mp_heating ( id_id , no_mp_heating )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: no_mp_heating
+  INTEGER id_id
+  no_mp_heating = model_config_rec%no_mp_heating
+  RETURN
+END SUBROUTINE nl_get_no_mp_heating
+SUBROUTINE nl_get_fractional_seaice ( id_id , fractional_seaice )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: fractional_seaice
+  INTEGER id_id
+  fractional_seaice = model_config_rec%fractional_seaice
+  RETURN
+END SUBROUTINE nl_get_fractional_seaice
+SUBROUTINE nl_get_seaice_snowdepth_opt ( id_id , seaice_snowdepth_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: seaice_snowdepth_opt
+  INTEGER id_id
+  seaice_snowdepth_opt = model_config_rec%seaice_snowdepth_opt
+  RETURN
+END SUBROUTINE nl_get_seaice_snowdepth_opt
+SUBROUTINE nl_get_seaice_snowdepth_max ( id_id , seaice_snowdepth_max )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: seaice_snowdepth_max
+  INTEGER id_id
+  seaice_snowdepth_max = model_config_rec%seaice_snowdepth_max
+  RETURN
+END SUBROUTINE nl_get_seaice_snowdepth_max
+SUBROUTINE nl_get_seaice_snowdepth_min ( id_id , seaice_snowdepth_min )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: seaice_snowdepth_min
+  INTEGER id_id
+  seaice_snowdepth_min = model_config_rec%seaice_snowdepth_min
+  RETURN
+END SUBROUTINE nl_get_seaice_snowdepth_min
+SUBROUTINE nl_get_seaice_albedo_opt ( id_id , seaice_albedo_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: seaice_albedo_opt
+  INTEGER id_id
+  seaice_albedo_opt = model_config_rec%seaice_albedo_opt
+  RETURN
+END SUBROUTINE nl_get_seaice_albedo_opt
+SUBROUTINE nl_get_seaice_albedo_default ( id_id , seaice_albedo_default )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: seaice_albedo_default
+  INTEGER id_id
+  seaice_albedo_default = model_config_rec%seaice_albedo_default
+  RETURN
+END SUBROUTINE nl_get_seaice_albedo_default
+SUBROUTINE nl_get_seaice_thickness_opt ( id_id , seaice_thickness_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: seaice_thickness_opt
+  INTEGER id_id
+  seaice_thickness_opt = model_config_rec%seaice_thickness_opt
+  RETURN
+END SUBROUTINE nl_get_seaice_thickness_opt
+SUBROUTINE nl_get_seaice_thickness_default ( id_id , seaice_thickness_default )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: seaice_thickness_default
+  INTEGER id_id
+  seaice_thickness_default = model_config_rec%seaice_thickness_default
+  RETURN
+END SUBROUTINE nl_get_seaice_thickness_default
+SUBROUTINE nl_get_tice2tsk_if2cold ( id_id , tice2tsk_if2cold )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: tice2tsk_if2cold
+  INTEGER id_id
+  tice2tsk_if2cold = model_config_rec%tice2tsk_if2cold
+  RETURN
+END SUBROUTINE nl_get_tice2tsk_if2cold
+SUBROUTINE nl_get_bucket_mm ( id_id , bucket_mm )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: bucket_mm
+  INTEGER id_id
+  bucket_mm = model_config_rec%bucket_mm
+  RETURN
+END SUBROUTINE nl_get_bucket_mm
+SUBROUTINE nl_get_bucket_j ( id_id , bucket_j )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: bucket_j
+  INTEGER id_id
+  bucket_j = model_config_rec%bucket_j
+  RETURN
+END SUBROUTINE nl_get_bucket_j
+SUBROUTINE nl_get_mp_tend_lim ( id_id , mp_tend_lim )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: mp_tend_lim
+  INTEGER id_id
+  mp_tend_lim = model_config_rec%mp_tend_lim
+  RETURN
+END SUBROUTINE nl_get_mp_tend_lim
+SUBROUTINE nl_get_prec_acc_dt ( id_id , prec_acc_dt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: prec_acc_dt
+  INTEGER id_id
+  prec_acc_dt = model_config_rec%prec_acc_dt(id_id)
+  RETURN
+END SUBROUTINE nl_get_prec_acc_dt
+SUBROUTINE nl_get_prec_acc_opt ( id_id , prec_acc_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: prec_acc_opt
+  INTEGER id_id
+  prec_acc_opt = model_config_rec%prec_acc_opt
+  RETURN
+END SUBROUTINE nl_get_prec_acc_opt
+SUBROUTINE nl_get_bucketr_opt ( id_id , bucketr_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: bucketr_opt
+  INTEGER id_id
+  bucketr_opt = model_config_rec%bucketr_opt
+  RETURN
+END SUBROUTINE nl_get_bucketr_opt
+SUBROUTINE nl_get_process_time_series ( id_id , process_time_series )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: process_time_series
+  INTEGER id_id
+  process_time_series = model_config_rec%process_time_series
+  RETURN
+END SUBROUTINE nl_get_process_time_series
+SUBROUTINE nl_get_grav_settling ( id_id , grav_settling )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: grav_settling
+  INTEGER id_id
+  grav_settling = model_config_rec%grav_settling(id_id)
+  RETURN
+END SUBROUTINE nl_get_grav_settling
+SUBROUTINE nl_get_sas_pgcon ( id_id , sas_pgcon )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: sas_pgcon
+  INTEGER id_id
+  sas_pgcon = model_config_rec%sas_pgcon(id_id)
+  RETURN
+END SUBROUTINE nl_get_sas_pgcon
+SUBROUTINE nl_get_scalar_pblmix ( id_id , scalar_pblmix )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: scalar_pblmix
+  INTEGER id_id
+  scalar_pblmix = model_config_rec%scalar_pblmix(id_id)
+  RETURN
+END SUBROUTINE nl_get_scalar_pblmix
+SUBROUTINE nl_get_tracer_pblmix ( id_id , tracer_pblmix )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: tracer_pblmix
+  INTEGER id_id
+  tracer_pblmix = model_config_rec%tracer_pblmix(id_id)
+  RETURN
+END SUBROUTINE nl_get_tracer_pblmix
+SUBROUTINE nl_get_use_aero_icbc ( id_id , use_aero_icbc )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: use_aero_icbc
+  INTEGER id_id
+  use_aero_icbc = model_config_rec%use_aero_icbc
+  RETURN
+END SUBROUTINE nl_get_use_aero_icbc
+SUBROUTINE nl_get_use_rap_aero_icbc ( id_id , use_rap_aero_icbc )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: use_rap_aero_icbc
+  INTEGER id_id
+  use_rap_aero_icbc = model_config_rec%use_rap_aero_icbc
+  RETURN
+END SUBROUTINE nl_get_use_rap_aero_icbc
+SUBROUTINE nl_get_use_mp_re ( id_id , use_mp_re )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: use_mp_re
+  INTEGER id_id
+  use_mp_re = model_config_rec%use_mp_re
+  RETURN
+END SUBROUTINE nl_get_use_mp_re
+SUBROUTINE nl_get_ccn_conc ( id_id , ccn_conc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: ccn_conc
+  INTEGER id_id
+  ccn_conc = model_config_rec%ccn_conc
+  RETURN
+END SUBROUTINE nl_get_ccn_conc
+SUBROUTINE nl_get_hail_opt ( id_id , hail_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: hail_opt
+  INTEGER id_id
+  hail_opt = model_config_rec%hail_opt
+  RETURN
+END SUBROUTINE nl_get_hail_opt
+SUBROUTINE nl_get_dveg ( id_id , dveg )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: dveg
+  INTEGER id_id
+  dveg = model_config_rec%dveg
+  RETURN
+END SUBROUTINE nl_get_dveg
+SUBROUTINE nl_get_opt_crs ( id_id , opt_crs )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_crs
+  INTEGER id_id
+  opt_crs = model_config_rec%opt_crs
+  RETURN
+END SUBROUTINE nl_get_opt_crs
+SUBROUTINE nl_get_opt_btr ( id_id , opt_btr )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_btr
+  INTEGER id_id
+  opt_btr = model_config_rec%opt_btr
+  RETURN
+END SUBROUTINE nl_get_opt_btr
+SUBROUTINE nl_get_opt_run ( id_id , opt_run )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_run
+  INTEGER id_id
+  opt_run = model_config_rec%opt_run
+  RETURN
+END SUBROUTINE nl_get_opt_run
+SUBROUTINE nl_get_opt_sfc ( id_id , opt_sfc )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_sfc
+  INTEGER id_id
+  opt_sfc = model_config_rec%opt_sfc
+  RETURN
+END SUBROUTINE nl_get_opt_sfc
+SUBROUTINE nl_get_opt_frz ( id_id , opt_frz )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_frz
+  INTEGER id_id
+  opt_frz = model_config_rec%opt_frz
+  RETURN
+END SUBROUTINE nl_get_opt_frz
+SUBROUTINE nl_get_opt_inf ( id_id , opt_inf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_inf
+  INTEGER id_id
+  opt_inf = model_config_rec%opt_inf
+  RETURN
+END SUBROUTINE nl_get_opt_inf
+SUBROUTINE nl_get_opt_rad ( id_id , opt_rad )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_rad
+  INTEGER id_id
+  opt_rad = model_config_rec%opt_rad
+  RETURN
+END SUBROUTINE nl_get_opt_rad
+SUBROUTINE nl_get_opt_alb ( id_id , opt_alb )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_alb
+  INTEGER id_id
+  opt_alb = model_config_rec%opt_alb
+  RETURN
+END SUBROUTINE nl_get_opt_alb
+SUBROUTINE nl_get_opt_snf ( id_id , opt_snf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_snf
+  INTEGER id_id
+  opt_snf = model_config_rec%opt_snf
+  RETURN
+END SUBROUTINE nl_get_opt_snf
+SUBROUTINE nl_get_opt_tbot ( id_id , opt_tbot )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_tbot
+  INTEGER id_id
+  opt_tbot = model_config_rec%opt_tbot
+  RETURN
+END SUBROUTINE nl_get_opt_tbot
+SUBROUTINE nl_get_opt_stc ( id_id , opt_stc )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_stc
+  INTEGER id_id
+  opt_stc = model_config_rec%opt_stc
+  RETURN
+END SUBROUTINE nl_get_opt_stc
+SUBROUTINE nl_get_opt_gla ( id_id , opt_gla )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_gla
+  INTEGER id_id
+  opt_gla = model_config_rec%opt_gla
+  RETURN
+END SUBROUTINE nl_get_opt_gla
+SUBROUTINE nl_get_opt_rsf ( id_id , opt_rsf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: opt_rsf
+  INTEGER id_id
+  opt_rsf = model_config_rec%opt_rsf
+  RETURN
+END SUBROUTINE nl_get_opt_rsf
+SUBROUTINE nl_get_wtddt ( id_id , wtddt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: wtddt
+  INTEGER id_id
+  wtddt = model_config_rec%wtddt(id_id)
+  RETURN
+END SUBROUTINE nl_get_wtddt
+SUBROUTINE nl_get_wrf_hydro ( id_id , wrf_hydro )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: wrf_hydro
+  INTEGER id_id
+  wrf_hydro = model_config_rec%wrf_hydro
+  RETURN
+END SUBROUTINE nl_get_wrf_hydro
+SUBROUTINE nl_get_fgdt ( id_id , fgdt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: fgdt
+  INTEGER id_id
+  fgdt = model_config_rec%fgdt(id_id)
+  RETURN
+END SUBROUTINE nl_get_fgdt
+SUBROUTINE nl_get_fgdtzero ( id_id , fgdtzero )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: fgdtzero
+  INTEGER id_id
+  fgdtzero = model_config_rec%fgdtzero(id_id)
+  RETURN
+END SUBROUTINE nl_get_fgdtzero
+SUBROUTINE nl_get_grid_fdda ( id_id , grid_fdda )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: grid_fdda
+  INTEGER id_id
+  grid_fdda = model_config_rec%grid_fdda(id_id)
+  RETURN
+END SUBROUTINE nl_get_grid_fdda
+SUBROUTINE nl_get_grid_sfdda ( id_id , grid_sfdda )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: grid_sfdda
+  INTEGER id_id
+  grid_sfdda = model_config_rec%grid_sfdda(id_id)
+  RETURN
+END SUBROUTINE nl_get_grid_sfdda
+SUBROUTINE nl_get_if_no_pbl_nudging_uv ( id_id , if_no_pbl_nudging_uv )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_no_pbl_nudging_uv
+  INTEGER id_id
+  if_no_pbl_nudging_uv = model_config_rec%if_no_pbl_nudging_uv(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_no_pbl_nudging_uv
+SUBROUTINE nl_get_if_no_pbl_nudging_t ( id_id , if_no_pbl_nudging_t )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_no_pbl_nudging_t
+  INTEGER id_id
+  if_no_pbl_nudging_t = model_config_rec%if_no_pbl_nudging_t(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_no_pbl_nudging_t
+SUBROUTINE nl_get_if_no_pbl_nudging_ph ( id_id , if_no_pbl_nudging_ph )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_no_pbl_nudging_ph
+  INTEGER id_id
+  if_no_pbl_nudging_ph = model_config_rec%if_no_pbl_nudging_ph(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_no_pbl_nudging_ph
+SUBROUTINE nl_get_if_no_pbl_nudging_q ( id_id , if_no_pbl_nudging_q )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_no_pbl_nudging_q
+  INTEGER id_id
+  if_no_pbl_nudging_q = model_config_rec%if_no_pbl_nudging_q(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_no_pbl_nudging_q
+SUBROUTINE nl_get_if_zfac_uv ( id_id , if_zfac_uv )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_uv
+  INTEGER id_id
+  if_zfac_uv = model_config_rec%if_zfac_uv(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_uv
+SUBROUTINE nl_get_k_zfac_uv ( id_id , k_zfac_uv )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_uv
+  INTEGER id_id
+  k_zfac_uv = model_config_rec%k_zfac_uv(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_uv
+SUBROUTINE nl_get_if_zfac_t ( id_id , if_zfac_t )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_t
+  INTEGER id_id
+  if_zfac_t = model_config_rec%if_zfac_t(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_t
+SUBROUTINE nl_get_k_zfac_t ( id_id , k_zfac_t )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_t
+  INTEGER id_id
+  k_zfac_t = model_config_rec%k_zfac_t(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_t
+SUBROUTINE nl_get_if_zfac_ph ( id_id , if_zfac_ph )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_ph
+  INTEGER id_id
+  if_zfac_ph = model_config_rec%if_zfac_ph(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_ph
+SUBROUTINE nl_get_k_zfac_ph ( id_id , k_zfac_ph )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_ph
+  INTEGER id_id
+  k_zfac_ph = model_config_rec%k_zfac_ph(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_ph
+SUBROUTINE nl_get_if_zfac_q ( id_id , if_zfac_q )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_q
+  INTEGER id_id
+  if_zfac_q = model_config_rec%if_zfac_q(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_q
+SUBROUTINE nl_get_k_zfac_q ( id_id , k_zfac_q )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_q
+  INTEGER id_id
+  k_zfac_q = model_config_rec%k_zfac_q(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_q
+SUBROUTINE nl_get_if_zfac_qr ( id_id , if_zfac_qr )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_qr
+  INTEGER id_id
+  if_zfac_qr = model_config_rec%if_zfac_qr(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_qr
+SUBROUTINE nl_get_k_zfac_qr ( id_id , k_zfac_qr )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_qr
+  INTEGER id_id
+  k_zfac_qr = model_config_rec%k_zfac_qr(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_qr
+SUBROUTINE nl_get_if_zfac_qc ( id_id , if_zfac_qc )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_zfac_qc
+  INTEGER id_id
+  if_zfac_qc = model_config_rec%if_zfac_qc(id_id)
+  RETURN
+END SUBROUTINE nl_get_if_zfac_qc
+SUBROUTINE nl_get_k_zfac_qc ( id_id , k_zfac_qc )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: k_zfac_qc
+  INTEGER id_id
+  k_zfac_qc = model_config_rec%k_zfac_qc(id_id)
+  RETURN
+END SUBROUTINE nl_get_k_zfac_qc
+SUBROUTINE nl_get_dk_zfac_uv ( id_id , dk_zfac_uv )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: dk_zfac_uv
+  INTEGER id_id
+  dk_zfac_uv = model_config_rec%dk_zfac_uv(id_id)
+  RETURN
+END SUBROUTINE nl_get_dk_zfac_uv
+SUBROUTINE nl_get_dk_zfac_t ( id_id , dk_zfac_t )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: dk_zfac_t
+  INTEGER id_id
+  dk_zfac_t = model_config_rec%dk_zfac_t(id_id)
+  RETURN
+END SUBROUTINE nl_get_dk_zfac_t
+SUBROUTINE nl_get_dk_zfac_ph ( id_id , dk_zfac_ph )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: dk_zfac_ph
+  INTEGER id_id
+  dk_zfac_ph = model_config_rec%dk_zfac_ph(id_id)
+  RETURN
+END SUBROUTINE nl_get_dk_zfac_ph
+SUBROUTINE nl_get_guv ( id_id , guv )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: guv
+  INTEGER id_id
+  guv = model_config_rec%guv(id_id)
+  RETURN
+END SUBROUTINE nl_get_guv
+SUBROUTINE nl_get_guv_sfc ( id_id , guv_sfc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: guv_sfc
+  INTEGER id_id
+  guv_sfc = model_config_rec%guv_sfc(id_id)
+  RETURN
+END SUBROUTINE nl_get_guv_sfc
+SUBROUTINE nl_get_gt ( id_id , gt )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gt
+  INTEGER id_id
+  gt = model_config_rec%gt(id_id)
+  RETURN
+END SUBROUTINE nl_get_gt
+SUBROUTINE nl_get_gt_sfc ( id_id , gt_sfc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gt_sfc
+  INTEGER id_id
+  gt_sfc = model_config_rec%gt_sfc(id_id)
+  RETURN
+END SUBROUTINE nl_get_gt_sfc
+SUBROUTINE nl_get_gq ( id_id , gq )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gq
+  INTEGER id_id
+  gq = model_config_rec%gq(id_id)
+  RETURN
+END SUBROUTINE nl_get_gq
+SUBROUTINE nl_get_gqr ( id_id , gqr )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gqr
+  INTEGER id_id
+  gqr = model_config_rec%gqr(id_id)
+  RETURN
+END SUBROUTINE nl_get_gqr
+SUBROUTINE nl_get_gqc ( id_id , gqc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gqc
+  INTEGER id_id
+  gqc = model_config_rec%gqc(id_id)
+  RETURN
+END SUBROUTINE nl_get_gqc
+SUBROUTINE nl_get_clh ( id_id , clh )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: clh
+  INTEGER id_id
+  clh = model_config_rec%clh(id_id)
+  RETURN
+END SUBROUTINE nl_get_clh
+SUBROUTINE nl_get_gq_sfc ( id_id , gq_sfc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gq_sfc
+  INTEGER id_id
+  gq_sfc = model_config_rec%gq_sfc(id_id)
+  RETURN
+END SUBROUTINE nl_get_gq_sfc
+SUBROUTINE nl_get_gph ( id_id , gph )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: gph
+  INTEGER id_id
+  gph = model_config_rec%gph(id_id)
+  RETURN
+END SUBROUTINE nl_get_gph
+SUBROUTINE nl_get_dtramp_min ( id_id , dtramp_min )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: dtramp_min
+  INTEGER id_id
+  dtramp_min = model_config_rec%dtramp_min
+  RETURN
+END SUBROUTINE nl_get_dtramp_min
+SUBROUTINE nl_get_if_ramping ( id_id , if_ramping )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: if_ramping
+  INTEGER id_id
+  if_ramping = model_config_rec%if_ramping
+  RETURN
+END SUBROUTINE nl_get_if_ramping
+SUBROUTINE nl_get_rinblw ( id_id , rinblw )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: rinblw
+  INTEGER id_id
+  rinblw = model_config_rec%rinblw(id_id)
+  RETURN
+END SUBROUTINE nl_get_rinblw
+SUBROUTINE nl_get_xwavenum ( id_id , xwavenum )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: xwavenum
+  INTEGER id_id
+  xwavenum = model_config_rec%xwavenum(id_id)
+  RETURN
+END SUBROUTINE nl_get_xwavenum
+SUBROUTINE nl_get_ywavenum ( id_id , ywavenum )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: ywavenum
+  INTEGER id_id
+  ywavenum = model_config_rec%ywavenum(id_id)
+  RETURN
+END SUBROUTINE nl_get_ywavenum
+SUBROUTINE nl_get_pxlsm_soil_nudge ( id_id , pxlsm_soil_nudge )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: pxlsm_soil_nudge
+  INTEGER id_id
+  pxlsm_soil_nudge = model_config_rec%pxlsm_soil_nudge(id_id)
+  RETURN
+END SUBROUTINE nl_get_pxlsm_soil_nudge
+SUBROUTINE nl_get_fasdas ( id_id , fasdas )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: fasdas
+  INTEGER id_id
+  fasdas = model_config_rec%fasdas(id_id)
+  RETURN
+END SUBROUTINE nl_get_fasdas
+SUBROUTINE nl_get_obs_nudge_opt ( id_id , obs_nudge_opt )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_opt
+  INTEGER id_id
+  obs_nudge_opt = model_config_rec%obs_nudge_opt(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_opt
+SUBROUTINE nl_get_max_obs ( id_id , max_obs )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: max_obs
+  INTEGER id_id
+  max_obs = model_config_rec%max_obs(id_id)
+  RETURN
+END SUBROUTINE nl_get_max_obs
+SUBROUTINE nl_get_obs_read_kalman ( id_id , obs_read_kalman )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_read_kalman
+  INTEGER id_id
+  obs_read_kalman = model_config_rec%obs_read_kalman(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_read_kalman
+SUBROUTINE nl_get_max_kalman ( id_id , max_kalman )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: max_kalman
+  INTEGER id_id
+  max_kalman = model_config_rec%max_kalman(id_id)
+  RETURN
+END SUBROUTINE nl_get_max_kalman
+SUBROUTINE nl_get_obs_qc_domain ( id_id , obs_qc_domain )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_qc_domain
+  INTEGER id_id
+  obs_qc_domain = model_config_rec%obs_qc_domain(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_qc_domain
+SUBROUTINE nl_get_obs_qc_alerts ( id_id , obs_qc_alerts )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_qc_alerts
+  INTEGER id_id
+  obs_qc_alerts = model_config_rec%obs_qc_alerts
+  RETURN
+END SUBROUTINE nl_get_obs_qc_alerts
+SUBROUTINE nl_get_obs_adjust_ht ( id_id , obs_adjust_ht )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_adjust_ht
+  INTEGER id_id
+  obs_adjust_ht = model_config_rec%obs_adjust_ht
+  RETURN
+END SUBROUTINE nl_get_obs_adjust_ht
+SUBROUTINE nl_get_obs_rekf_files ( id_id , obs_rekf_files )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_rekf_files
+  INTEGER id_id
+  obs_rekf_files = model_config_rec%obs_rekf_files
+  RETURN
+END SUBROUTINE nl_get_obs_rekf_files
+SUBROUTINE nl_get_obs_ndir ( id_id , obs_ndir )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_ndir
+  INTEGER id_id
+  obs_ndir = model_config_rec%obs_ndir
+  RETURN
+END SUBROUTINE nl_get_obs_ndir
+SUBROUTINE nl_get_obs_npow ( id_id , obs_npow )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_npow
+  INTEGER id_id
+  obs_npow = model_config_rec%obs_npow
+  RETURN
+END SUBROUTINE nl_get_obs_npow
+SUBROUTINE nl_get_obs_kalman_lbdy ( id_id , obs_kalman_lbdy )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_kalman_lbdy
+  INTEGER id_id
+  obs_kalman_lbdy = model_config_rec%obs_kalman_lbdy
+  RETURN
+END SUBROUTINE nl_get_obs_kalman_lbdy
+SUBROUTINE nl_get_obs_kalman_lskip ( id_id , obs_kalman_lskip )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_kalman_lskip
+  INTEGER id_id
+  obs_kalman_lskip = model_config_rec%obs_kalman_lskip
+  RETURN
+END SUBROUTINE nl_get_obs_kalman_lskip
+SUBROUTINE nl_get_obs_nudge_terms ( id_id , obs_nudge_terms )
+  USE module_configure, ONLY : model_config_rec
+  character*256 , INTENT(OUT) :: obs_nudge_terms
+  INTEGER id_id
+  obs_nudge_terms = model_config_rec%obs_nudge_terms(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_terms
+SUBROUTINE nl_get_nobs_scans ( id_id , nobs_scans )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: nobs_scans
+  INTEGER id_id
+  nobs_scans = model_config_rec%nobs_scans
+  RETURN
+END SUBROUTINE nl_get_nobs_scans
+SUBROUTINE nl_get_fdda_start ( id_id , fdda_start )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: fdda_start
+  INTEGER id_id
+  fdda_start = model_config_rec%fdda_start(id_id)
+  RETURN
+END SUBROUTINE nl_get_fdda_start
+SUBROUTINE nl_get_fdda_end ( id_id , fdda_end )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: fdda_end
+  INTEGER id_id
+  fdda_end = model_config_rec%fdda_end(id_id)
+  RETURN
+END SUBROUTINE nl_get_fdda_end
+SUBROUTINE nl_get_obs_nudge_wind ( id_id , obs_nudge_wind )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_wind
+  INTEGER id_id
+  obs_nudge_wind = model_config_rec%obs_nudge_wind(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_wind
+SUBROUTINE nl_get_obs_coef_wind ( id_id , obs_coef_wind )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_wind
+  INTEGER id_id
+  obs_coef_wind = model_config_rec%obs_coef_wind(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_wind
+SUBROUTINE nl_get_obs_nudge_vr ( id_id , obs_nudge_vr )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_vr
+  INTEGER id_id
+  obs_nudge_vr = model_config_rec%obs_nudge_vr(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_vr
+SUBROUTINE nl_get_obs_coef_vr ( id_id , obs_coef_vr )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_vr
+  INTEGER id_id
+  obs_coef_vr = model_config_rec%obs_coef_vr(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_vr
+SUBROUTINE nl_get_obs_nudge_rf ( id_id , obs_nudge_rf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_rf
+  INTEGER id_id
+  obs_nudge_rf = model_config_rec%obs_nudge_rf(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_rf
+SUBROUTINE nl_get_obs_coef_rf ( id_id , obs_coef_rf )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_rf
+  INTEGER id_id
+  obs_coef_rf = model_config_rec%obs_coef_rf(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_rf
+SUBROUTINE nl_get_obs_nudge_temp ( id_id , obs_nudge_temp )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_temp
+  INTEGER id_id
+  obs_nudge_temp = model_config_rec%obs_nudge_temp(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_temp
+SUBROUTINE nl_get_obs_coef_temp ( id_id , obs_coef_temp )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_temp
+  INTEGER id_id
+  obs_coef_temp = model_config_rec%obs_coef_temp(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_temp
+SUBROUTINE nl_get_obs_nudge_mois ( id_id , obs_nudge_mois )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_mois
+  INTEGER id_id
+  obs_nudge_mois = model_config_rec%obs_nudge_mois(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_mois
+SUBROUTINE nl_get_obs_coef_mois ( id_id , obs_coef_mois )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_mois
+  INTEGER id_id
+  obs_coef_mois = model_config_rec%obs_coef_mois(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_mois
+SUBROUTINE nl_get_obs_nudge_pstr ( id_id , obs_nudge_pstr )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_nudge_pstr
+  INTEGER id_id
+  obs_nudge_pstr = model_config_rec%obs_nudge_pstr(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_nudge_pstr
+SUBROUTINE nl_get_obs_coef_pstr ( id_id , obs_coef_pstr )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_coef_pstr
+  INTEGER id_id
+  obs_coef_pstr = model_config_rec%obs_coef_pstr(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_coef_pstr
+SUBROUTINE nl_get_obs_rinxy ( id_id , obs_rinxy )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy
+  INTEGER id_id
+  obs_rinxy = model_config_rec%obs_rinxy(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy
+SUBROUTINE nl_get_obs_rinxy_sfc ( id_id , obs_rinxy_sfc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sfc
+  INTEGER id_id
+  obs_rinxy_sfc = model_config_rec%obs_rinxy_sfc(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sfc
+SUBROUTINE nl_get_obs_rinfmx ( id_id , obs_rinfmx )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinfmx
+  INTEGER id_id
+  obs_rinfmx = model_config_rec%obs_rinfmx(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinfmx
+SUBROUTINE nl_get_obs_rinxy_meta ( id_id , obs_rinxy_meta )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_meta
+  INTEGER id_id
+  obs_rinxy_meta = model_config_rec%obs_rinxy_meta(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_meta
+SUBROUTINE nl_get_obs_rinxy_spec ( id_id , obs_rinxy_spec )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_spec
+  INTEGER id_id
+  obs_rinxy_spec = model_config_rec%obs_rinxy_spec(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_spec
+SUBROUTINE nl_get_obs_rinxy_ship ( id_id , obs_rinxy_ship )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_ship
+  INTEGER id_id
+  obs_rinxy_ship = model_config_rec%obs_rinxy_ship(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_ship
+SUBROUTINE nl_get_obs_rinxy_syno ( id_id , obs_rinxy_syno )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_syno
+  INTEGER id_id
+  obs_rinxy_syno = model_config_rec%obs_rinxy_syno(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_syno
+SUBROUTINE nl_get_obs_rinxy_temp ( id_id , obs_rinxy_temp )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_temp
+  INTEGER id_id
+  obs_rinxy_temp = model_config_rec%obs_rinxy_temp(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_temp
+SUBROUTINE nl_get_obs_rinxy_pilo ( id_id , obs_rinxy_pilo )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_pilo
+  INTEGER id_id
+  obs_rinxy_pilo = model_config_rec%obs_rinxy_pilo(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_pilo
+SUBROUTINE nl_get_obs_rinxy_satw ( id_id , obs_rinxy_satw )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_satw
+  INTEGER id_id
+  obs_rinxy_satw = model_config_rec%obs_rinxy_satw(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_satw
+SUBROUTINE nl_get_obs_rinxy_sams ( id_id , obs_rinxy_sams )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sams
+  INTEGER id_id
+  obs_rinxy_sams = model_config_rec%obs_rinxy_sams(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sams
+SUBROUTINE nl_get_obs_rinxy_prof ( id_id , obs_rinxy_prof )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_prof
+  INTEGER id_id
+  obs_rinxy_prof = model_config_rec%obs_rinxy_prof(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_prof
+SUBROUTINE nl_get_obs_rinxy_sl10 ( id_id , obs_rinxy_sl10 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl10
+  INTEGER id_id
+  obs_rinxy_sl10 = model_config_rec%obs_rinxy_sl10(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl10
+SUBROUTINE nl_get_obs_rinxy_sl11 ( id_id , obs_rinxy_sl11 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl11
+  INTEGER id_id
+  obs_rinxy_sl11 = model_config_rec%obs_rinxy_sl11(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl11
+SUBROUTINE nl_get_obs_rinxy_sl12 ( id_id , obs_rinxy_sl12 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl12
+  INTEGER id_id
+  obs_rinxy_sl12 = model_config_rec%obs_rinxy_sl12(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl12
+SUBROUTINE nl_get_obs_rinxy_sl13 ( id_id , obs_rinxy_sl13 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl13
+  INTEGER id_id
+  obs_rinxy_sl13 = model_config_rec%obs_rinxy_sl13(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl13
+SUBROUTINE nl_get_obs_rinxy_sl14 ( id_id , obs_rinxy_sl14 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl14
+  INTEGER id_id
+  obs_rinxy_sl14 = model_config_rec%obs_rinxy_sl14(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl14
+SUBROUTINE nl_get_obs_rinxy_sl15 ( id_id , obs_rinxy_sl15 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinxy_sl15
+  INTEGER id_id
+  obs_rinxy_sl15 = model_config_rec%obs_rinxy_sl15(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_rinxy_sl15
+SUBROUTINE nl_get_obs_rinsig ( id_id , obs_rinsig )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_rinsig
+  INTEGER id_id
+  obs_rinsig = model_config_rec%obs_rinsig
+  RETURN
+END SUBROUTINE nl_get_obs_rinsig
+SUBROUTINE nl_get_obs_twindo ( id_id , obs_twindo )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo
+  INTEGER id_id
+  obs_twindo = model_config_rec%obs_twindo(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo
+SUBROUTINE nl_get_obs_twindo_sfc ( id_id , obs_twindo_sfc )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sfc
+  INTEGER id_id
+  obs_twindo_sfc = model_config_rec%obs_twindo_sfc(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sfc
+SUBROUTINE nl_get_obs_twindo_meta ( id_id , obs_twindo_meta )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_meta
+  INTEGER id_id
+  obs_twindo_meta = model_config_rec%obs_twindo_meta(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_meta
+SUBROUTINE nl_get_obs_twindo_spec ( id_id , obs_twindo_spec )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_spec
+  INTEGER id_id
+  obs_twindo_spec = model_config_rec%obs_twindo_spec(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_spec
+SUBROUTINE nl_get_obs_twindo_ship ( id_id , obs_twindo_ship )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_ship
+  INTEGER id_id
+  obs_twindo_ship = model_config_rec%obs_twindo_ship(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_ship
+SUBROUTINE nl_get_obs_twindo_syno ( id_id , obs_twindo_syno )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_syno
+  INTEGER id_id
+  obs_twindo_syno = model_config_rec%obs_twindo_syno(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_syno
+SUBROUTINE nl_get_obs_twindo_temp ( id_id , obs_twindo_temp )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_temp
+  INTEGER id_id
+  obs_twindo_temp = model_config_rec%obs_twindo_temp(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_temp
+SUBROUTINE nl_get_obs_twindo_pilo ( id_id , obs_twindo_pilo )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_pilo
+  INTEGER id_id
+  obs_twindo_pilo = model_config_rec%obs_twindo_pilo(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_pilo
+SUBROUTINE nl_get_obs_twindo_satw ( id_id , obs_twindo_satw )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_satw
+  INTEGER id_id
+  obs_twindo_satw = model_config_rec%obs_twindo_satw(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_satw
+SUBROUTINE nl_get_obs_twindo_sams ( id_id , obs_twindo_sams )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sams
+  INTEGER id_id
+  obs_twindo_sams = model_config_rec%obs_twindo_sams(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sams
+SUBROUTINE nl_get_obs_twindo_prof ( id_id , obs_twindo_prof )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_prof
+  INTEGER id_id
+  obs_twindo_prof = model_config_rec%obs_twindo_prof(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_prof
+SUBROUTINE nl_get_obs_twindo_sl10 ( id_id , obs_twindo_sl10 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl10
+  INTEGER id_id
+  obs_twindo_sl10 = model_config_rec%obs_twindo_sl10(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl10
+SUBROUTINE nl_get_obs_twindo_sl11 ( id_id , obs_twindo_sl11 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl11
+  INTEGER id_id
+  obs_twindo_sl11 = model_config_rec%obs_twindo_sl11(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl11
+SUBROUTINE nl_get_obs_twindo_sl12 ( id_id , obs_twindo_sl12 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl12
+  INTEGER id_id
+  obs_twindo_sl12 = model_config_rec%obs_twindo_sl12(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl12
+SUBROUTINE nl_get_obs_twindo_sl13 ( id_id , obs_twindo_sl13 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl13
+  INTEGER id_id
+  obs_twindo_sl13 = model_config_rec%obs_twindo_sl13(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl13
+SUBROUTINE nl_get_obs_twindo_sl14 ( id_id , obs_twindo_sl14 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl14
+  INTEGER id_id
+  obs_twindo_sl14 = model_config_rec%obs_twindo_sl14(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl14
+SUBROUTINE nl_get_obs_twindo_sl15 ( id_id , obs_twindo_sl15 )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_twindo_sl15
+  INTEGER id_id
+  obs_twindo_sl15 = model_config_rec%obs_twindo_sl15(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_twindo_sl15
+SUBROUTINE nl_get_obs_npfi ( id_id , obs_npfi )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_npfi
+  INTEGER id_id
+  obs_npfi = model_config_rec%obs_npfi
+  RETURN
+END SUBROUTINE nl_get_obs_npfi
+SUBROUTINE nl_get_obs_ionf ( id_id , obs_ionf )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_ionf
+  INTEGER id_id
+  obs_ionf = model_config_rec%obs_ionf(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_ionf
+SUBROUTINE nl_get_obs_idynin ( id_id , obs_idynin )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_idynin
+  INTEGER id_id
+  obs_idynin = model_config_rec%obs_idynin
+  RETURN
+END SUBROUTINE nl_get_obs_idynin
+SUBROUTINE nl_get_obs_dtramp ( id_id , obs_dtramp )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: obs_dtramp
+  INTEGER id_id
+  obs_dtramp = model_config_rec%obs_dtramp
+  RETURN
+END SUBROUTINE nl_get_obs_dtramp
+SUBROUTINE nl_get_obs_prt_max ( id_id , obs_prt_max )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_prt_max
+  INTEGER id_id
+  obs_prt_max = model_config_rec%obs_prt_max
+  RETURN
+END SUBROUTINE nl_get_obs_prt_max
+SUBROUTINE nl_get_obs_prt_freq ( id_id , obs_prt_freq )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: obs_prt_freq
+  INTEGER id_id
+  obs_prt_freq = model_config_rec%obs_prt_freq(id_id)
+  RETURN
+END SUBROUTINE nl_get_obs_prt_freq
+SUBROUTINE nl_get_obs_ipf_in4dob ( id_id , obs_ipf_in4dob )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_ipf_in4dob
+  INTEGER id_id
+  obs_ipf_in4dob = model_config_rec%obs_ipf_in4dob
+  RETURN
+END SUBROUTINE nl_get_obs_ipf_in4dob
+SUBROUTINE nl_get_obs_ipf_errob ( id_id , obs_ipf_errob )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_ipf_errob
+  INTEGER id_id
+  obs_ipf_errob = model_config_rec%obs_ipf_errob
+  RETURN
+END SUBROUTINE nl_get_obs_ipf_errob
+SUBROUTINE nl_get_obs_ipf_nudob ( id_id , obs_ipf_nudob )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_ipf_nudob
+  INTEGER id_id
+  obs_ipf_nudob = model_config_rec%obs_ipf_nudob
+  RETURN
+END SUBROUTINE nl_get_obs_ipf_nudob
+SUBROUTINE nl_get_obs_ipf_init ( id_id , obs_ipf_init )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: obs_ipf_init
+  INTEGER id_id
+  obs_ipf_init = model_config_rec%obs_ipf_init
+  RETURN
+END SUBROUTINE nl_get_obs_ipf_init
+SUBROUTINE nl_get_qc_internal ( id_id , qc_internal )
+  USE module_configure, ONLY : model_config_rec
+  logical , INTENT(OUT) :: qc_internal
+  INTEGER id_id
+  qc_internal = model_config_rec%qc_internal
+  RETURN
+END SUBROUTINE nl_get_qc_internal
+SUBROUTINE nl_get_tolerance_p ( id_id , tolerance_p )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_p
+  INTEGER id_id
+  tolerance_p = model_config_rec%tolerance_p
+  RETURN
+END SUBROUTINE nl_get_tolerance_p
+SUBROUTINE nl_get_tolerance_q ( id_id , tolerance_q )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_q
+  INTEGER id_id
+  tolerance_q = model_config_rec%tolerance_q
+  RETURN
+END SUBROUTINE nl_get_tolerance_q
+SUBROUTINE nl_get_tolerance_t ( id_id , tolerance_t )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_t
+  INTEGER id_id
+  tolerance_t = model_config_rec%tolerance_t
+  RETURN
+END SUBROUTINE nl_get_tolerance_t
+SUBROUTINE nl_get_tolerance_u ( id_id , tolerance_u )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_u
+  INTEGER id_id
+  tolerance_u = model_config_rec%tolerance_u
+  RETURN
+END SUBROUTINE nl_get_tolerance_u
+SUBROUTINE nl_get_tolerance_p_sound ( id_id , tolerance_p_sound )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_p_sound
+  INTEGER id_id
+  tolerance_p_sound = model_config_rec%tolerance_p_sound
+  RETURN
+END SUBROUTINE nl_get_tolerance_p_sound
+SUBROUTINE nl_get_tolerance_q_sound ( id_id , tolerance_q_sound )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_q_sound
+  INTEGER id_id
+  tolerance_q_sound = model_config_rec%tolerance_q_sound
+  RETURN
+END SUBROUTINE nl_get_tolerance_q_sound
+SUBROUTINE nl_get_tolerance_t_sound ( id_id , tolerance_t_sound )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_t_sound
+  INTEGER id_id
+  tolerance_t_sound = model_config_rec%tolerance_t_sound
+  RETURN
+END SUBROUTINE nl_get_tolerance_t_sound
+SUBROUTINE nl_get_tolerance_u_sound ( id_id , tolerance_u_sound )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: tolerance_u_sound
+  INTEGER id_id
+  tolerance_u_sound = model_config_rec%tolerance_u_sound
+  RETURN
+END SUBROUTINE nl_get_tolerance_u_sound
+SUBROUTINE nl_get_scm_force ( id_id , scm_force )
+  USE module_configure, ONLY : model_config_rec
+  integer , INTENT(OUT) :: scm_force
+  INTEGER id_id
+  scm_force = model_config_rec%scm_force
+  RETURN
+END SUBROUTINE nl_get_scm_force
+SUBROUTINE nl_get_scm_force_dx ( id_id , scm_force_dx )
+  USE module_configure, ONLY : model_config_rec
+  real , INTENT(OUT) :: scm_force_dx
+  INTEGER id_id
+  scm_force_dx = model_config_rec%scm_force_dx
+  RETURN
+END SUBROUTINE nl_get_scm_force_dx
+!ENDOFREGISTRYGENERATEDINCLUDE

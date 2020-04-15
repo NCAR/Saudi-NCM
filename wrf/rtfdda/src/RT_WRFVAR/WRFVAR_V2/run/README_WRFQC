@@ -1,0 +1,103 @@
+#------------------------------------------------------------------------------#
+#
+# RT_G_rtfdda_wrfqc.csh: Main driver for WRF QC applications.
+#
+# Usage: wrf.csh this_cycle last_cycle start_date cpun node stage"
+# -----
+#
+# Where: 
+# -----
+#  this_cycle = current cycle  date and hour (CCYYMMDDHH)"
+#  last_cycle = previous cycle date and hour (CCYYMMDDHH)"
+#  start_date = date and time of the first observations to be QCed (CCYYMMDDHH)"
+#  cpun is the number of parallel processors"
+#  node:  0 = mpp; 1 = running omp on node"
+#  stage: WRF_F = final analysis; (WRF_F) or a forecast (WRF_P)"
+#  plotobs = 1 will create scatter plots (optional)"
+#
+#
+# Output:
+# ------
+#  Files cyymmddhh_qc_obs_for_assimilation_s where ccyymmddh is the time
+#  of validity for QCed observations.
+#
+# Files/functions already used by WRF FDDA and called from this script:
+# --------------------------------------------------------------------
+#
+#  advance_cymd:                        Compute new date from a date string 
+#                                      (CCYYMMDDHH) and a time in hours 
+#                                      (must be in the path).
+#
+#  $GSJOBDIR/namelists/wrf.nl.template: WRF namelist template for the WRF job.
+#
+#  $CONSTANT_FILES/wrfrun/LANDUSE.TBL:  The land use table used by thes WRF run.
+#
+#  $EXECUTABLE_ARCHIVE/wrf.nl.nest.pl:  WRF namelist utility used by the WRF run
+#
+#
+# Additional files/Functions:
+# --------------------------
+#
+#  $CONSTANT_FILES/WRFVAR.namelist.template: Template for WRF_VAR namelist
+#                                            with QC records appended. 
+#                                            Available from CVS at:
+#                                          apps/4dwx/RTFDDA/SOURCE/WRFV2_VAR/run
+#
+#  $EXECUTABLE_ARCHIVE/RT_all.obs_trim-merge.USA: Utility to sort obs available
+#                                                 from CVS at:
+#                                              apps/4dwx/RTFDDA/scripts/Forecast
+#
+#  $CSH_ARCHIVE/../POSTPROCS/plotobs.ncl: NCL script to create scatter plots
+#                                         of QCed data. Available from CVS at:
+#                                         apps/4dwx/RTFDDA/SOURCE/WRFV2_VAR/run
+#
+#  $EXECUTABLE_ARCHIVE/WRF_latlon.exe:  Executable built from source code
+#                                       WRF_to_point_data available from CVS at:
+#                                       apps/netcdf_utils/src/WRF_to_point_data
+#                                       Executable can be build by entering the
+#                                       command "make WRF_latlon.exe" under
+#                                       directory WRF_to_point_data, after
+#                                       check-out. 
+#
+#  $EXECUTABLE_ARCHIVE/wrfqc.exe:       Executable built from source code
+#                                       WRFV2_VAR available from CVS at:
+#                                       apps/4dwx/RTFDDA/SOURCE/WRFV2_VAR
+#                                       Executable can be build by entering
+#                                       the sequence of commands under WRFV2_VAR
+#                                       "configure qc" 
+#                                       (Select "1" when prompted)
+#                                       "compile qc"
+#                                        The executable wrfqc.exe will be
+#                                        created under directory WRFV2_VAR/main
+#
+#
+# This script is designed should be called by rtfddaflex.pl where the MM5
+# companion script RT_G_rtfdda_mm5qc.csh is called, but under the "WRF"
+# conditional switch. An example to call the script with plots
+# for analysis and no plot for forecast is:
+#
+#  print FILEL "\n   starting F-stage  rap_rtfdda.csh at ", &ctime(time);
+#  if($MODEL eq "MM5") {
+#   system("$CSH_ARCHIVE/Forecast/RT_G_rap_rtfdda_mm5qc.csh $OBS_start $this_cycle $this_cycle $last_cycle");
+#  } elsif ($MODEL eq "WRF") {
+#   system("$CSH_ARCHIVE/Forecast/RT_G_rtfdda_wrfqc.csh $this_cycle $last_cycle $OBS_start $NUM_PROCS $NODE WRF_F 1"); 
+#  }
+#
+# and
+#
+#  print FILEL "\n   starting P-stage rap_rtfdda.csh at ", &ctime(time);
+#  if($MODEL eq "MM5") {
+#   system("$CSH_ARCHIVE/Forecast/RT_G_rap_rtfdda_mm5qc.csh $p_fdda_start $p_fdda_end $this_cycle $last_cycle");
+#  } elsif ($MODEL eq "WRF") {
+#   system("$CSH_ARCHIVE/Forecast/RT_G_rtfdda_wrfqc.csh $this_cycle $last_cycle $OBS_start $NUM_PROCS $NODE WRF_P 0");
+#  }
+#                                        
+#------------------------------------------------------------------------------#
+# Copyright UCAR (c) 2005 - 2006.
+# University Corporation for Atmospheric Research (UCAR),
+# National Center for Atmospheric Research (NCAR),
+# Research Applications Laboratory (RAL),
+# P.O.Box 3000, Boulder, Colorado, 80307-3000, USA.
+#
+# Francois Vandenberghe, vandenb@ucar.edu, November 2006.
+#------------------------------------------------------------------------------#

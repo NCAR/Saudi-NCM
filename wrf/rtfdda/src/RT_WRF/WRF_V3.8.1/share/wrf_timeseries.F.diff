@@ -1,0 +1,510 @@
+1935a1936
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation
+1950,2165c1951,2238
+<                               grid%ts_z1l(n,i),                  & 
+<                               grid%ts_p1l(n,i),                  & 
+<                               grid%ts_t1l(n,i),                  & 
+<                               grid%ts_u1l(n,i),                  & 
+<                               grid%ts_v1l(n,i),                  & 
+<                               grid%ts_q1l(n,i)*1000,             & 
+<                               grid%ts_z2l(n,i),                  & 
+<                               grid%ts_p2l(n,i),                  & 
+<                               grid%ts_t2l(n,i),                  & 
+<                               grid%ts_u2l(n,i),                  & 
+<                               grid%ts_v2l(n,i),                  & 
+<                               grid%ts_q2l(n,i)*1000,             & 
+<                               grid%ts_z3l(n,i),                  & 
+<                               grid%ts_p3l(n,i),                  & 
+<                               grid%ts_t3l(n,i),                  & 
+<                               grid%ts_u3l(n,i),                  & 
+<                               grid%ts_v3l(n,i),                  & 
+<                               grid%ts_q3l(n,i)*1000,             & 
+<                               grid%ts_z4l(n,i),                  & 
+<                               grid%ts_p4l(n,i),                  & 
+<                               grid%ts_t4l(n,i),                  & 
+<                               grid%ts_u4l(n,i),                  & 
+<                               grid%ts_v4l(n,i),                  & 
+<                               grid%ts_q4l(n,i)*1000,             & 
+<                               grid%ts_z5l(n,i),                  & 
+<                               grid%ts_p5l(n,i),                  & 
+<                               grid%ts_t5l(n,i),                  & 
+<                               grid%ts_u5l(n,i),                  & 
+<                               grid%ts_v5l(n,i),                  & 
+<                               grid%ts_q5l(n,i)*1000,             & 
+<                               grid%ts_z6l(n,i),                  & 
+<                               grid%ts_p6l(n,i),                  & 
+<                               grid%ts_t6l(n,i),                  & 
+<                               grid%ts_u6l(n,i),                  & 
+<                               grid%ts_v6l(n,i),                  & 
+<                               grid%ts_q6l(n,i)*1000,             & 
+<                               grid%ts_z7l(n,i),                  & 
+<                               grid%ts_p7l(n,i),                  & 
+<                               grid%ts_t7l(n,i),                  & 
+<                               grid%ts_u7l(n,i),                  & 
+<                               grid%ts_v7l(n,i),                  & 
+<                               grid%ts_q7l(n,i)*1000,             & 
+<                               grid%ts_z8l(n,i),                  & 
+<                               grid%ts_p8l(n,i),                  & 
+<                               grid%ts_t8l(n,i),                  & 
+<                               grid%ts_u8l(n,i),                  & 
+<                               grid%ts_v8l(n,i),                  & 
+<                               grid%ts_q8l(n,i)*1000,             & 
+<                               grid%ts_z9l(n,i),                  & 
+<                               grid%ts_p9l(n,i),                  & 
+<                               grid%ts_t9l(n,i),                  & 
+<                               grid%ts_u9l(n,i),                  & 
+<                               grid%ts_v9l(n,i),                  & 
+<                               grid%ts_q9l(n,i)*1000,             & 
+<                               grid%ts_z10l(n,i),                  & 
+<                               grid%ts_p10l(n,i),                  & 
+<                               grid%ts_t10l(n,i),                  & 
+<                               grid%ts_u10l(n,i),                  & 
+<                               grid%ts_v10l(n,i),                  & 
+<                               grid%ts_q10l(n,i)*1000,             & 
+<                               grid%ts_z11l(n,i),                  & 
+<                               grid%ts_p11l(n,i),                  & 
+<                               grid%ts_t11l(n,i),                  & 
+<                               grid%ts_u11l(n,i),                  & 
+<                               grid%ts_v11l(n,i),                  & 
+<                               grid%ts_q11l(n,i)*1000,             & 
+<                               grid%ts_z12l(n,i),                  & 
+<                               grid%ts_p12l(n,i),                  & 
+<                               grid%ts_t12l(n,i),                  & 
+<                               grid%ts_u12l(n,i),                  & 
+<                               grid%ts_v12l(n,i),                  & 
+<                               grid%ts_q12l(n,i)*1000,             & 
+<                               grid%ts_z13l(n,i),                  & 
+<                               grid%ts_p13l(n,i),                  & 
+<                               grid%ts_t13l(n,i),                  & 
+<                               grid%ts_u13l(n,i),                  & 
+<                               grid%ts_v13l(n,i),                  & 
+<                               grid%ts_q13l(n,i)*1000,             & 
+<                               grid%ts_z14l(n,i),                  & 
+<                               grid%ts_p14l(n,i),                  & 
+<                               grid%ts_t14l(n,i),                  & 
+<                               grid%ts_u14l(n,i),                  & 
+<                               grid%ts_v14l(n,i),                  & 
+<                               grid%ts_q14l(n,i)*1000,             & 
+<                               grid%ts_z15l(n,i),                  & 
+<                               grid%ts_p15l(n,i),                  & 
+<                               grid%ts_t15l(n,i),                  & 
+<                               grid%ts_u15l(n,i),                  & 
+<                               grid%ts_v15l(n,i),                  & 
+<                               grid%ts_q15l(n,i)*1000,             & 
+<                               grid%ts_z16l(n,i),                  & 
+<                               grid%ts_p16l(n,i),                  & 
+<                               grid%ts_t16l(n,i),                  & 
+<                               grid%ts_u16l(n,i),                  & 
+<                               grid%ts_v16l(n,i),                  & 
+<                               grid%ts_q16l(n,i)*1000,             & 
+<                               grid%ts_z17l(n,i),                  & 
+<                               grid%ts_p17l(n,i),                  & 
+<                               grid%ts_t17l(n,i),                  & 
+<                               grid%ts_u17l(n,i),                  & 
+<                               grid%ts_v17l(n,i),                  & 
+<                               grid%ts_q17l(n,i)*1000,             & 
+<                               grid%ts_z18l(n,i),                  & 
+<                               grid%ts_p18l(n,i),                  & 
+<                               grid%ts_t18l(n,i),                  & 
+<                               grid%ts_u18l(n,i),                  & 
+<                               grid%ts_v18l(n,i),                  & 
+<                               grid%ts_q18l(n,i)*1000,             & 
+<                               grid%ts_z19l(n,i),                  & 
+<                               grid%ts_p19l(n,i),                  & 
+<                               grid%ts_t19l(n,i),                  & 
+<                               grid%ts_u19l(n,i),                  & 
+<                               grid%ts_v19l(n,i),                  & 
+<                               grid%ts_q19l(n,i)*1000,             & 
+<                               grid%ts_z20l(n,i),                  & 
+<                               grid%ts_p20l(n,i),                  & 
+<                               grid%ts_t20l(n,i),                  & 
+<                               grid%ts_u20l(n,i),                  & 
+<                               grid%ts_v20l(n,i),                  & 
+<                               grid%ts_q20l(n,i)*1000,             & 
+<                               grid%ts_z21l(n,i),                  & 
+<                               grid%ts_p21l(n,i),                  & 
+<                               grid%ts_t21l(n,i),                  & 
+<                               grid%ts_u21l(n,i),                  & 
+<                               grid%ts_v21l(n,i),                  & 
+<                               grid%ts_q21l(n,i)*1000,             & 
+<                               grid%ts_z22l(n,i),                  & 
+<                               grid%ts_p22l(n,i),                  & 
+<                               grid%ts_t22l(n,i),                  & 
+<                               grid%ts_u22l(n,i),                  & 
+<                               grid%ts_v22l(n,i),                  & 
+<                               grid%ts_q22l(n,i)*1000,             & 
+<                               grid%ts_z23l(n,i),                  & 
+<                               grid%ts_p23l(n,i),                  & 
+<                               grid%ts_t23l(n,i),                  & 
+<                               grid%ts_u23l(n,i),                  & 
+<                               grid%ts_v23l(n,i),                  & 
+<                               grid%ts_q23l(n,i)*1000,             & 
+<                               grid%ts_z24l(n,i),                  & 
+<                               grid%ts_p24l(n,i),                  & 
+<                               grid%ts_t24l(n,i),                  & 
+<                               grid%ts_u24l(n,i),                  & 
+<                               grid%ts_v24l(n,i),                  & 
+<                               grid%ts_q24l(n,i)*1000,             & 
+<                               grid%ts_z25l(n,i),                  & 
+<                               grid%ts_p25l(n,i),                  & 
+<                               grid%ts_t25l(n,i),                  & 
+<                               grid%ts_u25l(n,i),                  & 
+<                               grid%ts_v25l(n,i),                  & 
+<                               grid%ts_q25l(n,i)*1000,             & 
+<                               grid%ts_z26l(n,i),                  & 
+<                               grid%ts_p26l(n,i),                  & 
+<                               grid%ts_t26l(n,i),                  & 
+<                               grid%ts_u26l(n,i),                  & 
+<                               grid%ts_v26l(n,i),                  & 
+<                               grid%ts_q26l(n,i)*1000,             & 
+<                               grid%ts_z27l(n,i),                  & 
+<                               grid%ts_p27l(n,i),                  & 
+<                               grid%ts_t27l(n,i),                  & 
+<                               grid%ts_u27l(n,i),                  & 
+<                               grid%ts_v27l(n,i),                  & 
+<                               grid%ts_q27l(n,i)*1000,             & 
+<                               grid%ts_z28l(n,i),                  & 
+<                               grid%ts_p28l(n,i),                  & 
+<                               grid%ts_t28l(n,i),                  & 
+<                               grid%ts_u28l(n,i),                  & 
+<                               grid%ts_v28l(n,i),                  & 
+<                               grid%ts_q28l(n,i)*1000,             & 
+<                               grid%ts_z29l(n,i),                  & 
+<                               grid%ts_p29l(n,i),                  & 
+<                               grid%ts_t29l(n,i),                  & 
+<                               grid%ts_u29l(n,i),                  & 
+<                               grid%ts_v29l(n,i),                  & 
+<                               grid%ts_q29l(n,i)*1000,             & 
+<                               grid%ts_z30l(n,i),                  & 
+<                               grid%ts_p30l(n,i),                  & 
+<                               grid%ts_t30l(n,i),                  & 
+<                               grid%ts_u30l(n,i),                  & 
+<                               grid%ts_v30l(n,i),                  & 
+<                               grid%ts_q30l(n,i)*1000,             & 
+<                               grid%ts_z31l(n,i),                  & 
+<                               grid%ts_p31l(n,i),                  & 
+<                               grid%ts_t31l(n,i),                  & 
+<                               grid%ts_u31l(n,i),                  & 
+<                               grid%ts_v31l(n,i),                  & 
+<                               grid%ts_q31l(n,i)*1000,             & 
+<                               grid%ts_z32l(n,i),                  & 
+<                               grid%ts_p32l(n,i),                  & 
+<                               grid%ts_t32l(n,i),                  & 
+<                               grid%ts_u32l(n,i),                  & 
+<                               grid%ts_v32l(n,i),                  & 
+<                               grid%ts_q32l(n,i)*1000,             & 
+<                               grid%ts_z33l(n,i),                  & 
+<                               grid%ts_p33l(n,i),                  & 
+<                               grid%ts_t33l(n,i),                  & 
+<                               grid%ts_u33l(n,i),                  & 
+<                               grid%ts_v33l(n,i),                  & 
+<                               grid%ts_q33l(n,i)*1000,             & 
+<                               grid%ts_z34l(n,i),                  & 
+<                               grid%ts_p34l(n,i),                  & 
+<                               grid%ts_t34l(n,i),                  & 
+<                               grid%ts_u34l(n,i),                  & 
+<                               grid%ts_v34l(n,i),                  & 
+<                               grid%ts_q34l(n,i)*1000,             & 
+<                               grid%ts_z35l(n,i),                  & 
+<                               grid%ts_p35l(n,i),                  & 
+<                               grid%ts_t35l(n,i),                  & 
+<                               grid%ts_u35l(n,i),                  & 
+<                               grid%ts_v35l(n,i),                  & 
+<                               grid%ts_q35l(n,i)*1000,             & 
+<                               grid%ts_z36l(n,i),                  & 
+<                               grid%ts_p36l(n,i),                  & 
+<                               grid%ts_t36l(n,i),                  & 
+<                               grid%ts_u36l(n,i),                  & 
+<                               grid%ts_v36l(n,i),                  & 
+<                               grid%ts_q36l(n,i)*1000,             & 
+---
+>                               grid%ts_z1l(n,i),                  &
+>                               grid%ts_p1l(n,i),                  &
+>                             ( (grid%ts_t1l(n,i)+300.)*           &
+>                              (grid%ts_p1l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u1l(n,i),                  &
+>                               grid%ts_v1l(n,i),                  &
+>                               grid%ts_q1l(n,i)*1000,             &
+>                               grid%ts_z2l(n,i),                  &
+>                               grid%ts_p2l(n,i),                  &
+>                             ( (grid%ts_t2l(n,i)+300.)*           &
+>                              (grid%ts_p2l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u2l(n,i),                  &
+>                               grid%ts_v2l(n,i),                  &
+>                               grid%ts_q2l(n,i)*1000,             &
+>                               grid%ts_z3l(n,i),                  &
+>                               grid%ts_p3l(n,i),                  &
+>                             ( (grid%ts_t3l(n,i)+300.)*           &
+>                              (grid%ts_p3l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u3l(n,i),                  &
+>                               grid%ts_v3l(n,i),                  &
+>                               grid%ts_q3l(n,i)*1000,             &
+>                               grid%ts_z4l(n,i),                  &
+>                               grid%ts_p4l(n,i),                  &
+>                             ( (grid%ts_t4l(n,i)+300.)*           &
+>                              (grid%ts_p4l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u4l(n,i),                  &
+>                               grid%ts_v4l(n,i),                  &
+>                               grid%ts_q4l(n,i)*1000,             &
+>                               grid%ts_z5l(n,i),                  &
+>                               grid%ts_p5l(n,i),                  &
+>                             ( (grid%ts_t5l(n,i)+300.)*           &
+>                              (grid%ts_p5l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u5l(n,i),                  &
+>                               grid%ts_v5l(n,i),                  &
+>                               grid%ts_q5l(n,i)*1000,             &
+>                               grid%ts_z6l(n,i),                  &
+>                               grid%ts_p6l(n,i),                  &
+>                             ( (grid%ts_t6l(n,i)+300.)*           &
+>                              (grid%ts_p6l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u6l(n,i),                  &
+>                               grid%ts_v6l(n,i),                  &
+>                               grid%ts_q6l(n,i)*1000,             &
+>                               grid%ts_z7l(n,i),                  &
+>                               grid%ts_p7l(n,i),                  &
+>                             ( (grid%ts_t7l(n,i)+300.)*           &
+>                              (grid%ts_p7l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u7l(n,i),                  &
+>                               grid%ts_v7l(n,i),                  &
+>                               grid%ts_q7l(n,i)*1000,             &
+>                               grid%ts_z8l(n,i),                  &
+>                               grid%ts_p8l(n,i),                  &
+>                             ( (grid%ts_t8l(n,i)+300.)*           &
+>                              (grid%ts_p8l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u8l(n,i),                  &
+>                               grid%ts_v8l(n,i),                  &
+>                               grid%ts_q8l(n,i)*1000,             &
+>                               grid%ts_z9l(n,i),                  &
+>                               grid%ts_p9l(n,i),                  &
+>                             ( (grid%ts_t9l(n,i)+300.)*           &
+>                              (grid%ts_p9l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u9l(n,i),                  &
+>                               grid%ts_v9l(n,i),                  &
+>                               grid%ts_q9l(n,i)*1000,             &
+>                               grid%ts_z10l(n,i),                  &
+>                               grid%ts_p10l(n,i),                  &
+>                             ( (grid%ts_t10l(n,i)+300.)*           &
+>                              (grid%ts_p10l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u10l(n,i),                  &
+>                               grid%ts_v10l(n,i),                  &
+>                               grid%ts_q10l(n,i)*1000,             &
+>                               grid%ts_z11l(n,i),                  &
+>                               grid%ts_p11l(n,i),                  &
+>                             ( (grid%ts_t11l(n,i)+300.)*           &
+>                              (grid%ts_p11l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u11l(n,i),                  &
+>                               grid%ts_v11l(n,i),                  &
+>                               grid%ts_q11l(n,i)*1000,             &
+>                               grid%ts_z12l(n,i),                  &
+>                               grid%ts_p12l(n,i),                  &
+>                             ( (grid%ts_t12l(n,i)+300.)*           &
+>                              (grid%ts_p12l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u12l(n,i),                  &
+>                               grid%ts_v12l(n,i),                  &
+>                               grid%ts_q12l(n,i)*1000,             &
+>                               grid%ts_z13l(n,i),                  &
+>                               grid%ts_p13l(n,i),                  &
+>                             ( (grid%ts_t13l(n,i)+300.)*           &
+>                              (grid%ts_p13l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u13l(n,i),                  &
+>                               grid%ts_v13l(n,i),                  &
+>                               grid%ts_q13l(n,i)*1000,             &
+>                               grid%ts_z14l(n,i),                  &
+>                               grid%ts_p14l(n,i),                  &
+>                             ( (grid%ts_t14l(n,i)+300.)*           &
+>                              (grid%ts_p14l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u14l(n,i),                  &
+>                               grid%ts_v14l(n,i),                  &
+>                               grid%ts_q14l(n,i)*1000,             &
+>                               grid%ts_z15l(n,i),                  &
+>                               grid%ts_p15l(n,i),                  &
+>                             ( (grid%ts_t15l(n,i)+300.)*           &
+>                              (grid%ts_p15l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u15l(n,i),                  &
+>                               grid%ts_v15l(n,i),                  &
+>                               grid%ts_q15l(n,i)*1000,             &
+>                               grid%ts_z16l(n,i),                  &
+>                               grid%ts_p16l(n,i),                  &
+>                             ( (grid%ts_t16l(n,i)+300.)*           &
+>                              (grid%ts_p16l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u16l(n,i),                  &
+>                               grid%ts_v16l(n,i),                  &
+>                               grid%ts_q16l(n,i)*1000,             &
+>                               grid%ts_z17l(n,i),                  &
+>                               grid%ts_p17l(n,i),                  &
+>                             ( (grid%ts_t17l(n,i)+300.)*           &
+>                              (grid%ts_p17l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u17l(n,i),                  &
+>                               grid%ts_v17l(n,i),                  &
+>                               grid%ts_q17l(n,i)*1000,             &
+>                               grid%ts_z18l(n,i),                  &
+>                               grid%ts_p18l(n,i),                  &
+>                             ( (grid%ts_t18l(n,i)+300.)*           &
+>                              (grid%ts_p18l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u18l(n,i),                  &
+>                               grid%ts_v18l(n,i),                  &
+>                               grid%ts_q18l(n,i)*1000,             &
+>                               grid%ts_z19l(n,i),                  &
+>                               grid%ts_p19l(n,i),                  &
+>                             ( (grid%ts_t19l(n,i)+300.)*           &
+>                              (grid%ts_p19l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u19l(n,i),                  &
+>                               grid%ts_v19l(n,i),                  &
+>                               grid%ts_q19l(n,i)*1000,             &
+>                               grid%ts_z20l(n,i),                  &
+>                               grid%ts_p20l(n,i),                  &
+>                             ( (grid%ts_t20l(n,i)+300.)*           &
+>                              (grid%ts_p20l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u20l(n,i),                  &
+>                               grid%ts_v20l(n,i),                  &
+>                               grid%ts_q20l(n,i)*1000,             &
+>                               grid%ts_z21l(n,i),                  &
+>                               grid%ts_p21l(n,i),                  &
+>                             ( (grid%ts_t21l(n,i)+300.)*           &
+>                              (grid%ts_p21l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u21l(n,i),                  &
+>                               grid%ts_v21l(n,i),                  &
+>                               grid%ts_q21l(n,i)*1000,             &
+>                               grid%ts_z22l(n,i),                  &
+>                               grid%ts_p22l(n,i),                  &
+>                             ( (grid%ts_t22l(n,i)+300.)*           &
+>                              (grid%ts_p22l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u22l(n,i),                  &
+>                               grid%ts_v22l(n,i),                  &
+>                               grid%ts_q22l(n,i)*1000,             &
+>                               grid%ts_z23l(n,i),                  &
+>                               grid%ts_p23l(n,i),                  &
+>                             ( (grid%ts_t23l(n,i)+300.)*           &
+>                              (grid%ts_p23l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u23l(n,i),                  &
+>                               grid%ts_v23l(n,i),                  &
+>                               grid%ts_q23l(n,i)*1000,             &
+>                               grid%ts_z24l(n,i),                  &
+>                               grid%ts_p24l(n,i),                  &
+>                             ( (grid%ts_t24l(n,i)+300.)*           &
+>                              (grid%ts_p24l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u24l(n,i),                  &
+>                               grid%ts_v24l(n,i),                  &
+>                               grid%ts_q24l(n,i)*1000,             &
+>                               grid%ts_z25l(n,i),                  &
+>                               grid%ts_p25l(n,i),                  &
+>                             ( (grid%ts_t25l(n,i)+300.)*           &
+>                              (grid%ts_p25l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u25l(n,i),                  &
+>                               grid%ts_v25l(n,i),                  &
+>                               grid%ts_q25l(n,i)*1000,             &
+>                               grid%ts_z26l(n,i),                  &
+>                               grid%ts_p26l(n,i),                  &
+>                             ( (grid%ts_t26l(n,i)+300.)*           &
+>                              (grid%ts_p26l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u26l(n,i),                  &
+>                               grid%ts_v26l(n,i),                  &
+>                               grid%ts_q26l(n,i)*1000,             &
+>                               grid%ts_z27l(n,i),                  &
+>                               grid%ts_p27l(n,i),                  &
+>                             ( (grid%ts_t27l(n,i)+300.)*           &
+>                              (grid%ts_p27l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u27l(n,i),                  &
+>                               grid%ts_v27l(n,i),                  &
+>                               grid%ts_q27l(n,i)*1000,             &
+>                               grid%ts_z28l(n,i),                  &
+>                               grid%ts_p28l(n,i),                  &
+>                             ( (grid%ts_t28l(n,i)+300.)*           &
+>                              (grid%ts_p28l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u28l(n,i),                  &
+>                               grid%ts_v28l(n,i),                  &
+>                               grid%ts_q28l(n,i)*1000,             &
+>                               grid%ts_z29l(n,i),                  &
+>                               grid%ts_p29l(n,i),                  &
+>                             ( (grid%ts_t29l(n,i)+300.)*           &
+>                              (grid%ts_p29l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u29l(n,i),                  &
+>                               grid%ts_v29l(n,i),                  &
+>                               grid%ts_q29l(n,i)*1000,             &
+>                               grid%ts_z30l(n,i),                  &
+>                               grid%ts_p30l(n,i),                  &
+>                             ( (grid%ts_t30l(n,i)+300.)*           &
+>                              (grid%ts_p30l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u30l(n,i),                  &
+>                               grid%ts_v30l(n,i),                  &
+>                               grid%ts_q30l(n,i)*1000,             &
+>                               grid%ts_z31l(n,i),                  &
+>                               grid%ts_p31l(n,i),                  &
+>                             ( (grid%ts_t31l(n,i)+300.)*           &
+>                              (grid%ts_p31l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u31l(n,i),                  &
+>                               grid%ts_v31l(n,i),                  &
+>                               grid%ts_q31l(n,i)*1000,             &
+>                               grid%ts_z32l(n,i),                  &
+>                               grid%ts_p32l(n,i),                  &
+>                             ( (grid%ts_t32l(n,i)+300.)*           &
+>                              (grid%ts_p32l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u32l(n,i),                  &
+>                               grid%ts_v32l(n,i),                  &
+>                               grid%ts_q32l(n,i)*1000,             &
+>                               grid%ts_z33l(n,i),                  &
+>                               grid%ts_p33l(n,i),                  &
+>                             ( (grid%ts_t33l(n,i)+300.)*           &
+>                              (grid%ts_p33l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u33l(n,i),                  &
+>                               grid%ts_v33l(n,i),                  &
+>                               grid%ts_q33l(n,i)*1000,             &
+>                               grid%ts_z34l(n,i),                  &
+>                               grid%ts_p34l(n,i),                  &
+>                             ( (grid%ts_t34l(n,i)+300.)*           &
+>                              (grid%ts_p34l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u34l(n,i),                  &
+>                               grid%ts_v34l(n,i),                  &
+>                               grid%ts_q34l(n,i)*1000,             &
+>                               grid%ts_z35l(n,i),                  &
+>                               grid%ts_p35l(n,i),                  &
+>                             ( (grid%ts_t35l(n,i)+300.)*           &
+>                              (grid%ts_p35l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u35l(n,i),                  &
+>                               grid%ts_v35l(n,i),                  &
+>                               grid%ts_q35l(n,i)*1000,             &
+>                               grid%ts_z36l(n,i),                  &
+>                               grid%ts_p36l(n,i),                  &
+>                             ( (grid%ts_t36l(n,i)+300.)*           &
+>                              (grid%ts_p36l(n,i)/100000.)**0.287)  &
+>                                   - 273.15,                      &
+>                               grid%ts_u36l(n,i),                  &
+>                               grid%ts_v36l(n,i),                  &
+>                               grid%ts_q36l(n,i)*1000,             &
+2167a2241
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng mods for time series calculation

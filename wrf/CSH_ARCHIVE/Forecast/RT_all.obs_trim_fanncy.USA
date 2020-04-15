@@ -1,0 +1,92 @@
+#!/usr/local/bin/perl
+
+##########################################################################
+##  This program is written to process the obs data of the intermediate ##
+##  format for little_r of mm5 system. It can be used to                ##
+##    1). extract the obs on a particular domain defined by lat and lon ##
+##        which will save much of little_r CPU time                     ##
+##    2). extract special obs (eg: Metar, snd, profile and so on)       ##
+##    3). extract obs in a special time window                          ##
+##    4). Remove duplicate obs, merge sounding (pilot,temp...) and sort ##
+##        and sort the sounding level according to pressure             ##
+##    5). sort reports according to time, lat, long and station height  ##
+##    6). Any combination of 1) to 5).                                  ##
+##    7). List all obs stations                                         ##
+##    8). List unique obs stations                                      ##
+##             by Yubao Liu   in June 2000 at RAP/NCAR                  ##
+##########################################################################
+#
+
+foreach $a ("new") {
+
+open (IN, "all.obs.all");
+open (ME, ">all.obs.trim");
+open (SK, ">all.obs.unique_station");
+$flag = 0;
+my %tmp;
+while($aline = <IN>) {
+  if ( substr($aline,0,10)  == '          ') {
+   ($junk, $lat, $lon, @dd) = split(/\s+/,$aline);
+   $Sounding = substr($aline,279,1);
+   $Date = substr($aline,326,10);  # date
+   if ($lat < 60 && $lat > 15 && $lon < -50 && $lon > -155  # cover USA
+#  if ($lat < 50 && $lat > 25 && $lon < -55 && $lon > -95
+#  && ($aline =~ /METAR/)
+#  && ($Sounding EQ "T")
+#  && ($Date >= 2000052423 && $Date <=  2000052500)
+    ) {
+    $k1 = substr($lat,0,7);   
+    $k2 = substr($lon,0,7);
+    $k3 = substr($aline,209,7);   # height
+    $k4 = substr($aline,326,12);  # date and time 
+#   $k4 = "";
+    $k5 = $Sounding;
+    $kk = $k4." ".$k1." ".$k2." ".$k3." ".$k5;
+#   print $kk, "\n";
+    $header{$kk} = $aline;
+    $bline=<IN>;
+    while (substr($bline,0,7) NE '-777777') {
+     if($Sounding EQ "T") {
+      $body{$kk} = join("",$body{$kk}, $bline);  # keep all level of sounding
+     }
+     else {
+      $body{$kk} = $bline;     # only one surface report is retained
+     }
+      $bline=<IN>;
+    }
+     $cline=<IN>;
+    $tail{$kk} = join("",$bline, $cline);
+   }
+  }
+}
+
+foreach $k (sort keys %header) {
+  %tmp=();                                 # remove duplicate reports on one level
+ foreach $t ( split(/\n/,$body{$k})) {     # and sort the level according to pres
+  $p = substr($t,0,7);
+  $tmp{$p} = $t;
+ }
+  @btmp=();
+ foreach $p ( sort keys %tmp) {
+  @btmp = (@btmp, $tmp{$p});
+ }
+ $body{$k} = join("\n",@btmp);
+ print ME $header{$k}, $body{$k},"\n", $tail{$k};
+}
+
+close(IN);
+close(ME);
+system("mv all.obs.trim all.obs.${a}z");
+exit;
+
+foreach $k (sort keys %header) {             # log the unique station list
+ $k0 = substr($header{$k},85,5);             # set $k4 = "";
+ $kn = $k;
+ chop($kn);
+# print SK $k0, " ",$kn,"\n" if ($kn NE $ko);
+ print SK $k0, " ",$k,"\n";
+ $ko = $kn
+}
+
+}
+

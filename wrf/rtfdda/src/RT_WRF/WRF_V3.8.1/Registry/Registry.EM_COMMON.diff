@@ -1,0 +1,793 @@
+53,54c53,56
+< state    real  XLAT             ij      misc        1         -     i0123rh01{22}{23}du=(copy_fcnm)      "XLAT"                "LATITUDE, SOUTH IS NEGATIVE"                                          "degree_north"
+< state    real  XLONG            ij      misc        1         -     i0123rh01{22}{23}du=(copy_fcnm)      "XLONG"               "LONGITUDE, WEST IS NEGATIVE"                                          "degree_east"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Modify I/O stream for XLAT and XLONG per Will Cheng
+> state    real  XLAT             ij      misc        1         -     i0123rh013{22}{23}du=(copy_fcnm)     "XLAT"                "LATITUDE, SOUTH IS NEGATIVE"                                          "degree_north"
+> state    real  XLONG            ij      misc        1         -     i0123rh013{22}{23}du=(copy_fcnm)     "XLONG"               "LONGITUDE, WEST IS NEGATIVE"                                          "degree_east"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Modify I/O stream for XLAT and XLONG per Will Cheng
+60c62,64
+< state    real  LU_INDEX         ij      misc        1         -     i012rh01d=(interp_fcnm_lu:xlat,xlong,dx,grid_id)u=(copy_fcnm)   "LU_INDEX"              "LAND USE CATEGORY"         ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - 
+> state    real  LU_INDEX         ij      misc        1         -     i012rh013d=(interp_fcnm_lu:xlat,xlong,dx,grid_id)u=(copy_fcnm)   "LU_INDEX"              "LAND USE CATEGORY"         ""
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - 
+392,393c396,401
+< state    real   Q2               ij     misc        1         -     irh0{22}{23}du     "Q2"                   "QV at 2 M"         "kg kg-1"
+< state    real   T2               ij     misc        1         -     i01rh0{22}{23}du   "T2"                   "TEMP at 2 M"       "K"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Modify I/O stream for Q2 per Will Cheng
+> state    real   Q2               ij     misc        1         -     irh03{22}{23}du    "Q2"                   "QV at 2 M"         "kg kg-1"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Modify I/O stream for Q2 per Will Cheng
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Modify I/O stream for T2 per Will Cheng
+> state    real   T2               ij     misc        1         -     i01rh03{22}{23}du  "T2"                   "TEMP at 2 M"       "K"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Modify I/O stream for T2 per Will Cheng
+395c403,405
+< state    real   PSFC             ij     misc        1         -     i01rhdu   "PSFC"                 "SFC PRESSURE"      "Pa"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 5 - 
+> state    real   PSFC             ij     misc        1         -     i01rh03du "PSFC"                 "SFC PRESSURE"      "Pa"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 5 - 
+399,400c409,412
+< state    real   U10              ij     misc        1         -     irh01{22}{23}du     "U10"                "U at 10 M"         "m s-1"
+< state    real   V10              ij     misc        1         -     irh01{22}{23}du     "V10"                "V at 10 M"         "m s-1"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Modify I/O stream for U10 and V10 per Will Cheng
+> state    real   U10              ij     misc        1         -     irh013{22}{23}du    "U10"                "U at 10 M"         "m s-1"
+> state    real   V10              ij     misc        1         -     irh013{22}{23}du    "V10"                "V at 10 M"         "m s-1"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Modify I/O stream for U10 and V10 per Will Cheng
+408c420,422
+< state    real   obs_savwt      hikj     dyn_em      1         X      -       "OBS_SAVWT"           "Internal space holding weights of each ob, for each i,j,k" "dimensionless"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Change dimensions of savwt
+> state    real   obs_savwt       ikj{nscans}{kv}  dyn_em      1         X      -       "OBS_SAVWT"  "Saved weights for nudging"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Change dimensions of savwt
+429c443,445
+< state   real    xtime          -        -          -         -     rh         "xtime"                 "minutes since YYYY-MM-DD hh:mm:ss"      "minutes since simulation start"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 8 - 
+> state   real    xtime          -        -          -         -     rh03       "xtime"                 "minutes since YYYY-MM-DD hh:mm:ss"      "minutes since simulation start"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 8 - 
+655a672
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Time series: Add time series variables
+657,679c674,904
+< state    real   ts_hour         ?!       misc      -         -      -        "TS_HOUR"        "Model integration time, hours"
+< state    real   ts_u            ?!       misc      -         -      -        "TS_U"           "Surface wind U-component, earth-relative"
+< state    real   ts_v            ?!       misc      -         -      -        "TS_V"           "Surface wind V-component, earth-relative"
+< state    real   ts_q            ?!       misc      -         -      -        "TS_Q"           "Surface mixing ratio"
+< state    real   ts_t            ?!       misc      -         -      -        "TS_T"           "Surface temperature"
+< state    real   ts_psfc         ?!       misc      -         -      -        "TS_PSFC"        "Surface pressure"
+< state    real   ts_glw          ?!       misc      -         -      -        "TS_GLW"         "Downward long wave flux at surface"
+< state    real   ts_gsw          ?!       misc      -         -      -        "TS_GSW"         "Net short wave flux at surface"
+< state    real   ts_hfx          ?!       misc      -         -      -        "TS_HFX"         "Upward heat flux at surface"
+< state    real   ts_lh           ?!       misc      -         -      -        "TS_LH"          "Upward moisture flux at surface"
+< state    real   ts_tsk          ?!       misc      -         -      -        "TS_TSK"         "Skin temperature"
+< state    real   ts_tslb         ?!       misc      -         -      -        "TS_TSLB"        "Soil temperature"
+< state    real   ts_clw          ?!       misc      -         -      -        "TS_CLW"         "Column integrated cloud water"
+< state    real   ts_rainc        ?!       misc      -         -      -        "TS_RAINC"       "Cumulus precip"
+< state    real   ts_rainnc       ?!       misc      -         -      -        "TS_RAINNC"      "Grid-scale precip"
+< 
+< # Time series of vertical profile of U, V, GHT, THETA and QVAPOR
+< state    real   ts_u_profile   ?!k       misc      -         -      -        "TS_U_PROFILE"   "Wind u-Component, earth relative, vertical profile"
+< state    real   ts_v_profile   ?!k       misc      -         -      -        "TS_V_PROFILE"   "Wind v-Component, earth relative, vertical profile"
+< state    real   ts_gph_profile ?!k       misc      -         -      -        "TS_GPH_PROFILE" "Total geopotential height, vertical profile"
+< state    real   ts_th_profile  ?!k       misc      -         -      -        "TS_TH_PROFILE"  "Total potential temperature, vertical profile"
+< state    real   ts_qv_profile  ?!k       misc      -         -      -        "TS_QV_PROFILE"  "Water vapor mixing ratio, vertical profile"
+< 
+---
+> state    real   ts_z1l          ?!       misc      -         -      r        "TS_Z1L"         "Z, level 1 (meters)"
+> state    real   ts_z2l          ?!       misc      -         -      r        "TS_Z2L"         "Z, level 2 (meters)"
+> state    real   ts_z3l          ?!       misc      -         -      r        "TS_Z3L"         "Z, level 3 (meters)"
+> state    real   ts_z4l          ?!       misc      -         -      r        "TS_Z4L"         "Z, level 4 (meters)"
+> state    real   ts_z5l          ?!       misc      -         -      r        "TS_Z5L"         "Z, level 5 (meters)"
+> state    real   ts_z6l          ?!       misc      -         -      r        "TS_Z6L"         "Z, level 6 (meters)"
+> state    real   ts_z7l          ?!       misc      -         -      r        "TS_Z7L"         "Z, level 7 (meters)"
+> state    real   ts_z8l          ?!       misc      -         -      r        "TS_Z8L"         "Z, level 8 (meters)"
+> state    real   ts_z9l          ?!       misc      -         -      r        "TS_Z9L"         "Z, level 9 (meters)"
+> state    real   ts_z10l         ?!       misc      -         -      r        "TS_Z10L"        "Z, level 10 (meters)"
+> state    real   ts_z11l         ?!       misc      -         -      r        "TS_Z11L"        "Z, level 11 (meters)"
+> state    real   ts_z12l         ?!       misc      -         -      r        "TS_Z12L"        "Z, level 12 (meters)"
+> state    real   ts_z13l         ?!       misc      -         -      r        "TS_Z13L"        "Z, level 13 (meters)"
+> state    real   ts_z14l         ?!       misc      -         -      r        "TS_Z14L"        "Z, level 14 (meters)"
+> state    real   ts_z15l         ?!       misc      -         -      r        "TS_Z15L"        "Z, level 15 (meters)"
+> state    real   ts_z16l         ?!       misc      -         -      r        "TS_Z16L"        "Z, level 16 (meters)"
+> state    real   ts_z17l         ?!       misc      -         -      r        "TS_Z17L"        "Z, level 17 (meters)"
+> state    real   ts_z18l         ?!       misc      -         -      r        "TS_Z18L"        "Z, level 18 (meters)"
+> state    real   ts_z19l         ?!       misc      -         -      r        "TS_Z19L"        "Z, level 19 (meters)"
+> state    real   ts_z20l         ?!       misc      -         -      r        "TS_Z20L"        "Z, level 20 (meters)"
+> state    real   ts_z21l         ?!       misc      -         -      r        "TS_Z21L"        "Z, level 21 (meters)"
+> state    real   ts_z22l         ?!       misc      -         -      r        "TS_Z22L"        "Z, level 22 (meters)"
+> state    real   ts_z23l         ?!       misc      -         -      r        "TS_Z23L"        "Z, level 23 (meters)"
+> state    real   ts_z24l         ?!       misc      -         -      r        "TS_Z24L"        "Z, level 24 (meters)"
+> state    real   ts_z25l         ?!       misc      -         -      r        "TS_Z25L"        "Z, level 25 (meters)"
+> state    real   ts_z26l         ?!       misc      -         -      r        "TS_Z26L"        "Z, level 26 (meters)"
+> state    real   ts_z27l         ?!       misc      -         -      r        "TS_Z27L"        "Z, level 27 (meters)"
+> state    real   ts_z28l         ?!       misc      -         -      r        "TS_Z28L"        "Z, level 28 (meters)"
+> state    real   ts_z29l         ?!       misc      -         -      r        "TS_Z29L"        "Z, level 29 (meters)"
+> state    real   ts_z30l         ?!       misc      -         -      r        "TS_Z30L"        "Z, level 30 (meters)"
+> state    real   ts_z31l         ?!       misc      -         -      r        "TS_Z31L"        "Z, level 31 (meters)"
+> state    real   ts_z32l         ?!       misc      -         -      r        "TS_Z32L"        "Z, level 32 (meters)"
+> state    real   ts_z33l         ?!       misc      -         -      r        "TS_Z33L"        "Z, level 33 (meters)"
+> state    real   ts_z34l         ?!       misc      -         -      r        "TS_Z34L"        "Z, level 34 (meters)"
+> state    real   ts_z35l         ?!       misc      -         -      r        "TS_Z35L"        "Z, level 35 (meters)"
+> state    real   ts_z36l         ?!       misc      -         -      r        "TS_Z36L"        "Z, level 36 (meters)"
+> state    real   ts_p1l          ?!       misc      -         -      r        "TS_P1L"         "P, level 1 (Pa)"
+> state    real   ts_p2l          ?!       misc      -         -      r        "TS_P2L"         "P, level 2 (Pa)"
+> state    real   ts_p3l          ?!       misc      -         -      r        "TS_P3L"         "P, level 3 (Pa)"
+> state    real   ts_p4l          ?!       misc      -         -      r        "TS_P4L"         "P, level 4 (Pa)"
+> state    real   ts_p5l          ?!       misc      -         -      r        "TS_P5L"         "P, level 5 (Pa)"
+> state    real   ts_p6l          ?!       misc      -         -      r        "TS_P6L"         "P, level 6 (Pa)"
+> state    real   ts_p7l          ?!       misc      -         -      r        "TS_P7L"         "P, level 7 (Pa)"
+> state    real   ts_p8l          ?!       misc      -         -      r        "TS_P8L"         "P, level 8 (Pa)"
+> state    real   ts_p9l          ?!       misc      -         -      r        "TS_P9L"         "P, level 9 (Pa)"
+> state    real   ts_p10l         ?!       misc      -         -      r        "TS_P10L"        "P, level 10 (Pa)"
+> state    real   ts_p11l         ?!       misc      -         -      r        "TS_P11L"        "P, level 11 (Pa)"
+> state    real   ts_p12l         ?!       misc      -         -      r        "TS_P12L"        "P, level 12 (Pa)"
+> state    real   ts_p13l         ?!       misc      -         -      r        "TS_P13L"        "P, level 13 (Pa)"
+> state    real   ts_p14l         ?!       misc      -         -      r        "TS_P14L"        "P, level 14 (Pa)"
+> state    real   ts_p15l         ?!       misc      -         -      r        "TS_P15L"        "P, level 15 (Pa)"
+> state    real   ts_p16l         ?!       misc      -         -      r        "TS_P16L"        "P, level 16 (Pa)"
+> state    real   ts_p17l         ?!       misc      -         -      r        "TS_P17L"        "P, level 17 (Pa)"
+> state    real   ts_p18l         ?!       misc      -         -      r        "TS_P18L"        "P, level 18 (Pa)"
+> state    real   ts_p19l         ?!       misc      -         -      r        "TS_P19L"        "P, level 19 (Pa)"
+> state    real   ts_p20l         ?!       misc      -         -      r        "TS_P20L"        "P, level 20 (Pa)"
+> state    real   ts_p21l         ?!       misc      -         -      r        "TS_P21L"        "P, level 21 (Pa)"
+> state    real   ts_p22l         ?!       misc      -         -      r        "TS_P22L"        "P, level 22 (Pa)"
+> state    real   ts_p23l         ?!       misc      -         -      r        "TS_P23L"        "P, level 23 (Pa)"
+> state    real   ts_p24l         ?!       misc      -         -      r        "TS_P24L"        "P, level 24 (Pa)"
+> state    real   ts_p25l         ?!       misc      -         -      r        "TS_P25L"        "P, level 25 (Pa)"
+> state    real   ts_p26l         ?!       misc      -         -      r        "TS_P26L"        "P, level 26 (Pa)"
+> state    real   ts_p27l         ?!       misc      -         -      r        "TS_P27L"        "P, level 27 (Pa)"
+> state    real   ts_p28l         ?!       misc      -         -      r        "TS_P28L"        "P, level 28 (Pa)"
+> state    real   ts_p29l         ?!       misc      -         -      r        "TS_P29L"        "P, level 29 (Pa)"
+> state    real   ts_p30l         ?!       misc      -         -      r        "TS_P30L"        "P, level 30 (Pa)"
+> state    real   ts_p31l         ?!       misc      -         -      r        "TS_P31L"        "P, level 31 (Pa)"
+> state    real   ts_p32l         ?!       misc      -         -      r        "TS_P32L"        "P, level 32 (Pa)"
+> state    real   ts_p33l         ?!       misc      -         -      r        "TS_P33L"        "P, level 33 (Pa)"
+> state    real   ts_p34l         ?!       misc      -         -      r        "TS_P34L"        "P, level 34 (Pa)"
+> state    real   ts_p35l         ?!       misc      -         -      r        "TS_P35L"        "P, level 35 (Pa)"
+> state    real   ts_p36l         ?!       misc      -         -      r        "TS_P36L"        "P, level 36 (Pa)"
+> state    real   ts_t1l          ?!       misc      -         -      r        "TS_T1L"         "T, level 1 (deg C)"
+> state    real   ts_t2l          ?!       misc      -         -      r        "TS_T2L"         "T, level 2 (deg C)"
+> state    real   ts_t3l          ?!       misc      -         -      r        "TS_T3L"         "T, level 3 (deg C)"
+> state    real   ts_t4l          ?!       misc      -         -      r        "TS_T4L"         "T, level 4 (deg C)"
+> state    real   ts_t5l          ?!       misc      -         -      r        "TS_T5L"         "T, level 5 (deg C)"
+> state    real   ts_t6l          ?!       misc      -         -      r        "TS_T6L"         "T, level 6 (deg C)"
+> state    real   ts_t7l          ?!       misc      -         -      r        "TS_T7L"         "T, level 7 (deg C)"
+> state    real   ts_t8l          ?!       misc      -         -      r        "TS_T8L"         "T, level 8 (deg C)"
+> state    real   ts_t9l          ?!       misc      -         -      r        "TS_T9L"         "T, level 9 (deg C)"
+> state    real   ts_t10l         ?!       misc      -         -      r        "TS_T10L"        "T, level 10 (deg C)"
+> state    real   ts_t11l         ?!       misc      -         -      r        "TS_T11L"        "T, level 11 (deg C)"
+> state    real   ts_t12l         ?!       misc      -         -      r        "TS_T12L"        "T, level 12 (deg C)"
+> state    real   ts_t13l         ?!       misc      -         -      r        "TS_T13L"        "T, level 13 (deg C)"
+> state    real   ts_t14l         ?!       misc      -         -      r        "TS_T14L"        "T, level 14 (deg C)"
+> state    real   ts_t15l         ?!       misc      -         -      r        "TS_T15L"        "T, level 15 (deg C)"
+> state    real   ts_t16l         ?!       misc      -         -      r        "TS_T16L"        "T, level 16 (deg C)"
+> state    real   ts_t17l         ?!       misc      -         -      r        "TS_T17L"        "T, level 17 (deg C)"
+> state    real   ts_t18l         ?!       misc      -         -      r        "TS_T18L"        "T, level 18 (deg C)"
+> state    real   ts_t19l         ?!       misc      -         -      r        "TS_T19L"        "T, level 19 (deg C)"
+> state    real   ts_t20l         ?!       misc      -         -      r        "TS_T20L"        "T, level 20 (deg C)"
+> state    real   ts_t21l         ?!       misc      -         -      r        "TS_T21L"        "T, level 21 (deg C)"
+> state    real   ts_t22l         ?!       misc      -         -      r        "TS_T22L"        "T, level 22 (deg C)"
+> state    real   ts_t23l         ?!       misc      -         -      r        "TS_T23L"        "T, level 23 (deg C)"
+> state    real   ts_t24l         ?!       misc      -         -      r        "TS_T24L"        "T, level 24 (deg C)"
+> state    real   ts_t25l         ?!       misc      -         -      r        "TS_T25L"        "T, level 25 (deg C)"
+> state    real   ts_t26l         ?!       misc      -         -      r        "TS_T26L"        "T, level 26 (deg C)"
+> state    real   ts_t27l         ?!       misc      -         -      r        "TS_T27L"        "T, level 27 (deg C)"
+> state    real   ts_t28l         ?!       misc      -         -      r        "TS_T28L"        "T, level 28 (deg C)"
+> state    real   ts_t29l         ?!       misc      -         -      r        "TS_T29L"        "T, level 29 (deg C)"
+> state    real   ts_t30l         ?!       misc      -         -      r        "TS_T30L"        "T, level 30 (deg C)"
+> state    real   ts_t31l         ?!       misc      -         -      r        "TS_T31L"        "T, level 31 (deg C)"
+> state    real   ts_t32l         ?!       misc      -         -      r        "TS_T32L"        "T, level 32 (deg C)"
+> state    real   ts_t33l         ?!       misc      -         -      r        "TS_T33L"        "T, level 33 (deg C)"
+> state    real   ts_t34l         ?!       misc      -         -      r        "TS_T34L"        "T, level 34 (deg C)"
+> state    real   ts_t35l         ?!       misc      -         -      r        "TS_T35L"        "T, level 35 (deg C)"
+> state    real   ts_t36l         ?!       misc      -         -      r        "TS_T36L"        "T, level 36 (deg C)"
+> state    real   ts_u1l          ?!       misc      -         -      r        "TS_U1L"         "U, level 1 earth-relative (m/s)"
+> state    real   ts_u2l          ?!       misc      -         -      r        "TS_U2L"         "U, level 2 earth-relative (m/s)"
+> state    real   ts_u3l          ?!       misc      -         -      r        "TS_U3L"         "U, level 3 earth-relative (m/s)"
+> state    real   ts_u4l          ?!       misc      -         -      r        "TS_U4L"         "U, level 4 earth-relative (m/s)"
+> state    real   ts_u5l          ?!       misc      -         -      r        "TS_U5L"         "U, level 5 earth-relative (m/s)"
+> state    real   ts_u6l          ?!       misc      -         -      r        "TS_U6L"         "U, level 6 earth-relative (m/s)"
+> state    real   ts_u7l          ?!       misc      -         -      r        "TS_U7L"         "U, level 7 earth-relative (m/s)"
+> state    real   ts_u8l          ?!       misc      -         -      r        "TS_U8L"         "U, level 8 earth-relative (m/s)"
+> state    real   ts_u9l          ?!       misc      -         -      r        "TS_U9L"         "U, level 9 earth-relative (m/s)"
+> state    real   ts_u10l         ?!       misc      -         -      r        "TS_U10L"        "U, level 10 earth-relative (m/s)"
+> state    real   ts_u11l         ?!       misc      -         -      r        "TS_U11L"        "U, level 11 earth-relative (m/s)"
+> state    real   ts_u12l         ?!       misc      -         -      r        "TS_U12L"        "U, level 12 earth-relative (m/s)"
+> state    real   ts_u13l         ?!       misc      -         -      r        "TS_U13L"        "U, level 13 earth-relative (m/s)"
+> state    real   ts_u14l         ?!       misc      -         -      r        "TS_U14L"        "U, level 14 earth-relative (m/s)"
+> state    real   ts_u15l         ?!       misc      -         -      r        "TS_U15L"        "U, level 15 earth-relative (m/s)"
+> state    real   ts_u16l         ?!       misc      -         -      r        "TS_U16L"        "U, level 16 earth-relative (m/s)"
+> state    real   ts_u17l         ?!       misc      -         -      r        "TS_U17L"        "U, level 17 earth-relative (m/s)"
+> state    real   ts_u18l         ?!       misc      -         -      r        "TS_U18L"        "U, level 18 earth-relative (m/s)"
+> state    real   ts_u19l         ?!       misc      -         -      r        "TS_U19L"        "U, level 19 earth-relative (m/s)"
+> state    real   ts_u20l         ?!       misc      -         -      r        "TS_U20L"        "U, level 20 earth-relative (m/s)"
+> state    real   ts_u21l         ?!       misc      -         -      r        "TS_U21L"        "U, level 21 earth-relative (m/s)"
+> state    real   ts_u22l         ?!       misc      -         -      r        "TS_U22L"        "U, level 22 earth-relative (m/s)"
+> state    real   ts_u23l         ?!       misc      -         -      r        "TS_U23L"        "U, level 23 earth-relative (m/s)"
+> state    real   ts_u24l         ?!       misc      -         -      r        "TS_U24L"        "U, level 24 earth-relative (m/s)"
+> state    real   ts_u25l         ?!       misc      -         -      r        "TS_U25L"        "U, level 25 earth-relative (m/s)"
+> state    real   ts_u26l         ?!       misc      -         -      r        "TS_U26L"        "U, level 26 earth-relative (m/s)"
+> state    real   ts_u27l         ?!       misc      -         -      r        "TS_U27L"        "U, level 27 earth-relative (m/s)"
+> state    real   ts_u28l         ?!       misc      -         -      r        "TS_U28L"        "U, level 28 earth-relative (m/s)"
+> state    real   ts_u29l         ?!       misc      -         -      r        "TS_U29L"        "U, level 29 earth-relative (m/s)"
+> state    real   ts_u30l         ?!       misc      -         -      r        "TS_U30L"        "U, level 30 earth-relative (m/s)"
+> state    real   ts_u31l         ?!       misc      -         -      r        "TS_U31L"        "U, level 31 earth-relative (m/s)"
+> state    real   ts_u32l         ?!       misc      -         -      r        "TS_U32L"        "U, level 32 earth-relative (m/s)"
+> state    real   ts_u33l         ?!       misc      -         -      r        "TS_U33L"        "U, level 33 earth-relative (m/s)"
+> state    real   ts_u34l         ?!       misc      -         -      r        "TS_U34L"        "U, level 34 earth-relative (m/s)"
+> state    real   ts_u35l         ?!       misc      -         -      r        "TS_U35L"        "U, level 35 earth-relative (m/s)"
+> state    real   ts_u36l         ?!       misc      -         -      r        "TS_U36L"        "U, level 36 earth-relative (m/s)"
+> state    real   ts_v1l          ?!       misc      -         -      r        "TS_V1L"         "V, level 1 earth-relative (m/s)"
+> state    real   ts_v2l          ?!       misc      -         -      r        "TS_V2L"         "V, level 2 earth-relative (m/s)"
+> state    real   ts_v3l          ?!       misc      -         -      r        "TS_V3L"         "V, level 3 earth-relative (m/s)"
+> state    real   ts_v4l          ?!       misc      -         -      r        "TS_V4L"         "V, level 4 earth-relative (m/s)"
+> state    real   ts_v5l          ?!       misc      -         -      r        "TS_V5L"         "V, level 5 earth-relative (m/s)"
+> state    real   ts_v6l          ?!       misc      -         -      r        "TS_V6L"         "V, level 6 earth-relative (m/s)"
+> state    real   ts_v7l          ?!       misc      -         -      r        "TS_V7L"         "V, level 7 earth-relative (m/s)"
+> state    real   ts_v8l          ?!       misc      -         -      r        "TS_V8L"         "V, level 8 earth-relative (m/s)"
+> state    real   ts_v9l          ?!       misc      -         -      r        "TS_V9L"         "V, level 9 earth-relative (m/s)"
+> state    real   ts_v10l         ?!       misc      -         -      r        "TS_V10L"        "V, level 10 earth-relative (m/s)"
+> state    real   ts_v11l         ?!       misc      -         -      r        "TS_V11L"        "V, level 11 earth-relative (m/s)"
+> state    real   ts_v12l         ?!       misc      -         -      r        "TS_V12L"        "V, level 12 earth-relative (m/s)"
+> state    real   ts_v13l         ?!       misc      -         -      r        "TS_V13L"        "V, level 13 earth-relative (m/s)"
+> state    real   ts_v14l         ?!       misc      -         -      r        "TS_V14L"        "V, level 14 earth-relative (m/s)"
+> state    real   ts_v15l         ?!       misc      -         -      r        "TS_V15L"        "V, level 15 earth-relative (m/s)"
+> state    real   ts_v16l         ?!       misc      -         -      r        "TS_V16L"        "V, level 16 earth-relative (m/s)"
+> state    real   ts_v17l         ?!       misc      -         -      r        "TS_V17L"        "V, level 17 earth-relative (m/s)"
+> state    real   ts_v18l         ?!       misc      -         -      r        "TS_V18L"        "V, level 18 earth-relative (m/s)"
+> state    real   ts_v19l         ?!       misc      -         -      r        "TS_V19L"        "V, level 19 earth-relative (m/s)"
+> state    real   ts_v20l         ?!       misc      -         -      r        "TS_V20L"        "V, level 20 earth-relative (m/s)"
+> state    real   ts_v21l         ?!       misc      -         -      r        "TS_V21L"        "V, level 21 earth-relative (m/s)"
+> state    real   ts_v22l         ?!       misc      -         -      r        "TS_V22L"        "V, level 22 earth-relative (m/s)"
+> state    real   ts_v23l         ?!       misc      -         -      r        "TS_V23L"        "V, level 23 earth-relative (m/s)"
+> state    real   ts_v24l         ?!       misc      -         -      r        "TS_V24L"        "V, level 24 earth-relative (m/s)"
+> state    real   ts_v25l         ?!       misc      -         -      r        "TS_V25L"        "V, level 25 earth-relative (m/s)"
+> state    real   ts_v26l         ?!       misc      -         -      r        "TS_V26L"        "V, level 26 earth-relative (m/s)"
+> state    real   ts_v27l         ?!       misc      -         -      r        "TS_V27L"        "V, level 27 earth-relative (m/s)"
+> state    real   ts_v28l         ?!       misc      -         -      r        "TS_V28L"        "V, level 28 earth-relative (m/s)"
+> state    real   ts_v29l         ?!       misc      -         -      r        "TS_V29L"        "V, level 29 earth-relative (m/s)"
+> state    real   ts_v30l         ?!       misc      -         -      r        "TS_V30L"        "V, level 30 earth-relative (m/s)"
+> state    real   ts_v31l         ?!       misc      -         -      r        "TS_V31L"        "V, level 31 earth-relative (m/s)"
+> state    real   ts_v32l         ?!       misc      -         -      r        "TS_V32L"        "V, level 32 earth-relative (m/s)"
+> state    real   ts_v33l         ?!       misc      -         -      r        "TS_V33L"        "V, level 33 earth-relative (m/s)"
+> state    real   ts_v34l         ?!       misc      -         -      r        "TS_V34L"        "V, level 34 earth-relative (m/s)"
+> state    real   ts_v35l         ?!       misc      -         -      r        "TS_V35L"        "V, level 35 earth-relative (m/s)"
+> state    real   ts_v36l         ?!       misc      -         -      r        "TS_V36L"        "V, level 36 earth-relative (m/s)"
+> state    real   ts_q1l          ?!       misc      -         -      r        "TS_Q1L"         "QV mixing ratio, level 1 (g/kg)"
+> state    real   ts_q2l          ?!       misc      -         -      r        "TS_Q2L"         "QV mixing ratio, level 2 (g/kg)"
+> state    real   ts_q3l          ?!       misc      -         -      r        "TS_Q3L"         "QV mixing ratio, level 3 (g/kg)"
+> state    real   ts_q4l          ?!       misc      -         -      r        "TS_Q4L"         "QV mixing ratio, level 4 (g/kg)"
+> state    real   ts_q5l          ?!       misc      -         -      r        "TS_Q5L"         "QV mixing ratio, level 5 (g/kg)"
+> state    real   ts_q6l          ?!       misc      -         -      r        "TS_Q6L"         "QV mixing ratio, level 6 (g/kg)"
+> state    real   ts_q7l          ?!       misc      -         -      r        "TS_Q7L"         "QV mixing ratio, level 7 (g/kg)"
+> state    real   ts_q8l          ?!       misc      -         -      r        "TS_Q8L"         "QV mixing ratio, level 8 (g/kg)"
+> state    real   ts_q9l          ?!       misc      -         -      r        "TS_Q9L"         "QV mixing ratio, level 9 (g/kg)"
+> state    real   ts_q10l         ?!       misc      -         -      r        "TS_Q10L"        "QV mixing ratio, level 10 (g/kg)"
+> state    real   ts_q11l         ?!       misc      -         -      r        "TS_Q11L"        "QV mixing ratio, level 11 (g/kg)"
+> state    real   ts_q12l         ?!       misc      -         -      r        "TS_Q12L"        "QV mixing ratio, level 12 (g/kg)"
+> state    real   ts_q13l         ?!       misc      -         -      r        "TS_Q13L"        "QV mixing ratio, level 13 (g/kg)"
+> state    real   ts_q14l         ?!       misc      -         -      r        "TS_Q14L"        "QV mixing ratio, level 14 (g/kg)"
+> state    real   ts_q15l         ?!       misc      -         -      r        "TS_Q15L"        "QV mixing ratio, level 15 (g/kg)"
+> state    real   ts_q16l         ?!       misc      -         -      r        "TS_Q16L"        "QV mixing ratio, level 16 (g/kg)"
+> state    real   ts_q17l         ?!       misc      -         -      r        "TS_Q17L"        "QV mixing ratio, level 17 (g/kg)"
+> state    real   ts_q18l         ?!       misc      -         -      r        "TS_Q18L"        "QV mixing ratio, level 18 (g/kg)"
+> state    real   ts_q19l         ?!       misc      -         -      r        "TS_Q19L"        "QV mixing ratio, level 19 (g/kg)"
+> state    real   ts_q20l         ?!       misc      -         -      r        "TS_Q20L"        "QV mixing ratio, level 20 (g/kg)"
+> state    real   ts_q21l         ?!       misc      -         -      r        "TS_Q21L"        "QV mixing ratio, level 21 (g/kg)"
+> state    real   ts_q22l         ?!       misc      -         -      r        "TS_Q22L"        "QV mixing ratio, level 22 (g/kg)"
+> state    real   ts_q23l         ?!       misc      -         -      r        "TS_Q23L"        "QV mixing ratio, level 23 (g/kg)"
+> state    real   ts_q24l         ?!       misc      -         -      r        "TS_Q24L"        "QV mixing ratio, level 24 (g/kg)"
+> state    real   ts_q25l         ?!       misc      -         -      r        "TS_Q25L"        "QV mixing ratio, level 25 (g/kg)"
+> state    real   ts_q26l         ?!       misc      -         -      r        "TS_Q26L"        "QV mixing ratio, level 26 (g/kg)"
+> state    real   ts_q27l         ?!       misc      -         -      r        "TS_Q27L"        "QV mixing ratio, level 27 (g/kg)"
+> state    real   ts_q28l         ?!       misc      -         -      r        "TS_Q28L"        "QV mixing ratio, level 28 (g/kg)"
+> state    real   ts_q29l         ?!       misc      -         -      r        "TS_Q29L"        "QV mixing ratio, level 29 (g/kg)"
+> state    real   ts_q30l         ?!       misc      -         -      r        "TS_Q30L"        "QV mixing ratio, level 30 (g/kg)"
+> state    real   ts_q31l         ?!       misc      -         -      r        "TS_Q31L"        "QV mixing ratio, level 31 (g/kg)"
+> state    real   ts_q32l         ?!       misc      -         -      r        "TS_Q32L"        "QV mixing ratio, level 32 (g/kg)"
+> state    real   ts_q33l         ?!       misc      -         -      r        "TS_Q33L"        "QV mixing ratio, level 33 (g/kg)"
+> state    real   ts_q34l         ?!       misc      -         -      r        "TS_Q34L"        "QV mixing ratio, level 34 (g/kg)"
+> state    real   ts_q35l         ?!       misc      -         -      r        "TS_Q35L"        "QV mixing ratio, level 35 (g/kg)"
+> state    real   ts_q36l         ?!       misc      -         -      r        "TS_Q36L"        "QV mixing ratio, level 36 (g/kg)"
+> state    real   ts_hour         ?!       misc      -         -      r        "TS_HOUR"        "Model integration time, hours"
+> state    real   ts_u            ?!       misc      -         -      r        "TS_U"           "Surface wind U-component, earth-relative"
+> state    real   ts_v            ?!       misc      -         -      r        "TS_V"           "Surface wind V-component, earth-relative"
+> state    real   ts_q            ?!       misc      -         -      r        "TS_Q"           "Surface mixing ratio"
+> state    real   ts_t            ?!       misc      -         -      r        "TS_T"           "Surface temperature"
+> state    real   ts_psfc         ?!       misc      -         -      r        "TS_PSFC"        "Surface pressure"
+> state    real   ts_glw          ?!       misc      -         -      r        "TS_GLW"         "Downward long wave flux at surface"
+> state    real   ts_gsw          ?!       misc      -         -      r        "TS_GSW"         "Net short wave flux at surface"
+> state    real   ts_hfx          ?!       misc      -         -      r        "TS_HFX"         "Upward heat flux at surface"
+> state    real   ts_qfx          ?!       misc      -         -      r        "TS_QFX"         "Upward moisture flux at surface"
+> state    real   ts_tsk          ?!       misc      -         -      r        "TS_TSK"         "Skin temperature"
+> state    real   ts_tslb         ?!       misc      -         -      r        "TS_TSLB"        "Soil temperature"
+> state    real   ts_clw          ?!       misc      -         -      r        "TS_CLW"         "Column integrated cloud water"
+> state    real   ts_rainc        ?!       misc      -         -      r        "TS_RAINC"       "Cumulus precip"
+> state    real   ts_rainnc       ?!       misc      -         -      r        "TS_RAINNC"      "Grid-scale precip"
+680a906
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Time series: Add time series variables
+1163c1389,1391
+< state   real    ht             ij      misc         1         -     i012rhdus  "HGT"              "Terrain Height"   "m"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Modify I/O stream for ht per Will Cheng
+> state   real    ht             ij      misc         1         -     i012rh03dus  "HGT"            "Terrain Height"   "m"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Modify I/O stream for ht per Will Cheng
+1173c1401,1403
+< state   real    TSK            ij      misc         1         -     i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)    "TSK"                   "SURFACE SKIN TEMPERATURE"                  "K"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 11 - 
+> state   real    TSK            ij      misc         1         -     i012rh03d=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)    "TSK"                   "SURFACE SKIN TEMPERATURE"                  "K"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 11 - 
+1276,1278c1506,1510
+< state    real  RAINC            ij      misc        1         -      rhdu     "RAINC"                 "ACCUMULATED TOTAL CUMULUS PRECIPITATION"                 "mm"      
+< state    real  RAINSH           ij      misc        1         -      rhdu     "RAINSH"                "ACCUMULATED SHALLOW CUMULUS PRECIPITATION"               "mm"
+< state    real  RAINNC           ij      misc        1         -      rhdu     "RAINNC"                "ACCUMULATED TOTAL GRID SCALE PRECIPITATION"              "mm"      
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 12 - Modify I/O stream for RAINC, RAINSH, and RAINNC per Will Cheng
+> state    real  RAINC            ij      misc        1         -      rh03du   "RAINC"                 "ACCUMULATED TOTAL CUMULUS PRECIPITATION"                 "mm"
+> state    real  RAINSH           ij      misc        1         -      rh03du   "RAINSH"                "ACCUMULATED SHALLOW CUMULUS PRECIPITATION"               "mm"
+> state    real  RAINNC           ij      misc        1         -      rh03du   "RAINNC"                "ACCUMULATED TOTAL GRID SCALE PRECIPITATION"              "mm"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 12 - Modify I/O stream for RAINC, RAINSH, and RAINNC per Will Cheng
+1356c1588,1590
+< state    real  CLDT             ij      misc        1         -      -        "CFRACT"                "TOTAL CLOUD FRACTION"                                 ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 13 - 
+> state    real  CLDT             ij      misc        1         -      rh03d    "CFRACT"                "TOTAL CLOUD FRACTION"                                 ""
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 13 - 
+1359c1593,1595
+< state    real  SWDOWN           ij      misc        1         -      rhd      "SWDOWN"                "DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE"           "W m-2"      
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 14 - 
+> state    real  SWDOWN           ij      misc        1         -      rh03d    "SWDOWN"                "DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE"           "W m-2"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 14 - 
+1362,1363c1598,1601
+< state    real  GLW              ij      misc        1         -      rhd      "GLW"                   "DOWNWARD LONG WAVE FLUX AT GROUND SURFACE"            "W m-2"      
+< state    real  SWNORM           ij      misc        1         -      rhd      "SWNORM"                "NORMAL SHORT WAVE FLUX AT GROUND SURFACE (SLOPE-DEPENDENT)"           "W m-2"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 15 - 
+> state    real  GLW              ij      misc        1         -      rh03d    "GLW"                   "DOWNWARD LONG WAVE FLUX AT GROUND SURFACE"            "W m-2"
+> state    real  SWNORM           ij      misc        1         -      rh03d    "SWNORM"                "NORMAL SHORT WAVE FLUX AT GROUND SURFACE (SLOPE-DEPENDENT)"           "W m-2"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 15 - 
+1366,1368c1604,1608
+< state   real    swddir       ij     misc         1         -     rd     "SWDDIR"     "Shortwave surface downward direct irradiance" "W m-2" ""
+< state   real    swddni       ij     misc         1         -     rd     "SWDDNI"     "Shortwave surface downward direct normal irradiance" "W m-2" ""
+< state   real    swddif       ij     misc         1         -     rd     "SWDDIF"     "Shortwave surface downward diffuse irradiance" "W m-2" ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 16 - 
+> state   real    swddir       ij     misc         1         -     rh03d   "SWDDIR"     "Shortwave surface downward direct irradiance" "W m-2" ""
+> state   real    swddni       ij     misc         1         -     rh03d   "SWDDNI"     "Shortwave surface downward direct normal irradiance" "W m-2" ""
+> state   real    swddif       ij     misc         1         -     rh03d   "SWDDIF"     "Shortwave surface downward diffuse irradiance" "W m-2" ""
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 16 - 
+1687c1927,1929
+< state    real  UST              ij      misc        1         -      rh       "UST"                   "U* IN SIMILARITY THEORY"                      "m s-1"      
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 17 - 
+> state    real  UST              ij      misc        1         -      rh03     "UST"                   "U* IN SIMILARITY THEORY"                      "m s-1"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 17 - 
+1692c1934,1936
+< state    real  PBLH             ij      misc        1         -      rh       "PBLH"                  "PBL HEIGHT"         "m"      
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 18 - 
+> state    real  PBLH             ij      misc        1         -      rh03     "PBLH"                  "PBL HEIGHT"         "m"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 18 - 
+1695c1939,1941
+< state    real  HFX              ij      misc        1         -      rh       "HFX"                   "UPWARD HEAT FLUX AT THE SURFACE"              "W m-2"      
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 19 - 
+> state    real  HFX              ij      misc        1         -      rh03     "HFX"                   "UPWARD HEAT FLUX AT THE SURFACE"              "W m-2"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 19 - 
+1697c1943,1945
+< state    real  LH               ij      misc        1         -      rh       "LH"                    "LATENT HEAT FLUX AT THE SURFACE"              "W m-2"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 20 - 
+> state    real  LH               ij      misc        1         -      rh03     "LH"                    "LATENT HEAT FLUX AT THE SURFACE"              "W m-2"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 20 - 
+1714c1962,1964
+< state    real  SNOWC            ij      misc        1         -      i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)  "SNOWC"  "FLAG INDICATING SNOW COVERAGE (1 FOR SNOW COVER)"  ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 21 - 
+> state    real  SNOWC            ij      misc        1         -      i012rh03d=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)  "SNOWC"  "FLAG INDICATING SNOW COVERAGE (1 FOR SNOW COVER)"  ""
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 21 - 
+1750,1751c2000,2008
+< state    real  RQVNDGDTEN        ikj      misc        1         -      r        "RQVNDGDTEN"              "COUPLED Q_V TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+< state    real  RMUNDGDTEN        ij       misc        1         -      r        "RMUNDGDTEN"              "MU TENDENCY DUE TO FDDA GRID NUDGING"     "Pa s-1"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 22 - # Grid nudging radar mods 1: Add tendencies RQR, RQS, RQG, RQC, RQI (Mei Xu)
+> state    real  RQVNDGDTEN        ikj      misc     1         -      r        "RQVNDGDTEN"              "COUPLED Q_V TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RQRNDGDTEN        ikj      misc     1         -      r        "RQRNDGDTEN"              "COUPLED Q_R TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RQSNDGDTEN        ikj      misc     1         -      r        "RQSNDGDTEN"              "COUPLED Q_S TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RQGNDGDTEN        ikj      misc     1         -      r        "RQGNDGDTEN"              "COUPLED Q_G TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RQCNDGDTEN        ikj      misc     1         -      r        "RQCNDGDTEN"              "COUPLED Q_C TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RQINDGDTEN        ikj      misc     1         -      r        "RQINDGDTEN"              "COUPLED Q_I TENDENCY DUE TO FDDA GRID NUDGING"     "Pa kg kg-1 s-1"
+> state    real  RMUNDGDTEN        ij       misc     1         -      r        "RMUNDGDTEN"              "MU TENDENCY DUE TO FDDA GRID NUDGING"     "Pa s-1"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 22 - # Grid nudging radar mods 1: Add tendencies RQR, RQS, RQG, RQC, RQI (Mei Xu)
+1756,1757c2013,2021
+< state    real  Q_NDG_NEW         ikjf     fdda3d      1         -      i{10}r   "Q_NDG_NEW"               "NEW WATER VAPOR MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+< state    real  PH_NDG_NEW        ikjf     fdda3d      1         Z      i{10}r   "PH_NDG_NEW"              "NEW PERT GEOPOTENTIAL FOR FDDA GRID NUDGING"  "kg/kg"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 23 - # Grid nudging radar mods 2: Add new mix ratios QR, QS, QG, QC, QI (Mei Xu)
+> state    real  Q_NDG_NEW         ikjf     fdda3d   1         -      i{10}r   "Q_NDG_NEW"               "NEW WATER VAPOR MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QR_NDG_NEW        ikjf     fdda3d    1         -     i{10}r     "QR_NDG_NEW"              "NEW RAINWATER VAPOR MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QS_NDG_NEW        ikjf     fdda3d    1         -     i{10}r     "QS_NDG_NEW"              "NEW SNOW MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QG_NDG_NEW        ikjf     fdda3d    1         -     i{10}r     "QG_NDG_NEW"              "NEW GRAUPEL MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QC_NDG_NEW        ikjf     fdda3d    1         -     i{10}r     "QC_NDG_NEW"              "NEW COULD WATER MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QI_NDG_NEW        ikjf     fdda3d    1         -     i{10}r     "QI_NDG_NEW"              "NEW ICE MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  PH_NDG_NEW        ikjf     fdda3d   1         Z      i{10}r   "PH_NDG_NEW"              "NEW PERT GEOPOTENTIAL FOR FDDA GRID NUDGING"  "kg/kg"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 23 - # Grid nudging radar mods 2: Add new mix ratios QR, QS, QG, QC, QI (Mei Xu)
+1761,1762c2025,2033
+< state    real  Q_NDG_OLD         ikjf     fdda3d      1         -      i{10}r   "Q_NDG_OLD"               "OLD WATER VAPOR MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+< state    real  PH_NDG_OLD        ikjf     fdda3d      1         Z      i{10}r   "PH_NDG_OLD"              "OLD PERT GEOPOTENTIAL FOR FDDA GRID NUDGING"  "kg/kg"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 24 - # Grid nudging radar mods 3: Add old mix ratios QR, QS, QG, QC, QI (Mei Xu)
+> state    real  Q_NDG_OLD         ikjf     fdda3d   1         -      i{10}r   "Q_NDG_OLD"               "OLD WATER VAPOR MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QR_NDG_OLD         ikjf    fdda3d    1         -     i{10}r     "QR_NDG_OLD"              "OLD RAINWATER MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QS_NDG_OLD         ikjf    fdda3d    1         -     i{10}r     "QS_NDG_OLD"              "OLD SNOW MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QG_NDG_OLD         ikjf    fdda3d    1         -     i{10}r     "QG_NDG_OLD"              "OLD GRAUPEL MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QC_NDG_OLD         ikjf    fdda3d    1         -     i{10}r     "QC_NDG_OLD"              "OLD CLOUD WATER MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  QI_NDG_OLD         ikjf    fdda3d    1         -     i{10}r     "QI_NDG_OLD"              "OLD ICE MIX RATIO FOR FDDA GRID NUDGING"  "kg/kg"
+> state    real  PH_NDG_OLD        ikjf     fdda3d   1         Z      i{10}r   "PH_NDG_OLD"              "OLD PERT GEOPOTENTIAL FOR FDDA GRID NUDGING"  "kg/kg"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 24 - # Grid nudging radar mods 3: Add old mix ratios QR, QS, QG, QC, QI (Mei Xu)
+1956a2228
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 25 - Addition for Will Cheng's aux3 code
+1958a2231,2238
+> # == WC: 2016-07-30 ===
+> rconfig   integer nsigout                 namelist,domains      1              1      rh    "number of vertical levels to output for subset"
+> rconfig   integer isigout                 namelist,domains      1              0      rh    "flag to output subset of vertical levels"
+> rconfig   real    sigout_dt               namelist,domains      max_domains  900.     -      "sigout_dt"   "time interval to update output subset in sec" ""
+> # =====================
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 25 - Addition for Will Cheng's aux3 code
+> 
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 26 - Adaptive time step adjustment
+1968a2249
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 26 - Adaptive time step adjustment
+2054a2336
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 27 - Add vars for MM5-like time-series option
+2055a2338,2339
+> rconfig   integer   use_mm5_ts      namelist,domains    1                0            -       "use_mm5_ts"    "Flag to output MM5-like time series"
+> rconfig   real      xsec_mm5_ts     namelist,domains    1                900.         -       "xsec_mm5_ts"   "Output interval of MM5-like time series in sec"
+2056a2341
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 27 - Add vars for MM5-like time-series option
+2228a2514
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 28 - Add namelist vars for lightning option
+2229a2516,2519
+> rconfig   integer wlpi_use                namelist,physics      max_domains   0       -      "wlpi_use"       "calculate WLPI" ""
+> rconfig   real    wlpi_dt                 namelist,physics      max_domains   300.    -      "wlpi_dt"        "time interval to calculate wlpi in sec" ""
+> rconfig   integer wmxdbz_use              namelist,physics      max_domains   0       -      "wmxdbz_use"     "activate calculating maximum reflectivity" ""
+> rconfig   real    wmxdbz_dt               namelist,physics      max_domains   300.    -      "wmxdbz_dt"      "time interval to calculate wmxdbz in sec" ""
+2231a2522
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 28 - Add namelist vars for lightning option
+2324a2616
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 29 - Grid nudging radar mods 4: Add zfac variables
+2325a2618,2621
+> rconfig   integer  if_zfac_qr             namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+> rconfig   integer   k_zfac_qr             namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+> rconfig   integer  if_zfac_qc             namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+> rconfig   integer   k_zfac_qc             namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+2327a2624
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 29 - Grid nudging radar mods 4: Add zfac variables
+2332a2630
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 30 - Grid nudging radar mods 5: Add gqr, gqc, clh variables
+2333a2632,2634
+> rconfig   real        gqr                 namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+> rconfig   real        gqc                 namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+> rconfig   real        clh                 namelist,fdda         max_domains    0       rh       "grid_fdda"            ""      ""
+2334a2636
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 30 - Grid nudging radar mods 5: Add gqr, gqc, clh variables
+2348c2650,2663
+< rconfig   integer     max_obs             namelist,fdda            1              0       h        "max_obs"           "Maximum number of observations"       ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 31 - Obs nudging: Add namelist vars obs_read_kalman, max_kalman, obs_ndirpow, obs_kalman_lbdy, obs_kalman_lskip, nobs_scans, obs_qc_domain, obs_qc_alerts, obs_adjust_ht, obs_REKF_files, obs_nudge_terms (unique on domain)
+> rconfig   integer     max_obs             namelist,fdda            max_domains    0       rh       "max_obs"           "Maximum number of observations for each domain" ""
+> rconfig   integer     obs_read_kalman     namelist,fdda            max_domains    0       rh       "obs_read_kalman"   "Flag for reading kalman gain data for domain" ""
+> rconfig   integer     max_kalman          namelist,fdda            max_domains    0       rh       "max_kalman"        "Maximum number of kalman obs for each domain" ""
+> rconfig   integer     obs_qc_domain       namelist,fdda            max_domains    1       rh       "obs_qc_domain"     "Domain used to set qc values for observations" ""
+> rconfig   integer     obs_qc_alerts       namelist,fdda            1              0       rh       "obs_qc_alerts"     "1 to activate qc alert msgs, 0 to suppress" ""
+> rconfig   logical     obs_adjust_ht       namelist,fdda            1              .false. rh       "obs_adjust_ht"     "Switch to turn on near-surface height adjustment calculation"
+> rconfig   logical     obs_REKF_files      namelist,fdda            1              .false. rh       "obs_REKF_files"    "Switch to turn on printout showing Kalman-gain file-opens"
+> rconfig   integer     obs_ndir            namelist,fdda            1              25      h        "obs_ndir"          "Dimension for reduced kalman gain data (half-length)"  ""
+> rconfig   integer     obs_npow            namelist,fdda            1              1       h        "obs_npow"          "Dimension for reduced kalman gain data (jump)"  ""
+> rconfig   integer     obs_kalman_lbdy     namelist,fdda            1              4       -        "obs_kalman_lbdy"   "Starting index for Kalman gain" ""
+> rconfig   integer     obs_kalman_lskip    namelist,fdda            1              2       -        "obs_kalman_skip"   "Skip index for Kalman gain" ""
+> rconfig   character   obs_nudge_terms     namelist,fdda            max_domains "UU VV TT QQ" -     "obs_nudge_terms" "List of variance/covar terms (ex: UU UV TVr) to be used for nudging" ""
+> rconfig   integer     nobs_scans          namelist,fdda            1              1       h        "nobs_scans"        "Number of nudging scans"
+2349a2665
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 31 - Obs nudging: Add namelist vars obs_read_kalman, max_kalman, obs_ndirpow, obs_kalman_lbdy, obs_kalman_lskip, nobs_scans, obs_qc_domain, obs_qc_alerts, obs_adjust_ht, obs_REKF_files, obs_nudge_terms (unique on domain)
+2351a2668
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 32 - Add switch for radial wind nudging
+2352a2670,2675
+> #### wuyh added 20140626
+> rconfig   integer     obs_nudge_vr        namelist,fdda            max_domains    0       rh       "obs_nudge_vr"      "Radial wind-nudging flag for domain (0 off, -1 U,V, +1 Vr)" ""
+> rconfig   real        obs_coef_vr         namelist,fdda            max_domains    0       rh       "obs_coef_vr"       "Radial wind-nudging coeficient for domain"   "s-1"
+> rconfig   integer     obs_nudge_rf        namelist,fdda            max_domains    0       rh       "obs_nudge_rf"      "Z-nudging flag for domain"         ""
+> rconfig   real        obs_coef_rf         namelist,fdda            max_domains    0       rh       "obs_coef_rf"       "Z-nudging coeficient for domain"   "s-1"
+> #### wuyh added 20140626 end
+2353a2677
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 32 - Add switch for radial wind nudging
+2357a2682
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 33 - Obs nudging: Remove vertical influence function variables; Add obs_rinfmx; Add platform-specific rinxy
+2359,2388d2683
+< rconfig   integer     obs_no_pbl_nudge_uv namelist,fdda            max_domains    0       rh       "obs_no_pbl_nudge_uv" "1=no wind-nudging within pbl"          ""
+< rconfig   integer     obs_no_pbl_nudge_t  namelist,fdda            max_domains    0       rh       "obs_no_pbl_nudge_t"  "1=no temperature-nudging within pbl"   ""
+< rconfig   integer     obs_no_pbl_nudge_q  namelist,fdda            max_domains    0       rh       "obs_no_pbl_nudge_q"  "1=no moisture-nudging within pbl"      ""
+< rconfig   integer     obs_sfc_scheme_horiz namelist,fdda           1              0       rh       "obs_sfcscheme_horiz" "0=wrf scheme, 1=original mm5 scheme" ""
+< rconfig   integer     obs_sfc_scheme_vert  namelist,fdda           1              0       rh       "obs_sfcscheme_vert"  "0=regime vif scheme, 1=original simple scheme" ""
+< rconfig   real        obs_max_sndng_gap   namelist,fdda            1              20      rh       "obs_max_sndng_gap"   "Max press gap between soundings" "centibars"
+< rconfig   real        obs_nudgezfullr1_uv namelist,fdda            1              50      rh       "obs_nudgezfullr1_uv" "Vert infl full weight  height for LML obs, regime 1, winds"        ""
+< rconfig   real        obs_nudgezrampr1_uv namelist,fdda            1              50      rh       "obs_nudgezrampr1_uv" "Vert infl ramp-to-zero height for LML obs, regime 1, winds"        ""
+< rconfig   real        obs_nudgezfullr2_uv namelist,fdda            1              50      rh       "obs_nudgezfullr2_uv" "Vert infl full weight  height for LML obs, regime 2, winds"        ""
+< rconfig   real        obs_nudgezrampr2_uv namelist,fdda            1              50      rh       "obs_nudgezrampr2_uv" "Vert infl ramp-to-zero height for LML obs, regime 2, winds"        ""
+< rconfig   real        obs_nudgezfullr4_uv namelist,fdda            1              -5000   rh       "obs_nudgezfullr4_uv" "Vert infl full weight  height for LML obs, regime 4, winds"        ""
+< rconfig   real        obs_nudgezrampr4_uv namelist,fdda            1              50      rh       "obs_nudgezrampr4_uv" "Vert infl ramp-to-zero height for LML obs, regime 4, winds"        ""
+< rconfig   real        obs_nudgezfullr1_t  namelist,fdda            1              50      rh       "obs_nudgezfullr1_t" "Vert infl full weight  height for LML obs, regime 1, temperature"  ""
+< rconfig   real        obs_nudgezrampr1_t  namelist,fdda            1              50      rh       "obs_nudgezrampr1_t" "Vert infl ramp-to-zero height for LML obs, regime 1, temperature"  ""
+< rconfig   real        obs_nudgezfullr2_t  namelist,fdda            1              50      rh       "obs_nudgezfullr2_t" "Vert infl full weight  height for LML obs, regime 2, temperature"  ""
+< rconfig   real        obs_nudgezrampr2_t  namelist,fdda            1              50      rh       "obs_nudgezrampr2_t" "Vert infl ramp-to-zero height for LML obs, regime 2, temperature"  ""
+< rconfig   real        obs_nudgezfullr4_t  namelist,fdda            1              -5000   rh       "obs_nudgezfullr4_t" "Vert infl full weight  height for LML obs, regime 4, temperature"  ""
+< rconfig   real        obs_nudgezrampr4_t  namelist,fdda            1              50      rh       "obs_nudgezrampr4_t" "Vert infl ramp-to-zero height for LML obs, regime 4, temperature"  ""
+< rconfig   real        obs_nudgezfullr1_q  namelist,fdda            1              50      rh       "obs_nudgezfullr1_q" "Vert infl full weight  height for LML obs, regime 1, moisture"     ""
+< rconfig   real        obs_nudgezrampr1_q  namelist,fdda            1              50      rh       "obs_nudgezrampr1_q" "Vert infl ramp-to-zero height for LML obs, regime 1, moisture"     ""
+< rconfig   real        obs_nudgezfullr2_q  namelist,fdda            1              50      rh       "obs_nudgezfullr2_q" "Vert infl full weight  height for LML obs, regime 2, moisture"     ""
+< rconfig   real        obs_nudgezrampr2_q  namelist,fdda            1              50      rh       "obs_nudgezrampr2_q" "Vert infl ramp-to-zero height for LML obs, regime 2, moisture"     ""
+< rconfig   real        obs_nudgezfullr4_q  namelist,fdda            1              -5000   rh       "obs_nudgezfullr4_q" "Vert infl full weight  height for LML obs, regime 4, moisture"     ""
+< rconfig   real        obs_nudgezrampr4_q  namelist,fdda            1              50      rh       "obs_nudgezrampr4_q" "Vert infl ramp-to-zero height for LML obs, regime 4, moisture"     ""
+< rconfig   real        obs_nudgezfullmin   namelist,fdda            1                 50   rh       "obs_nudgezfullmin" "Minimum depth through which vertical influence fcn remains 1.0"     "m"
+< rconfig   real        obs_nudgezrampmin   namelist,fdda            1                 50   rh       "obs_nudgezrampmin" "Minimum depth through which vertical influence fcn decreases from 1.0 to 0.0" "m"
+< rconfig   real        obs_nudgezmax       namelist,fdda            1               3000   rh       "obs_nudgezmax" "Maximum depth in which vertical influence function is nonzero" "m"
+< rconfig   real        obs_sfcfact         namelist,fdda            1              1.0     h        "obs_sfcfact"       "Scale factor applied to time window for surface obs"     ""
+< rconfig   real        obs_sfcfacr         namelist,fdda            1              1.0     h        "obs_sfcfacr"       "Scale factor applied to horiz radius of influence for surface obs"     ""
+< rconfig   real        obs_dpsmx           namelist,fdda            1              7.5     h        "obs_dpsmx"         "Max pressure change allowed within horiz radius of influence"     "centibars"
+2389a2685,2701
+> rconfig   real        obs_rinxy_sfc       namelist,fdda            max_domains    0       rh       "obs_rinxy_sfc"     "Horizontal radius of influence for sfc obs"       "km"
+> rconfig   real        obs_rinfmx          namelist,fdda            max_domains    2       rh       "obs_rinfmx"        "Scale factor on rinxy for max radius of influence"       ""
+> rconfig   real        obs_rinxy_meta      namelist,fdda            max_domains    0       rh       "obs_rinxy_meta"    "Horiz ROI for platfm type metar"      "km"
+> rconfig   real        obs_rinxy_spec      namelist,fdda            max_domains    0       rh       "obs_rinxy_spec"    "Horiz ROI for platfm type speci"      "km"
+> rconfig   real        obs_rinxy_ship      namelist,fdda            max_domains    0       rh       "obs_rinxy_ship"    "Horiz ROI for platfm type ship"       "km"
+> rconfig   real        obs_rinxy_syno      namelist,fdda            max_domains    0       rh       "obs_rinxy_syno"    "Horiz ROI for platfm type synop"      "km"
+> rconfig   real        obs_rinxy_temp      namelist,fdda            max_domains    0       rh       "obs_rinxy_temp"    "Horiz ROI for platfm type temp"       "km"
+> rconfig   real        obs_rinxy_pilo      namelist,fdda            max_domains    0       rh       "obs_rinxy_pilo"    "Horiz ROI for platfm type pilot"      "km"
+> rconfig   real        obs_rinxy_satw      namelist,fdda            max_domains    0       rh       "obs_rinxy_satw"    "Horiz ROI for platfm type satwnds"    "km"
+> rconfig   real        obs_rinxy_sams      namelist,fdda            max_domains    0       rh       "obs_rinxy_sams"    "Horiz ROI for platfm type sams"       "km"
+> rconfig   real        obs_rinxy_prof      namelist,fdda            max_domains    0       rh       "obs_rinxy_prof"    "Horiz ROI for platfm type profiler"   "km"
+> rconfig   real        obs_rinxy_sl10      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl10"    "Horiz ROI for platfm type slot 10"    "km"
+> rconfig   real        obs_rinxy_sl11      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl11"    "Horiz ROI for platfm type slot 11"    "km"
+> rconfig   real        obs_rinxy_sl12      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl12"    "Horiz ROI for platfm type slot 12"    "km"
+> rconfig   real        obs_rinxy_sl13      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl13"    "Horiz ROI for platfm type slot 13"    "km"
+> rconfig   real        obs_rinxy_sl14      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl14"    "Horiz ROI for platfm type slot 14"    "km"
+> rconfig   real        obs_rinxy_sl15      namelist,fdda            max_domains    0       rh       "obs_rinxy_sl15"    "Horiz ROI for platfm type slot 15"    "km"
+2391c2703,2721
+< rconfig   real        obs_twindo          namelist,fdda            max_domains    0       rh       "obs_twindo"        "Half-period time window for nudging"  "hrs"
+---
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 33 - Obs nudging: Remove vertical influence function variables; Add obs_rinfmx; Add platform-specific rinxy
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 34 - Obs nudging: Add platform-specific twindo
+> rconfig   real        obs_twindo          namelist,fdda            max_domains    0       rh       "obs_twindo"        "Half-period time window for nudging (default for all platforms)"  "hrs"
+> rconfig   real        obs_twindo_sfc      namelist,fdda            max_domains    0       rh       "obs_twindo_sfc"    "Half-period time window for nudging (default for all platforms) for sfc obs"  "hrs"
+> rconfig   real        obs_twindo_meta     namelist,fdda            max_domains    0       rh       "obs_twindo_meta"   "Half-period twindo for pltfm metar"   "hrs"
+> rconfig   real        obs_twindo_spec     namelist,fdda            max_domains    0       rh       "obs_twindo_spec"   "Half-period twindo for pltfm speci"   "hrs"
+> rconfig   real        obs_twindo_ship     namelist,fdda            max_domains    0       rh       "obs_twindo_ship"   "Half-period twindo for pltfm ship"    "hrs"
+> rconfig   real        obs_twindo_syno     namelist,fdda            max_domains    0       rh       "obs_twindo_syno"   "Half-period twindo for pltfm synop"   "hrs"
+> rconfig   real        obs_twindo_temp     namelist,fdda            max_domains    0       rh       "obs_twindo_temp"   "Half-period twindo for pltfm temp"    "hrs"
+> rconfig   real        obs_twindo_pilo     namelist,fdda            max_domains    0       rh       "obs_twindo_pilo"   "Half-period twindo for pltfm pilot"   "hrs"
+> rconfig   real        obs_twindo_satw     namelist,fdda            max_domains    0       rh       "obs_twindo_satw"   "Half-period twindo for pltfm satwnds" "hrs"
+> rconfig   real        obs_twindo_sams     namelist,fdda            max_domains    0       rh       "obs_twindo_sams"   "Half-period twindo for pltfm sams"    "hrs"
+> rconfig   real        obs_twindo_prof     namelist,fdda            max_domains    0       rh       "obs_twindo_prof"   "Half-period twindo for pltfm profiler""hrs"
+> rconfig   real        obs_twindo_sl10     namelist,fdda            max_domains    0       rh       "obs_twindo_sl10"   "Half-period twindo for pltfm slot 10" "hrs"
+> rconfig   real        obs_twindo_sl11     namelist,fdda            max_domains    0       rh       "obs_twindo_sl11"   "Half-period twindo for pltfm slot 11" "hrs"
+> rconfig   real        obs_twindo_sl12     namelist,fdda            max_domains    0       rh       "obs_twindo_sl12"   "Half-period twindo for pltfm slot 12" "hrs"
+> rconfig   real        obs_twindo_sl13     namelist,fdda            max_domains    0       rh       "obs_twindo_sl13"   "Half-period twindo for pltfm slot 13" "hrs"
+> rconfig   real        obs_twindo_sl14     namelist,fdda            max_domains    0       rh       "obs_twindo_sl14"   "Half-period twindo for pltfm slot 14" "hrs"
+> rconfig   real        obs_twindo_sl15     namelist,fdda            max_domains    0       rh       "obs_twindo_sl15"   "Half-period twindo for pltfm slot 15" "hrs"
+2392a2723
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 34 - Obs nudging: Add platform-specific twindo
+2400a2732
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 35 - Obs nudging: Add variables for internal QC
+2402c2734,2744
+< rconfig   integer     obs_scl_neg_qv_innov namelist,fdda           1              0       h        "obs_scl_neg_qv_innov" "Scale certain negative QV innovations"   ""
+---
+> # FCV changes begin
+> rconfig   logical     qc_internal         namelist,fdda            1              .false. rh       "qc_internal"       "Switch to turn on internal QC on the fly"   ""
+> rconfig   real        tolerance_p         namelist,fdda            1              1.6     rh       "tolerance_p"       "Standard deviation for pressure QC Bell function"   ""
+> rconfig   real        tolerance_q         namelist,fdda            1              1.0     rh       "tolerance_q"       "Standard deviation for specific humidity component QC Bell function"   ""
+> rconfig   real        tolerance_t         namelist,fdda            1              2.2     rh       "tolerance_t"       "Standard deviation for temperature component QC Bell function"   ""
+> rconfig   real        tolerance_u         namelist,fdda            1              2.0     rh       "tolerance_u"       "Standard deviation for wind components QC Bell function"   ""
+> rconfig   real        tolerance_p_sound   namelist,fdda            1              3.0     rh       "tolerance_p_soud"  "Standard deviation for sounding pressure QC Bell function"   ""
+> rconfig   real        tolerance_q_sound   namelist,fdda            1              2.0     rh       "tolerance_q_sound" "Standard deviation for sounding specific humidity component QC Bell function"   ""
+> rconfig   real        tolerance_t_sound   namelist,fdda            1              3.2     rh       "tolerance_t"       "Standard deviation for sounding temperature component QC Bell function"   ""
+> rconfig   real        tolerance_u_sound   namelist,fdda            1              3.0     rh       "tolerance_u"       "Standard deviation for sounding wind component QC Bell function"   ""
+> # FCV changes end
+2404a2747
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 35 - Obs nudging: Add variables for internal QC
+2534,2535c2877,2888
+< rconfig   integer nobs_ndg_vars           derived                       1         6       -        "num_ndg_vars"         "Number of nudging variables"          ""
+< rconfig   integer nobs_err_flds           derived                       1         10      -        "num_err_flds"         "Number of error fields"               ""
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 36 - Add derived variables for Kalman gain, dimensioning, cross-correlations
+> rconfig   integer nobs_ndg_vars           derived                       1         8       -        "num_ndg_vars"         "Number of nudging variables + 2"      ""
+> rconfig   integer obs_vobs_dim            derived                       1         3       -        "obs_vobs_dim"         "Number of vars in vobs, vobs_qc, for each ob" ""
+> rconfig   integer obs_errf_dim            derived                       1         5       -        "obs_errf_dim"         "Number of vars in errf for each ob" ""
+> rconfig   integer nobs_kgain_vars         derived                       1         4       -        "nobs_kgain_vars"      "Number of kgain variables" ""
+> rconfig   integer obs_ndirpow             derived                       1         2601    -        "obs_ndirpow"       "Dimension for raw kalman gain data"  ""
+> rconfig   integer obs_nkalman_angs        derived                       1         8       -        "obs_nkalman_angs"     "Number of angles for Kalman gain"  ""
+> rconfig   integer obs_nkalman_coefs       derived                       1         4       -        "obs_nkalman_coefs"    "Deg+1 of polyn for Kalman gain coefs"  ""
+> rconfig   integer obs_nkalman_we          derived                       1         2       -        "obs_nkalman_we"       "Number of west-east Kalman obs netwk pts on local processor" ""
+> rconfig   integer obs_nkalman_sn          derived                       1         2       -        "obs_nkalman_sn"       "Number of south-north Kalman obs netwk pts on lcl processor" ""
+> rconfig   integer obs_dmax_nobs           derived                       1         0       -        "obs_dmax_nobs"        "Maximum number of obs, this domain" ""
+> rconfig   integer obs_dmax_nkalman        derived                       1         0       -        "obs_dmax_nkalman"     "Maximum number of kalman obs, this domain" ""
+2536a2890
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 36 - Add derived variables for Kalman gain, dimensioning, cross-correlations
+2751c3105,3107
+< package   psufddagd      grid_fdda==1                -             fdda3d:u_ndg_old,v_ndg_old,t_ndg_old,q_ndg_old,ph_ndg_old,u_ndg_new,v_ndg_new,t_ndg_new,q_ndg_new,ph_ndg_new;fdda2d:mu_ndg_old,mu_ndg_new;state:rundgdten,rvndgdten,rthndgdten,rphndgdten,rqvndgdten,rmundgdten,hfx_fdda
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 37 - Grid nudging radar mods 6: Add variables for package grid_fdda==1
+> package   psufddagd      grid_fdda==1                -             fdda3d:u_ndg_old,v_ndg_old,t_ndg_old,q_ndg_old,qr_ndg_old,qs_ndg_old,qg_ndg_old,qc_ndg_old,qi_ndg_old,ph_ndg_old,u_ndg_new,v_ndg_new,t_ndg_new,q_ndg_new,qr_ndg_new,qs_ndg_new,qg_ndg_new,qc_ndg_new,qi_ndg_new,ph_ndg_new;fdda2d:mu_ndg_old,mu_ndg_new;state:rundgdten,rvndgdten,rthndgdten,rphndgdten,rqvndgdten,rqrndgdten,rqsndgdten,rqgndgdten,rqcndgdten,rqindgdten,rmundgdten,hfx_fdda
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 37 - Grid nudging radar mods 6: Add variables for package grid_fdda==1
+2824a3181
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 38 - Addition for Will Cheng's aux3 code
+2825a3183,3205
+> 
+> # ====== WC: 2016-07-30 =========
+> # additional output for aux3  
+> state    real    wslp       ij         misc    1   -   rh3   "wslp"        "Sea-level Pressure"       "Pa"
+> state    real    cfslingo   ij         misc    1   -   rh3   "cfslingo"    "Cloud Fraction from Slingo"  "frac"
+> state    real    usig       i{wcz}j    misc    1   -   rh3   "usig"        "Model U at eta level"     "m/s"
+> state    real    vsig       i{wcz}j    misc    1   -   rh3   "vsig"        "Model V at eta level"     "m/s"
+> state    real    wsig       i{wcz}j    misc    1   -   rh3   "wsig"        "Model W at eta level"     "m/s"
+> state    real    tsig       i{wcz}j    misc    1   -   rh3   "tsig"        "Model Tmp at eta level"     "K"
+> state    real    phsig      i{wcz}j    misc    1   -   rh3   "phsig"      "Model Pert Geopot at eta level"     "m**2/s**2"
+> state    real    phbsig     i{wcz}j    misc    1   -   rh3   "phbsig"      "Model Basic State Geopot at eta level"     "m**2/s**2"
+> state    real    psig       i{wcz}j    misc    1   -   rh3   "psig"        "Model Pert Pressure at eta level"     "Pa"
+> state    real    pbsig      i{wcz}j    misc    1   -   rh3   "pbsig"       "Model Basic State Pressure at eta level"   "Pa"
+> state    real    qvsig      i{wcz}j    misc    1   -   rh3   "qvsig"       "Model Water Vapor Mixing Ratio at eta level"   "kg/kg"
+> state    real    qcsig      i{wcz}j    misc    1   -   rh3   "qcsig"       "Model Cloud Water Mixing Ratio at eta level"   "kg/kg"
+> state    real    qrsig      i{wcz}j    misc    1   -   rh3   "qrsig"       "Model Rain Water Mixing Ratio at eta level"   "kg/kg"
+> state    real    qisig      i{wcz}j    misc    1   -   rh3   "qisig"       "Model Ice Mixing Ratio at eta level"   "kg/kg"
+> state    real    qssig      i{wcz}j    misc    1   -   rh3   "qssig"       "Model Snow Mixing Ratio at eta level"   "kg/kg"
+> state    real    qgsig      i{wcz}j    misc    1   -   rh3   "qgsig"       "Model Graupel Mixing Ratio at eta level"   "kg/kg"
+> state    real    qhsig      i{wcz}j    misc    1   -   rh3   "qhsig"       "Model Hail Mixing Ratio at eta level"   "kg/kg"
+> state    real    cldfrasig  i{wcz}j    misc    1   -   rh3   "cldfrasig"   "Model Cloud Fraction at eta level"   "frac"
+> # ==================================
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 38 - Addition for Will Cheng's aux3 code
+2829c3209,3211
+< state    real    ic_flashcount     ij     misc    1   -   rh    "ic_flashcount"      "Accumulated IC flash count"     "#"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 39 - Modify I/O stream for ic_flashcount per Will Cheng
+> state    real    ic_flashcount     ij     misc    1   -   rh03  "ic_flashcount"      "Accumulated IC flash count"     "#"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 39 - Modify I/O stream for ic_flashcount per Will Cheng
+2831c3213,3216
+< state    real    cg_flashcount     ij     misc    1   -   rh    "cg_flashcount"      "Accumulated CG flash count"     "#"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 40 - Modify I/O stream for cg_flashcount per Will Cheng
+> state    real    cg_flashcount     ij     misc    1   -   rh03  "cg_flashcount"      "Accumulated CG flash count"     "#"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 40 - Modify I/O stream for cg_flashcount per Will Cheng
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 41 - Lightning mod per Will Cheng
+2833c3218,3219
+< 
+---
+> state    real    wlpi              ij     misc    1   -   rh03  "wlpi"               "WLPI"                           "J/kg"
+> state    real    wmxdbz            ij     misc    1   -   rh03  "wmxdbz"             "Maximum Radar Reflectivity"     "dBz"
+2835a3222
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 41 - Lightning mod per Will Cheng
+2977c3364,3366
+< halo      HALO_OBS_NUDGE dyn_em 24:ph_2,p,uratx,vratx,tratx,kpbl
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 42 - Ob: Add th2 to halo region
+> halo      HALO_OBS_NUDGE dyn_em 24:ph_2,p,uratx,vratx,tratx,kpbl,th2
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 42 - Ob: Add th2 to halo region
+3029c3418,3420
+< typedef fdob_type integer NSTAT        # number of obs stations used to nudge current model step
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 43 - Ob: Fix comment for NSTAT
+> typedef fdob_type integer NSTAT        # number of obs stations read for current model step
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 43 - Ob: Fix comment for NSTAT
+3034c3425,3427
+< typedef fdob_type real    WINDOW       # time window half-period for nudging (in minutes) 
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 44 - Ob: Fix comment for WINDOW
+> typedef fdob_type real    WINDOW       # max half-period time-window (in hrs) over all platfms, used for reading obs
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 44 - Ob: Fix comment for WINDOW
+3046c3439,3441
+< typedef fdob_type real    RINFMX       # maximum radius of influence
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 45 - Ob: Fix comment for RINFMX
+> typedef fdob_type real    RINFMX       # scale factor on horiz radius of influence to get max roi
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 45 - Ob: Fix comment for RINFMX
+3051a3447
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 46 - Add VARLIST, LEN_VARLIST for checking Kalman-gain data set, change size NDG_TERM_INDXS
+3052a3449,3452
+> typedef fdob_type integer NDG_TERM_INDXS(25,2) # converted index form of obs_nudge_terms
+> typedef fdob_type integer NUM_NDG_TERMS    # number of nudge terms in obs_nudge_terms
+> typedef fdob_type character VARLIST    # treated list of nudge terms in obs_nudge_terms
+> typedef fdob_type integer LEN_VARLIST  # string length of VARLIST
+3053a3454,3455
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 46 - Add VARLIST, LEN_VARLIST for checking Kalman-gain data set, change size NDG_TERM_INDXS
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 47 - Obs nudging: Add TERRAIN, KTAU_PREV, CALC_STEP, ..., NDUM, vobs_qc, Kalman arrays, platform_obs, Last_Obs_Time; Remove VIF vars
+3055,3066c3457,3490
+< typedef fdob_type real    VIF_UV(6)    # Vertical influence function parameters for wind nudging
+< typedef fdob_type real    VIF_T(6)     # Vertical influence function parameters for temperature nudging
+< typedef fdob_type real    VIF_Q(6)     # Vertical influence function parameters for moisture nudging
+< typedef fdob_type real    VIF_FULLMIN  # Minimum depth through which vert infl fcn remains 1.0 (m)
+< typedef fdob_type real    VIF_RAMPMIN  # Minimum depth through which vif decreases 1.0 to 0.0 (m)
+< typedef fdob_type real    VIF_MAX      # Maximum depth in which vif is nonzero (m)
+< 
+< # table entries are of the form
+< #      <Table>  <Type>  <Sym>                <Dims>   <Use>   <NumTLev> <Stagger> <IO>     <DNAME>             <DESCRIP>     <UNITS>
+< #Grid variables
+< typedef fdob_type real    varobs         {nndgvar}{obs} -         1        -       -       "varobs"          "observational values in each variable"
+< typedef fdob_type real    errf              h{obs}      -         1        -       -       "errf"            "errors between model and obs values"
+---
+> typedef fdob_type integer TERRAIN      # flag for gathering 2D terrain array
+> typedef fdob_type integer KTAU_PREV    # ktau for previous timestep
+> typedef fdob_type integer CALC_STEP    # flag for obs calculation this timestep (=1, yes)
+> typedef fdob_type real    RINXY_PLT(99)  # Radius of influence for individual platforms
+> typedef fdob_type real    TWINDO_PLT(99) # half-period time-window (in hrs) for nudging, for each indiv platfm type (max 99 platform types)
+> ### wuyh added for output 20130418
+> typedef fdob_type real    Last_Obs_Time  # Time for output time of obs at previous time step
+> ### wuyh added for output 20130418
+> typedef fdob_type integer NLAST          # last obs in list of valid obs from prev window
+> typedef fdob_type integer OBS_NET_DIM(3) # global dimensions of Kalman obs-network
+> typedef fdob_type integer OBS_NET_WE(2)  # beginning and ending indices on obs netw (west-east) for this processor patch
+> typedef fdob_type integer OBS_NET_SN(2)  # beginning and ending indices on obs netw (south-nth) for this processor patch
+> typedef fdob_type integer NKALR          # number of old kalman obs entries to remove from kalman2obs list
+> typedef fdob_type integer KLAST          # number of remaining kalman
+> typedef fdob_type integer NDIRPOW        # dimension for raw Kalman gain data (total number of gridpoints)
+> typedef fdob_type integer NDIR           # dimension used to reduce sampling of raw Kalman gain points (half-length) 
+> typedef fdob_type integer NPOW           # dimension used to reduce sampling of raw Kalman gain points (jump) 
+> typedef fdob_type integer NKV            # number of Kalman variables
+> typedef fdob_type integer LBDY           # starting index for Kalman obs-network
+> typedef fdob_type integer LSKIP          # skip index for Kalman obs-network
+> typedef fdob_type integer NDUM           # shift index for removing old observations from time window
+>                                                                                                                                          # table entries are of the form
+> #      <Table>  <Type>  <Sym>                <Dims>   <Use>   <NumTLev> <Stagger> <IO>     <DNAME>             <DESCRIP>     <UNITS>     #Grid variables
+> typedef fdob_type real    vobs           {vobdim}{obs}  -         1        -       -       "vobs"            "observational values in observation"
+> typedef fdob_type real    vobs_qc        {vobdim}{obs}  -         1        -       -       "vobs_qc"         "quality control values for observations"
+> typedef fdob_type real    errf           {errdim}{obs}  -         1        -       -       "errf"            "errors between model and observations"
+> typedef fdob_type real    gain_at_ob      {kc}{obk}     -         1        -       -       "gain_at_ob"      "Kalman gain at obs locations, current time"
+> typedef fdob_type real    vls_knw_t2      {ni}{nj}k     -         1        -       -       "vls_knw_t2"      "Vert lvls (prs or ht) read at Kalman obs netw pts, time2"
+> typedef fdob_type integer ob_is_kalman       {obs}      -         1        -       -       "ob_is_kalman"    "specifies which obs are of Kalman type"
+> typedef fdob_type integer gainname           {obs}      -         1        -       -       "gainname"        "specifies the gain file name info"
+> typedef fdob_type integer obs2kalman         {obs}      -         1        -       -       "obs2kalman"      "mapping from obs index to Kalman index"
+> # FCV changes begin
+> typedef fdob_type integer platform_ob   {obsstid}{obs}  -         1        -       -       "platform_ob"     "platform for each observation"            "none"
+> # FCV changes end
+3067a3492
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 47 - Obs nudging: Add TERRAIN, KTAU_PREV, CALC_STEP, ..., NDUM, vobs_qc, Kalman arrays, platform_obs, Last_Obs_Time; Remove VIF vars
+3069a3495
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 48 - 
+3070a3497,3498
+> typedef fdob_type real    rkmob              {obs}      -         1        -       -       "rkmob"           "mean distance between observations"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 48 - 
+3072,3073c3500,3503
+< typedef fdob_type real    rio                {obs}      -         1        -       -       "rio"             "west-east grid coordinate"
+< typedef fdob_type real    rjo                {obs}      -         1        -       -       "rjo"             "south-north grid coordinate"
+---
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 49 - Obs nudging: Expand description statements for rio, rjo to include grid detail
+> typedef fdob_type real    rio                {obs}      -         1        -       -       "rio"             "west-east coord of ob, on non-staggered grid"
+> typedef fdob_type real    rjo                {obs}      -         1        -       -       "rjo"             "south-north coord of ob, on non-staggered grid"
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 49 - Obs nudging: Expand description statements for rio, rjo to include grid detail
+3078a3509
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 50 - Obs nudging - add qcdomprt
+3079a3511
+> typedef fdob_type integer qcdomprt             [        -         1        -       -       "qcdomprt"        "domain used to set obs qc value"
+3080a3513,3514
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 50 - Obs nudging - add qcdomprt
+> # ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 51 - For internal QC
+3082a3517,3532
+> # wuyh added 20110630 for qc
+> typedef fdob_type real    qcu                {obs}      -         1        -       -       "qcu"             "obs qc flag value for u (wuyh)"
+> typedef fdob_type real    oblat              {obs}      -         1        -       -       "oblat"           "obs latitude coord      (wuyh)"
+> typedef fdob_type real    oblon              {obs}      -         1        -       -       "oblon"           "obs longitude coord     (wuyh)"
+> typedef fdob_type logical flagsnd            {obs}      -         1        -       -       "flagsnd"         "obs flag  for sounding (wuyh)"
+> typedef fdob_type logical flagbog            {obs}      -         1        -       -       "flagbog"         "obs flag  for bogus obs (wuyh)"
+> typedef fdob_type integer desobs         {obsstid}{obs} -         1       -       -        "desobs"          "obs description(wuyh)"                     "none"
+> typedef fdob_type integer wusource       {obsstid}{obs} -         1       -       -        "source"          "obs source(wuyh)"                          "none"
+> typedef fdob_type integer wudate          {obtian}{obs}  -        1       -       -        "date"            "obs date(wuyh)"                          "none"
+> typedef fdob_type integer stnid          {obsstid}{obs}   -       1        -       -       "stnid"           "obs station id for qc accounting"
+> # ajb added 20150226 for 1ob-1var implementation
+> typedef fdob_type integer ob_var_type        {obs}      -         1        -       -       "ob_var_type"     "observation variable type"
+> typedef fdob_type integer ob_ndg_type        {obs}      -         1        -       -       "ob_ndg_type"     "observation nudge-term type"
+> # ajb added 20150226 end
+> # wuyh added 20110630 end
+> 
+3083a3534
+> # ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 51 - For internal QC

@@ -1,0 +1,129 @@
+
+&fsl_metar
+ fsl_metar_use = .FALSE.,
+ fsl_metar_db  = 'FSL',
+ fsl_metar_minbck = 0,
+ fsl_metar_minfwd = 59,
+ fsl_metar_recwin = 4,
+ fsl_metar_all_providers = .TRUE.,
+ fsl_metar_provider_list = '/FULLPATH/fsl_metar_providers.list',
+/
+
+&fsl_mesonet
+ fsl_mesonet_use = .FALSE.,
+ fsl_mesonet_db  = 'FSL',
+ fsl_mesonet_minbck = 0,
+ fsl_mesonet_minfwd = 59,
+ fsl_mesonet_recwin = 4,
+ fsl_mesonet_all_providers = .TRUE.,
+ fsl_mesonet_provider_list = '/FULLPATH/fsl_sfc_providers.list',
+/
+
+&fsl_maritime
+ fsl_maritime_use = .FALSE.,
+ fsl_maritime_db  = 'FSL',
+ fsl_maritime_minbck = 0,
+ fsl_maritime_minfwd = 59,
+ fsl_maritime_recwin = 4,
+/
+
+&fsl_sao
+ fsl_sao_use = .FALSE.,
+ fsl_sao_db  = 'FSL',
+ fsl_sao_minbck = 0,
+ fsl_sao_minfwd = 59,
+ fsl_sao_recwin = 4,
+/
+
+&fsl_coop
+ fsl_coop_use = .FALSE.,
+ fsl_coop_db  = 'FSL',
+ fsl_coop_minbck = 0,
+ fsl_coop_minfwd = 59,
+ fsl_coop_recwin = 4,
+/
+
+&fsl_raob
+ fsl_raob_use = .TRUE.,
+ fsl_raob_db  = 'FSL',
+ fsl_raob_minbck = 0,
+ fsl_raob_minfwd = 59,
+ fsl_raob_recwin = 4,
+/
+
+&fsl_npn
+ fsl_npn_use = .TRUE.,
+ fsl_npn_db  = 'FSL',
+ fsl_npn_minbck = 0,
+ fsl_npn_minfwd = 59,
+ fsl_npn_recwin = 3,
+ fsl_npn_all_providers = .TRUE.,
+ fsl_npn_provider_list = '/FULLPATH/fsl_npn_providers.list',
+/
+
+&fsl_map
+ fsl_map_use = .TRUE.,
+ fsl_map_db  = 'FSL',
+ fsl_map_minbck = 0,
+ fsl_map_minfwd = 59,
+ fsl_map_recwin = 4,
+ fsl_map_all_providers = .TRUE.,
+ fsl_map_provider_list = '/FULLPATH/fsl_map_providers.list',
+/
+
+&fsl_rdmtr
+ fsl_rdmtr_use = .FALSE.,
+ fsl_rdmtr_db  = 'FSL',
+ fsl_rdmtr_minbck = 0,
+ fsl_rdmtr_minfwd = 59,
+ fsl_rdmtr_recwin = 4,
+ fsl_rdmtr_all_providers = .TRUE.,
+ fsl_rdmtr_provider_list = '/FULLPATH/fsl_rdmtr_providers.list',
+/
+
+&fsl_acars
+ fsl_acars_use = .TRUE.,
+ fsl_acars_db  = 'FSL',
+ fsl_acars_minbck =  0,
+ fsl_acars_minfwd = 59,
+ fsl_acars_recwin = 4,
+/
+
+&fsl_acarsp
+ fsl_acarsp_use = .FALSE.,
+ fsl_acarsp_db  = 'FSL',
+ fsl_acarsp_minbck =  0,
+ fsl_acarsp_minfwd = 59,
+ fsl_acarsp_recwin = 4,
+/
+
+&fsl_satwnd
+ fsl_satwnd_use = .TRUE.,
+ fsl_satwnd_db = 'FSL',
+ fsl_satwnd_minbck =  0,
+ fsl_satwnd_minfwd = 59,
+ fsl_satwnd_recwin = 4,
+ fsl_satwnd_all_providers = .TRUE.,
+ fsl_satwnd_provider_list = '/FULLPATH/fsl_satwnd_providers.list',
+ fsl_satwnd_wv = .TRUE.,
+ fsl_satwnd_ir = .TRUE.,
+ fsl_satwnd_vis = .TRUE.,
+ fsl_satwnd_s10 = .TRUE.,
+ fsl_satwnd_s12 = .TRUE.,
+/
+
+&fsl_sfc
+ fsl_sfc_use = .TRUE.,
+ fsl_sfc_db  = 'FSL',
+ fsl_sfc_minbck = 0,
+ fsl_sfc_minfwd = 59,
+ fsl_sfc_recwin = 4,
+ fsl_sfc_all_providers = .TRUE.,
+ fsl_sfc_provider_list = '/FULLPATH/fsl_sfc_providers.list',
+/
+
+&fsl_general
+ fsl_analysis_type = 'FDDA',
+ fsl_rip_out = .FALSE.,
+/
+

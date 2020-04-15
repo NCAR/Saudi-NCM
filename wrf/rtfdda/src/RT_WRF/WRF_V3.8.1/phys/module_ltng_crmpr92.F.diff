@@ -1,0 +1,245 @@
+22a23
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng ltng_crmpr92w mods
+87,101c88,137
+< ! Compute flash rate across cell
+<  wmax = maxval(w(ips:ipe,kps:kpe,jps:jpe))
+<  IF ( cellcount_method .eq. 2 ) THEN
+<    wmax = wrf_dm_max_real(wmax)
+<  ENDIF
+< 
+<  total_fr = 5.7e-6 * wmax**4.5
+< 
+< ! Locating widest part of convective core
+<  k_maxcount = kps
+<  maxcount = cellcount(kps)
+<  DO k=kps+1,kpe
+<    IF ( cellcount(k) .gt. maxcount ) THEN
+<      k_maxcount = k
+<      maxcount = cellcount(k)
+---
+> ! ===== comment out by WC: 2015-07-13
+> !
+> !! Compute flash rate across cell
+> ! wmax = maxval(w(ips:ipe,kps:kpe,jps:jpe))
+> ! IF ( cellcount_method .eq. 2 ) THEN
+> !   wmax = wrf_dm_max_real(wmax)
+> ! ENDIF
+> !
+> ! total_fr = 5.7e-6 * wmax**4.5
+> !
+> !! Locating widest part of convective core
+> ! k_maxcount = kps
+> ! maxcount = cellcount(kps)
+> ! DO k=kps+1,kpe
+> !   IF ( cellcount(k) .gt. maxcount ) THEN
+> !     k_maxcount = k
+> !     maxcount = cellcount(k)
+> !   ENDIF
+> ! ENDDO
+> !
+> !! Distributing across convective core
+> ! ave_fr = total_fr/maxcount/60.
+> ! WHERE( refl(ips:ipe,k_maxcount,jps:jpe) .gt. reflthreshold )
+> !   total_flashrate(ips:ipe,jps:jpe) = ave_fr
+> ! ENDWHERE
+> 
+> ! ====2015-08-17 ===
+> ! actually fix not complete yet as there is no distinction between
+> ! marine and continental environments
+> !
+> ! options 1 and 2 are different aspects of the same thing, so no need
+> ! to use this option
+> ! 
+>  DO j=jps,jpe
+>   DO i=ips,ipe
+>    maxcount = 0
+>    total_fr = 0
+>    wmax = 0
+>    !refl(i,k,j) .gt. reflthreshold
+>    DO k=kps,kpe
+>     IF ( (refl(i,k,j) .gt. reflthreshold) ) THEN
+>      maxcount = maxcount + 1
+>      wmax = w(i,k,j)
+>      total_fr = MAX(total_fr, 5.7e-6 * wmax**4.5)
+>     ENDIF
+>    ENDDO
+> 
+>    IF ( maxcount.gt.0.5 ) THEN
+>     !total_flashrate(i,j) = total_fr/maxcount/60. 
+>     total_flashrate(i,j) = total_fr/60.
+103d138
+<  ENDDO
+105,109c140,141
+< ! Distributing across convective core
+<  ave_fr = total_fr/maxcount/60.
+<  WHERE( refl(ips:ipe,k_maxcount,jps:jpe) .gt. reflthreshold )
+<    total_flashrate(ips:ipe,jps:jpe) = ave_fr
+<  ENDWHERE
+---
+>   ENDDO
+>  ENDDO
+111a144
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Will Cheng ltng_crmpr92w mods
+112a146
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Will Cheng ltng_crmpr92z mods
+169a204,208
+>  ! ====== WC: 2015-07-13 =======
+>  REAL :: zmin, z_depth, z_cltop, z_cltop_max
+>  INTEGER :: ncount_dbz
+>  ! ============================
+> 
+175a215
+> ! ====== comment out by WC: 2015-07-13 ===========
+177,185c217,286
+<  k = kpe
+<  do while ( cellcount(k) .eq. 0 .and. k .gt. kps)
+<    k = k-1
+<  ENDDO
+<  zmax = 0.
+<  mostlyland = 0.
+<  count = 0
+<  DO i=ips,ipe
+<    DO j=jps,jpe
+---
+> ! k = kpe
+> ! do while ( cellcount(k) .eq. 0 .and. k .gt. kps)
+> !   k = k-1
+> ! ENDDO
+> ! zmax = 0.
+> ! mostlyland = 0.
+> ! count = 0
+> ! DO i=ips,ipe
+> !   DO j=jps,jpe
+> !     IF ( (refl(i,k,j) .gt. reflthreshold) .and. (t(i,k,j) .lt. 273.15) ) THEN
+> !       IF (z(i,k,j)-ht(i,j) .gt. zmax) THEN
+> !         zmax = z(i,k,j)-ht(i,j)
+> !       ENDIF
+> !       count = count + 1
+> !       mostlyland = mostlyland + xland(i,j)
+> !     ENDIF
+> !   ENDDO
+> ! ENDDO
+> ! mostlyland = mostlyland/count
+> !
+> ! zmax = zmax * 1.e-3
+> ! WRITE(message, * ) ' ltng_crmpr92z: reflectivity cloud top height: ', zmax
+> ! CALL wrf_debug ( 15, message )
+> !
+> ! if ( cellcount_method .eq. 2 ) THEN
+> !   zmax = wrf_dm_max_real(zmax)
+> ! endif
+> !
+> ! if ( mostlyLand .lt. 1.5 ) then
+> !    total_fr = 3.44E-5 * (zmax**4.9)  ! PR 92 continental eq
+> ! else
+> !    total_fr = 6.57E-6 * (zmax**4.9)  ! Michalon 99 marine eq
+> ! ENDIF
+> !
+> !! Locating widest part of convective core
+> ! k_maxcount = kps
+> ! maxcount = cellcount(kps)
+> ! DO k=kps+1,kpe
+> !   IF ( cellcount(k) .gt. maxcount ) THEN
+> !     k_maxcount = k
+> !     maxcount = cellcount(k)
+> !   ENDIF
+> ! ENDDO
+> !
+> !! Distributing across convective core
+> ! ave_fr = total_fr/maxcount/60.
+> ! WHERE( refl(ips:ipe,k_maxcount,jps:jpe) .gt. reflthreshold  )
+> !   total_flashrate(ips:ipe,jps:jpe) = ave_fr
+> ! ENDWHERE
+> 
+>  DO j=jps,jpe
+>   DO i=ips,ipe
+>    maxcount = 0
+>    total_fr = 0
+>    zmax = 0.
+>    zmin = 100000.
+>    z_cltop = 0
+>    ncount_dbz = 0
+>    !refl(i,k,j) .gt. reflthreshold
+>    IF ( maxval(refl(i:i,kps:kpe,j:j)) .gt. reflthreshold ) THEN
+> 
+>     DO k=kps,kpe
+> 
+>      IF (refl(i,kpe-k+kps,j) .gt. reflthreshold) THEN
+>       IF (z(i,kpe-k+kps,j)-ht(i,j) .lt. zmin) THEN
+>        zmin = z(i,kpe-k+kps,j)-ht(i,j)
+>        IF ( refl(i,kpe-k+kps,j) .gt. 40. ) ncount_dbz = ncount_dbz + 1
+>       ENDIF
+>      ENDIF
+> 
+187,188c288,299
+<        IF (z(i,k,j)-ht(i,j) .gt. zmax) THEN
+<          zmax = z(i,k,j)-ht(i,j)
+---
+> 
+>       !IF ( refl(i,k,j) .gt. 40. ) ncount_dbz = ncount_dbz + 1
+> 
+>       IF (z(i,k,j)-ht(i,j) .gt. zmax) THEN
+>        zmax = z(i,k,j)-ht(i,j)
+>        z_cltop = z(i,k,j)
+>        !zmax = zmax * 1.e-3
+>        maxcount = maxcount + 1
+>        IF ( xland(i,j) .lt. 1.5 ) THEN
+>         total_fr = MAX(total_fr,3.44E-5 * ((zmax/1000.)**4.9) ) ! PR 92 continental eq
+>        ELSE
+>         total_fr = MAX(total_fr,6.57E-6 * ((zmax/1000.)**4.9) )  ! Michalon 99 marine eq
+190,191c301
+<        count = count + 1
+<        mostlyland = mostlyland + xland(i,j)
+---
+>       ENDIF
+193,195c303,313
+<    ENDDO
+<  ENDDO
+<  mostlyland = mostlyland/count
+---
+>     ENDDO
+> 
+>     IF ( maxcount.gt.0.5 ) THEN
+>      !total_flashrate(i,j) = total_fr/maxcount/60.
+>      z_depth = zmax - zmin
+>      z_cltop_max = 8000.
+>      IF ( (ncount_dbz.ge.5) .and. (z_depth.gt.5000.) .and.                         &
+>           (zmax.gt.8000.) .and. (z_cltop.gt.z_cltop_max) ) THEN
+>       total_flashrate(i,j) = total_fr/60.
+>      ENDIF
+>     ENDIF
+197,217d314
+<  zmax = zmax * 1.e-3
+<  WRITE(message, * ) ' ltng_crmpr92z: reflectivity cloud top height: ', zmax
+<  CALL wrf_debug ( 15, message )
+< 
+<  if ( cellcount_method .eq. 2 ) THEN
+<    zmax = wrf_dm_max_real(zmax)
+<  endif
+< 
+<  if ( mostlyLand .lt. 1.5 ) then
+<     total_fr = 3.44E-5 * (zmax**4.9)  ! PR 92 continental eq
+<  else
+<     total_fr = 6.57E-6 * (zmax**4.9)  ! Michalon 99 marine eq
+<  ENDIF
+< 
+< ! Locating widest part of convective core
+<  k_maxcount = kps
+<  maxcount = cellcount(kps)
+<  DO k=kps+1,kpe
+<    IF ( cellcount(k) .gt. maxcount ) THEN
+<      k_maxcount = k
+<      maxcount = cellcount(k)
+219d315
+<  ENDDO
+221,225c317,318
+< ! Distributing across convective core
+<  ave_fr = total_fr/maxcount/60.
+<  WHERE( refl(ips:ipe,k_maxcount,jps:jpe) .gt. reflthreshold  )
+<    total_flashrate(ips:ipe,jps:jpe) = ave_fr
+<  ENDWHERE
+---
+>   ENDDO
+>  ENDDO
+227a321
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Will Cheng ltng_crmpr92z mods

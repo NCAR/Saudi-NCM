@@ -1,0 +1,85 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/src/WRFV2_VAR.
+#
+# Nov 2007
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns)
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+
+# ----------- configure/compile settings ----------------------
+
+# Need the ./configure option selection passed in on the command line.
+
+# Note that the WANTED_WRFVAR_CONFIGURE_OPTION and DO_MPICH must be
+# correct for your selection or the output filenames will be wrong.
+
+# Should override the default here, e.g., 'make all WANTED_WRFVAR_CONFIGURE_OPTION=3'
+
+WANTED_WRFVAR_CONFIGURE_OPTION=-1
+
+# Compile type. Can override on the command line if needed,
+# e.g., 'make all DO_MPICH=TRUE'
+
+DO_MPICH=FALSE
+
+# Whether to execute a command (e.g., a sed command to modify the configure.wrf
+# file after it has been generated) after configure and before compile
+
+CMD_TO_RUN_BEFORE_WRFVAR_COMPILE=echo
+
+# Whether to build and/or install exes or not
+
+DO_WRFVAR_BUILD=TRUE
+DO_WRFVAR_INSTALL=TRUE
+
+# --------- Compiled files ---------
+
+
+# --------- Targets --------------
+
+all: clean
+	if $(TEST) $(DO_WRFVAR_BUILD) = TRUE; then \
+		echo $(WANTED_WRFVAR_CONFIGURE_OPTION) | ./configure var ;\
+		echo "--- Will run command CMD_TO_RUN_BEFORE_WRFVAR_COMPILE: $(CMD_TO_RUN_BEFORE_WRFVAR_COMPILE) ---" ;\
+		$(CMD_TO_RUN_BEFORE_WRFVAR_COMPILE) ;\
+		./compile qc ;\
+	fi
+
+install: all
+	if $(TEST) $(DO_WRFVAR_INSTALL) = TRUE; then \
+		if $(TEST) $(DO_MPICH) = TRUE; then \
+			$(CP) main/wrfqc.exe $(DEST)/wrfqc.mpich ;\
+		else \
+			$(CP) main/wrfqc.exe $(DEST) ;\
+			$(CP) external/io_netcdf/latlon_wrf.exe $(DEST) ;\
+		fi ;\
+	fi
+
+clean: FORCE
+	./clean -a
+
+add2readme:
+	if $(TEST) $(DO_WRFVAR_INSTALL) = TRUE; then \
+	if $(TEST) $(DO_MPICH) = TRUE; then \
+		echo "wrfqc.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+	else \
+		echo "wrfqc.exe -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		echo "latlon_wrf.exe -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+	fi ;\
+	fi
+
+FORCE:
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+

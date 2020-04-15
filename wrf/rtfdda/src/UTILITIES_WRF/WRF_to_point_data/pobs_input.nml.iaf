@@ -1,0 +1,12 @@
+ &pobs_input
+   output_flag   = "metcm"
+   path_and_file = "./wrfout_d03_2017-05-12_12:00:00.GRM_P+FCST"
+   location_file = "./iaf_metcm_locations.txt"
+   nlat          = 2 
+   height_file   = "./pobs_height.list"
+   nheight       = 5
+   zCoord        = "h"
+   outputFiles   = "single"
+   out_unit      = 6
+   rnge          = "iaf"
+  /

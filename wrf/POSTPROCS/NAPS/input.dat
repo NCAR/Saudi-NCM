@@ -1,0 +1,16 @@
+1                           | ICHOICE (default=1, NAPS model run)
+0                           | IOPT (default=0, computes dB contours)
+.True.                      | PLOTIT (set to true to invoke plotting)
+.FALSE.                      | white_backgrnd (true if white background on plots)
+4                           | DBPLOTOPT (1-5)
+.True.                      | DOELV (true to use elevation data)
+.True.                      | DOATT (true to use land attribute data)
+5.                          | input_delpsi(azimuth increment(deg),default=5)
+'/usr/people/yliu/NAPS/napstest/'   | METDIR  directory containing met data
+'/usr/people/yliu/NAPS/napstest/'   | DATADIR data directrory
+'/usr/people/yliu/NAPS/napstest/'   | OUTDIR  output directory 
+12                          | ISITE: blast site
+1.                          | ZBAG: blast height above surface in meters
+20.                         | WB: blast weight in pounds
+0                           | IGUN: gun type (default=0, uniform blast)
+'sndNAPS'              | met_dsn: input meteorology file 

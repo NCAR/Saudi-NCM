@@ -1,0 +1,111 @@
+10a11
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+11a13,14
+>                   RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,RQCNDGDTEN,RQINDGDTEN,   &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+16a20
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+17a22,23
+>                   qr_ndg_old,qs_ndg_old,qg_ndg_old,qc_ndg_old,qi_ndg_old,   &
+>                   qr_ndg_new,qs_ndg_new,qg_ndg_new,qc_ndg_new,qi_ndg_new,   &
+18a25
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+174c181,188
+<                                                         RQVNDGDTEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+>                                                         RQVNDGDTEN, &
+>                                                         RQRNDGDTEN, &
+>                                                         RQSNDGDTEN, &
+>                                                         RQGNDGDTEN, &
+>                                                         RQCNDGDTEN, &
+>                                                         RQINDGDTEN
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+193a208
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+194a210,214
+>                                                          qr_ndg_old, &
+>                                                          qs_ndg_old, &
+>                                                          qg_ndg_old, &
+>                                                          qc_ndg_old, &
+>                                                          qi_ndg_old, &
+195a216
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+197a219
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+199c221,226
+<                                                          q_ndg_new
+---
+>                                                          q_ndg_new, &
+>                                                          qr_ndg_new, &
+>                                                          qs_ndg_new, &
+>                                                          qg_ndg_new, &
+>                                                          qc_ndg_new, &
+>                                                          qi_ndg_new
+200a228
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 5 - Radar mods
+266a295
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods
+267a297,301
+>             qr_ndg_old(i,k,j) = moist(i,k,j,P_QR)
+>             qs_ndg_old(i,k,j) = moist(i,k,j,P_QS)
+>             qg_ndg_old(i,k,j) = moist(i,k,j,P_QG)
+>             qc_ndg_old(i,k,j) = moist(i,k,j,P_QC)
+>             qi_ndg_old(i,k,j) = moist(i,k,j,P_QI)
+268a303
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 6 - Radar mods
+295a331
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods
+309a346,350
+>             RQRNDGDTEN(I,K,J)=0.
+>             RQSNDGDTEN(I,K,J)=0.
+>             RQGNDGDTEN(I,K,J)=0.
+>             RQCNDGDTEN(I,K,J)=0.
+>             RQINDGDTEN(I,K,J)=0.
+310a352
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 7 - Radar mods
+321a364
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods
+335a379,383
+>             RQRNDGDTEN(I,K,J)=0.
+>             RQSNDGDTEN(I,K,J)=0.
+>             RQGNDGDTEN(I,K,J)=0.
+>             RQCNDGDTEN(I,K,J)=0.
+>             RQINDGDTEN(I,K,J)=0.
+336a385
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 8 - Radar mods
+535a585
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods
+536a587,590
+>                config_flags%if_zfac_qr, &
+>                config_flags%k_zfac_qr, &
+>                config_flags%if_zfac_qc, &
+>                config_flags%k_zfac_qc, &
+538a593
+>                config_flags%gqr, config_flags%gqc, config_flags%clh, &
+539a595
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 9 - Radar mods
+545a602
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Radar mods
+546a604,608
+>                moist(ims,kms,jms,P_QR),     &
+>                moist(ims,kms,jms,P_QS),     &
+>                moist(ims,kms,jms,P_QG),     &
+>                moist(ims,kms,jms,P_QC),     &
+>                moist(ims,kms,jms,P_QI),     &
+550,554c612,620
+<      u10_ndg_old, v10_ndg_old, t2_ndg_old, th2_ndg_old, q2_ndg_old, &
+<      rh_ndg_old, psl_ndg_old, ps_ndg_old, tob_ndg_old, odis_ndg_old,  &
+<      u10_ndg_new, v10_ndg_new, t2_ndg_new, th2_ndg_new, q2_ndg_new, &
+<      rh_ndg_new, psl_ndg_new, ps_ndg_new, tob_ndg_new, odis_ndg_new,  &
+<                RUNDGDTEN,RVNDGDTEN,RTHNDGDTEN,RQVNDGDTEN,RMUNDGDTEN,&
+---
+>                qr_ndg_old,qs_ndg_old,qg_ndg_old,qc_ndg_old,qi_ndg_old,   &
+>                qr_ndg_new,qs_ndg_new,qg_ndg_new,qc_ndg_new,qi_ndg_new,   &
+>      u10_ndg_old, v10_ndg_old, t2_ndg_old, th2_ndg_old, q2_ndg_old,      &
+>      rh_ndg_old, psl_ndg_old, ps_ndg_old, tob_ndg_old, odis_ndg_old,     &
+>      u10_ndg_new, v10_ndg_new, t2_ndg_new, th2_ndg_new, q2_ndg_new,      &
+>      rh_ndg_new, psl_ndg_new, ps_ndg_new, tob_ndg_new, odis_ndg_new,     &
+>                RUNDGDTEN,RVNDGDTEN,RTHNDGDTEN,RQVNDGDTEN,RMUNDGDTEN,     &
+>                RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,RQCNDGDTEN,RQINDGDTEN,   &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 10 - Radar mods

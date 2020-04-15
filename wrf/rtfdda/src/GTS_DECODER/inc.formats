@@ -1,0 +1,10 @@
+
+   CHARACTER ( LEN = 80 ) , PARAMETER ::                 &
+      HDRFMT   = '( A60 , / , 3I20 , 3G20.10 )' ,        &
+      SNDFMT   = '( 6G20.10 )' ,                         &
+      ENDFMT   = '( 6I20 )' ,                            &
+      SYNOPFMT = '( A60, /, 3I10, 10G20.10, 2I10 )'
+
+   CHARACTER ( LEN = 3 ) , PARAMETER:: ADV = 'YES'
+!  CHARACTER ( LEN = 2 ) , PARAMETER:: ADV = 'NO'
+

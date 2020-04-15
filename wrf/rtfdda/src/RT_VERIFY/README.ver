@@ -1,0 +1,26 @@
+10/23/2000:
+
+  * QC flag was added in filtering out bad obs. The addition takes effect
+    beginning 2000102314 cycle.
+
+10/30/2000:
+
+  * UUTAH SAMS duplicate obs, carrying METNET=3 ID, are filtered out. The
+    change takes effect beginning 2000103023 cycle.
+
+11/06/2000:
+
+  * An error relating to using missing temperature in psfc <-> slp
+    conversion is corrected. The change takes effect beginning 2000110620
+    cycle.
+
+01/09/2001:
+
+  * Email:
+    The modification on c2 has been completed to accomodate 12-hour
+    forecast. Since the change to 12-hour fcst took place at the 2000Z cycle
+    of Jan. 8, ideally, the new stats plotting should apply back as early as
+    1100Z final cycle of Jan. 9 (t-15 cycle is 2001010820 cycle). However,
+    the 2001010911 and 20010914 cycles had been scurbbed by the time I
+    planned to rerun their stats. Therefore, the new stats design could only
+    become effective starting the 2001010917 cycle.

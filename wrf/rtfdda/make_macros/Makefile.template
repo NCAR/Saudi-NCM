@@ -1,0 +1,41 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# <dir>
+#
+# Dependencies:
+#      (1) You must have the MS_MAKE_MACROS_DIR environment variable defined
+#          and it must point to the directory of Modeling System Makefile
+#          include files.
+#      (2) You must have the MS_OS_TYPE defined and it must be one of the
+#          types in $MS_MAKE_MACROS_DIR/compiler_macros.<ms_os_type>.
+#          If you do not have the MS_OS_TYPE set, the line including the
+#          compiler_macros below will cause an error
+#
+# <date>
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns) and the
+# operating system specific info (compiler_macros.$(MS_OS_TYPE))
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+include $(MS_MAKE_MACROS_DIR)/compiler_macros.$(MS_OS_TYPE)
+
+# --------- Object files ----------
+
+
+# --------- Local compile/link definitions --------
+
+
+# --------- Targets --------------
+
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+

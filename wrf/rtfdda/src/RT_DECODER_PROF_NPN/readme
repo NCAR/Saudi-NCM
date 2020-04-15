@@ -1,0 +1,3 @@
+
+f90 -g -o crfil -L/usr/local/lib -I/usr/local/include crfil_15m.f -L/usr/local/lib -lnetcdf
+

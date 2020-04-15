@@ -1,0 +1,171 @@
+#
+# Function:
+#
+#  This file is the shared Makefile definitions file used by RTFDDA Makefiles.
+#  It contains the common macros across all operating systems
+#
+# Access:
+#
+#  This file is included in individual application Makefiles.
+#
+#  This file and the other files in this directory are accessed via an
+#  environment variable which must be set correctly to this
+#  directory: MS_MAKE_MACROS_DIR (Modeling System Make Definitions).
+#
+# Mar 2007        
+#
+# ==============================================================================
+
+# ---------------- Common definitions ------------------------------------
+#
+# Common commands 
+
+AR              =        ar
+CD              =        cd
+CP		=	 cp
+ECHO            =        echo
+MAKE            =        make -i
+MV              =        mv
+RM              =        rm -rf
+LN              =        ln -s -f
+LS		=	 ls
+TOUCH           =        touch
+TEST		=	 test
+SHELL           =        /bin/sh
+PWD		=	 pwd
+DATE		=	 date -u
+CMP		=	 diff
+
+# Common destinations (inherited from MM5)
+
+DEST            =        $(MM5HOME)/cycle_code/EXECUTABLE_ARCHIVE
+CSH_DEST	=        $(MM5HOME)/cycle_code/CSH_ARCHIVE
+TOOLS_DEST	=	 $(MM5HOME)/cycle_code/TOOLS
+CONSTANT_FILES_DEST =	$(MM5HOME)/cycle_code/CONSTANT_FILES
+HOME_CRONTAB	=	 $(USER_HOME)/crontab
+HOME_BIN	=	 $(USER_HOME)/bin
+HOME_DATBIN	=	 $(USER_HOME)/datbin
+HOME_CONFIG	=	 $(USER_HOME)/CONFIG
+HOME_LIB	=	 $(USER_HOME)/lib
+
+# Common directory locations (inherited from MM5)
+
+INSTALL_LIB_DIR	=	$(MM5HOME)/cycle_code/SOURCE/LIBRARIES
+LIBS            =	-L$(INSTALL_LIB_DIR) -lV3Util
+MODDIR		=	-I$(INSTALL_LIB_DIR)
+
+# Common README files, one per installed dir. Added to by make target: add2readme
+
+SRC_README_FNAME	=	 README.src_dir_info
+DEST_SRC_README		=	 $(DEST)/$(SRC_README_FNAME)
+CSH_DEST_SRC_README	=	 $(CSH_DEST)/$(SRC_README_FNAME)
+TOOLS_DEST_SRC_README	=	 $(TOOLS_DEST)/$(SRC_README_FNAME)
+HOME_BIN_SRC_README	=	 $(HOME_BIN)/$(SRC_README_FNAME)
+HOME_DATBIN_SRC_README	=	 $(HOME_DATBIN)/$(SRC_README_FNAME)
+INSTALL_LIB_SRC_README	=	 $(INSTALL_LIB_DIR)/$(SRC_README_FNAME)
+
+# Common clean files
+
+CLEAN_LIST = *.o *~ core* *.exe *.kmo *.mod fort.* *.out *.decoded .ostype .tmpfile
+
+# Common compiler link commands -- BE VERY CAREFUL IF YOU EDIT THESE --
+#
+# These are split between pre and post to allow the individual Makefile
+# targets to specify the output file and list of object files inbetweeen
+# the pre and post macros. 
+# The items in the POST_LINK are: system/OS specific LDFLAGS, 
+#    compiler specific LDFLAGS, directory specific LDFLAGS, 
+#    directory specific LDLIBS, system/OS specific LDLIBS
+
+CC_PRE_LINK=$(CC)
+CC_POST_LINK=$(SYS_CC_LDFLAGS) $(LOC_CC_LDFLAGS) $(LOC_LDFLAGS) $(LOC_LDLIBS) $(SYS_CC_LDLIBS)
+FC_PRE_LINK=$(FC)
+FC_POST_LINK=$(SYS_FC_LDFLAGS) $(LOC_FC_LDFLAGS) $(LOC_LDFLAGS) $(LOC_LDLIBS) $(SYS_FC_LDLIBS)
+F90_PRE_LINK=$(F90)
+F90_POST_LINK=$(SYS_F90_LDFLAGS) $(LOC_F90_LDFLAGS) $(LOC_LDFLAGS) $(LOC_LDLIBS) $(SYS_F90_LDLIBS)
+
+# Common suffix rules -- BE VERY CAREFUL IF YOU EDIT THESE --
+#
+# Assumptions: .F and .f90 are FORTRAN90, .f is F77, .c is C.
+# The items in the compile line are: the compiler, system/OS compile flags,
+#     compiler specific compile flags, directory includes
+# The FORTRAN code that might use the PGI compiler contains a workaround for 
+#     the PGI license server problem where the license manager fails to get a
+#     license in the middle of a compile. Thanks to Dave Gill of MMM for
+#     the idea of delete-sleep-and-retry.
+
+COMPILE_MAX_NTRIES=2
+COMPILE_SLEEP_SECS=10
+
+.SUFFIXES: .c .F .f .f90 .o .i .mod
+
+.F.i:
+	$(RM) $@
+	$(CPP) $(CPPFLAGS) -D$(CPPOPTION) $*.F > $@
+
+.c.o:
+	$(RM) $@
+	$(CC) $(SYS_CFLAGS) $(LOC_CC_FLAGS) -c $(LOC_INCLUDES) $<
+
+.F.o:
+	$(RM) $@
+	count=1 ;\
+	while [ $${count} -le ${COMPILE_MAX_NTRIES} ] ;\
+	do \
+		$(F90) $(SYS_FFLAGS90) $(LOC_F90_FLAGS) -c $(LOC_INCLUDES) $< ;\
+		if [ -e $@ ] ;\
+		then \
+			break ;\
+		else \
+			sleep ${COMPILE_SLEEP_SECS} ;\
+			count=`expr $${count} + 1` ;\
+		fi ;\
+	done
+
+.f.o:
+	$(RM) $@
+	count=1 ;\
+	while [ $${count} -le ${COMPILE_MAX_NTRIES} ] ;\
+	do \
+		$(FC) $(SYS_FCFLAGS) $(LOC_FC_FLAGS) -c $(LOC_INCLUDES) $< ;\
+		if [ -e $@ ] ;\
+		then \
+			break ;\
+		else \
+			sleep ${COMPILE_SLEEP_SECS} ;\
+			count=`expr $${count} + 1` ;\
+		fi ;\
+	done
+
+.f90.o:
+	$(RM) $@
+	count=1 ;\
+	while [ $${count} -le ${COMPILE_MAX_NTRIES} ] ;\
+	do \
+		$(F90) $(SYS_FFLAGS90) $(LOC_F90_FLAGS) -c $(LOC_INCLUDES) $< ;\
+		if [ -e $@ ] ;\
+		then \
+			break ;\
+		else \
+			sleep ${COMPILE_SLEEP_SECS} ;\
+			count=`expr $${count} + 1` ;\
+		fi ;\
+	done
+
+.f90.mod:
+	$(RM) $@
+	count=1 ;\
+	while [ $${count} -le ${COMPILE_MAX_NTRIES} ] ;\
+	do \
+		$(F90) $(SYS_FFLAGS90) $(LOC_F90_FLAGS) -c $(LOC_INCLUDES) $< ;\
+		if [ -e $@ ] ;\
+		then \
+			break ;\
+		else \
+			sleep ${COMPILE_SLEEP_SECS} ;\
+			count=`expr $${count} + 1` ;\
+		fi ;\
+	done
+
+
+

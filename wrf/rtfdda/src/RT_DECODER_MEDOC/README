@@ -1,0 +1,42 @@
+!------------------------------------------------------------------------------!
+!
+! This directory contained the programs for converting 3-dimensional gridded 
+! wind data read in a MEDOC file into MM5 LITTLE_R observations format 
+! wind profiles that can be assimilated into MM5 RT-FFDA and 3D-VAR system. 
+! See: www.mmm.ucar.edu/mm5/documents/MM5_tut_Web_notes/OA/OA.html#pgfId=644106
+! for a description of the format.
+!
+! COMPILATION: "make" in this directory.
+! -----------
+!
+!USAGE:  medoc_decoder [-v-help] -i MEDOC_FILE -o DECODED_FILE -r RIP_FILE
+!-----
+!
+!WHERE:
+!-----
+! MEDOC_FILE:   Name of input MEDOC file to convert.
+! DECODED_FILE: Name of output file to store decoded data at the MM5 
+!               RAWINS/LITTLE_R input format.
+! RIP_FILE:     Name of output file to write data location for MM5 RIP namelist.
+!
+! Argument  MEDOC_FILE is mandatory (max 80 characters).
+! File name MEDOC_FILE_decoded will be used if argument DECODED_FILE is omitted.
+! File name RIP_FILE_decoded will be used if argument RIP_FILE is omitted.
+!
+! Only MEDOC spherical coordinates (lat/lon) system is supported.
+!
+! Enter: "medoc_decoder -help" for on-line help.
+! -----
+!
+! For MEDOC file format: see SCIPUFF documentation section 14.2.2. 
+! For MM5 file format see MM5 documentation at:
+! www.mmm.ucar.edu/mm5/documents/MM5_tut_Web_notes/OA/OA.html#pgfId=644106
+!
+! Copyright UCAR (c) 1992 - 2004.
+! University Corporation for Atmospheric Research (UCAR),
+! National Center for Atmospheric Research (NCAR),
+! Research Applications Program (RAP),
+! P.O.Box 3000, Boulder, Colorado, 80307-3000, USA. 
+!
+! Francois Vandenberghe, vandenb@ucar.edu, October 2004.
+!------------------------------------------------------------------------------!

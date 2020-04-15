@@ -1,0 +1,58 @@
+#!/bin/csh -f
+
+##This shell decodes the data from the Radiometrics Water Vapor Radiometer 
+## (*.prf files) for locations defined by the variables "WVR_LOCATIONS"
+###############################################################################
+echo  " ----------------------------------------------------------------------"
+echo  " ---------------- WVR decoder starts  ---------------------------------"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+set debug = 1 # 0 = normal usage
+
+if ( ${#argv} < 2 ) then
+	echo "usage: RT_rd_S_wvr_rtfdda.csh start_date obs_date"
+	echo "where start_date is CCYYMMDDHH"
+	echo  "d obs_date is CCYYMMDDHH"
+	echo "location is lamont ot boulder"
+	exit ( 4 )
+endif
+
+#set echo
+set timestamp
+setenv SUBSYSTEM WVR_FDDA
+
+
+## ENVIRONMENT
+
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+## Testing only
+
+if ($debug > 0) then 
+    setenv MM5HOST GRM
+endif
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+
+source ${CFILE}user.mm5sys.${MM5HOST};    
+
+echo ""
+
+## Current location of Radiometers
+
+set WVR_LOCATIONS = "lamont boulder"
+
+## Decode for each location
+
+foreach site ($WVR_LOCATIONS)
+ ${CSH_ARCHIVE}/Forecast/RT_S_rd_wvr_location.csh $1 $2 $site
+end
+
+exit (0)
+

@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+#
+
+$f_in = $ARGV[0]; 
+$f_in = "all.obs" if( ! $f_in);
+$f_out = "$f_in.trim";
+$RM_DUB=1;
+open (IN, "$f_in");
+open (ME, ">$f_out");
+$flag = 0;
+my %tmp;
+while($aline = <IN>) {
+ $record_start = substr($aline,0,10);
+  if ( $record_start == '          ') {
+   $lat = substr($aline,10,10);
+   $lon = substr($aline,30,10);
+   if (1
+#  if ($lat < 60 && $lat > 15 && $lon < -55 && $lon > -155  # cover USA
+#  if ($lat < 50 && $lat > 25 && $lon < -55 && $lon > -95   #atc
+#  if ($lat < 45 && $lat > 5  && $lon < -110 && $lon > -179  # cover Hawaii  
+#  && $aline =~ /METAR/ 
+#  && $aline =~ /19980209/
+#  && $aline =~ /PILOT/
+    ) {
+   $k1 = $lat;
+   $k2 = $lon;
+   $k3 = substr($aline,209,80);
+   $k4 = substr($aline,326,12);
+   $k5 = substr($aline,40,5);
+   $k6 = substr($aline,80,12);
+   $k7 = substr($aline,120,12);
+   $kk = $k4." ".$k1." ".$k2." ".$k5." ".$k6." ".$k7." ".$k3;
+#       $kk = $aline;
+   if($RM_DUB == 1) {
+     $tmp{$kk} = $aline;  #late obs is retained
+   } else {
+     $tmp{$kk} = join("",$tmp{$kk}, $aline);
+   }
+   $flag = 1;
+#   $flag = 0 if ($tmp{$kk} NE "");
+   }
+   else {
+   $flag = 0;
+   }
+ }
+else {
+# print ME $aline if ($flag == 1);
+ $tmp{$kk} = join("",$tmp{$kk}, $aline) if ($flag == 1);
+}
+}
+
+foreach $k (sort keys %tmp) {
+ print ME $tmp{$k};
+}

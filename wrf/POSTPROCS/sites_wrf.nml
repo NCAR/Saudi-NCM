@@ -1,0 +1,13 @@
+ &pobs_input
+   output_flag   = "sfc_site"
+   path_and_file = "FILENAME"
+   location_file = "stationmap_new.list"
+   nlat          =  NLINES 
+   output_type   = "TAG"
+   height_file   = "sites_height.list"
+   nheight       = 3
+   zCoord        = "h"
+   outputFiles   = "multiple"
+   out_unit      = 30
+   writeBufkit   = .false.
+  /

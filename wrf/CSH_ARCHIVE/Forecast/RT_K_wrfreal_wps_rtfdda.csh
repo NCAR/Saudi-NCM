@@ -1,0 +1,361 @@
+#!/bin/csh
+
+#
+# More Environment
+#
+if(-e $GSJOBDIR/tmp/$this_cycle/cshrc) then
+  source $GSJOBDIR/tmp/$this_cycle/cshrc
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "Found and Sourced $GSJOBDIR/tmp/$this_cycle/cshrc"
+endif
+
+
+###############################################################################
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " "
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " ----------------------------------------------------------------------"
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " ---------------- WRF REAL WITH WPS to get WRF IC and BC---------------"
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " ----------------------------------------------------------------------"
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " " 
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  "$0 $argv[*]"
+${PERL_ARCHIVE}/MMPerlLog.perl "INFO"  " " 
+#     " ------------------Yubao Liu 2007.2 -----------------------------------"
+###############################################################################
+
+#set echo
+set timestamp
+setenv SUBSYSTEM WRF
+setenv RM "rm -rf"
+
+set DOMS = ( 1 2 3 4 )
+if($?NUM_DOMS) then
+ if ($NUM_DOMS == 5) then
+  set DOMS = ( 1 2 3 4 5 )
+ else if ($NUM_DOMS == 4) then
+  set DOMS = ( 1 2 3 4)
+ else if ($NUM_DOMS == 3) then
+  set DOMS = ( 1 2 3)
+ else if ($NUM_DOMS == 2) then
+  set DOMS = ( 1 2 )
+ else if ($NUM_DOMS == 1) then
+  set DOMS = ( 1 )
+ endif
+endif
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+
+source ${CFILE}user.mm5sys.${MM5HOST};
+
+if ( ${#argv} != 7) then
+	echo "usage: wrf.csh this_cycle start_date end_date NODE normal NAMGFS"
+	echo "where start_date, end_date and this_cycle is ccyymmddhh"
+	echo "NODE: 0 -mpp; 1 - 31 running omp on node"
+	echo "normal=1: restart "
+	exit ( 1 )
+endif
+
+set this_cycle = $1
+set start_date = $2
+set end_date   = $3
+set NODE       = $4
+set normal     = $5
+set cpun       = $6
+set NAMGFS     = $7
+
+set y_start = `echo $start_date | cut -b 1-4`
+set m_start = `echo $start_date | cut -b 5-6`
+set d_start = `echo $start_date | cut -b 7-8`
+set h_start = `echo $start_date | cut -b 9-10`
+
+set y_end = `echo $end_date | cut -b 1-4`
+set m_end = `echo $end_date | cut -b 5-6`
+set d_end = `echo $end_date | cut -b 7-8`
+set h_end = `echo $end_date | cut -b 9-10`
+
+set d4end_date = $end_date
+set d4y_end = `echo $d4end_date | cut -b 1-4`
+set d4m_end = `echo $d4end_date | cut -b 5-6`
+set d4d_end = `echo $d4end_date | cut -b 7-8`
+set d4h_end = `echo $d4end_date | cut -b 9-10`
+
+
+#if $BATCH_SYSTEM is not set, set it to "INTER" (interactive, no batch)
+if (! $?BATCH_SYSTEM) set BATCH_SYSTEM = "INTER"
+
+#if $MPI_PRE_PROCESS is not set, set it to "1", i.e., will run real.mpich
+if (! $?MPI_PRE_PROCESS ) set MPI_PRE_PROCESS  = 1
+
+#if $REAL_MPICH is not set, set to real.mpich
+if (! $?REAL_MPICH ) set REAL_MPICH  = real.mpich
+
+
+if ( $BATCH_SYSTEM == "PBS" )then
+  echo ""
+  echo "PBS_JOBID: $PBS_JOBID"
+  echo "Allocated nodes are: "
+  cat $PBS_NODEFILE
+  echo ""
+endif
+
+### The PBS directive
+#PBS -l nodes=${NUM_NODES}:ppn=${PPN}
+
+set CYCDIR = $RUNDIR/$this_cycle
+cd $CYCDIR
+
+set dir_work = $CYCDIR/WRF_REAL
+
+if(-d $GEAPSTMP/1) then # $GEAPSTMP/1: mpirun does not like local disk
+ if(-d $GEAPSTMP/WRF_REAL) rm -rf $GEAPSTMP/WRF_REAL
+ $MustHaveDir $GEAPSTMP/WRF_REAL
+ ln -s -f $GEAPSTMP/WRF_REAL $dir_work
+else
+ $MustHaveDir $dir_work
+endif
+
+cd $dir_work
+
+# Bring wrf/real namelist over that we need
+
+if( $NODE == 0 ) then
+ if( -e $GSJOBDIR/namelists/wrf.nl.template ) then
+  cp $GSJOBDIR/namelists/wrf.nl.template wrf.nl
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/namelists/wrf.nl.template"
+ else
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Missing wrf.nl -> exiting"
+  exit (3)
+ endif
+else
+ if(-e $GSJOBDIR/namelists/wrf.nl.template.$NODE) then
+  cp $GSJOBDIR/namelists/wrf.nl.template.$NODE wrf.nl
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/namelists/wrf.nl.template.$NODE"
+ else if ( -e $GSJOBDIR/namelists/wrf.nl.template) then
+  cp $GSJOBDIR/namelists/wrf.nl.template wrf.nl
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/namelists/wrf.nl.template"
+ else
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Missing wrf.nl -> exiting"
+  exit (4)
+ endif
+endif
+
+ cp $GSJOBDIR/wrfrun/gribmap.txt .
+
+ set ifrest = "FALSE"
+ set savefrq  = 44600                # No savefile for restart is needed
+ set FCST_LENGTH=1000                # No savefile for restart is needed
+ set out_int = 60                    # No savefile for restart is needed
+ if ( $this_cycle < 2016051117 ) then
+  set metl = 27
+ else if ( $this_cycle >= 2016051117 && $this_cycle < 2019061217 ) then
+  set metl = 32
+ else
+  set metl = 34
+ endif
+ if($NAMGFS == ETA || $NAMGFS == NAM) set metl = 40
+ if($NAMGFS == NNRP || $NAMGFS == NNRP2) set metl = 18
+ if($NAMGFS == CFSV1 || $NAMGFS == CFSV2 || $NAMGFS == CFSR || $NAMGFS == CFSF) set metl = 38
+ if($NAMGFS == DWD  ) set metl = 21
+ if($NAMGFS == UKMO ) set metl = 17
+ if($NAMGFS == GEM ) set metl = 29
+ if($NAMGFS == ECMWF ) set metl = 21
+
+set NDOM = $NUM_DOMS
+
+# 
+# Force outputing wrfbdy and wrfinput files in NETCDF4-classic format, not
+# the native compressed format
+#
+if ( $NETCDF_CONVERT ) then
+   sed -i 's/time_control/time_control\n use_netcdf_classic = \.true\./' wrf.nl
+endif
+
+# build the wrf and real namelist
+
+# CFDDA uses python tools
+if($NAMGFS == CFSV1 || $NAMGFS == CFSV2 || $NAMGFS == CFSR || $NAMGFS == CFSF) then
+
+# build the wrf and real namelist
+echo "update wrf.nl with python tool ..."
+echo "$NDOM  $start_date  $end_date  $FCST_LENGTH  $ifrest  $savefrq  $out_int  $metl"
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -i './wrf.nl' -N $NDOM -b $start_date -e $end_date
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -s 'time_control' -k 'run_hours' -v $FCST_LENGTH
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -s 'time_control' -k 'restart' -v $ifrest
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -s 'time_control' -k 'restart_interval' -v $savefrq
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -s 'domains' -k 'num_metgrid_levels' -v $metl
+set i = 1
+while ($i <= $NDOM)
+   $PYTHON_ARCHIVE/tools/updatewrfnml.py -s 'time_control' -k 'history_interval' -v $out_int -n $i
+   @ i ++
+end
+$PYTHON_ARCHIVE/tools/updatewrfnml.py -o './wrf.nl'
+if (-e nml.pkl) then
+   rm -f nml.pkl
+endif
+
+else # CFS
+
+echo $y_start $m_start $d_start $h_start
+echo $y_end $m_end $d_end $h_end $NUM_DOMS
+echo $savefrq $ifrest $d4y_end $d4m_end $d4d_end $d4h_end
+
+ed wrf.nl << EOF > /dev/null
+g/SYY/s//$y_start/g
+g/SMM/s//$m_start/g
+g/SDD/s//$d_start/g
+g/SHH/s//$h_start/g
+g/EYY/s//$y_end/g
+g/EMM/s//$m_end/g
+g/EDD/s//$d_end/g
+g/EHH/s//$h_end/g
+g/D4YY/s//$d4y_end/g
+g/D4MM/s//$d4m_end/g
+g/D4DD/s//$d4d_end/g
+g/D4HH/s//$d4h_end/g
+g/E1YY/s//$y_end/g
+g/E1MM/s//$m_end/g
+g/E1DD/s//$d_end/g
+g/E1HH/s//$h_end/g
+g/E2YY/s//$y_end/g
+g/E2MM/s//$m_end/g
+g/E2DD/s//$d_end/g
+g/E2HH/s//$h_end/g
+g/E3YY/s//$y_end/g
+g/E3MM/s//$m_end/g
+g/E3DD/s//$d_end/g
+g/E3HH/s//$h_end/g
+g/E4YY/s//$y_end/g
+g/E4MM/s//$m_end/g
+g/E4DD/s//$d_end/g
+g/E4HH/s//$h_end/g
+g/E5YY/s//$y_end/g
+g/E5MM/s//$m_end/g
+g/E5DD/s//$d_end/g
+g/E5HH/s//$h_end/g
+g/DOM/s//$NDOM/g
+g/FCSTH/s//$FCST_LENGTH/g
+g/SaveFrq/s//$savefrq/g
+g/OUTINT/s//$out_int/g
+g/OUT1INT/s//$out_int/g
+g/OUT2INT/s//$out_int/g
+g/OUT3INT/s//$out_int/g
+g/OUT4INT/s//$out_int/g
+g/OUT5INT/s//$out_int/g
+g/IfRest/s//$ifrest/g
+g/METL/s//$metl/g
+w
+q
+EOF
+
+endif # CFS
+
+ln -s -f wrf.nl namelist.input
+
+# Run real to get ICs and BCs
+
+##ELENA-ADDED
+if ($MPI_PRE_PROCESS == 0) then
+
+ if ( -e $GSJOBDIR/executables/real.exe ) then
+  cp $GSJOBDIR/executables/real.exe real.exe
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/executables/real.exe"
+ else if ( -e ${REAL_EXE} ) then
+   cp ${REAL_EXE} real.exe
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using ${REAL_EXE}"
+ else
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Missing real.exe executable --  exiting"
+  exit (4)
+ endif
+
+else
+##ELENA-ADDED-END
+
+ if(-e $GSJOBDIR/executables/real.mpich.$NODE) then
+  cp $GSJOBDIR/executables/real.mpich.$NODE real.mpich
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/executables/real.mpich.$NODE"
+ else if ( -e $GSJOBDIR/executables/real.mpich ) then
+  cp $GSJOBDIR/executables/real.mpich real.mpich
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using $GSJOBDIR/executables/real.mpich"
+ else if ( -e ${REAL_MPICH}.$NODE ) then
+  cp ${REAL_MPICH}.$NODE real.mpich
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using  ${REAL_MPICH}.$NODE"
+ else if ( -e ${REAL_MPICH} ) then
+  cp ${REAL_MPICH} real.mpich
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Using ${REAL_MPICH}"
+ else
+  ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "${SUBSYSTEM} -- Missing real.mpich executable --  exiting"
+  exit (4)
+ endif
+
+endif
+
+setenv WRF_WPS $RUNDIR/$this_cycle/WRF_WPS
+ln -s -f $RUNDIR/$this_cycle/WRF_WPS/met_em.d* .
+
+if ( $?CHEM ) then
+   if ( $CHEM > 0 ) then
+      ln -sf $GSJOBDIR/wrfrun/wrfchem* .
+   endif
+endif
+
+echo $0
+/opt/cray/pe/modules/3.2.10.6/bin/modulecmd csh list
+
+if ( $MPI_PRE_PROCESS == 0 ) then
+    ./real.exe >>& real.print.out
+else if ($BATCH_SYSTEM == "PBS") then
+    echo "$MPICMD_BIN_DIR/aprun -n $NUM_PROCS ./real.mpich >>& real.print.out"
+    $MPICMD_BIN_DIR/aprun -n $NUM_PROCS ./real.mpich >>& real.print.out
+else if ($BATCH_SYSTEM == "SLURM") then
+    $MPICMD_BIN_DIR/srun -n $NUM_PROCS --ntasks=32 --hint=nomultithread ./real.mpich >>& real.print.out
+    echo "srun -n $NUM_PROCS --ntasks=32 ./real.mpich >>& real.print.out"
+else if ($BATCH_SYSTEM == "LSF") then
+#    $GSJOBDIR/mpirun.lsf ./real.mpich  #>>&! real.print.out
+#    exit (0)
+else if ($BATCH_SYSTEM == "INTER") then
+#  Submit the job with apirun
+    #echo "$MPICMD_BIN_DIR/aprun -n $NUM_PROCS ./real.mpich >>& real.print.out"
+    $MPICMD_BIN_DIR/aprun -n $NUM_PROCS ./real.mpich >>& real.print.out
+    echo "aprun -n $NUM_PROCS ./real.mpich >>& real.print.out"
+    #aprun -n $NUM_PROCS ./real.mpich >>& real.print.out
+ if(-e $GSJOBDIR/machinefile) then
+   cp $GSJOBDIR/machinefile $RUNDIR/hosts
+ endif
+ $MPICMD_BIN_DIR/mpirun -np $cpun -machinefile $RUNDIR/hosts ./real.mpich >>& real.print.out
+else
+    ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" " " 
+    ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "ERROR: Unknown value BATCH_SYSTEM = $BATCH_SYSTEM!"
+    ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" "       BATCH_SYSTEM must be PBS, LSF or INTER (interactive)"
+    ${PERL_ARCHIVE}/MMPerlLog.perl "INFO" " " 
+endif
+
+foreach i ( $DOMS )
+ if($normal == 1) then
+  mv -f wrfinput_d0$i $CYCDIR/${this_cycle}_wrfinput_d0$i
+ else
+  #cp -f wrfinput_d0$i $up_dir/${this_cycle}_wrfinput_d0${i}_cold #save a copy on local disk
+  mv -f wrfinput_d0$i $CYCDIR/${this_cycle}_wrfinput_d0${i}_cold  #cold-start
+ endif
+ if (-e wrffdda_d0$i) then
+     mv wrffdda_d0$i $CYCDIR/${this_cycle}_wrffdda_d0$i
+ endif
+end
+  mv -f wrfbdy_d01 $CYCDIR/${this_cycle}_wrfbdy_d01
+
+endif     #--- real ends
+
+
+# real has been done.
+
+#  Clean up
+#  rm met_em*
+
+exit ( 0 )
+

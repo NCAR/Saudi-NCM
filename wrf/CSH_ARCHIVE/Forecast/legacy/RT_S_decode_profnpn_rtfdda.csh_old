@@ -1,0 +1,67 @@
+#!/bin/tcsh  -f
+#
+###############################################################################
+echo
+echo  " ----------------------------------------_-----------------------------"
+echo  " ---------------- NPN_PROF decoder starts  -------------------------------"
+echo "$0 $argv[*]"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+set timestamp
+setenv SUBSYSTEM NPN_PROF_FDDA
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};    
+#set echo
+
+#	Check usage
+
+if ( ${#argv} == 2 ) then
+    set cycle_date = $1
+    set obs_date = $2
+else
+    echo "usage: $0 cycle_date obs_date "
+    echo "where cycle_date and obs_date are CCYYMMDDHH"
+    exit ( 4 )
+endif
+
+if(-d $GEAPSTMP) then
+ if( ! -d $GEAPSTMP/DECODE_NPN_PROF) then 
+  $MustHaveDir $GEAPSTMP/DECODE_NPN_PROF
+  ln -s $GEAPSTMP/DECODE_NPN_PROF $RUNDIR/${cycle_date}/DECODE_NPN_PROF
+ endif
+else
+ $MustHaveDir $RUNDIR/${cycle_date}/DECODE_NPN_PROF
+endif
+
+cd ${RUNDIR}/${cycle_date}/DECODE_NPN_PROF
+echo "Now working in  $cwd"
+
+rm *.profiler
+cp ${NPN_PROF_DATA_DIR}/../npn_profiler/$obs_date.profiler .
+
+touch aaprofiler
+foreach prof (*profiler)
+echo $prof
+${EXECUTABLE_ARCHIVE}/rd_prof_npn.exe << END >>npn.exe.log
+$prof
+END
+echo $prof 
+if($prof != "aaprofiler") then
+mv fort.50 $RUNDIR/${cycle_date}/DECODE_NPN_PROF/PROF.${obs_date}_$prof.1h
+endif
+end
+
+echo "NPN_PROF DATA for $obs_date is processed"
+exit 0

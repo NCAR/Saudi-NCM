@@ -1,0 +1,10 @@
+#!/bin/tcsh
+#PBS -l select=1:ncpus=32:mpiprocs=32
+#PBS -l walltime=3:00:00
+
+cd $MM5HOME/cycle_code/POSTPROCS/AnEn
+echo 'pwd'
+echo '$MM5HOME'
+#aprun -n 1 -d 32 -cc none -a xt ./AnEn_driver.py
+aprun -n 1 -d 32 -cc none -a xt $MM5HOME/cycle_code/POSTPROCS/AnEn/AnEn_submit.pl
+

@@ -1,0 +1,14 @@
+dbcolor file for NCAR graphics contouring at 5 dB, >100 dB
+    12
+    15   100.0   | dark blue
+    14   105.0   | dark green
+    13   110.0   | yellow
+    12   115.0   | orange
+    10   120.0   | yellow-orange
+     9   125.0   | red-orange
+     8   130.0   | red-red-orange
+     7   135.0   | red
+     6   140.0   | red
+     5   145.0   | red
+     4   150.0   | red
+     3   155.0   | red

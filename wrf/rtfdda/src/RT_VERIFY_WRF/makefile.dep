@@ -1,0 +1,19 @@
+datetime_module.o : datetime_module.f90 
+eta2p.o : eta2p.f90 
+nearest_hour.o : nearest_hour.f90 
+qfromrh.o : qfromrh.f90 
+qfromttd.o : qfromttd.f90 
+right_time.o : right_time.f90 
+vertical_interp.o : vertical_interp.f90 
+wrf_arrays.o : wrf_arrays.f90 
+wrf_constants.o : wrf_constants.f90 wrf_kinds.o 
+wrf_kinds.o : wrf_kinds.f90 
+wrf_ncread.o : wrf_ncread.f90 wrf_kinds.o 
+wrf_pseudo_2d.o : wrf_pseudo_2d.f90 
+wrf_pseudo_snd.o : wrf_pseudo_snd.f90 
+wrf_read_snd_pairs.o : wrf_read_snd_pairs.f90 
+wrf_sfc_interp.o : wrf_sfc_interp.f90 wrf_constants.o wrf_tools.o wrf_arrays.o 
+wrf_sfc_interp_model_only.o : wrf_sfc_interp_model_only.f90 datetime_module.o wrf_constants.o wrf_tools.o wrf_arrays.o 
+wrf_snd_pairs.o : wrf_snd_pairs.f90 write_snd_bin.o wrf_constants.o wrf_tools.o wrf_arrays.o 
+wrf_tools.o : wrf_tools.f90 wrf_ncread.o wrf_constants.o wrf_kinds.o 
+write_snd_bin.o : write_snd_bin.f90 

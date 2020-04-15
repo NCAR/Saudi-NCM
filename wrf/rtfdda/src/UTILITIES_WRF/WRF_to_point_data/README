@@ -1,0 +1,345 @@
+=============================================================================
+               Source Code Reference and User's Guide for the 
+                    WRF P-Obs Retrieval Utility Program
+
+		    Oct 2005 - J. Schramm - first version
+		    Apr 2006 - J. Schramm - added command line options
+		                            Type 'readWRF.exe -h' for help
+=============================================================================
+
+This file contains the following sections:
+
+(1) Introduction
+(2) Software/input data necessary to run this package
+(3) Files it contains
+(4) Namelist input parameters
+(5) Sounding Namelist Example
+(6) Surface Site Namelist Example
+(7) Arbitrary Point Namelist Example
+(8) How to use it
+
+-----------------------------------------------------------------------------
+(1) Introduction
+-----------------------------------------------------------------------------
+This directory contains a collection of Fortran files that can extract 
+meteorological data at a surface site, along a trajectory, or retrieve
+virtual sounding data from WRF netCDF output files.  The WRF output 
+files can contain one or more time levels. See the code for more information.
+
+The code resides in the RAL CVS repository in the directory: 
+
+apps/netcdf_utils/src/WRF_to_point_data
+
+-----------------------------------------------------------------------------
+(2) Software/input data necessary to run this package:
+-----------------------------------------------------------------------------
+
+1) F90 compiler
+2) F90 netCDF library
+3) WRF netCDF output files, including the hour before desired time if the
+   hourly precip is desired
+
+-----------------------------------------------------------------------------
+(3) Files it contains:
+-----------------------------------------------------------------------------
+
+README            - This file.
+
+Makefile          - Commands to build the executable.  Fortran compiler name is
+                    set in here as is the location of the netCDF library.
+
+pobs_input.nml    - Namelist containing information about WRF output files, number 
+                    of points where data will be retrieved, the type of desired
+		    output.  See the section on input namelist variables for a
+		    complete list and description of namelist parameters.
+
+pobs_lat_lon.list - Latitude, longitude locations (in degrees), station elevation,
+                    a 3-character station ID, and a station name character string
+		    for each point where data will be retrieved.  This is the standard
+		    format for the stationmap_new.list file:
+
+		     19.833  -90.500   42 CPE Campeche, MX
+		     20.517  -86.933    1 CZM Cozumel, MX
+
+		    The number of records in this file must be set using the value
+		    nlat in the namelist.The file content is formatted.
+
+pobs_height.list -  The heights in this file are only used for calculating data at
+                    an arbitrary point.  The heights can be in units of m above
+		    ground level or unreduced pressure levels (hPa).  Units for
+		    the arbitrary point height is specified by the namelist parameter
+		    zCoord.  This file can contain a single height value that will be
+		    used for all lat/lon points, or a unique value that will be used
+		    for each lat/lon point. 
+
+                    The number of records in this file must be set as nheight
+		    in the namelist.  The file content has a list-directed format.
+
+WRF_cmdLine.F90    - Module where the command line arguments are parsed and set.
+
+WRF_constants.F90 - Module where the physical and numerical constants are set.
+
+WRF_input.F90     - Module where input data is processed.  Reads some global attributes 
+                    from input file and determines what points are in model domain.
+
+WRF_kinds.F90     - Module where variable precision is set for all common data types.
+
+WRF_lltoxy.F90    - Converts lat/lon point to i/j.
+
+WRF_main.F90      - Main driver routine that reads in namelist and station location
+                    information. The points from the input files are sorted, and those
+		    that lie outside the model domain are discarded.  The appropriate
+		    subroutine is called based on the type of data requested
+
+WRF_ncread.F90    - Module containing a collection of subroutines that extract
+                    data and other information from WRF netCDF output files.
+
+WRF_ptData.F90    - Reads in WRF output data at the date and time set in the namelist,
+                    calculates meteorological data at the desired, but arbitrary, 
+		    locations and heights, and writes out:
+		      (1) Pressure (hPa)
+		      (2) Temperature (C)
+		      (3) Relative Humidity (%)
+		      (4) Wind direction (degrees)
+		      (5) Wind speed (m/s)
+
+WRF_site.F90      - Reads in WRF output data at the date and time set in the namelist,
+                    calculates surface meteorological data at the desired points, and
+		    writes out:
+		      (1) MSL Pressure (hPa)
+		      (2) Temperature 2m (C)
+		      (3) Dewpoint Temperature (C)
+		      (4) Relative Humidity (%)
+		      (5) 10 m Wind direction (degrees)
+		      (6) 10 m Wind speed (m/s)
+		      (7) Cloud cover (fraction)
+		      (8) Precipitation (mm)
+		      (9) PBL Height (m)
+
+WRF_sounding.F90  - Reads in WRF output data at the date and time set in the namelist,
+                    calculates virtual sounding data at the desired points, and
+		    writes out:
+                      (1) Height of model levels (m)
+                      (2) Temperature (C)
+                      (3) Relative Humidity (%)
+                      (4) Wind speed (m/s)
+                      (5) Wind direction (degrees)
+                      (6) Pressure (mb)
+		    at each model level.
+
+WRF_tools.F90     - Module containing a collection of subroutines and functions
+                    for interpolation, RH calculation, and other commonly used
+		    code.
+
+-----------------------------------------------------------------------------
+(4) Namelist input parameters:
+-----------------------------------------------------------------------------
+An input namelist is read from stdin at runtime.  Following is a list and
+description of available namelist input parameters.  Note that currently,
+there are no default values for the namelist parameters, so they must all
+be set in the namelist file.
+
+output_flag
+   Type: character(len=80)
+   Default: none
+   Required: yes
+   Description: Determines the type of data to be output.  There are three
+      options:
+      (1) output_flag = "sfc_site"   Gets surface data at the points specified
+                                     in pobs_lat_lon.list. Uses the station
+				     heights set in pobs_height.list.
+
+      (2) output_flag = "sounding"   Gets virtual sounding data at the points
+                                     specified in pobs_lat_lon.list.
+
+      (3) output_flag = "arb_point"   Gets data at the points and heights set
+                                      in pobs_lat_lon.list and pobs_height.list.
+
+path_and_file
+   Type:     character(len=256)
+   Default:  none
+   Required: yes
+   Description: Path and file name of WRF output netCDF file. Example:
+       wrf_path_name = "/raid/cycles/GWDPGL/DPG/2005101106/wrfout_d02_2006-08-08_12:00:00.DPG_F"
+
+location_file
+   Type: character(len=256)
+   Default: None
+   Required: yes
+   Description: String containing the name of the input file with the 
+                lat/lon/elev/station ID/station name information.
+		Example: "./pobs_lat_lon.list"
+
+nlat
+   Type: integer
+   Default: none
+   Required: yes
+   Description: Number of lat/lon locations in the input file location_file.
+
+height_file
+   Type: character(len=256)
+   Default: None
+   Required: yes
+   Description: String containing the name of the input file with the 
+                height information.
+		Example: "./pobs_height.list"
+
+nheight
+   Type: integer
+   Default: none
+   Required: yes
+   Description: Number of heights in the input file pobs_height.list.
+
+zCoord
+   Type: character(len=80)
+   Default: none
+   Required: yes
+   Description: Type of height coordinate in the input file pobs_height.list
+       used for retrieving arbitrary point data.  There are currently 2 options:
+       (1) zCoord = "P" (or "p") Heights are in hPa.
+
+       (2) zCoord = "H" (or "h") Heights are above ground level in meters.
+
+outputFiles
+   Type: character(len=80)
+   Default: none
+   Required: yes
+   Description: This is for *site* output only.  All output can be written to a single
+       file, or data from each station can be appended to a file that contains only
+       data from that station.  There are currently 2 options:
+       outputFiles = "single
+       outputFiles = "multiple"
+
+out_unit
+   Type: integer
+   Default: none
+   Required: yes
+   Description: Unit number where meteorological output will be written.
+       Error messages are written to stdout.
+
+output_type
+   Type: character(len=80)
+   Default: "final"
+   Required: no
+   Description:  Output type or  cycle tag that denotes which kind of output we
+       are looking at.  Used to determine the color of the table row on html page.
+
+-----------------------------------------------------------------------------
+(5) Sounding Namelist Example:
+-----------------------------------------------------------------------------
+
+Namelist to get virtual sounding data at three locations:
+
+&pobs_input
+  output_flag   = "sounding"
+  wrf_path_name = "/scratch/schramm/wrf_file_name = "wrfout_d01_2006-03-24_11:00:00.DPG_P+FCST"
+  location_file = "./pobs_lat_lon.list"
+  nlat          = 3
+  height_file   = "./pobs_height.list"
+  nheight       = 3
+  zCoord        = "h"
+  outputFiles   = "single"
+  out_unit      = 6
+ /
+
+Contents of pobs_lat_lon.list should look like:
+
+ 32.610 -114.630   46 YME Yuma,Mesa, AZ
+ 32.633 -108.150 1659 SVC SILVER CITY, NM
+ 32.650 -114.600   65 YUM Yuma, AZ
+
+Note that height_file, nheight and zCoord will not be used in this case.
+
+-----------------------------------------------------------------------------
+(6) Surface Site Namelist Example:
+-----------------------------------------------------------------------------
+
+Namelist to get surface site data at three locations:
+
+ &pobs_input
+   output_flag   = "sfc_site"
+   wrf_path_name = "/scratch/schramm"
+   wrf_file_name = "wrfout_d01_2006-03-24_11:00:00.DPG_P+FCST"
+   date_time     = "2006-03-24_11:00:00"
+   location_file = "./pobs_lat_lon.list"
+   nlat          = 3
+   height_file   = "./pobs_height.list"
+   nheight       = 3
+   zCoord        = "h"
+   outputFiles   = "single"
+   out_unit      = 6
+   output_type   = "fcst"
+ /
+
+Contents of pobs_lat_lon.list should look like:
+
+ 31.583 -110.333 1438 FHU FORT HUACHUCA, AZ
+ 31.811 -106.376 1206 ELP El Paso, TX
+ 31.831 -104.809 1661 GDP GUADALUPE PASS, TX
+
+Note that height_file, nheight and zCoord will not be used in this case.
+
+-----------------------------------------------------------------------------
+(7) Arbitrary Point Namelist Example:
+-----------------------------------------------------------------------------
+
+Namelist to get arbitrary point data along a trajectory:
+
+ &pobs_input
+   output_flag   = "arb_point"
+   path_and_file = "/scratch/schramm/wrfout_d01_2006-03-24_11:00:00.DPG_P+FCST"
+   location_file = "./pobs_lat_lon.list"
+   nlat          = 3
+   height_file   = "./pobs_height.list"
+   nheight       = 3
+   zCoord        = "h"
+   outputFiles   = "single"
+   out_unit      = 6
+  /
+
+Contents of pobs_lat_lon.list (lat,lon,station elevation) should look like:
+
+ 32.338 -104.263 1004 CNM CARLSBAD, NM
+ 32.359  -95.404  165 TYR Tyler, TX
+ 32.410  -99.682  545 ABI Abiline , TX
+
+Contents (for pressure) of pobs_height.list should look like:
+
+800.000     ! Height of point 1 in mb
+750.000    
+700.000    
+
+Contents (for height AGL) of pobs_height.list should look like:
+Set  zCoord        = "H" in namelist
+
+1426.000    ! Height AGL of obs point 1
+1425.000    ! Height AGL of obs point 2
+1425.000    ! Height AGL of obs point 3
+
+The file pobs_height.list can also contain a single height value, which will
+be applied to all points in pobs_lat_lon.list.
+
+A missing value will be printed out for points below the model surface.
+
+-----------------------------------------------------------------------------
+(8) How to use it:
+-----------------------------------------------------------------------------
+
+0) To check the code out of the CVS repository, if necessary:
+
+   cvs co apps/netcdf_utils/src/WRF_to_point_data
+
+1) Set the name of your Fortran 90 compiler and the location of your Fortran 90
+   netCDF library in Makefile.
+
+2) Set the input parameters in the namelist file pobs_input.nml
+
+3) Put the locations and station names of your data in pobs_lat_lon.list
+
+4) Put the heights or site elevations in pobs_height.list
+
+5) Make the executable:  make
+
+6) Run the executable:  readWRF.exe
+
+

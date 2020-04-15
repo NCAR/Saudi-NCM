@@ -1,0 +1,30 @@
+28-JUN-2017		Building WRFv3.8.1 for RTFDDA
+-----------------------------------------------------------------------------
+0) This version in RAL's terminology is RAL3.8.1R0+
+
+1) Need to modify the Makefile for libfftpack.a to change all instances
+   of TARGET to LIB_TARGET so doesn't get overridden by the Makefile at 
+   the apps/4dwx/RTFDDA/src level.
+
+   Modify file: apps/4dwx/RTFDDA/src/RT_WRF/WRF_V3.8.1/external/fftpack/fftpack5/Makefile
+
+   to change all instances of TARGET to LIB_TARGET
+
+2) Need to modify the makefile for libio_esmf.a to change all instances
+   of TARGET to LIB_TARGET so doesn't get overridden by the Makefile at 
+   the apps/4dwx/RTFDDA/src level.
+
+   Modify file: apps/4dwx/RTFDDA/src/RT_WRF/WRF_V3.8.1/external/io_esmf/makefile
+
+   to change all instances of TARGET to LIB_TARGET
+
+3) Need to modify the Makefile for libatm_ocn.a to change all instances
+   of TARGET to LIB_TARGET so doesn't get overridden by the Makefile at 
+   the apps/4dwx/RTFDDA/src level.
+
+   Modify file: apps/4dwx/RTFDDA/src/RT_WRF/WRF_V3.8.1/external/atm_ocn/Makefile
+
+   to change all instances of TARGET to LIB_TARGET
+
+4) Need to add a _Makefile.auto_build to the apps/4dwx/RTFDDA/src/RT_WRF/WRF_V3.8.1/
+   directory

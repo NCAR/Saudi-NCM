@@ -1,0 +1,41 @@
+572a573,574
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Set derived vars nobs_kgain_vars, obs_dmax_nobs, obs_dmax_nkalman, obs_ndirpow
+> 
+586d587
+< 
+587a589,621
+> 
+>       INTEGER n, ic  !AJB for setting nobs_kgain_vars
+> 
+> !     Set nobs_kgain_vars if kalman-obs are turned on. This loop counts the
+> !     number of var/covar terms in the namelist variable obs_nudge_terms.
+>       if(model_config_rec%obs_read_kalman(1).eq.1) then
+>         ic = 0
+>         if (model_config_rec%obs_nudge_terms(1)(1:1).ne." ") ic = 1
+>         do n = 1, len(model_config_rec%obs_nudge_terms(1))-1
+>           if( model_config_rec%obs_nudge_terms(1)(  n:  n).eq." ".and.     &
+>             model_config_rec%obs_nudge_terms(1)(n+1:n+1).ne." " ) ic = ic + 1
+>         enddo
+> 
+>         model_config_rec%nobs_kgain_vars = ic
+> 
+>       endif
+> 
+> !     Set max obs dim
+>       model_config_rec % obs_dmax_nobs = &
+>                          model_config_rec%max_obs(model_config_rec%grid_id(1))
+> 
+> !     Set max kalman obs dim; set to zero if kalman-obs are turned off
+>       if(model_config_rec%obs_read_kalman(1).eq.1) then
+> 
+>         model_config_rec%obs_dmax_nkalman = &
+>                          model_config_rec%max_kalman(model_config_rec%grid_id(1))
+>       else
+>         model_config_rec%obs_dmax_nkalman = 0
+>       endif
+> 
+> !     Set Kalman gain dimension from half-length
+>       model_config_rec % obs_ndirpow = (2*model_config_rec % obs_ndir + 1)**2
+> 
+588a623
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Set derived vars nobs_kgain_vars, obs_dmax_nobs, obs_dmax_nkalman, obs_ndirpow

@@ -1,0 +1,82 @@
+1773a1774
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1774a1776,1777
+>                      RQRNDGDTEN,RQSNDGDTEN,RQGNDGDTEN,                 &
+>                      RQCNDGDTEN,RQINDGDTEN,                            &
+1775a1779
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1842c1846,1852
+<                                                              RQVNDGDTEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+>                                                              RQVNDGDTEN, &
+>                                                              RQRNDGDTEN, &
+>                                                              RQSNDGDTEN, &
+>                                                              RQGNDGDTEN, &
+>                                                              RQCNDGDTEN, &
+>                                                              RQINDGDTEN
+1843a1854
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+2100a2112
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+2105a2118,2119
+> !
+> ! Mei Xu for hydrometeor fields
+2107,2111c2121
+<     ENDIF
+< 
+< ! 4d couple scalar tendencies that have only uncoupled physics tendencies at this point
+< 
+<    DO im = PARAM_FIRST_SCALAR,num_scalar
+---
+>       IF (P_QR .ge. PARAM_FIRST_SCALAR) THEN
+2115c2125
+<             scalar_tend(I,K,J,im)=mu(I,J)*scalar_tend(I,K,J,im)
+---
+>             RQRNDGDTEN(I,K,J)=mu(I,J)*RQRNDGDTEN(I,K,J)
+2119,2121c2129,2139
+<    ENDDO
+< 
+<    DO im = PARAM_FIRST_SCALAR,num_tracer
+---
+>       ENDIF
+>       IF (P_QS .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=jts,jtf
+>          DO K=kts,ktf
+>          DO I=its,itf
+>             RQSNDGDTEN(I,K,J)=mu(I,J)*RQSNDGDTEN(I,K,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QG .ge. PARAM_FIRST_SCALAR) THEN
+2125c2143
+<             tracer_tend(I,K,J,im)=mu(I,J)*tracer_tend(I,K,J,im)
+---
+>             RQGNDGDTEN(I,K,J)=mu(I,J)*RQGNDGDTEN(I,K,J)
+2129c2147,2165
+<    ENDDO
+---
+>       ENDIF
+>       IF (P_QC .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=jts,jtf
+>          DO K=kts,ktf
+>          DO I=its,itf
+>             RQCNDGDTEN(I,K,J)=mu(I,J)*RQCNDGDTEN(I,K,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QI .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=jts,jtf
+>          DO K=kts,ktf
+>          DO I=its,itf
+>             RQINDGDTEN(I,K,J)=mu(I,J)*RQINDGDTEN(I,K,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+2130a2167
+>     ENDIF
+2132a2170
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods

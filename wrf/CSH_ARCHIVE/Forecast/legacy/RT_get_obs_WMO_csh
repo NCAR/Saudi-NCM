@@ -1,0 +1,105 @@
+#!/bin/csh -f
+
+echo
+echo   " ----------------------------------------------------------------------"
+echo   " --------------------- RT_get_obs_WMO_csh starts ----------------------------"
+echo "$0 $argv[*]"
+echo   " ----------------------------------------------------------------------"
+
+#set echo
+set timestamp
+setenv SUBSYSTEM WMO_OBS
+setenv RM "rm -rf"
+
+set cycle_date = $1
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};
+
+#	Where is the data supposed to reside locally?
+
+cd ${RUNDIR}/data/gts
+echo "Now working in  $cwd"
+
+
+#	Build the UTC date as yy mm dd hh
+
+set cc = `date -u '+%Y' | cut -c -2`
+set yy = `date -u '+%y'`
+set mm = `date -u '+%m'`
+set dd = `date -u '+%d'`
+set hh = `date -u '+%H'`
+
+#	Choose which UTC time to access
+
+if ( ! -d $WMO_DATA_DIR ) then
+ echo "${SUBSYSTEM}" "Missing dir $WMO_DATA_DIR -> exiting"
+ exit (2)
+endif
+if ( ! -x ${EXECUTABLE_ARCHIVE}/advance_cymdh.exe ) then
+ echo "${SUBSYSTEM}" "Missing program ${EXECUTABLE_ARCHIVE}/advance_cymdh.exe -> exiting"
+ exit (2)
+endif
+
+if ($CYC_INT > 12) then
+    @ hour = -$CYC_INT - 1
+else
+    @ hour = -13
+endif
+
+while ($hour <= 1)
+#foreach hour ( -13 -12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 )
+	echo "$cycle_date, $hour" >! input
+	$RM output
+	${EXECUTABLE_ARCHIVE}/advance_cymdh.exe < input >! output
+	if ( ! -e output ) then
+	  echo "${EXECUTABLE_ARCHIVE}/advance_cymdh FAILED"
+	  exit (2)
+	endif
+		set thedate = `cat output`
+
+        set f = ${thedate}_upa.wmo
+
+        if (-e  ${WMO_DATA_DIR}/${f}.gz) then
+            cp -f ${WMO_DATA_DIR}/${f}.gz .
+            gunzip -f ${f}.gz
+        else
+           if (-e  ${WMO_DATA_DIR}/${f}) then
+               ln -s -f ${WMO_DATA_DIR}/${f} .
+           endif
+        endif
+
+	foreach ob ( boy syn sao )
+
+           set f = ${thedate}_${ob}.wmo
+
+ 	   if (-e ${WMO_DATA_DIR}/${f}.gz) then
+ 	       cp -f ${WMO_DATA_DIR}/${f}.gz .
+ 	       gunzip -f ${f}.gz
+           else
+ 	       if (-e ${WMO_DATA_DIR}/${f}) then
+                  ln -s -f ${WMO_DATA_DIR}/${f} .
+               endif
+           endif
+	end
+
+	rm -rf input output
+@ hour ++
+end
+
+ls -al ${RUNDIR}/data/gts
+
+# allow a maximum of 5 minutes to scp these data
+#sleep 300
+
+exit

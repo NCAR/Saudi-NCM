@@ -1,0 +1,73 @@
+#!/bin/csh -f
+
+echo
+echo   " ----------------------------------------------------------------------"
+echo   " --------------------- RT_get_obs_LDM_csh starts ----------------------------"
+echo "$0 $argv[*]"
+echo   " ----------------------------------------------------------------------"
+#set echo
+set timestamp
+setenv SUBSYSTEM LDM_OBS
+setenv RM "rm -rf"
+
+set cycle_date = $1
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};
+
+#	Where is the data supposed to reside locally?
+
+cd ${RUNDIR}/data/gts
+echo "Now working in  $cwd"
+
+
+#	Build the UTC date as yy mm dd hh
+
+set cc = `date -u '+%Y' | cut -c -2`
+set yy = `date -u '+%y'`
+set mm = `date -u '+%m'`
+set dd = `date -u '+%d'`
+set hh = `date -u '+%H'`
+
+#	Choose which UTC time to access
+
+if ( ! -d $LDMDATA ) then
+ echo "${SUBSYSTEM}" "Missing dir $LDMDATA -> exiting"
+ exit (2)
+endif
+if ( ! -x ${EXECUTABLE_ARCHIVE}/advance_cymdh.exe ) then
+ echo "${SUBSYSTEM}" "Missing program ${EXECUTABLE_ARCHIVE}/advance_cymdh.exe -> exiting"
+ exit (2)
+endif
+foreach hour ( -6 -5 -4 -3 -2 -1 0 1 )
+	echo "$cycle_date, $hour" >! input
+	$RM output
+	${EXECUTABLE_ARCHIVE}/advance_cymdh.exe < input >! output
+	if ( ! -e output ) then
+	  echo "${EXECUTABLE_ARCHIVE}/advance_cymdh FAILED"
+	  exit (2)
+	endif
+		set thedate = `cat output`
+#       scp mm5sys@mm5-dev:${LDMDATA}/upperair/${thedate}_upa.wmo ${thedate}_upa.wmo &
+        cp ${LDMDATA}/upperair/${thedate}_upa.wmo ${thedate}_upa.wmo &
+	foreach ob ( boy syn sao )
+#	   scp mm5sys@mm5-dev:${LDMDATA}/surface/$ob/${thedate}_$ob.wmo ${thedate}_$ob.wmo &
+ 	   cp ${LDMDATA}/surface/$ob/${thedate}_$ob.wmo ${thedate}_$ob.wmo &
+	end
+	rm -rf input output
+end
+
+# allow a maximum of 5 minutes to scp these data
+#sleep 300
+
+exit

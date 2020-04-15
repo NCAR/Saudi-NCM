@@ -1,0 +1,105 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/src/WPS_V3.9.0.1
+#
+# Aug 2017
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns)
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+
+# ----------- configure/compile settings ----------------------
+
+# Need the ./configure option selection passed in on the command line.
+# Note that the WANTED_WPS_CONFIGURE_OPTION and DO_MPICH must be
+# correct for your selection or the output filenames will be wrong.
+
+# Should override the default here, e.g., 'make all WANTED_WPS_CONFIGURE_OPTION=3'
+
+WANTED_WPS_CONFIGURE_OPTION=-1
+
+# Compile type. Can override on the command line if needed,
+# e.g., 'make all DO_MPICH=FALSE'
+
+DO_MPICH=TRUE
+
+# Whether to build and/or install exes or not. This is due to issues with the
+# WPS dependency on WRF and the ../Makefile.
+# Special note: ungrib only builds a serial version, even when an MPI option is
+#      selected, so it should stay .exe in either case and not be renamed
+
+DO_WPS_BUILD=TRUE
+DO_WPS_INSTALL=TRUE
+
+# Whether to install compiled utils or not. These are extra exes that may not
+# be needed in an ops build. They should not be renamed and are only .exe
+
+DO_WPS_UTILS_INSTALL=TRUE
+
+# --------- Compiled files ---------
+
+#EXECS=geogrid.exe metgrid.exe ungrib.exe
+EXECS=ungrib.exe
+UTILS_EXECS=avg_tsfc.exe calc_ecmwf_p.exe g1print.exe height_ukmo.exe mod_levs.exe plotfmt.exe plotgrids.exe rd_intermediate.exe g2print.exe
+
+
+# --------- Targets --------------
+
+all: clean
+	if $(TEST) $(DO_WPS_BUILD) = TRUE; then \
+		echo $(WANTED_WPS_CONFIGURE_OPTION) | ./configure ;\
+		./compile ungrib;\
+	fi
+
+install: all
+	if $(TEST) $(DO_WPS_INSTALL) = TRUE; then \
+		if $(TEST) $(DO_MPICH) = TRUE; then \
+			$(CP) geogrid.exe $(DEST)/geogrid.mpich ;\
+			$(CP) metgrid.exe $(DEST)/metgrid.mpich ;\
+			$(CP) ungrib.exe $(DEST) ;\
+		else  \
+			$(CP) $(EXECS) $(DEST) ;\
+		fi ;\
+	fi
+	if $(TEST) $(DO_WPS_UTILS_INSTALL) = TRUE ; then \
+		for exe in ${UTILS_EXECS} ;\
+			do \
+				$(CP) util/$${exe} $(DEST) ;\
+			done ;\
+	fi
+
+clean: FORCE
+	./clean -a
+
+add2readme:
+	if $(TEST) $(DO_WPS_INSTALL) = TRUE; then \
+		if $(TEST) $(DO_MPICH) = TRUE; then \
+			echo "geogrid.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+			echo "metgrid.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+			echo "ungrib.exe -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		else \
+			for exe in ${EXECS} ;\
+			do \
+				echo $${exe} -- source: `$(PWD)`, `$(DATE)` >> $(DEST_SRC_README) ;\
+			done ;\
+		fi ;\
+	fi
+	if $(TEST) $(DO_WPS_UTILS_INSTALL) = TRUE ; then \
+		for exe in ${UTILS_EXECS} ;\
+			do \
+				echo $${exe} -- source: `$(PWD)`, `$(DATE)` >> $(DEST_SRC_README) ;\
+			done ;\
+	fi
+
+FORCE:
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.

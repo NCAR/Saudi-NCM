@@ -1,0 +1,90 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/src/RT_WRF/WRF_V3.8.1
+#
+# Jun 2017
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns)
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+
+# ----------- configure/compile settings ----------------------
+
+# Need the ./configure option selection passed in on the command line.
+
+# Note that the WANTED_WRF_CONFIGURE_OPTION and DO_MPICH must be
+# correct for your selection or the output filenames will be wrong.
+
+# Should override the default here, e.g., 'make all WANTED_WRF_CONFIGURE_OPTION=3'
+
+WANTED_WRF_CONFIGURE_OPTION=3
+
+# Can override the default here, e.g., 'make all WANTED_WRF_NESTING_CONFIGURE_OPTION=1'
+# only takes effect for serial. For MPICH=TRUE, the default nesting option takes effect.
+
+WANTED_WRF_NESTING_CONFIGURE_OPTION=1
+
+# Compile type. Can override on the command line if needed,
+# e.g., 'make all DO_MPICH=FALSE'
+
+DO_MPICH=TRUE
+
+# Whether to execute a command (e.g., a sed command to modify the configure.wrf
+# file after it has been generated) after configure and before compile
+
+CMD_TO_RUN_BEFORE_COMPILE=echo
+
+# --------- Targets --------------
+
+all: clean
+	if $(TEST) $(DO_MPICH) = FALSE; then \
+		if $(TEST) $(WANTED_WRF_NESTING_CONFIGURE_OPTION) -ge 0 ; then \
+		    /bin/echo -ne "$(WANTED_WRF_CONFIGURE_OPTION)\n$(WANTED_WRF_NESTING_CONFIGURE_OPTION)\n" | ./configure ;\
+		else \
+		    echo $(WANTED_WRF_CONFIGURE_OPTION) | ./configure ;\
+		fi ;\
+	else \
+		echo $(WANTED_WRF_CONFIGURE_OPTION) | ./configure ;\
+	fi
+	echo "--- Will run command CMD_TO_RUN_BEFORE_COMPILE: $(CMD_TO_RUN_BEFORE_COMPILE) ---"
+	$(CMD_TO_RUN_BEFORE_COMPILE)
+	./compile em_real
+
+install: all
+	if $(TEST) $(DO_MPICH) = TRUE; then \
+		$(CP) main/wrf.exe $(DEST)/wrf.mpich ;\
+		$(CP) main/real.exe $(DEST)/real.mpich ;\
+		$(CP) external/io_int/diffwrf $(TOOLS_DEST)/diffwrf.mpich ;\
+	else \
+		$(CP) main/wrf.exe $(DEST) ;\
+		$(CP) main/real.exe $(DEST) ;\
+		$(CP) external/io_int/diffwrf $(TOOLS_DEST)/diffwrf.exe ;\
+	fi
+
+clean: FORCE
+	./clean -a
+
+add2readme:
+	if $(TEST) $(DO_MPICH) = TRUE; then \
+		echo "wrf.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		echo "real.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		echo "diffwrf.mpich -- source: `$(PWD)`/external/io_int/, `$(DATE)`" >> $(TOOLS_DEST_SRC_README) ;\
+	else \
+		echo "wrf.exe -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		echo "real.exe -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		echo "diffwrf.exe -- source: `$(PWD)`/external/io_int/, `$(DATE)`" >> $(TOOLS_DEST_SRC_README) ;\
+	fi
+
+FORCE:
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+

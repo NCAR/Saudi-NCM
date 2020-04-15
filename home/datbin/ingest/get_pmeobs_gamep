@@ -1,0 +1,3 @@
+cd /project/k1206/datainput/pme_obs;/home/x_fisherh/sshpass/sshpass-1.06/sshpass -f /home/x_fisherh/datbin/ingest/ecmwfp sftp -r -o Port=36979 shaheen@37.216.246.197:/outgoing/surface_obs/* .
+cd /project/k1206/datainput/sounding;/home/x_fisherh/sshpass/sshpass-1.06/sshpass -f /home/x_fisherh/datbin/ingest/ecmwfp sftp -r -o Port=36979 shaheen@37.216.246.197:/outgoing/sounding/* .
+

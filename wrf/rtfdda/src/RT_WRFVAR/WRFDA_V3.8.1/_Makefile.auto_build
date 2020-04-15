@@ -1,0 +1,108 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/src/RT_WRFVAR/WRFDA_3.8.1
+#
+# Jun 2017
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns)
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+
+# ----------- configure/compile settings ----------------------
+
+# Need the ./configure option selection passed in on the command line.
+# Note that the WANTED_WRFVARDA_CONFIGURE_OPTION and DO_MPICH must be
+# correct for your selection or the output filenames will be wrong.
+
+# Should override the default here, e.g., 'make all WANTED_WRFVARDA_CONFIGURE_OPTION=3'
+
+WANTED_WRFVARDA_CONFIGURE_OPTION=-1
+
+# Can override the default here, e.g., 'make all WANTED_WRFVARDA_NESTING_CONFIGURE_OPTION=1'
+# only takes effect for serial. For MPICH=TRUE, the default nesting option takes effect.
+
+WANTED_WRFVARDA_NESTING_CONFIGURE_OPTION=-1
+
+# Compile type. Can override on the command line if needed,
+# e.g., 'make all DO_MPICH=FALSE'
+
+DO_MPICH=TRUE
+
+# Whether to build and/or install exes or not. This is due to issues with the
+# WRFVAR dependency on WRF and the ../Makefile.
+
+DO_WRFVARDA_BUILD=TRUE
+DO_WRFVARDA_INSTALL=TRUE
+
+# --------- Compiled files ---------
+
+EXECS=da_wrfvar.exe obsproc.exe
+
+# --------- Targets --------------
+
+all: clean
+	if $(TEST) $(DO_WRFVARDA_BUILD) = TRUE; then \
+	   	echo "Removing all CVS dirs..." ;\
+		find . -type d -name CVS -exec tar -uf ./CVS.tar.gz {} \; ;\
+		find . -type d -name CVS -exec rm -Rf {} \; ;\
+		echo "Configure and compile" ;\
+		echo "Current BUFR env var", `printenv BUFR` ;\
+		echo "Current CRTM env var", `printenv CRTM` ;\
+		if $(TEST) $(DO_MPICH) = FALSE; then \
+			if $(TEST) $(WANTED_WRFVARDA_NESTING_CONFIGURE_OPTION) -ge 0; then \
+			    /bin/echo -ne "$(WANTED_WRFVARDA_CONFIGURE_OPTION)\n$(WANTED_WRFVARDA_NESTING_CONFIGURE_OPTION)\n" | ./configure ;\
+			else \
+			    echo $(WANTED_WRFVARDA_CONFIGURE_OPTION) | ./configure wrfda ;\
+			fi ;\
+		else \
+			echo $(WANTED_WRFVARDA_CONFIGURE_OPTION) | ./configure wrfda ;\
+		fi ;\
+		./compile all_wrfvar ;\
+		echo "Restoring CVS dirs" ;\
+		tar -xf CVS.tar.gz ;\
+		rm CVS.tar.gz ;\
+	fi
+
+install: all
+	if $(TEST) $(DO_WRFVARDA_INSTALL) = TRUE; then \
+		if $(TEST) $(DO_MPICH) = TRUE; then \
+			$(CP) var/build/da_wrfvar.exe $(DEST)/da_wrfvar.mpich ;\
+			$(CP) var/obsproc/obsproc.exe $(DEST)/obsproc.mpich ;\
+		else  \
+			$(CP) var/build/da_wrfvar.exe $(DEST)/ ;\
+			$(CP) var/obsproc/obsproc.exe $(DEST)/ ;\
+		fi ;\
+		if $(TEST) -f var/external/bufr/libbufr.a ; then \
+			$(CP) var/external/bufr/libbufr.a $(INSTALL_LIB_DIR)/ ;\
+		fi ;\
+	fi
+
+clean: FORCE
+	./clean -a
+
+add2readme:
+	if $(TEST) $(DO_WRFVARDA_INSTALL) = TRUE; then \
+		if $(TEST) $(DO_MPICH) = TRUE; then \
+			echo "da_wrfvar.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+			echo "obsproc.mpich -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README) ;\
+		else \
+			echo "da_wrfvar.exe -- source: `$(PWD)`, `$(DATE)` >> $(DEST_SRC_README) ;\
+			echo "obsproc.exe -- source: `$(PWD)`, `$(DATE)` >> $(DEST_SRC_README) ;\
+		fi ;\
+		if $(TEST) -f var/external/bufr/libbufr.a ; then \
+			echo "libbufr.a -- source: `$(PWD)`/var/external/bufr, `$(DATE)`" >> $(INSTALL_LIB_SRC_README) ;\
+		fi ;\
+	fi
+
+FORCE:
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.

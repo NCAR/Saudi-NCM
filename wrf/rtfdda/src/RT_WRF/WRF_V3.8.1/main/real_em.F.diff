@@ -1,0 +1,30 @@
+867a868
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+868a870,874
+>                   grid%fdda3d(i,k,j,p_qr_ndg_old) = grid%moist(i,k,j,P_QR)
+>                   grid%fdda3d(i,k,j,p_qs_ndg_old) = grid%moist(i,k,j,P_QS)
+>                   grid%fdda3d(i,k,j,p_qg_ndg_old) = grid%moist(i,k,j,P_QG)
+>                   grid%fdda3d(i,k,j,p_qc_ndg_old) = grid%moist(i,k,j,P_QC)
+>                   grid%fdda3d(i,k,j,p_qi_ndg_old) = grid%moist(i,k,j,P_QI)
+869a876
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1014a1022
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+1015a1024,1028
+>                   grid%fdda3d(i,k,j,p_qr_ndg_new) = grid%moist(i,k,j,P_QR)
+>                   grid%fdda3d(i,k,j,p_qs_ndg_new) = grid%moist(i,k,j,P_QS)
+>                   grid%fdda3d(i,k,j,p_qg_ndg_new) = grid%moist(i,k,j,P_QG)
+>                   grid%fdda3d(i,k,j,p_qc_ndg_new) = grid%moist(i,k,j,P_QC)
+>                   grid%fdda3d(i,k,j,p_qi_ndg_new) = grid%moist(i,k,j,P_QI)
+1016a1030
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+1236a1251
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+1237a1253,1257
+>                      grid%fdda3d(i,k,j,p_qr_ndg_old) = grid%fdda3d(i,k,j,p_qr_ndg_new)
+>                      grid%fdda3d(i,k,j,p_qs_ndg_old) = grid%fdda3d(i,k,j,p_qs_ndg_new)
+>                      grid%fdda3d(i,k,j,p_qg_ndg_old) = grid%fdda3d(i,k,j,p_qg_ndg_new)
+>                      grid%fdda3d(i,k,j,p_qc_ndg_old) = grid%fdda3d(i,k,j,p_qc_ndg_new)
+>                      grid%fdda3d(i,k,j,p_qi_ndg_old) = grid%fdda3d(i,k,j,p_qi_ndg_new)
+1238a1259
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods

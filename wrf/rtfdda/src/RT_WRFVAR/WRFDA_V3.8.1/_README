@@ -1,0 +1,36 @@
+29-JUN-2017             Building WRFVAR 3.8.1 for RTFDDA
+-----------------------------------------------------------------------------
+Dependencies:
+
+ (1) WRFVAR 3 does not depend on WRF being compiled.
+
+For RTFDDA
+
+ (1) Need to remove all the CVS dirs before doing ./compile. There are
+     link failures in the ./compile with commands like: "ln -s ../*"
+
+ (2) Need to add a _Makefile.auto_build to this directory
+
+ (3) Need to modify the Makefile for the following libraries
+     to change all instances of TARGET to LIB_TARGET so doesn't 
+     get overridden by the Makefile at the apps/4dwx/RTFDDA/src level.
+
+     Modify file: apps/4dwx/RTFDDA/src/RT_WRFVAR/WRFDA_3.8.1/external/fftpack/fftpack5/Makefile
+
+     Modify file: apps/4dwx/RTFDDA/src/RT_WRFVAR/WRFDA_3.8.1/var/external/bufr/Makefile
+
+     Modify file: apps/4dwx/RTFDDA/src/RT_WRFVAR/WRFDA_3.8.1/external/io_esmf/makefile
+
+     Modify file: apps/4dwx/RTFDDA/src/RT_WRFVAR/WRFDA_3.8.1/external/atm_ocn/Makefile
+
+
+ (4) Need to add install of libbufr.a (if created, may need to have env
+     var "BUFR" set to 1) to shared lib area. This lib is required by
+     apps/4dwx/RTFDDA/src/hybrid/tools/ncep_radiance/cwordsh_source
+
+ (5) Starting WRFDA_3.5.1 (maybe even earlier), the source codes comes with
+     two required empty directories: var/build/{frame,inc}. Since empty
+     directories cannot be CVS tagged, they cannot be checked out from CVS
+     with the intended tag. A solution is add a README file to each of these
+     directories, check them into the CVS, so that these directories can be
+     tagged and subsequently checked out from a tag.

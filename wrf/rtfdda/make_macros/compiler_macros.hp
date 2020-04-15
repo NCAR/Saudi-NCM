@@ -1,0 +1,126 @@
+#
+# Function:
+#
+#  This file is the OS-specific definitions and macros files used by
+#  RTFDDA Makefiles. It contains the OS-specific macros and any 
+#  OS-specific overrides to the common macros.
+#
+#  It should contain ONLY OS-specific information. Any shared macros and
+#  definitions should be included in the make_defns file so that they
+#  can be used by multiple applications and OS's.
+#
+#  This is for HP
+#
+# Access:
+#
+#  This file is included in individual application Makefiles.
+#
+#  This file and the other files in this directory are accessed via an
+#  environment variable which must be set correctly to this
+#  directory: MS_MAKE_MACROS_DIR (Modeling System Make Definitions).
+#
+#  In order to access the correct compiler_macros.$MS_OS_TYPE file in
+#  this directory you must have the MS_OS_TYPE defined. This can be 
+#  done in one of two ways:
+#             (a) set your MS_OS_TYPE environment variable to the
+#                 correct compiler_macros.$MS_OS_TYPE type as 
+#		  listed in this directory
+#             (b) on your command line use the command
+#                 % make MS_OS_TYPE=`$MS_MAKE_MACROS_DIR/get_os.sh; cat .ostype` 
+#
+# Mar 2007        
+#
+# ==============================================================================
+
+# Override commands
+
+# Set the "compile OS" type to pass to MMM Makefiles in the
+# top-level apps/4dwx/RTFDDA/src/_Makefile.  The MMM Makefiles
+# require a "make linux" (for example) command, and do not support 
+# other variations (e.g., if the MS_OS_TYPE is "linux64")
+
+USE_MS_OS_TYPE	=	hp
+
+# Compiler macros
+
+OSTYPE		=	HP
+
+F77             =        
+F90             =        
+CPP             =	/opt/langtools/lbin/cpp
+CPPFLAGS        =	-I. -C -P -D$(OSTYPE)
+CPPOPTION	=
+FFLAGS          =
+FFLAGS90        =        
+FFLAGS90F       =        
+FFLAGS90MP      =        
+FFLAGS7790      =        
+FFLAGS7790MP    =
+FFFLAGS_64	=	$(FFLAGS)
+FFLAGS_BYTESWAP	=	
+FFLAGS_FREE	=
+FFFLAGS_DBLPREC	=
+DEBUG_FLAGS	= 	-g
+
+FC	        =	f90
+FF		=
+FCFLAGS         =	+langlvl=90
+FCFLAGS_64	=	$(FCFLAGS)
+
+
+CC              =        
+CFLAGS          =       
+CCFLAGS         =       -D$(OSTYPE) -I.
+
+# Linker macros
+
+LD              =       
+LD90            =       
+NCARGF77        =       
+LDFLAGS         =       
+LDFLAGS90       =       
+LDFLAGS90MP     =
+LDFLAGS_STATIC  =
+LDFLAGS_PGI	=
+
+# NCAR Graphics
+
+NCARGF77LIB     =	
+
+# netcdf location, includes and link libs
+
+NET		=
+NET_INCS	=	-I$(NET)/include
+NET_LDFLAGS	=	-L$(NET)/lib
+NET_LDLIBS	=	-lnetcdf
+
+# madis location
+
+MADIS_LOC	=
+MADIS_INCS	=	
+MADIS_LDFLAGS	=	
+MADIS_LDLIBS	=	
+
+# Long lines (specific to Cray?) files in local src directory
+
+LONG_LINES	=
+
+# Machine type and word length
+
+MACH		= 	-DHP
+WLENGTH		= 	-DBIT32
+
+# Grouped compiler and linker flags used in the suffix rules and pre/post link rules
+# in the make_defns file. C is for .c files, FC is for F77, F90 is for FORTRAN90
+
+SYS_CFLAGS	=
+SYS_FCFLAGS	=
+SYS_FFLAGS90	=
+SYS_CC_LDFLAGS	=
+SYS_FC_LDFLAGS	=
+SYS_F90_LDFLAGS	=
+SYS_CC_LDLIBS	=
+SYS_FC_LDLIBS	=
+SYS_F90_LDLIBS	=
+
+

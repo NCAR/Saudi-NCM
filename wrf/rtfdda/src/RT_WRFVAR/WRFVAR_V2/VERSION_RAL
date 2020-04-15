@@ -1,0 +1,8 @@
+
+CVS Tag:
+
+rel-1-1:  Code imported from the WRF VAR 2.1 release of August 2005. 
+rel-1-2:  QC program implemented in RT-FDDA.
+rel-1-3:  QC program implemented in RT-FDDA updated to WRF VAR 2.2
+          released on Decemeber 22, 2006.
+rel-1-3:  Make code compatible with version 3.0.1.1

@@ -1,0 +1,20 @@
+27-NOV-2007		Building WRFVAR for RTFDDA
+-----------------------------------------------------------------------------
+netCDF
+------
+For RTFDDA using netCDF 3.6,2 or higher, need to modify the netCDF
+libraries linked in to add the new library:
+
+1. in external/io_netcdf/makefile:
+
+  change: LIBS    = -L$(NETCDFPATH)/lib -lnetcdf
+
+  to:     LIBS    = -L$(NETCDFPATH)/lib -lnetcdff -lnetcdf
+
+
+2. after "./configure" and before "./compile", need to modify configure.wrf:
+
+  change: -lnetcdf
+
+  to: -lnetcdff -lnetcdf
+

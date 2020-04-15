@@ -1,0 +1,216 @@
+#-----------------------------------------------------------------------------
+#
+# Setup to select gfortran compiler.  Makes compiler switching easy.
+#
+# 2008-jun-27	Original version for gfortran.  By Dave Allured.
+# 2008-aug-13	Add LIB_NETOPEN.  Update LIB_UDUNITS.
+#		Insert name-fix kludge for NETCDF.mod name problem.
+#		Remove status message; it conflicts with application scripts.
+# 2008-aug-27	Back to normal netcdf.mod.  Remove name-fix kludge.
+# 2008-oct-02	Add NCARGF90_CMD.
+#		New f90_config.gfortran.f90, due to fortran_eor_unformatted.
+# 2008-nov-07	Test version for testing libnetopen.
+# 2008-dec-30	Add GFORTRAN_UNBUFFERED_PRECONNECTED = yes.
+#		Use $HOME rather than hard path, for network independence.
+# 2009-may-13	Remove libnetopen test message, but keep using test version.
+# 2009-jul-06	Switch to beta test version of netopen library.
+#		Note, uduerr is now bundled with netopen.
+# 2009-aug-26	Switch to netopen alpha test.  Update various library paths.
+#
+# 2009-dec-09	Switch to intel mac.
+#		Add support for netcdf 3/4 commands.
+#		Add fpe exceptions, which work on X86, not PPC.
+#		Use -gdwarf-2 instead of -g (stabs), needed by gfortran 4.5.0.
+# 2010-jan-08	Use ~/lib indirect link for Udunits library.
+# 2010-mar-18	Switch back to -g for a while, for gfortran 4.4.*.
+#		Add $LIB_FGSL.
+#		Force correct netcdf 3 library with -lnetcdf.x1 trick.
+# 2020-mar-25	Change to explicit 32 in $FGSL_ROOT.
+#		Add $GSL_ROOT for C programs.
+# 2010-apr-06	Add -lgslcblas library reference with GSL.
+# 2010-may-05	Remove -ffpe-trap=invalid, udunits-1 can fail on it.
+#		Hopefully this can be properly debugged and restored later.
+# 2010-jul-21	Refresh the *_INCLUDE lists of hidden source dependencies.
+# 2010-oct-07	Use ~/lib indirect link for netopen library.
+#
+# 2010-oct-12	New version for 64 bit gfortran on Mac OS 10.6.
+#		Default linkage ~/lib/gfortran switched from 32 but to 64 bit.
+# 2010-oct-26	Switch to ~/lib indirect linkage for GSL.
+#
+# 2010-dec-21	Add stricter error checking and other new gfortran options.
+#		Use -Wall, -Wextra (GCC), -fcheck=all, -fmax-errors, etc.
+#		Add $F90_RELAXED to support new "relax" command in .alias.
+#		Enable -ffpe-trap=invalid in normal mode, not in relaxed.
+#		Add -fno-sign-zero; changes formatted output.
+#		Remove -Werror.  Too many new warnings leaking through.
+#
+# 2012-jan-26	Add -lnetcdf/-lnetcdff switch for Netcdf 3 vs. 4.
+# 2012-apr-24	Change -g to -gstabs, suppress external dSYM directory.
+# 2012-may-01	Add -Wno-conversion, suppress excess type conversion warnings.
+#		This is a good check that should be reinstated when practical.
+#
+# 2013-jun-05	Add Udunits hard path to avoid system version, get utisinit_f.
+# 2013-jul-02	Add -Wno-compare-reals for gfortran 4.8.
+#		Revert to standard -g, avoid warnings with -gdwarf-2.
+#		Can not suppress dSYM bundles on Mac, without trouble.
+#		Tentatively re-enable -Werror and -Wno-conversion.
+# 2013-jul-10	Turn off -Werror and -Wno-conversion again, otherwise
+#		  too much breakage.
+# 2013-jul-18	Add */lib subdirectory for netopen library.
+#
+# 2014-mar-12	Add optional $F90_IEEE_SUP to supply missing IEEE support.
+#		Add optional $F03_ALLOCATE for F2003+ allocation rules.
+#
+# 2014-apr-14	Side version for stand-alone operation on Linux platforms.
+#		Set up local paths for $LIB_F90, etc. 
+#
+# Incompatible with Dave/Brant code, 2010-dec-16/21:
+# See suppressors in code below for cancellation of some of these.
+#
+#	-Warray-temporaries	- predominant usage of temp arrays
+#	-Wimplicit-interface	- ubiquitous usage
+#	-Wimplicit-procedure	- ubiquitous usage
+#	-Wno-tabs		- tabs are ubiquitous
+#	-Wcharacter-truncation	- substantial usage
+#	-Wcompare-reals		- substantial usage, appropriate
+#
+#	-pedantic		- no way; prevents disabling of
+#				  incompatible checks, e.g. -Wno-tabs
+#	-pedantic-errors	- same
+#	-std=f95		- same
+#	-std=f95		- same
+#
+# Troublesome warnings, so do not use -Werror at this time (2010-dec-21).
+#
+#	-Wunused		 - covers most but not all unused stuff
+#	-Wunused-parameter	 - in -Wextra & -Wunused; disable with relaxed
+#	-Wunused-variable	 - in -Wall   & -Wunused; disable with relaxed
+#	-Wunused-dummy-argument  - GF 4.5.2 or later; wait for compiler upgrade
+#
+#-----------------------------------------------------------------------------
+#
+# This file must be source'd, not just executed.
+# To make this the default compiler, source this file from .cshrc or .login.
+#
+# This selector requires environment variables in make files,
+# not hard coded.  For example, "Link.f90 = $(F90_CMD) $(F90_FLAGS)".
+#
+# Environment vars must be set up for ALL differences, in particular:
+#
+#    Fortran command			(F90_CMD)
+#    Command line compiler options	(F90_FLAGS)
+#    Compiler-specific libraries	(LIB_NETCDF, etc.)
+#    Compiler-specific subroutines	(F90_RENAME, etc.)
+#    Run time environment vars		(GFORTRAN_UNBUFFERED_PRECONNECTED, etc.)
+#
+# LIB vars must define the include and module options, if used, AS
+# WELL AS the library options.  Because of non-standardization of F90
+# module file formats, compiler-specific subdirectories may be in use.
+#
+#-----------------------------------------------------------------------------
+
+# Generic setup 2014-apr-14, for misc. platforms.
+# "lib" and root paths may be sym links.
+
+setenv LIB_F90 lib
+setenv NETCDF_SUP_INCLUDES '$(LIB_F90)/getnc_dim_size.f90 $(LIB_F90)/netcdf_check2.f90 $(LIB_F90)/nf90_get_att_trim.f90 $(LIB_F90)/nf90_get_var_trim.f90'
+
+# Selectors for codependent setup commands.
+
+setenv	FORTRAN_SELECT	gfortran
+
+if ( ! $?NETCDF_SELECT ) then
+#   setenv NETCDF_SELECT netcdf3   	# if missing, default to netcdf 3
+   setenv NETCDF_SELECT netcdf4   	# if missing, default to netcdf 4
+endif
+
+if ( $NETCDF_SELECT == netcdf3 ) then
+   set nclib = 		netcdf
+else
+   set nclib = 		netcdff
+endif
+
+# Library root paths.
+
+setenv	GSL_ROOT	~/lib/gfortran/gsl
+setenv	FGSL_ROOT	~/lib/gfortran/fgsl
+setenv	NETCDF_ROOT	~/lib/gfortran/$NETCDF_SELECT
+setenv	NETOPEN_ROOT	~/lib/gfortran/netopen
+setenv	UDUNITS_ROOT	~/lib/gfortran/udunits
+
+# Command line related.
+
+setenv	F90_CMD		gfortran	# depends on $PATH and aliases!
+					# alternate version may be available,
+					# e.g. /usr/local/bin/gfortran
+
+setenv	NCARGF90_CMD	ncargf90_gfortran
+
+#set	ff1 = '-gdwarf-2 -fimplicit-none -fbacktrace -Werror'	# GF4.5?
+#set	ff1 = '-g -fimplicit-none -fbacktrace -Werror'		# GF4.4
+#set	ff1 = '-g -fimplicit-none -fbacktrace -fmax-errors=10'	# GF4.5
+#set	ff1 = '-gstabs -g2'					# GF4.7 on Lion
+set	ff1 = '-g'						# GF4.8 and up
+
+set	ff2 = '-fimplicit-none -fbacktrace -fmax-errors=20'
+set	ff3 = '-fcheck=all -fno-sign-zero'
+set	ff4 = '-Wall -Wextra -Wsurprising'
+#set	ff4 = '-Wextra -Wsurprising'
+
+set	ff5 = '-Wunderflow -Walign-commons'
+
+# Suppressors required to counteract -Wall.
+
+set	sup1 = '-Wno-character-truncation -Wtabs'
+set	sup2 = '-Wno-conversion -Wno-compare-reals'
+
+set	allflags = "$ff1 $ff2 $ff3 $ff4 $ff5 $sup1 $sup2"
+
+# Alternate settings for normal and relaxed error checking.
+
+set	ff_normal = '-ffpe-trap=invalid,zero,overflow'
+set	ff_relax = \
+	  '-Wno-unused-parameter -Wno-unused-variable -ffpe-trap=zero,overflow'
+
+setenv	F90_FLAGS	"$allflags $ff_normal"
+setenv	F90_RELAXED	"$allflags $ff_relax"
+
+setenv	F03_ALLOCATE	-frealloc-lhs		# use F2003+ allocation rules
+				# this has been gfortran default for a while??
+
+setenv	F90_CLEANUP	'*.mod'			# for rm statement
+
+# Libraries.  All of these selections are specific to the compiler.
+# Module paths must also be included with -I (Macs) or -M (Sun).
+
+# Note for FGSL:  Also include GSL C libraries from selected GSL path.
+
+set	opt_gsl =	"-L$GSL_ROOT/lib -lgsl -lgslcblas"
+setenv	LIB_FGSL	"-I$FGSL_ROOT/include -L$FGSL_ROOT/lib -lfgsl $opt_gsl"
+setenv	LIB_NETCDF	"-I$NETCDF_ROOT/include -L$NETCDF_ROOT/lib -l$nclib"
+setenv	LIB_NETOPEN	"-L$NETOPEN_ROOT/lib -lnetopen"
+setenv	LIB_UDUNITS	"-I$UDUNITS_ROOT/include -L$UDUNITS_ROOT/lib -ludunits"
+
+# Hard path to ensure local Udunits with utisinit_f patch.  No longer needed.
+
+## setenv LIB_UDUNITS	"-I$UDUNITS_ROOT/include $UDUNITS_ROOT/lib/libudunits.a"
+
+# Local library routines, via $LIB_F90.
+
+setenv	F90_CONFIG	f90_config.gfortran.f90	 # compiler-specific constants
+setenv	F90_RENAME	rename_file.xlf.f90	 # rename a file; XLF vers. okay
+setenv	F90_IEEE_SUP	'$(LIB_F90)/ieee_supplement.f90'
+						 # add missing IEEE functions
+
+# Refresh the *_INCLUDE lists of hidden source dependencies.
+# This operates on the current $LIB_F90.
+
+### 2014-apr-08: Replaced by hard coded list.  See NETCDF_SUP_INCLUDES above.
+### source	~/setup/get-lib-includes
+
+# Run time environment variables.
+
+setenv	GFORTRAN_UNBUFFERED_PRECONNECTED yes	# facilitate progress displays
+
+unset	ff1 ff2 ff3 ff4 ff5 sup1 sup2		# clean up local temp vars
+unset	allflags ff_normal ff_relax opt_gsl

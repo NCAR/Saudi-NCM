@@ -1,0 +1,13 @@
+#!/usr/bin/perl -wT
+
+use GDBM_File;
+
+$file = "./records.dbx";
+
+tie(%DATA, GDBM_File, $file, GDBM_READER, 0666) || print $!;
+foreach $key (keys %DATA)
+{
+        $out = $DATA{$key};
+        print "$key = $out\n";
+}
+untie(%DATA);

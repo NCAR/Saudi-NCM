@@ -1,0 +1,138 @@
+!-------------------------------------------------------------------------------
+! 
+!                       PROGRAM rd_pwids
+! 
+! This is the main driver of the PWIDS decoder. The program rd_pwids.f90
+! reads in an ASCII file (*.dat) write out an ASCII file (*.decoded) at the 
+! input format of MM5 RAWINS, LITTLE_R and 3D-VAR programs.
+! 
+! Everything a user needs to run the program is contained in this directory.
+! Complilation on LINUX (Portland pgf90) has been tested. Compilation is done 
+! with the command "make". See below for more details.
+!  
+! For questions, please send emails to vandenb@ucar.edu
+! 
+! For detailed documentation about programs, please see below
+! 
+! For more information on PWIDS, please see:
+! 
+! http://www.rap.ucar.edu/~hahnd/darpa/doc/PWIDS/index.html
+! 
+! For details about MM5, please see:
+! 
+! http://www.mmm.ucar.edu/mm5/mm5-home.html
+! 
+!------------------------------------------------------------------------------
+! Functions:
+! ---------
+! 
+! 1) Read the list and position of the PWIDS stations in the instruments file
+!   (normally file Instruments.txt with the following format:
+!
+!Dugway Instrumentation Location
+!Pentagon Shield Test
+!Date Created:   4/17/2004       Date Updated:   4/17/2004
+!Instrument      Location Elv(m) Latitude(°N)    Longitude(°W) Alternative Name
+!PWID             1      14              38.87453        -77.05696
+!PWID             2      40              38.87219        -77.05763
+!PWID             3      40              38.87284        -77.05472
+!PWID             4      10              38.87284        -77.05122
+!PWID             5      20              38.87098        -77.06209
+!PWID             6      35              38.87156        -77.05665
+!PWID             7      35              38.87166        -77.05548
+!PWID             8      35              38.87069        -77.05681
+!PWID             9      35              38.87088        -77.05496
+!PWID            10      40              38.87006        -77.05833
+!PWID            11      35              38.87021        -77.05579
+!PWID            12      40              38.87064        -77.05336
+!PWID            13      40              38.86892        -77.05560
+!PWID            14      18              38.86797        -77.05813
+!PWID            15      15              38.86798        -77.05230
+!
+! Remarks:
+! -------
+! a) The maximum number of PWID stations that can be loaded is limited to
+!    "npwids_max". This value is set in file module_pwids.f90.
+!
+! b) Beware of the convention in longitude, if West longitudes are positive,
+!    the parameter "west_longitudes" in file read_instruments.f90 must be set
+!    to TRUE.
+!
+!
+! 2) Read the PWIDS data file, eg: 2004_05_07_1200_pwids.dat, with format:
+!
+!logger_id,ccyy,Julian_Day,hhmn,ss,pwid_id,voltage,windspeed,Winddir,Temp,RH
+!103,2004,128,1206,0,15,12.68,.57,186.2,18.55,75.9
+!103,2004,128,1206,0,4,12.58,1.56,182.9,18.91,69.24
+!103,2004,128,1206,10,15,12.68,1.13,200.3,18.59,75.7
+!103,2004,128,1206,0,10,12.44,.64,155,18.59,80.1
+!103,2004,128,1206,0,14,12.62,0,0,19.05,69.79
+!103,2004,128,1206,0,11,12.85,.44,209,18.95,69.99
+!103,2004,128,1206,0,5,12.89,.77,190.4,19.42,86.7
+!103,2004,128,1206,0,13,13.28,.41,86.4,18.6,70.2
+!103,2004,128,1206,0,9,12.94,.84,170.1,18.79,69.83
+!103,2004,128,1206,0,8,13.22,.02,70.2,19.53,65.8
+!
+!
+! 3) Assign the proper PWID station latitude, longitude, elevation to 
+!    the corresponding measurement, average in time measurements at 
+!    a frequency provided by the users in command line (-t averaging_mn)
+!
+! 4) Write out the averaged measurements at the MM5 RAWINS, LITTLE_R and 3D-VAR
+!    "decoded" format. The code "FM-12 PWID" is arbitrarily assigned s WMO
+!    platform code.
+!
+!------------------------------------------------------------------------------
+! Compilation:
+! ------------
+! 
+! Programs are in Fortran 90 and require Fortran 90 compiler.
+! 
+! The Makefile works on DEC Alpha, SGI Irix, SUN SunOS with their native 
+! compilers, and PC running Linux using Portland Group Fortran 90 compiler.
+! If your machine isn't one of the ones supported or the compiler isn't
+! the native one from the vendor, you need to edit the Makefile.
+! 
+!------------------------------------------------------------------------------
+! Input files:
+! -----------
+! 
+!  i) An list of the PWID stations with their locations and ids
+!     (eg Instruments.txt in this directory).
+!  i)  A PWIDS ASCII file 
+!      (eg: 2004_05_07_1200_pwids.dat in this directory),
+!  IDs in the data file shall match IDs in the instrument file.
+! 
+!------------------------------------------------------------------------------
+! Command line arguments:
+! ----------------------
+! 
+!  rd_pwids.exe -i input_file.dat [-n Instruments.txt -o output_file.decoded \
+!               -t averaging_mn
+! 
+!  Where:
+!  -----
+!    input_file:    is the name (with full path) of PWIDS input file.
+!    Instruments:   is the list of PWID stations with their locations and ids.
+!    ouput_file:    is the name (with full path) of the output file.
+!    averaging_mn:  is the averaging time in minutes.
+! 
+!  If -o argument is ommitted then output file will be "input_file.decoded",
+!  If -n argument is ommitted then instrument file will be "Instruments.txt".
+!  If -t argument is ommitted then averaging time will be 15 minutes.
+! ------------------------------------------------------------------------------
+! Output file:
+! -----------
+!
+!  input_file.decoded: an ASCII file of PWIDS data at the MM5 RAWINS, 
+!                      LITTLE_R  and 3D-VAR input format.
+!
+!-------------------------------------------------------------------------------
+!  Copyright UCAR (c) 1992 - 2004.
+!  University Corporation for Atmospheric Research (UCAR),
+!  National Center for Atmospheric Research (NCAR),
+!  Research Applications Program (RAP),
+!  P.O.Box 3000, Boulder, Colorado, 80307-3000, USA. 
+!
+!  Francois Vandenberghe, vandenb@ucar.edu, April 2004.
+!-------------------------------------------------------------------------------

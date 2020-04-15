@@ -1,0 +1,88 @@
+2560,2561c2560,2569
+<         horiz_cfl = max( abs(u(i,k,j) * rdx * msfuxt * dt),                          &
+<              abs(v(i,k,j) * rdy * msfvy(i,j) * dt) )
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Fix from Will Cheng, 2013-05-09
+>         ! ====== comment out by WC: 2013-05-09 =============      
+>         !horiz_cfl = max( abs(u(i,k,j) * rdx * msfuxt * dt),                          &
+>         !     abs(v(i,k,j) * rdy * msfvy(i,j) * dt) )
+>         !
+>         ! a bigger estimate of horiz_cfl by Will Cheng and Badrinath Nagarajan
+>         ! for more stable adaptive timestep; 
+>         horiz_cfl = sqrt(u(i,k,j)*u(i,k,j)+v(i,k,j)*v(i,k,j)) *                       &
+>                   sqrt(rdx*msfuxt*rdx*msfuxt+rdy*msfvy(i,j)*rdy*msfvy(i,j)) * dt
+>         ! ===================================================
+2562a2571
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Fix from Will Cheng, 2013-05-09
+4669a4679
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+4670a4681,4682
+>                          RQRNDGDTEN, RQSNDGDTEN, RQGNDGDTEN,          &
+>                          RQCNDGDTEN, RQINDGDTEN,                      &
+4671a4684
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+4769c4782,4788
+<                                                            RQVNDGDTEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+>                                                            RQVNDGDTEN, &
+>                                                            RQRNDGDTEN, &
+>                                                            RQSNDGDTEN, &
+>                                                            RQGNDGDTEN, &
+>                                                            RQCNDGDTEN, &
+>                                                            RQINDGDTEN
+4771a4791
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+5211a5232
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods
+5216a5238,5285
+> 
+> ! meixu 2007-8-28
+>       IF (P_QR .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=j_start,j_end
+>          DO K=k_start,k_end
+>          DO I=i_start,i_end
+>             RQRNDGDTEN(I,K,J)=RQRNDGDTEN(I,K,J)/mu(I,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QS .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=j_start,j_end
+>          DO K=k_start,k_end
+>          DO I=i_start,i_end
+>             RQSNDGDTEN(I,K,J)=RQSNDGDTEN(I,K,J)/mu(I,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QG .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=j_start,j_end
+>          DO K=k_start,k_end
+>          DO I=i_start,i_end
+>             RQGNDGDTEN(I,K,J)=RQGNDGDTEN(I,K,J)/mu(I,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QC .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=j_start,j_end
+>          DO K=k_start,k_end
+>          DO I=i_start,i_end
+>             RQCNDGDTEN(I,K,J)=RQCNDGDTEN(I,K,J)/mu(I,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+>       IF (P_QI .ge. PARAM_FIRST_SCALAR) THEN
+>          DO J=j_start,j_end
+>          DO K=k_start,k_end
+>          DO I=i_start,i_end
+>             RQINDGDTEN(I,K,J)=RQINDGDTEN(I,K,J)/mu(I,J)
+>          ENDDO
+>          ENDDO
+>          ENDDO
+>       ENDIF
+> 
+5221a5291
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Radar mods

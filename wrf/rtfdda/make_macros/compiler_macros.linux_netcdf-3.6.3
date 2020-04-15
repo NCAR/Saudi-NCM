@@ -1,0 +1,137 @@
+#
+# Function:
+#
+#  This file is the OS-specific definitions and macros files used by
+#  RTFDDA Makefiles. It contains the OS-specific macros and any 
+#  OS-specific overrides to the common macros.
+#
+#  It should contain ONLY OS-specific information. Any shared macros and
+#  definitions should be included in the make_defns file so that they
+#  can be used by multiple applications and OS's.
+#
+#  This is for LINUX
+#
+# Access:
+#
+#  This file is included in individual application Makefiles.
+#
+#  This file and the other files in this directory are accessed via an
+#  environment variable which must be set correctly to this
+#  directory: MS_MAKE_MACROS_DIR (Modeling System Make Definitions).
+#
+#  In order to access the correct compiler_macros.$MS_OS_TYPE file in
+#  this directory you must have the MS_OS_TYPE defined. This can be 
+#  done in one of two ways:
+#             (a) set your MS_OS_TYPE environment variable to the
+#                 correct compiler_macros.$MS_OS_TYPE type as 
+#		  listed in this directory
+#             (b) on your command line use the command
+#                 % make MS_OS_TYPE=`$MS_MAKE_MACROS_DIR/get_os.sh; cat .ostype` 
+#
+# Mar 2007        
+#
+# ==============================================================================
+
+# Override commands
+
+AR = ar -r
+
+# Set the "compile OS" type to pass to MMM Makefiles in the
+# top-level apps/4dwx/RTFDDA/src/_Makefile.  The MMM Makefiles
+# require a "make linux" (for example) command, and do not support 
+# other variations (e.g., if the MS_OS_TYPE is "linux64")
+
+USE_MS_OS_TYPE	=	linux
+
+# Compiler flags
+
+OSTYPE		=	LINUX
+
+F77             =        pgf90
+F90             =        pgf90
+CPP             =        /lib/cpp
+CPPTRAD		= 	 -traditional
+CPPFLAGS        =        -I. -C -P -D$(OSTYPE) $(CPPTRAD)
+CPPOPTION	=	F90
+FFLAGS90        =        -Mfreeform -pc 32 -byteswapio
+FFLAGS90F       =        -pc 32 -byteswapio
+FFLAGS90MP      =        -n32 -freeform -mp
+FFLAGS7790      =        -pc 32 -byteswapio
+FFLAGS7790MP    =        -n32 -mp
+FFLAGS_BYTESWAP	=	-byteswapio
+FFLAGS_FREE	=	-Mfree
+DEBUG_FLAGS	= 	-g
+
+FC	        =       pgf90
+FF		=	pgf90
+FCFLAGS         =	-pc 32 -Mfreeform -byteswapio -Mbounds
+FCFLAGS_64	=	-pc 64 -Mfreeform -byteswapio -Mbounds -r8 -i4 
+FFFLAGS		=	$(FCFLAGS)
+FFFLAGSM_64	= 	-pc 64 -Ktrap=fp -byteswapio -Mbounds -r4 -i4 
+FFFLAGS_64	= 	-pc 64 -r8 -i4
+FFFLAGS_DBLPREC	=	-r8
+
+CC              =        cc
+CFLAGS          =       
+CCFLAGS         =        -D$(OSTYPE) -I.
+
+# Linker flags
+
+LD              =        pgf77
+LD90            =        pgf90
+NCARGF77        =        ncargf77
+LDFLAGS         =        -Wl, -Bstatic
+LDFLAGS90       =         -pc 32 -byteswapio
+LDFLAGS90MP     =        -n32 -mp
+LDFLAGS_STATIC  =        -Wl, -Bstatic
+LDFLAGS_PGI	=	-L$(PGI)/lib -lpgftnrtl -lpgc -lg2c
+
+# X11
+
+SYS_X_INCLUDES	=	-I/usr/X11/include
+SYS_X_LDFLAGS	= 	-L/usr/X11R6/lib
+
+# NCAR Graphics
+
+NCARGF77LIB     =        -L/usr/local/ncarg/lib -L/usr/local/lib \
+                         -lncarg -lncarg_gks -lncarg_c -lX11 -lm
+#LIBS            =        -lfastm this one is deadly!
+
+# netCDF location, includes and link libs. Note that there are
+# 2 netCDF libs starting in version 2.6.2. Order of these 2 libs is
+# important
+
+NET		=	/opt/netcdf
+NET_INCS	=	-I$(NET)/include
+NET_LDFLAGS	=	-L$(NET)/lib
+NET_LDLIBS	=	-lnetcdf
+
+# madis location. Note that because the library is named madislib.a
+# not libmadis.a, it cannot have a -L or -l in front of it
+
+MADIS_LOC	=	/opt/madis
+MADIS_INCS	=	-I$(MADIS_LOC)/include
+MADIS_LDFLAGS	=	
+MADIS_LDLIBS	=	$(MADIS_LOC)/lib/madislib.a
+
+# Long lines (specific to Cray?) files in local src directory
+
+LONG_LINES	=
+
+# Machine type and word length
+
+MACH		= 	-DDEC
+WLENGTH		= 	-DBIT32
+
+# Grouped compiler and linker flags used in the suffix rules and pre/post link rules
+# in the make_defns file. C is for .c files, FC is for F77, F90 is for FORTRAN90
+
+SYS_CFLAGS	=
+SYS_FCFLAGS	=
+SYS_FFLAGS90	=
+SYS_CC_LDFLAGS	=
+SYS_FC_LDFLAGS	=
+SYS_F90_LDFLAGS	=
+SYS_CC_LDLIBS	=
+SYS_FC_LDLIBS	=
+SYS_F90_LDLIBS	=

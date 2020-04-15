@@ -1,0 +1,35 @@
+41a42
+> /*! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - !*/
+46,47c47,51
+< # ifndef RSL0_ONLY
+<     sprintf(filename,"rsl.out.%04d",*me) ;
+---
+> 
+> # ifndef RSL_LOCAL
+> /* yliu 20131202  put the time series profiles on local disk under
+>           restart file dir */
+>     sprintf(filename,"restrts/rsl.out.%04d",*me) ;
+55c59,60
+<      sprintf(filename,"/dev/null") ;
+---
+> /*   sprintf(filename,"/dev/null") ; */
+>      sprintf(filename,"rsl.out.%04d",*me) ;
+58c63
+<     if ((newfd = open( filename, O_CREAT | O_WRONLY | O_TRUNC, 0666 )) < 0 )
+---
+>      if ((newfd = open( filename, O_CREAT | O_WRONLY | O_TRUNC, 0666 )) < 0 )
+76,77c81,84
+< # ifndef RSL0_ONLY
+<     sprintf(filename,"rsl.error.%04d",*me) ;
+---
+> # ifndef RSL_LOCAL
+> /* yliu 20131202  put the time series profiles on local disk under
+>           restart file dir */
+>     sprintf(filename,"restrts/rsl.error.%04d",*me) ;
+85c92,93
+<      sprintf(filename,"/dev/null") ;
+---
+> /*   sprintf(filename,"/dev/null") ; */
+>      sprintf(filename,"rsl.error.%04d",*me) ;
+107a116
+> /*! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - !*/

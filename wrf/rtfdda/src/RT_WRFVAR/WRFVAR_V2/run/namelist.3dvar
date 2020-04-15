@@ -1,0 +1,165 @@
+
+&record1
+ model_type = 'WRF',
+ write_increments = .FALSE., 
+ global           = .FALSE.,
+ print_detail = 100,
+ lvar4d = .FALSE.,
+/
+
+&record2
+ analysis_type = '3D-VAR',
+ analysis_date = '2006-05-06_00:00:00',
+ analysis_accu = 900,
+ w_increments  = .FALSE.,
+ dt_cloud_model =.FALSE..
+ write_qcw = .FALSE.,  
+ write_qrn = .FALSE.,  
+ write_qci = .FALSE.,  
+ write_qsn = .FALSE.,  
+ write_qgr = .FALSE.,
+/
+
+&record3
+ fg_format = 1, 
+ ob_format = 2,
+ num_fgat_time = 1,
+/
+
+&record4
+ process_obs    = 'YES',
+ obs_qc_pointer = 0,
+ use_SynopObs   = .TRUE.,
+ use_ShipsObs   = .TRUE.,
+ use_MetarObs   = .TRUE.,
+ use_RadarObs   = .FALSE.,
+ use_Radar_rv   = .FALSE.,
+ use_Radar_rf   = .FALSE.,
+ use_PilotObs   = .TRUE.,
+ use_SoundObs   = .TRUE.,
+ use_SatemObs   = .TRUE.,
+ use_GeoAMVObs  = .FALSE.,
+ use_PolarAMVObs= .FALSE.
+ use_AirepObs   = .TRUE.,
+ use_GpspwObs   = .FALSE.,
+ use_GpsrefObs  = .FALSE.,
+ use_SsmiRetrievalObs = .FALSE.,
+ use_SsmiTbObs  = .FALSE.,
+ use_ssmt1obs   = .FALSE.,
+ use_ssmt2obs   = .FALSE.,
+ use_qscatobs   = .TRUE.,
+ use_ProfilerObs= .TRUE.,
+ use_BuoyObs    = .TRUE.,
+ use_BogusObs   = .FALSE.,
+ check_max_iv   = .TRUE.,
+ use_obs_errfac = .FALSE.,
+ put_rand_seed  = .FALSE.,
+ omb_set_rand   = .FALSE.,
+ omb_add_noise  = .FALSE.,
+/
+
+&record5
+ time_window    = 3.,
+ print_obs_info = .TRUE.,
+/
+
+&record6
+ max_ext_its    = 2,
+ eps            = 1.E-02, 1.E-02, 1.E-02, 1.E-02, 1.E-02, 1.E-02, 1.E-02,,
+ ntmax          = 3,
+ nsave          = 4,
+ write_switch   = .FALSE.,
+ write_interval = 5,
+/
+
+&record7
+ rf_passes      = 6,
+ var_scaling1   = 1.0,
+ var_scaling2   = 1.0,
+ var_scaling3   = 1.0,
+ var_scaling4   = 1.0,
+ var_scaling5   = 1.0,
+ len_scaling1   = 1.0,
+ len_scaling2   = 1.0,
+ len_scaling3   = 1.0,
+ len_scaling4   = 1.0,
+ len_scaling5   = 1.0,
+/
+
+&record8
+ def_sub_domain = .FALSE.,
+ x_start_sub_domain = 55.0,
+ y_start_sub_domain = 35.0,
+ x_end_sub_domain   = 80.0,
+ y_end_sub_domain   = 60.0,
+/
+
+&record10
+ Testing_3DVAR  = .FALSE.,
+ Test_Transforms = .FALSE.,
+ Test_Statistics = .FALSE.,
+ Interpolate_Stats = .TRUE.,
+/
+ 
+&record11
+ minimisation_option = 2,
+ write_outer_loop    = .FASLE., 
+ lat_stats_option    = .FALSE..
+calculate_cg_cost_function = .FALSE.,
+ cv_options     = 3,
+ cv_options_hum = 1,
+ check_rh       = 1,
+ as1            = 0.25, 0.75, 1.5,
+ as2            = 0.25, 0.75, 1.5,
+ as3            = 0.25, 0.75, 1.5,
+ as4            = 0.25, 0.75, 1.5,
+ as5            = 0.25, 0.75, 1.5,
+ sfc_assi_options = 1,
+ set_omb_rand_fac = 1.0,
+ seed_array1    = 0,
+ seed_array2    = 0,
+/
+ 
+&record12
+ balance_type   = 1,
+/
+ 
+&record13
+ vert_corr      = 2,
+ vertical_ip    = 0,
+ vert_evalue    = 1,
+ max_vert_var1  = 99.0,
+ max_vert_var2  = 99.0,
+ max_vert_var3  = 99.0,
+ max_vert_var4  = 99.0,
+ max_vert_var5  = 0.0,
+/
+ 
+&pseudo_ob_nl
+ num_pseudo     = 0, 
+ pseudo_x       = 1.0,
+ pseudo_y       = 1.0,
+ pseudo_z       = 1.0,
+ pseudo_val     = 1.0,
+ pseudo_err     = 1.0,
+ pseudo_var     = 't',
+/
+
+&solve_qc
+ max_number_of_obs_nml   = 99999,
+ fatal_if_exceed_max_obs = .TRUE.,
+ model_qc  = .TRUE.,
+ error_type = "avnfct",
+ turbulence_weighting = .FALSE.,
+ tolerance_p       = 1.6,
+ tolerance_q       = 1.0,
+ tolerance_t       = 2.2,
+ tolerance_u       = 2.0,
+ tolerance_p_sound = 3.0,
+ tolerance_q_sound = 2.0,
+ tolerance_t_sound = 3.0,
+ tolerance_u_sound = 3.0,
+ log_time = .FALSE.,
+ time_before = 30.,
+ time_after  = 30.,
+/

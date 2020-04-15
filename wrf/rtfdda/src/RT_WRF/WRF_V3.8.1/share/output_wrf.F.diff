@@ -1,0 +1,22 @@
+61c61,63
+<     REAL    fgdt, guv, gt, gq, gph, dtramp_min, &
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+> REAL    fgdt, guv, gt, gq, gph, gqr, gqc, clh, dtramp_min, &
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+200a203
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+201a205,207
+>     CALL nl_get_gqr        ( grid%id , gqr )
+>     CALL nl_get_gqc        ( grid%id , gqc )
+>     CALL nl_get_clh        ( grid%id , clh )
+202a209
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Radar mods
+699a707
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods
+700a709,711
+>         CALL wrf_put_dom_ti_real    ( fid, 'GQR', gqr , 1 , ierr )
+>         CALL wrf_put_dom_ti_real    ( fid, 'GQC', gqc , 1 , ierr )
+>         CALL wrf_put_dom_ti_real    ( fid, 'CLH', clh , 1 , ierr )
+701a713
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Radar mods

@@ -1,0 +1,57 @@
+#!/bin/tcsh -f
+#
+###############################################################################
+echo
+echo  " ----------------------------------------_-----------------------------"
+echo  " ---------------- ACARS decoder starts  -------------------------------"
+echo "$0 $argv[*]"
+echo  " ----------------------------------------------------------------------"
+###############################################################################
+
+set timestamp
+setenv SUBSYSTEM ACARS_FDDA
+
+#
+# ENVIRONMENT
+#
+set CFILE="$MM5HOME/cycle_code/CONFIG_FILES/cshrc_"
+
+$CheckConfigFiles
+set cfstat = $status
+if ( $cfstat != 0 ) then
+ echo "${SUBSYSTEM} -- Missing ConfigFile -> exiting"
+ exit (2)
+endif
+source ${CFILE}user.mm5sys.${MM5HOST};    
+#set echo
+
+#	Check usage
+
+if ( ${#argv} == 2 ) then
+    set cycle_date = $1
+    set obs_date = $2
+else
+    echo "usage: $0 cycle_date obs_date "
+    echo "where cycle_date and obs_date are CCYYMMDDHH"
+    exit ( 4 )
+endif
+
+$MustHaveDir $RUNDIR/${cycle_date}/DECODE_ACARS
+cd ${RUNDIR}/${cycle_date}/DECODE_ACARS
+echo "Now working in  $cwd"
+
+set ccyymmdd = `echo $obs_date | cut -b 1-8`
+set hh = `echo $obs_date | cut -b 9-10`
+echo "hh= $ccyymmdd"
+echo "hh= $hh"
+
+if (-e acars_QC_${obs_date}) rm acars_QC_${obs_date} 
+foreach flight (`ls ${ACARS_DATA_DIR}/$ccyymmdd/$hh*`)
+rm fort.50 fort.10
+ln -f -s $flight fort.10
+${RD_ACARS_EXE}  >> print.out.acars
+cat fort.50 >>acars_QC_${obs_date}
+end
+echo "ACARS DATA for $obs_date is processed"
+cat acars_QC_${obs_date} >> ACARS.$cycle_date.all
+exit 0

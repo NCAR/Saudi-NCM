@@ -1,0 +1,12 @@
+ &pobs_input
+   output_flag   = "metcm"
+   path_and_file = "./wrfout_d03_2017-02-21_00:00:00.YPG_P+FCST"
+   location_file = "./metcm_locations.txt"
+   nlat          = 3 
+   height_file   = "./pobs_height.list"
+   nheight       = 5
+   zCoord        = "h"
+   outputFiles   = "single"
+   out_unit      = 6
+   rnge          = "ypg"
+  /

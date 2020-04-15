@@ -1,0 +1,2 @@
+pgf90 -o geth_newdate.exe -Mfree geth_newdate_ccyymmdd.F geth_newdate.F nfeb.F
+pgf90 -o geth_idts.exe -Mfree geth_idts_main.F geth_idts.F nfeb.F 

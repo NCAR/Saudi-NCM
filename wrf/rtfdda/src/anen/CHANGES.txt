@@ -1,0 +1,59 @@
+!----------------------------------------------------------------------
+!
+! Copyright University Corporation for Atmospheric Research (UCAR) 2014
+! Research Application Laboratory (RAL)
+! National Center for Atmospheric Research (NCAR)
+! All Rights Reserved
+!
+! CONTACTS: Luca Delle Monache,   lucadm@ucar.edu
+!           Stefano Alessandrini, alessand@ucar.edu
+!           Will Cheng,           chengw@ucar.edu 
+!----------------------------------------------------------------------
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+NOTE on the LICENSE AGREEMENT
+Use of the analog code is governed by the License Agreement that you can find in this directory.  
+Please review the License Agreement. If you do not agree to these terms and conditions as provided, 
+you will not be permitted to use the Software. Please note that downloading, installing, using, 
+or copying of the software by you or by a third party on your behalf indicates your agreement to 
+be bound by all of the terms and conditions specified in the License Agreement.  
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+The following changes were applied for the October 2015 release of the analog code.
+
+As of 2015-10-27:
+
+  a) fixed wind direction as a predictor problem by excluding standard
+     deviation of zero (or only 1 sample size)
+
+  b) removed hard-wired condition of positive definiteness, limit correction with
+     "lower_limit_target_var" and "upper_limit_target_var" in namelist
+
+  c) Options to compile: gfortran (must have 5.1 or higher) for both sequential and
+     parallel and sequential for Intel Fortran. PGI fortran is not working yet and
+     would require much more work (see README.txt)
+
+  d) Added the following to the namelist (see README.txt for explanation):
+      opt_metric_endday
+      window
+      trend
+      method
+
+      changed nday_start as negative to select the N most recent days, e.g.,
+      nday_start = -5 for the 5 most recent days. Take note not go beyond
+      the second last day.
+
+
+  e) 4 different methods to use the analog code
+     method =        ! 1 = AnEn, ANALOG ENSEMBLE AS IN DELLE MONACHE ET AL. 2013, MWR, 41, 3498-3516
+                     ! 2 = KFAS, KALMAN FILTER ON ANALOG SPACE IDENTIFIED AS "ANKF"
+                     !     IN DELLE MONACHE ET AL. 2011, MWR,  139, 3554-3570
+                     ! 3 = KFAN; KF APPLIED TO AnEnMEAN, AS IN DJALALOVA ET AL. 2015, AE, 108, 76-87
+                           AnEn WILL ALSO BE RUN AND OUTPUT AS WELL
+                     ! 4 = AnEnMEAN, WEIGHTED MEAN OF AnEn, IDENTIFIED AS "AN" IN DELLE MONACHE ET AL.
+                     !     2011, MWR,  139, 3554-3570. AnEn WILL ALSO BE RUN AND OUTPUT AS WELL
+
+
+  f) new file format for ATEC operations (see README)
+

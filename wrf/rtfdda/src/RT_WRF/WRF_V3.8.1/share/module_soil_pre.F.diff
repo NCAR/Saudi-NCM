@@ -1,0 +1,11 @@
+3127a3128
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - No mod here, just for positioning into file to fix NAM TEMPSKIN problem
+3128a3130
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - No mod here, just for positioning into file to fix NAM TEMPSKIN problem
+3203c3205,3208
+<                        ( ( landmask(i,j) .LT. 0.5 ) .AND. ( tsk(i,j) .LT. seaice_threshold ) ) ) THEN
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Corrects a situation in which ICE/SNOW land use is put over warm oceans when NAM TEMPSKIN field bad
+>                       ( ( landmask(i,j) .LT. 0.5 ) .AND. ( tsk(i,j) .LT. seaice_threshold ) &
+>                        .AND. ( sst(i,j) .LT. seaice_threshold ) ) ) THEN   !yliu 201203 add sst  - in case NAM tsk is crazy!
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Corrects a situation in which ICE/SNOW land use is put over warm oceans when NAM TEMPSKIN field bad

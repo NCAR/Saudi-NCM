@@ -1,0 +1,76 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/src/RT_RIP/RIP_V4.6
+#
+# Jan 2011
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns)
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+
+# ----------- configure/compile settings ----------------------
+
+# Need the ./configure option selection passed in on the command line.
+
+# Note that the WANTED_RIP_CONFIGURE_OPTION 
+# correct for your selection
+
+# Should override the default here, e.g., 'make all WANTED_RIP_CONFIGURE_OPTION=1'
+
+WANTED_RIP_CONFIGURE_OPTION=1
+
+# -------- What to build --------
+
+EXES = rip ripcomp ripdp_mm5 ripdp_wrfarw ripinterp ripshow showtraj tabdiag upscale
+CONSTANT_FILES = color.tbl eta_micro_lookup.dat stationlist psadilookup.dat
+
+# --------- Targets --------------
+
+all: clean
+	echo $(WANTED_RIP_CONFIGURE_OPTION) | ./configure ;\
+	./compile
+
+install: all dir
+	cd src/ 
+	for exe in $(EXES) ;\
+	do \
+		cp $${exe} $(DEST)/$${exe}.exe ;\
+	done
+	cp ripdp_wrfarw $(DEST)/ripdp_wrf.exe
+	cd ..
+	for file in $(CONSTANT_FILES) ;\
+	do \
+		cp $${file} $(CONSTANT_FILES_DEST)/RIP4 ;\
+	done
+
+add2readme:
+	for exe in $(EXES) ;\
+	do \
+		echo "$${exe}.exe -- source: `pwd`, `date -u`" >> $(DEST_SRC_README) ;\
+	done
+	echo "/ripdp_wrf.exe -- copy of ripdp_wrfarw, `date -u`" >> $(DEST_SRC_README)
+
+clean: FORCE
+	./clean -a
+
+dir:
+	if test -d $(CONSTANT_FILES_DEST)/RIP4 ;\
+	then \
+		: ;\
+	else \
+		mkdir -p $(CONSTANT_FILES_DEST)/RIP4 ;\
+	fi
+
+FORCE:
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+

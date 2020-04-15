@@ -1,0 +1,19 @@
+&model_fields
+ terrain = .true.,
+ t_2m    = .true.,
+ p_sfc   = .true.,
+ rh_2m   = .true.,
+ td_2m   = .true.,
+ wind_10m= .true.,
+ rain    = .true.,
+ pbl     = .true.,
+ swdown  = .true.,
+ max_gust= .true.
+/
+
+&derived_fields
+ p_msl   = .true.,
+ vis = .true.,
+ alt_den = .true.,
+ alt_pres = .true.
+/

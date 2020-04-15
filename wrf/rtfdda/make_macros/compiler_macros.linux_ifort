@@ -1,0 +1,149 @@
+#
+# Function:
+#
+#  This file is the OS-specific definitions and macros files used by
+#  RTFDDA Makefiles. It contains the OS-specific macros and any 
+#  OS-specific overrides to the common macros.
+#
+#  It should contain ONLY OS-specific information. Any shared macros and
+#  definitions should be included in the make_defns file so that they
+#  can be used by multiple applications and OS's.
+#
+#  This is for LINUX
+#
+# Access:
+#
+#  This file is included in individual application Makefiles.
+#
+#  This file and the other files in this directory are accessed via an
+#  environment variable which must be set correctly to this
+#  directory: MS_MAKE_MACROS_DIR (Modeling System Make Definitions).
+#
+#  In order to access the correct compiler_macros.$MS_OS_TYPE file in
+#  this directory you must have the MS_OS_TYPE defined. This can be 
+#  done in one of two ways:
+#             (a) set your MS_OS_TYPE environment variable to the
+#                 correct compiler_macros.$MS_OS_TYPE type as 
+#		  listed in this directory
+#             (b) on your command line use the command
+#                 % make MS_OS_TYPE=`$MS_MAKE_MACROS_DIR/get_os.sh; cat .ostype` 
+#
+# Mar 2007        
+#
+# ==============================================================================
+
+# Override commands
+
+AR = ar -r
+COMPILE_MAX_NTRIES=1
+COMPILE_SLEEP_SECS=0
+
+# Set the "compile OS" type to pass to MMM Makefiles in the
+# top-level apps/4dwx/RTFDDA/src/_Makefile.  The MMM Makefiles
+# require a "make linux" (for example) command, and do not support 
+# other variations (e.g., if the MS_OS_TYPE is "linux64")
+
+USE_MS_OS_TYPE	=	linux
+
+# Compiler flags
+
+OSTYPE		=	LINUX
+
+F77             =        ifort
+F90             =        ifort
+CPP             =        /lib/cpp
+CPPTRAD		= 	 -traditional
+CPPFLAGS        =        -I. -C -P -D$(OSTYPE) $(CPPTRAD)
+CPPOPTION	=	 F90
+FFLAGS90        =        $(FFLAGS_FREE) $(FFLAGS_COMPILER_PREC_32) $(FFLAGS_BYTESWAP)
+FFLAGS90F       =        $(FFLAGS_COMPILER_PREC_32) $(FFLAGS_BYTESWAP)
+FFLAGS90MP      =        $(FFLAGS_PGI_N32) $(FFLAGS_FREE) $(FFLAGS_OPEN_MP)
+FFLAGS7790      =        $(FFLAGS_COMPILER_PREC_32) $(FFLAGS_BYTESWAP)
+FFLAGS7790MP    =        $(FFLAGS_PGI_N32) $(FFLAGS_OPEN_MP)
+
+FFLAGS_BYTESWAP		= -convert big_endian
+FFLAGS_FREE		= -free
+DEBUG_FLAGS		= -g
+FFLAGS_COMPILER_PREC_32 = -pc 32 
+FFLAGS_COMPILER_PREC_64 = 
+FFLAGS_OPEN_MP 		= -openmp
+FFLAGS_DBL_AS_REAL	= -r4
+FFLAGS_REAL_AS_DBL	= -r8	
+FFLAGS_INT_AS_4BYTES	= -i4
+FFLAGS_CHECK_BOUNDS	= -check bounds
+FFLAGS_PGI_N32		= 
+FFLAGS_TRAP_FP_EXCEP	=
+
+FC	        =       ifort
+FF		=	ifort
+FCFLAGS         =	$(FFLAGS_COMPILER_PREC_32) $(FFLAGS_FREE) $(FFLAGS_BYTESWAP) $(FFLAGS_CHECK_BOUNDS)
+FCFLAGS_64	=	$(FFLAGS_COMPILER_PREC_64) $(FFLAGS_FREE) $(FFLAGS_BYTESWAP) $(FFLAGS_CHECK_BOUNDS) $(FFLAGS_REAL_AS_DBL) $(FFLAGS_INT_AS_4BYTES) 
+FFFLAGS		=	$(FCFLAGS)
+FFFLAGSM_64	= 	$(FFLAGS_COMPILER_PREC_64) $(FFLAGS_TRAP_FP_EXCEP) $(FFLAGS_BYTESWAP) $(FFLAGS_CHECK_BOUNDS) $(FFLAGS_DBL_AS_REAL) $(FFLAGS_INT_AS_4BYTES) 
+FFFLAGS_64	= 	$(FFLAGS_COMPILER_PREC_64) $(FFLAGS_REAL_AS_DBL) $(FFLAGS_INT_AS_4BYTES)
+FFFLAGS_DBLPREC	=	$(FFLAGS_REAL_AS_DBL)
+
+CC              =        icc
+CFLAGS          =       
+CCFLAGS         =        -D$(OSTYPE) -I.
+
+# Linker flags
+
+LD              =        ifort
+LD90            =        ifort
+NCARGF77        =        ncargf77
+LDFLAGS         =
+LDFLAGS90       =         $(FFLAGS_COMPILER_PREC_32) $(FFLAGS_BYTESWAP)
+LDFLAGS90MP     =        $(FFLAGS_PGI_N32) $(FFLAGS_OPEN_MP)
+LDFLAGS_STATIC  =        -Wl,-Bstatic
+LDFLAGS_PGI	=	-L$(PGI)/lib -lpgftnrtl -lpgc -lg2c
+
+# X11
+
+SYS_X_INCLUDES	=	-I/usr/X11/include
+SYS_X_LDFLAGS	= 	-L/usr/X11R6/lib
+
+# NCAR Graphics
+
+NCARGF77LIB     =        -L/usr/local/ncarg/lib -L/usr/local/lib \
+                         -lncarg -lncarg_gks -lncarg_c -lX11 -lm
+#LIBS            =        -lfastm this one is deadly!
+
+# netCDF location, includes and link libs. Note that there are
+# 2 netCDF libs starting in version 2.6.2. Order of these 2 libs is
+# important
+
+NET		=	$(NETCDF)
+NET_INCS	=	-I$(NET)/include
+NET_LDFLAGS	=	-L$(NET)/lib
+NET_LDLIBS	=	-lnetcdff -lnetcdf
+
+# madis location. Note that because the library is named madislib.a
+# not libmadis.a, it cannot have a -L or -l in front of it
+
+MADIS_LOC	=	/opt/madis
+MADIS_INCS	=	-I$(MADIS_LOC)/include
+MADIS_LDFLAGS	=	
+MADIS_LDLIBS	=	$(MADIS_LOC)/lib/madislib.a
+
+# Long lines (specific to Cray?) files in local src directory
+
+LONG_LINES	=
+
+# Machine type and word length
+
+MACH		= 	-DDEC
+WLENGTH		= 	-DBIT32
+
+# Grouped compiler and linker flags used in the suffix rules and pre/post link rules
+# in the make_defns file. C is for .c files, FC is for F77, F90 is for FORTRAN90
+
+SYS_CFLAGS	=
+SYS_FCFLAGS	=
+SYS_FFLAGS90	=
+SYS_CC_LDFLAGS	=
+SYS_FC_LDFLAGS	=
+SYS_F90_LDFLAGS	=
+SYS_CC_LDLIBS	=
+SYS_FC_LDLIBS	=
+SYS_F90_LDLIBS	=

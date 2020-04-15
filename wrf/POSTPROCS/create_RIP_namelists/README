@@ -1,0 +1,142 @@
+******************************************
+* THIS FILE EXPLAINS ABOUT ALL THE       *
+* SCRIPTS USED TO CREATE RIP NAMELIST    *
+* FILES FOR THE ATEC ARMY RANGES         *
+* Written by Joe Grim (grim@ucar.edu)    *
+* Documentation last updated 26 May 2011 *
+******************************************
+
+**************************************
+***ALL NECESSARY SCRIPTS AND FILES****
+**************************************
+All files in this folder can be checked out from CVS in the following path:
+cvs/apps/4dwx/RTFDDA/scripts/postprocs/create_RIP_namelists
+These files should be:
+create_plots.csh              - Wrapper script to make all namelists
+create_RIP.ncl                - Primary program used to make namelists
+plotting_routines.ncl         - Contains all the user functions for create_RIP.ncl
+create_color_table_images.ncl - Makes color table images for all possible color tables used in the plots
+                              - The resultant color table images should then be copied to .../www/htdocs/rip/
+plot_RIP_color_table.ncl      - Makes a color palette plot of all possible colors used in RIP
+plot_defaults.asc             - All of the default parameters for every possible plot type
+                              - Contents of this file explained in greater detail in *PLOT DEFAULTS DETAILS* section below
+color_names.asc               - All the color tables used in the RIP plots
+rip_color.asc                 - Our custom RIP color palette: classic RIP palette + hues for colorblind-friendly palette
+hdr.asc                       - Lines for the header portion of the RIP namelists
+range_tzones_dst.asc          - Time zone offsets and DST flags for each range
+Pre1hr.asc                    - Incomplete namelist parameters for "Special" 1-hr Precip plot
+Omeg700RH.asc                 - Incomplete namelist parameters for "Special" 700mb RH and Omega plot
+VV600m.asc                    - Incomplete namelist parameters for "Special" 600m vertical velocity plot
+snowcv.asc                    - Incomplete namelist parameters for "Special" snow cover plot
+landuse.asc                   - Incomplete namelist parameters for "Special" Land Use Type plot
+landuse_table.asc             - List of Land Use Types and their colors for the Land Use Table plot
+MdomainD.SEASON.RANGE.asc     - Unique "custom" plots for individual ranges
+                              - D = domain; SEASON = summer or winter; RANGE is range acronym
+
+**************************************
+******STEPS IN RUNNING SCRIPTS********
+**************************************
+1) Go to: http://smac-c2-int1/cgi-bin/rip/enter_rip_form.pl and select a range
+   Note: All web form files are also in CVS at cvs/apps/4dwx/RTFDDA/scripts/postprocs/create_RIP_namelists/www/cgi-bin/rip/ and .../www/htdocs/rip/
+   The web form files were created by Becky Ruttenburg (becky@ucar.edu)
+2) Select the range-specific plots and plotting parameters and submit the form
+3) Copy the coded output into a file called formRANGE.out and put it in the create_RIP_namelists directory
+   RANGE is the 3- or 4-letter range id (e.g., DPG)
+   Contents of this file are explained in greater detail in *formRANGE.out DETAILS* section below
+4) In create_plots.csh, edit range, domain and season
+   Note: Namelists will be created for all seasons and domains for the given range
+         Setting the domain and season is only for viewing those plots
+5) In create_RIP.ncl, set variable "testing" to 1 for testing, or 0 for operational
+6) Run create_plots.csh and the namelists should be created
+
+**************************************
+********PLOT DEFAULTS DETAILS*********
+**************************************
+Plot_Abb   - Abbreviated plot name; also used in formRANGE.out and the gif files in the FDDA Image Viewer
+Plot Name  - Plot name identify its contents and also printed in the namelist file
+Plt Typ    - Plot type (Plan, Raster, XS, Special)
+Shade      - The RIP field abbreviation for shaded fields (if "MMM", there is no shaded field)
+Cntr       - The RIP field abbreviation for contoured fields (if "MMM", there is no contoured field)
+Dash       - The RIP field abbreviation for dashed fiedls (if "MMM", there is no dashed field)
+Winds      - The RIP field abbreviation for wind vector fields (if "MMM", there are no vectors plotted)
+Vcor Sh    - The RIP vertical coordinate for the shaded field (s, p, z or MMM)
+Vcor Co    - The RIP vertical coordinate for the contoured field (s, p, z or MMM)
+Vcor Da    - The RIP vertical coordinate for the dashed field (s, p, z or MMM)
+Lvl Sh     - The level of the shaded field
+Lvl Co     - The level of the contoured field
+Lvl Da     - The level of the dashed field
+Sm Sh      - The number of smoothing passes for the shaded field
+Sm Co      - The number of smoothing passes for the contoured field
+Sm Da      - The number of smoothing passes for the dashed field
+Xtra Line  - The value of an extra line to plot (e.g., 1000-500 540 line, 0C line)
+Wnd Vctr   - Wind vector type (Brb = barb, Arw = arrow, Strm = streamline)
+Sh Lbl     - Shaded field contour label intervals for each domain 1-4, separated by commas
+
+**************************************
+********formRANGE.out DETAILS*********
+**************************************
+Note: RANGE is the 3- or -4-character range ID
+There are 6 sections in the output
+1) ***Universal Parameters for RANGE*** 
+    - contains universal parameters to be applied to all plots for a range
+2) ***Plot Specific Parameters***
+    - contains the specific parameters for each plot for this range
+3) ***Sounding Parameters***
+    - contains the information needed for sounding plots
+4) ***Cross Section Parameters***
+    - contains the information needed for cross section plots
+5) ***Overlays***
+    - contains the information needed for overlays on each plan-view plot
+6) ***Terrain Heights***
+    - contains information on the terrain height mins and maxes for the multiple plots using terrain
+
+***Universal Parameters for RANGE*** SECTION
+Wind (kts/mps)            - 10kts = use 10 knots for one full wind barb
+                          - 5mps  = use 5 m/s for one full wind barb
+No. Doms                  - number of domains in range model
+Hide fields under terrain - visible = don't hide upper level fields below terrain level (e.g., 850 mb in the West)
+                          - hide = hide upper level fields below terrain level
+Color bar location        - side = always put color bar on right side of plot
+                          - default = put colorbar wherever it allows the plot to be maximized
+Wind Barb Freq.           - grid frequency in which to plot wind barbs for each domain, separated by commas
+Dupl. Snding              - yes = create a duplicate sounding with the Parcel Info box removed
+                          - no  = only create the regular sounding plot with the Parcel Info box
+
+***Plot Specific Parameters*** SECTION
+Plot Name   - The abbreviated name of the plot, also used in plot_defaults.asc and its gif image name in the FDDA Image Viewer
+Sha Int     - The contour interval of the shaded field for each domain, 1-4, separated by a comma
+Ctr Int     - The contour interval of the contoured field for each domain, 1-4, separated by a comma
+Dsh Int     - The contour interval of the dashed field for each domain, 1-4, separated by a comma
+Sha Max Smr - The maximum shaded value for summer plots
+Sha Min Smr - The minimum shaded value for summer plots
+Sha Max Wtr - The maximum shaded value for winter plots
+Sha Min Wtr - The minimum shaded value for winter plots
+Clr Tbl     - The color table to use for this plot (located in color_names.asc)
+Hghlt Line  - The line to highlight (e.g., 1000-500 540 line)
+*Note: "999" indicates parameter is not used for this plot
+
+***Sounding Parameters*** SECTION
+Domain             - the domain # (1-4)
+Sounding Locations - the 4-letter station ID or lat,lon coordinate for the sounding
+                   - multiple soundings are separated by :
+
+***Cross Section Parameters*** SECTION
+Domain                   - the domain # (1-4)
+Cross Section End Points - the cross section end points
+                         - left lat, left lon > right lat, right lon
+                         - multiple cross sections are separated by :
+
+***Overlays*** SECTION
+Line 1: Range Outline Domains   - Domain numbers used for range outlines, separated by commas
+Line 2: County Boundary Domains - Domain numbers used for range county outlines, separated by commas
+Lines 3+: parameters separated by a ;
+ param 1: 2 - 4 letter station ID to overlay
+ param 2: lat,lon of station
+ param 3: domain(s) on which to plot station, separated by a comma
+
+***Terrain Heights*** SECTION
+Domain - Domain #
+Min    - Minimum terrain shaded value for domain for all plots using terrain
+Max    - Maximum terrain shaded value for domain for all plots using terrain
+
+***END OF INPUT*** final line

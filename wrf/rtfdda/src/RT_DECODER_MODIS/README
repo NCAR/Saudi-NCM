@@ -1,0 +1,9 @@
+Usage: convert modis netcdf data into intermediate data for metgrid input.
+
+1. compile this code:
+pgf90 -o modis_sst.exe -Mfree sst_conv.F -byteswapio  -I /opt/netcdf/include -L /opt/netcdf/lib -lnetcdf -lnetcdff
+
+2. copy modis_sst.exe to ...../cycle_code/EXECUTABLE_ARCHIVE
+
+3. command:
+   ./modis_sst.exe $modis_data $yyyy$mm$dd$hh  $forecast_hr

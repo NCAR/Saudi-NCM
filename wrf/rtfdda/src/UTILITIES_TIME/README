@@ -1,0 +1,8 @@
+
+This directory contains files which be placed in ${HOME}/bin for
+user "mm5sys".  Note that ${HOME}/bin should also be in the $PATH
+of mm5sys.
+
+D. Hansen, NCAR
+
+

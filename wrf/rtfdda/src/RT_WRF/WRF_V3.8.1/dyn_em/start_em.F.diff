@@ -1,0 +1,35 @@
+1052a1053
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1053a1055,1057
+>                       grid%rqrndgdten,grid%rqsndgdten,grid%rqgndgdten,  &     !  Optional  meixu
+>                       grid%rqcndgdten,grid%rqindgdten,                  &     !  Optional  meixu
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - Radar mods
+1442a1447
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Yubao Liu mod to scale down lap_hgt for big dx
+1443a1449,1451
+> ! yliu 20130916  - scale down for bigger DX
+>           if(grid%dx.gt.2000.) grid%lap_hgt(i,j)=grid%lap_hgt(i,j)/sqrt(grid%dx/2000.)
+> ! yliu end
+1444a1453
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Yubao Liu mod to scale down lap_hgt for big dx
+1472c1481,1488
+<             if(grid%xland(i,j).lt.1.5)grid%ctopo(i,j)=sqrt(grid%var_sso(i,j))
+---
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Yubao Liu mod to avoid overflow for var_sso = -1 over land
+> ! yliu 20131016 - avoid overflow for var_sso = -1 over land (possible inconsistency in geogrid)
+> !           if(grid%xland(i,j).lt.1.5)grid%ctopo(i,j)=sqrt(grid%var_sso(i,j))
+>             if(grid%xland(i,j).lt.1.5) then
+>                grid%var_sso(i,j) = amax1(grid%var_sso(i,j),1.0)
+>                grid%ctopo(i,j)=sqrt(grid%var_sso(i,j))
+>             endif
+> ! yliu 20131016 end
+1473a1490
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Yubao Liu mod to avoid overflow for var_sso = -1 over land
+1490a1508
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Yubao Liu mod to raise lower friction limit for topo_wind
+1492a1511,1513
+> ! yliu 20130916  - raise the lower friction limit
+>                   grid%ctopo(i,j)=amax1(grid%ctopo(i,j),0.5)
+>                   grid%ctopo2(i,j)=amax1(grid%ctopo2(i,j),0.5)
+1495a1517
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 4 - Yubao Liu mod to raise lower friction limit for topo_wind

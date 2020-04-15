@@ -1,0 +1,41 @@
+178a179,183
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 1 - First change added by Will Cheng, 09152015
+>  ! ====== added for adap time step ==========
+>  !        by WC: 2015-08-23
+>  REAL :: xtime_wrf_time_seconds    ! model time in sec
+>  ! ===============================================
+180a186
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 1 - First change added by Will Cheng, 09152015
+291a298
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Second change added by Will Cheng, 09152015
+299a307,328
+>    ! ====== added by WC: 2015-08-22 =======
+>    IF ( ( grid%do_radar_ref .EQ. 1 ) .and.  &
+>         ( grid%wmxdbz_use .NE. 0 ) ) THEN
+>    ! diag_flag = .true.
+>     xtime_wrf_time_seconds = grid%xtime*60.*1000.   ! msec
+> 
+>     if (grid%use_adaptive_time_step) then
+>             if (abs(int(xtime_wrf_time_seconds)-           &
+>                     (1000*grid%wmxdbz_dt)*int(xtime_wrf_time_seconds/(1000*grid%wmxdbz_dt))).gt.                      &
+>                                (1000*1.5*grid%dt)) then
+>             else
+>              diag_flag = .true.
+>             endif
+>           else
+>             if (mod(int(xtime_wrf_time_seconds),int(1000*grid%wmxdbz_dt)).ne.0) then
+>             else
+>              diag_flag = .true.
+>             endif
+>           endif
+> 
+>    ENDIF
+>    ! ======================================
+300a330
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 2 - Second change added by Will Cheng, 09152015
+776a807
+> ! ----->> BEGIN STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Add argument rho_phy to sub first_rk_step_part2 for lightning potential (per Will Cheng)
+777a809
+>                              , rho_phy                          & !WC
+778a811
+> ! ----->> END STAGE RAL3.8.1R0 SOURCE UPDATE 3 - Add argument rho_phy to sub first_rk_step_part2 for lightning potential (per Will Cheng)

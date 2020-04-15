@@ -1,0 +1,70 @@
+###########################################################################
+#
+# Makefile for Modeling System (MS)
+# RTFDDA/RT_DECODER_MEDOC
+#
+# Dependencies:
+#      (1) You must have the MS_MAKE_MACROS_DIR environment variable defined
+#          and it must point to the directory of Modeling System Makefile
+#          include files.
+#      (2) You must have the MS_OS_TYPE environment variable defined and it
+#          must be one of the types in:
+#          $MS_MAKE_MACROS_DIR/compiler_macros.<ms_os_type>.
+#
+# Mar 2007
+#
+###########################################################################
+
+# ---------- Definitions -----------
+#
+# Include the standard shared make info (make_defns) and the
+# operating system specific info (compiler_macros.$(MS_OS_TYPE))
+
+include $(MS_MAKE_MACROS_DIR)/make_defns
+include $(MS_MAKE_MACROS_DIR)/compiler_macros.$(MS_OS_TYPE)
+
+# --------- Object files ----------
+
+EXEC	=	medoc_decoder.exe
+MODULES_MEDOC	=	module_medoc.o
+MODULES_DECODED	=	module_decoded.o
+MODULES_NETCDF=		typeSizes.mod netcdf.mod
+OBJS_MEDOC	=	medoc_decoder.o
+OBJS_UTIL    	=	error_handler.o ffdduv.o openfiles.o
+
+
+# --------- Local compile/link definitions --------
+
+NET		=	$(NETCDF)
+LOC_INCLUDES	=	
+LOC_LDLIBS	=	$(LDLIBS) $(NET_LDLIBS)
+LOC_LDFLAGS	=	$(NET_LDFLAGS)
+LOC_F90_LDFLAGS	=	-Wl,-rpath,$(NET)/lib $(LDFLAGS90)
+LOC_F90_FLAGS	=	$(FFFLAGSM_64)
+LOC_FC_FLAGS	=	$(FFFLAGSM_64)
+
+
+# --------- Targets --------------
+
+all:	$(MODULES_NETCDF) $(EXEC)
+
+install:	$(EXEC)
+	$(CP) $(EXEC) $(DEST)
+
+$(EXEC):	$(MODULES_MEDOC) $(OBJS_UTIL) $(MODULES_DECODED) $(OBJS_MEDOC)
+	$(F90_PRE_LINK) -o $@ $? $(F90_POST_LINK)
+
+$(MODULES_NETCDF):
+	$(LN) $(NET)/include/$@ $@
+
+clean:
+	$(RM) $(CLEAN_LIST) $(EXEC)
+
+add2readme:
+	echo "$(EXEC) -- source: `$(PWD)`, `$(DATE)`" >> $(DEST_SRC_README)
+
+# --------- Dependencies ----------
+
+# This needs to come after the other make targets
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.

@@ -1,0 +1,7 @@
+
+   CHARACTER ( LEN = * ) , INTENT ( IN )  :: arg
+   INTEGER , INTENT ( OUT )               :: ival
+   REAL , INTENT ( OUT )                  :: rval
+   CHARACTER ( LEN = * ) , INTENT ( OUT ) :: cval
+   CHARACTER ( LEN = * ) , INTENT ( IN )  :: append
+

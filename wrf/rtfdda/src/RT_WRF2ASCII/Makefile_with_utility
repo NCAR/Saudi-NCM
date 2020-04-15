@@ -1,0 +1,52 @@
+#------------------------------------------------------------------------------#
+# © the University Corporation for Atmospheric Research 2007. Note that        #
+# Government rights to use, modify, reproduce, release, perform, display or    #
+# disclose this data, computer software and related documentation are          #
+# restricted to a nonexclusive, nontransferable, irrevocable, royalty-free     #
+# license to exercise or have exercised for or on behalf of the U.S. throughout#
+# the world all the exclusive rights provided by copyrights. Such license      #
+# does not include the right to sell copies or phonorecords of the copyrighted #
+# works to the public. Any reproduction of data, computer software and related #
+# documentation marked with this legend must also reproduce these markings.    #
+#                                                                              #
+# Rong-Shyang Sheu, sheu@ucar.edu, January 2007.                               #
+#------------------------------------------------------------------------------#
+
+F90 = pgf90
+FFLAGS90 = -c
+LDFLAGS90 = -Wl,-Bstatic
+MV = mv -f
+CP = cp -f
+RM = rm -f
+INCLUDE = /usr/local/netcdf-3.6.2-pgi7/include
+LIB = /usr/local/netcdf-3.6.2-pgi7/lib
+
+OBJ = wrf_arrays.o wrf2ascii4medoc.o wrf_fields.o transpose_array.o
+
+MODS = wrf_arrays.mod netcdf.mod typesizes.mod
+
+all: wrf2ascii4medoc.exe wrf_fields.exe transpose_array.exe
+
+wrf2ascii4medoc.exe: wrf2ascii4medoc.o wrf_arrays.o
+	$(F90) $(LDFLAGS90) -L$(LIB) -o $@ $? -lnetcdff -lnetcdf
+
+wrf_fields.exe: wrf_fields.o wrf_arrays.o
+	$(F90) $(LDFLAGS90) -L$(LIB) -o $@ $? -lnetcdff -lnetcdf
+
+transpose_array.exe: transpose_array.o
+	$(F90) $(LDFLAGS90) -o $@ $<
+
+%.o : %.f90 $(MODS)
+	$(F90) $(FFLAGS90) $< -o $@
+
+netcdf.mod: typesizes.mod
+	$(CP) $(INCLUDE)/$@ $@
+
+typesizes.mod:
+	$(CP) $(INCLUDE)/$@ $@
+
+wrf_arrays.mod: wrf_arrays.o
+
+
+clean:
+	$(RM) *.o core $(EXEC) *mod *.exe
