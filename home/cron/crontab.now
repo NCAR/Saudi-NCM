@@ -53,6 +53,8 @@ MAILTO=""
 10 1 * * *   $HOME/bin/scrub -d 4 /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM
 30 1 * * *   $HOME/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
 
+30 2,14 * * * $HOME/distrib/push2webserver.sh >& /dev/null
+
 #35 3,9,15,21 * * * /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/logs/GWBLDR.cronlog
 #15 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/logs/GWBLDR.coldstart
 
@@ -63,7 +65,5 @@ MAILTO=""
 16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
 
 
-#10 10 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -c 2020021306 -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
 
-#0,10,20,30,40,50 * * * * /usr/bin/csh -c "/home/x_fisherh/csh_slurm_test"
-#5,15,25,35,45,55 * * * * /home/x_fisherh/bash_slurm_test
+
