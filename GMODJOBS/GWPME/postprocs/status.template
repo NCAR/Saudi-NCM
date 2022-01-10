@@ -1,0 +1,57 @@
+<HEAD>
+<title>WRF RT-FDDA Run Status</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+//  open station window function
+function tWindow() {
+ if (!window.twin) {     // has not yet been defined
+   twin=window.open('/images/home/atec.gif','weatherlist','height=850,width=710,scrollbars=yes,status=yes,resizable=yes,menub
+ar=yes');
+ }
+ else {                    // has been defined
+   if (!twin.closed) {     // still open
+    twin.focus();
+   }
+   else { twin=window.open('/images/home/atec.gif','weatherlist','height=850,width=710,scrollbars=yes,status=yes,resizable=ye
+s,menubar=yes');
+  }
+ }
+}
+// -->
+
+</SCRIPT>
+</HEAD>
+
+<BODY bgcolor="#FFFFFF" text="#666666" >
+<FONT FACE="Arial,Helvetica">
+<FONT SIZE=+3 COLOR="GREEN"> 
+<b>WRF RT-FDDA Run Status</b><br>
+</FONT><BR>
+<b> </b><br>
+<FONT COLOR="GRAY"> 
+<b>Please hit "reload" to see the latest status</b><br>
+</FONT><BR>
+<b> </b><br>
+<b> </b><br>
+<FONT SIZE=+1 COLOR="BLUE"> 
+<b>CYCLE cycle            started at STARTTIME</b><br>
+<b> </b><br>
+<b>COLDSTART </b><br>
+<b> </b><br>
+<b>C-stage Obs Processing started at STATUS1 </b><br>
+<b> </b><br>
+<b>F-stage Obs Processing started at STATUS2 </b><br>
+<b>F-stage WRF            started at STATUS3 </b><br>
+<b> </b><br>
+<b>P-stage Obs Processing started at STATUS4 </b><br>
+<b>P-stage WRF            started at STATUS5 </b><br>
+<b> </b><br>
+<b>P-stage WRF           finished at STATUS6 </b><br>
+
+</FONT><BR>
+
+<br>
+
+</BODY>
+</HTML>

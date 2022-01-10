@@ -1,0 +1,31 @@
+ModuleCmd_Load.c(244):ERROR:105: Unable to locate a modulefile for 'Base-opts'
+cmdTrace.c(730):ERROR:104: 'PrgEnv-intel' is an unrecognized subcommand
+cmdModule.c(423):ERROR:104: 'PrgEnv-intel' is an unrecognized subcommand
+Using env-vars file: ./env_vars.csh
+ModuleCmd_Load.c(244):ERROR:105: Unable to locate a modulefile for 'python/2.7'
+Calling /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/PERL/flex/init.pl with '-c 2019032112 --'
+flexinput file is /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/flexinput.pl
+sourcing /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/cshrc
+cycle label PME_2112
+ACCOUNT_KEY : -A DPGUT38332XWX
+QUEUE : -q xwx
+DSP : -l dsp=XWX
+
+/opt/slurm/default/bin//sbatch -J GWPME_2019032112_pre_f --partition=workq -t 90 -A k1206 --ntasks=32 --ntasks-per-node=32 --ntasks-per-socket=16 -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/pre_f.log -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/pre_f.log /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/PERL/flex/pre_process_F.pl
+JOB GWPME_2019032112_pre_F submitted - jobid: 8719762
+
+/opt/slurm/default/bin//sbatch -J 2019032112_postproc -d after:8719762 --partition=workq -t 360 -A k1206 -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/post_process.log -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/post_process.log --export=ALL,FLEXINPUT=/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/2019032112/pre_process_in_donotedit.pl,MM5HOME=/lustre/project/k1206/build_mm_released/wrfv3.8.1 /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/PERL/flex/rtfdda_postproc.pl > /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/moabID_post_process
+JOB GWPME_2019032112_postprocess submitted - jobid: 8719763
+
+/opt/slurm/default/bin//sbatch -J GWPME_2019032112_wrf_f -d afterany:8719762 --export=ALL,CSHRC_RT=/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/2019032112/cshrc,CSHRC_WRF=/lustre/project/k1206//x_fisherh/cycles/GWPME/GRM/2019032112/cshrc.WRF_F --partition=workq -t 120 -A k1206 --ntasks=480 --ntasks-per-node=32 --ntasks-per-socket=16 -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/wrf_f.log -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/wrf_f.log /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/CSH_ARCHIVE/Forecast/RT_L_MM_WRF_rtfdda.csh
+JOB GWPME_2019032112_WRF_F submitted - jobid: 8719764
+
+
+/opt/slurm/default/bin//sbatch -J GWPME_2019032112_pre_P -d afterany:8719764 --export=ALL,FLEXINPUT=/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/2019032112/pre_process_in_donotedit.pl --partition=workq -t 30 -A k1206 --ntasks=32 --ntasks-per-node=32 --ntasks-per-socket=16 -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/pre_p+fcst.log -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/pre_p+fcst.log /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/PERL/flex/pre_process_P+FCST.pl
+JOB GWPME_2019032112_pre_P+FCST submitted - jobid: 8719765
+
+/opt/slurm/default/bin//sbatch -J GWPME_2019032112_wrf_p -d afterany:8719765 --export=ALL,CSHRC_RT=/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/2019032112/cshrc,CSHRC_WRF=/lustre/project/k1206//x_fisherh/cycles/GWPME/GRM/2019032112/cshrc.WRF_P+FCST --partition=workq -t 210 -A k1206 --ntasks=480 --ntasks-per-node=32 --ntasks-per-socket=16 -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/WRF+P+FCST.log -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/WRF+P+FCST.log.log /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/CSH_ARCHIVE/Forecast/RT_L_MM_WRF_rtfdda.csh
+JOB GWPME_2019032112_WRF_P+FCST submitted - jobid: 8719766
+
+/opt/slurm/default/bin//sbatch -J GWPME_2019032112_clean -d afterany:8719766 --export=ALL,FLEXINPUT=/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/tmp/2019032112/pre_process_in_donotedit.pl --partition=workq -t 60 -A k1206 --ntasks=1 -o /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/post_process_clean.pl -e /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/2019032112/post_process_clean.pl /lustre/project/k1206/build_mm_released/wrfv3.8.1/cycle_code/PERL/flex/post_process_clean.pl
+JOB GWPME_2019032112_clean submitted - jobid: Submitted batch job 8719767

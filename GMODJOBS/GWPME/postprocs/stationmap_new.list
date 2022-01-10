@@ -1,0 +1,531 @@
+ 19.833  -90.500   42 CPE Campeche, MX                            
+ 20.517  -86.933    1 CZM Cozumel, MX                             
+ 20.983  -89.650   10 MID Merida, MX                              
+ 21.033  -86.883    1 CUN Cancun, MX                              
+ 24.130 -104.530 1880 DGO DURANGO AIRPORT, MX                     
+ 24.554  -81.754    1 EYW Key West, FL                            
+ 25.483  -80.383    2 HST Homestead AFB, FL                       
+ 25.780 -100.100  374 MTY MONTERREY/GEN MARIA, MX                 
+ 25.791  -80.316    3 MIA Miami, FL                               
+ 25.820 -108.980   22 LMN LOS MOCHIS AIRPORT, MX                  
+ 25.914  -97.423    7 BRO Brownsville, TX                         
+ 26.068  -80.153    3 FLL Ft Lauderdale, FL                       
+ 26.150  -81.767    2 APF Naples, FL                              
+ 26.550  -78.700    5 MYG Freeport, BH                            
+ 26.584  -81.862    5 FMY Ft Meyers, FL                           
+ 26.685  -80.099    5 PBI West Palm Beach, FL                     
+ 27.401  -82.559    9 SRQ Sarasota, FL                            
+ 27.503  -97.812   15 NQI Kingsville, TX                          
+ 27.656  -80.418    7 VRB Vero Beach, FL                          
+ 27.650  -81.333   20 AGR Avon Park Gunnery Range, FL             
+ 27.773  -97.513   13 CRP Corpus Christi, TX                      
+ 27.912  -82.686    3 PIE St Petersburg, FL                       
+ 27.950  -81.783   39 BOW Bartow, FL                              
+ 27.961  -82.540    8 TPA Tampa, FL                               
+ 27.980 -110.930   33 GYM Guaymas Int A, MX                       
+ 27.983  -82.017   43 LAL Lakeland, FL                            
+ 28.103  -80.646   10 MLB Melbourne, FL                           
+ 28.417  -81.325   29 MCO Orlando Jetport, FL                     
+ 28.517  -80.800   11 TIX Titusville, FL                          
+ 28.546  -81.336   34 ORL Orlando Herndon, FL                     
+ 28.617  -80.683    2 X68 NASA Shuttle Facilty, FL                
+ 28.700 -105.970 1356 CUU Chihuahua Int A, MX                     
+ 28.783  -81.250   17 SFB Sanford, FL                             
+ 28.863  -96.930   35 VCT Victoria, TX                            
+ 29.177  -81.060   10 DAB Daytona Beach, FL                       
+ 29.270  -94.864    2 GLS Galveston, TX                           
+ 29.333  -89.400    0 BVE Boothville, LA                          
+ 29.375 -100.924  304 DRT Del Rio (AUTOB), TX                     
+ 29.533  -98.464  246 SAT San Antonio, TX                         
+ 29.550  -83.105   12 CTY Cross City (AMOS), FL                   
+ 29.692  -82.276   46 GNV Gainesville, FL                         
+ 29.727  -85.025    6 AQQ Apalachicola, FL                        
+ 29.951  -94.021    5 BPT Beaumont, TX                            
+ 29.992  -95.364   29 IAH Houston, TX                             
+ 29.993  -90.251    1 MSY New Orleans, LA                         
+ 30.049  -90.029    2 NEW New Orleans, LA                         
+ 30.067  -85.583    5 PAM Tyndall AFB, FL                         
+ 30.126  -93.223    5 LCH Lake Charles, LA                        
+ 30.207  -85.685    6 PFN Pensacola, FL                           
+ 30.194  -97.670  165 AUS In/mueller, TX                          
+ 30.393  -84.353   24 TLH Tallahassee, FL                         
+ 30.478  -87.187   36 PNS Pensacola, FL                           
+ 30.494  -81.693    9 JAX Jacksonville, FL                        
+ 30.537  -91.147   21 BTR Baton Rouge, LA                         
+ 30.688  -88.246   66 MOB Mobile, AL                              
+ 31.178  -90.472  126 MCB Mccomb/Lewisfield, MS                   
+ 31.234  -94.750   90 LFK Lufkin, TX                              
+ 31.250  -82.400   46 AYS Waycross, GA                            
+ 31.335  -92.559   27 AEX Alexandria, LA                          
+ 31.351 -100.494  584 SJT San Angelo, TX                          
+ 31.395  -92.290   34 ESF Alexandria, LA                          
+ 31.469 -109.604 1266 DUG DOUGLAS, AZ                             
+ 31.583 -110.333 1438 FHU FORT HUACHUCA, AZ                       
+ 31.617  -97.228  157 ACT Waco-Madison Cooper, TX                 
+ 31.780 -103.201  860 INK WINK, TX                                
+ 31.811 -106.376 1206 ELP El Paso, TX                             
+ 31.831 -104.809 1661 GDP GUADALUPE PASS, TX                      
+ 31.948 -102.209  875 MAF Midland, TX                             
+ 32.131 -110.955  805 TUS Tucson, AZ                              
+ 32.119  -81.202   15 SAV Savannah, GA                            
+ 32.262 -107.721 1315 DMN Deming, NM                              
+ 32.280 -106.920 1358 LRU LAS CRUCES, NM                          
+ 32.300  -86.406   67 MGM Montgomery, AL                          
+ 32.320  -90.078  105 JAN Jackson, MS                             
+ 32.338 -104.263 1004 CNM CARLSBAD, NM                            
+ 32.338  -88.748   90 MEI Meridian, MS                            
+ 32.359  -95.404  165 TYR Tyler, TX                               
+ 32.410  -99.682  545 ABI Abiline , TX                            
+ 32.447  -93.824   78 SHV Shreveport, LA                          
+ 32.494  -80.703   11 NBC Beaumont, SC                            
+ 32.516  -84.942  121 CSG Columbus, GA                            
+ 32.512  -92.031   24 MLU Monroe, LA                              
+ 32.550 -114.710   29 YVA Yuma,Valley, AZ                         
+ 32.610 -114.630   46 YME Yuma,Mesa, AZ                           
+ 32.633 -108.150 1659 SVC SILVER CITY, NM                         
+ 32.650 -114.600   65 YUM Yuma, AZ                                
+ 32.683 -103.217 1115 HOB HOBBS, NM                               
+ 32.688  -83.654  107 MCN Macon, GA                               
+ 32.734 -117.183    4 SAN San Diego , CA                          
+ 32.833 -105.983 1279 ALM ALAMOGORDO-WHIT,NM                      
+ 32.850 -106.100 1248 HMN HOLLOMAN AFB, NM                        
+ 32.852  -96.856  148 DAL Dallas, TX                              
+ 32.433 -112.683  262 GBN GILA BEND, AZ                           
+ 32.899  -80.041   14 CHS Charleston, SC                          
+ 32.900  -87.250  140 CKL Centreville, AL                         
+ 32.897  -97.022  183 DFW Dallas/Ft Worth, TX                     
+ 33.212  -87.616   52 TCL Tuscaloosa, AL                          
+ 33.230 -107.260 1478 TCS Truth or Consequnces, NM                
+ 33.308 -104.508 1118 ROW ROSWELL, NM                             
+ 33.350 -105.670 2132 RUI RUIDOSO, NM                             
+ 33.364  -81.963   44 AGS Augusta, GA                             
+ 33.434 -112.051  345 PHX Phoenix, AZ                             
+ 33.456  -93.987  118 TXK Texarkana, AR                           
+ 33.46  -105.53  2076 SRR Ruidoso, NM
+ 33.492  -90.084   47 GWO Greenwood, MS                           
+ 33.566  -86.745  196 BHM Birmingham, AL                          
+ 33.633  -95.450  167 PRX Paris, TX                               
+ 33.667 -101.821 1000 LBB Lubbock, TX                             
+ 33.630  -84.442  312 ATL Atlanta, GA                             
+ 33.880 -114.450   94 PKR Parker, AZ                              
+ 33.938 -118.389   38 LAX Los Angeles, CA                         
+ 33.950 -113.190  669 AGU Aguila, AZ                              
+ 33.942  -81.118   71 CAE Columbia, SC                            
+ 33.951  -83.328  246 AHN Athens, GA                              
+ 33.979  -98.493  309 SPS Wichita Falls, TX                       
+ 34.017 -106.900 1478 ONM SOCORRO, NM                             
+ 34.100 -105.683 1981 4CR CORONA, NM                              
+ 34.175  -91.935   63 PBF Pine Bluff, AR                          
+ 34.188  -79.731   45 FLO Florence City, SC                       
+ 34.268  -77.906    9 ILM Wilmington, NC                          
+ 34.268  -88.770  106 TUP Tupelo, MS                              
+ 34.433 -103.083 1284 CVN CLOVIS, NM                              
+ 34.426 -119.844    3 SBA Santa Barbara, CA                       
+ 34.478  -93.096  165 HOT Hot Springs, AR                         
+ 34.498  -82.710  238 AND Anderson, SC                            
+ 34.644  -86.786  192 HSV Huntsville, AL                          
+ 34.706  -77.441    7 NCA New River, NC                           
+ 34.727  -92.236   79 LIT Little Rock, AR                         
+ 34.766 -114.623  300 EED NEEDLES, CA                             
+ 34.854 -116.787  587 DAG Daggett-Barstow, CA                     
+ 34.882  -95.783  234 MLC Mcalester, OK                           
+ 34.917 -117.900  702 EDW EDWARDS AFB, CA                         
+ 34.899 -120.449   78 SMX Santa Maria, CA                         
+ 34.898  -76.881    8 NKT Cherry Point, NC                        
+ 34.884  -82.221  296 GSP Greenville, SC                          
+ 34.920 -105.580 2072 P70 CLINES CORNER, NM                       
+ 34.983 -106.050 1890 4MY MORIARITY, NM                           
+ 34.989  -78.880   57 FAY Fayetteville, NC                        
+ 34.989  -99.052  476 HBR Hobart, OK                              
+ 35.028 -110.721 1505 INW Winslow (AUTOB), AZ                     
+ 35.033  -85.200  207 CHA Chattanooga, TN                         
+ 35.042 -106.615 1631 ABQ Albuquerque, NM                         
+ 35.061  -89.985  101 MEM Memphis, TN                             
+ 35.083 -108.783 1957 ZUN Zuni Pueblo, NM                         
+ 35.068  -77.047    5 EWN New Bern, NC                            
+ 35.140 -111.672 2137 FLG Flagstaff (AMOS), AZ                    
+ 35.165 -107.902 1988 GNT GRANTS, NM                              
+ 35.183 -103.603 1239 TCC Tucumcari, NM                           
+ 35.213  -80.949  228 CLT Charlotte, NC                           
+ 35.220 -101.717 1099 AMA Amarillo, TX                            
+ 35.267  -75.550    2 HAT Cape Hatteras, NC                       
+ 35.334  -94.365  142 FSM Fort Smith, AR                          
+ 35.389  -97.600  394 OKC Oklahoma City, OK                       
+ 35.434 -119.057  155 BFL Bakersfield/Meadows, CA                 
+ 35.432  -82.537  660 AVL Asheville, NC                           
+ 35.500 -108.600 2072 FWG Fort Wingate                            
+ 35.511 -108.789 1973 GUP GALLUP, NM                              
+ 35.593  -88.917  132 MKL Jackson, TN                             
+ 35.611 -106.095 1934 SAF SANTA FE, NM                            
+ 35.654 -105.143 2096 LVS LAS VEGAS/MUNI, NM                      
+ 35.657  -95.360  185 MKO Muskogee, OK                            
+ 35.742  -81.382  362 HKY Hickory, NC                             
+ 35.818  -83.986  299 TYS Knoxville, TN                           
+ 35.837  -90.643   79 JBR Jonesboro, AR                           
+ 35.871  -78.786  133 RDU Raleigh, NC                             
+ 35.883 -106.283 2179 LAM LOS ALAMOS, NM                          
+ 35.946 -112.155 2014 GCN GRAND CANYON, AZ                        
+ 35.951  -85.085  573 CSV Crossville, TN                          
+ 36.010  -94.168  381 FYV Fayetteville, AR                        
+ 35.800 -107.183 2106 4SL CUBA AWRS, NM                           
+ 36.079 -115.155  663 LAS Las Vegas, NV                           
+ 36.098  -79.944  282 GSO Greensboro, NC                          
+ 36.119  -86.689  182 BNA Nashville, TN                           
+ 36.197  -95.886  206 TUL Tulsa, OK                               
+ 36.297  -99.769  677 GAG Gage, OK                                
+ 36.420 -105.570 2127 E23 TAOS, NM                                
+ 36.448 -103.153 1513 CAO CLAYTON, NM                             
+ 36.480  -82.399  463 TRI Bristol, TN                             
+ 36.573  -79.336  174 DAN Danville, VA                            
+ 36.533 -115.900  952 INS Indian Springs, NV                      
+ 36.621 -116.028 1007 DRA Desert R/Mercury, NV                    
+ 36.667  -87.500  174 HOP Hopkinsville, KY                        
+ 36.744 -108.229 1677 FMN Farmington, NM                          
+ 36.780 -119.719  101 FAT Fresno, CA                              
+ 36.821  -76.028    6 NTU Oceana, VA                              
+ 36.900 -106.583 2393 E33 CHAMA, NM                               
+ 36.904  -76.192    8 ORF Norfolk, VA                             
+ 37.964  -86.424  166 BWG Bowling Green, KY                       
+ 37.056  -88.774  125 PAH Paducah, KY                             
+ 37.089  -84.069  369 LOZ London, KY                              
+ 37.156  -94.501  299 JLN Joplin, MO                              
+ 37.240  -93.390  386 SGF Springfield, MO                         
+ 37.317  -79.974  358 ROA Roanoke, VA                             
+ 37.321  -79.207  285 LYH Lynchburg, VA                           
+ 37.371 -118.358 1256 BIH Bishop, CA                              
+ 37.439 -105.861 2297 ALS Alamosa, CO                             
+ 37.500 -110.700 1110 U17 Bullfrog, UT                            
+ 37.511  -77.323   51 RIC Richmond, VA                            
+ 37.617 -109.467 1840 4BL Blanding, UT                            
+ 37.620 -122.365    3 SFO San Francisco, CA                       
+ 37.647  -97.429  406 ICT Wichita, KS                             
+ 37.670  -95.484  305 CNU Chanute/Martin John, KS                 
+ 37.706 -112.146 2312 BCE Bryce Canyon, UT                        
+ 37.707 -113.097 1715 CDC Cedar City, UT                          
+ 37.773  -99.970  790 DDC Dodge City, KS                          
+ 37.795  -81.125  763 BKW Beckley, WV                             
+ 37.867  -80.400  702 LWB Lewisburg, WV                           
+ 37.890 -121.224    9 SCK Stockton, CA                            
+ 37.941  -75.463   12 WAL Wallops Island, VA                      
+ 38.041  -84.606  298 LEX Lexington, KY                           
+ 38.043  -87.520  127 EVV Evansville , IN                         
+ 38.060 -117.087 1654 TPH Tonopah, NV                             
+ 38.138  -78.456  195 CHO Charlottesville, VA                     
+ 38.177  -85.730  151 SDF Louisville, KY                          
+ 38.250 -114.383 2644 ILC Wilson Creek, NV                        
+ 38.267  -78.900  366 SHD Staunton, VA                            
+ 38.290 -104.498 1440 PUB Pueblo, CO                              
+ 38.279  -76.414   12 NHK Patuxent River, MD                      
+ 38.341  -75.510   16 SBY Salisbury, MD                           
+ 38.379  -81.591  299 CRW Charleston, WV                          
+ 38.365  -82.555  252 HTS Huntington, WV                          
+ 38.417 -110.800 1401 HVE Hanksville, UT                          
+ 38.422 -113.010 1536 MLF Milford, UT                             
+ 38.500  -70.700    2 C7H Near Ship Hotel, BH                     
+ 38.507 -121.495    6 SAC Sacramento, CA                          
+ 38.550 -118.633 1285 HTH Hawthorne, NV                           
+ 38.550  -89.850  138 BLV Scott AFB, IL                           
+ 38.633 -112.200 1655 7LI Joseph, UT                              
+ 38.752  -90.374  184 STL St Louis, MO                            
+ 38.760 -109.745 1388 CNY Moab, UT                                
+ 38.816 -104.711 1881 COS Colorado Springs, CO                    
+ 38.817  -92.218  271 COU Columbia, MO                            
+ 38.848  -77.034    4 DCA Washington, DC                          
+ 38.873  -98.813  567 RSL Russell, KS                             
+ 38.885  -79.853  605 EKN Elkins, WV                              
+ 38.935  -77.448   95 IAD Washington/Dulles, DC                   
+ 39.000 -110.167 1241 U28 Green River Rang, UT                    
+ 39.043  -84.672  273 CVG Cincinnati/Greater, KY                  
+ 39.073  -95.626  268 TOP Topeka, KS                              
+ 39.106  -84.416  147 LUK Cincinnati, OH                          
+ 39.134 -108.539 1481 GJT Grand Junction, CO                      
+ 39.121  -94.597  231 MKC Kansas City, MO                         
+ 39.133  -75.467    9 DOV Dover, DE                               
+ 39.167  -76.683   44 BWI Baltimore, MD                           
+ 39.295 -114.845 1907 ELY Ely, NV                                 
+ 39.297  -94.731  312 MCI Kansas City, MO                         
+ 39.330 -112.580 1418 DEL Delta , UT                              
+ 39.345  -81.439  262 PKB Parkersburg, WV                         
+ 39.367 -101.693 1114 GLD Goodland, KS                            
+ 39.366  -75.078   26 MIV Millville, NJ                           
+ 39.402  -77.984  170 MRB Martinsburg, WV                         
+ 39.432 -118.686 1199 NFL Fallon NAS, NV                          
+ 39.465  -74.587   23 ACY Atlantic City, NJ                       
+ 39.467  -76.167   18 APG Aberdeen, MD                            
+ 39.500 -117.083 2014 U31 Austin, NV                              
+ 39.484 -119.771 1345 RNO Reno, NV                                
+ 39.551  -97.651  453 CNK Concordia, KS                           
+ 39.650  -77.467  547 DVD President's Retreat CP DAVID, MD        
+ 39.649  -79.921  380 MGW Morgantown, WV                          
+ 39.673  -75.601   24 ILG Wilmington, DE                          
+ 39.725  -86.282  243 IND Indianapolis, IN                        
+ 39.833 -104.657 1655 DEN Denver, CO                              
+ 39.768  -94.909  251 STJ St Joseph, MO                           
+ 39.845  -89.684  182 SPI Springfield, IL                         
+ 39.868  -75.231    6 PHL Philadelphia, PA                        
+ 39.906  -84.219  307 DAY Dayton, OH                              
+ 39.944  -81.892  274 ZZV Zanesville, OH                          
+ 39.995  -82.876  248 CMH Columbus, OH                            
+ 40.033  -74.317   31 NEL Lakehurst, NJ                           
+ 40.032  -88.273  229 CMI Champaign-Urbana, IL                    
+ 40.066 -118.565 1190 LOL Lovelock, NV                            
+ 40.117 -112.560 2005 LKP Lookout Pass, UT                            
+ 40.133 -110.117 1646 MTU Myton, UT                               
+ 40.120  -76.294  123 LNS Lancaster, PA                           
+ 40.135 -113.451 1293 SLT SL Test Site, UT                            
+ 40.151 -122.252  106 RBL Red Bluff, CA                           
+ 40.170  -80.644  364 HLG Wheeling, WV                            
+ 40.194  -76.763   95 MDT Middletown, PA                          
+ 40.217 -111.717 1369 PVU Provo, UT                               
+ 40.217  -76.851  106 CXY Harrisburg, PA                          
+ 40.300 -109.983 1553 U67 Roosevelt, UT                           
+ 40.289 -112.368 1537 TW9 Tower 9, UT                             
+ 40.300  -78.317  458 AOO Altoona, PA                             
+ 40.317 -112.300 1628 T62 Tooele, UT                              
+ 40.333 -112.567 1976 JNP Johnson Pass, UT                            
+ 40.413  -86.948  184 LAF Lafayette, IN                           
+ 40.515 -122.297  153 RDD Redding, CA                             
+ 40.504  -80.266  366 PIT Pittsburgh, PA                          
+ 40.509 -112.464 1505 TW1 Tower 1, UT                             
+ 40.557 -112.062 1572 LFP Landfill Profiler, UT                   
+ 40.567 -116.917 1386 BAM Battle Mtn, NV                          
+ 40.639  -73.762    3 JFK New York City - JFK, NY                 
+ 40.651  -75.449  120 ABE Allentown, PA                           
+ 40.667  -89.684  201 PIA Peoria, IL                              
+ 40.682  -74.169    5 EWR Newark, NJ                              
+ 40.710 -112.250 1265 UT9 I80/Kennecott (Lake Point), UT              
+ 40.717 -113.750 1281 BVL Bonneville, UT                          
+ 40.733 -114.033 1291 ENV Wendover , UT                           
+ 40.742 -112.653 1277 SKU I80/Skull Valley, UT                        
+ 40.779  -73.880    6 LGA New York City - LGA, NY                 
+ 40.778 -111.969 1288 SLC Salt Lake City, UT                      
+ 40.773  -91.125  212 BRL Burlington, IA                          
+ 40.800 -124.167   13 EKA Eureka, CA                              
+ 40.794  -73.102   30 ISP Islip, NY                               
+ 40.825 -115.792 1568 EKO Elko, NV                                
+ 40.831  -96.764  370 LNK Lincoln, NE                             
+ 40.883  -78.083  578 PSB Philipsburg, PA                         
+ 40.900 -112.350 1265 HAT Hat Island, UT                              
+ 40.902 -117.807 1311 WMC Winnemucca, NV                          
+ 40.918  -81.443  374 CAK Akron, OH                               
+ 40.958  -98.312  562 GRI Grand Island, NE                        
+ 40.978  -85.195  248 FWA Fort Wayne, IN                          
+ 41.067  -73.707  134 HPN White Plains, NY                        
+ 41.122 -100.668  846 LBF North Platte, NE                        
+ 41.158 -104.807 1876 CYS Cheyenne, WY                            
+ 41.167  -71.583   33 BID Block Island, RI                        
+ 41.158  -73.129    3 BDR Bridgeport, CT                          
+ 41.194 -112.016 1362 OGD Ogden, UT                               
+ 41.254  -70.060   14 ACK Nantucket, MA                           
+ 41.243  -76.922  161 IPT Williamsport, PA                        
+ 41.254  -80.674  364 YNG Youngstown, OH                          
+ 41.310  -95.899  299 OMA Omaha, NE                               
+ 41.339  -75.727  293 AVP Wilkes Barre/Scranton, PA               
+ 41.405  -81.853  241 CLE Cleveland, OH                           
+ 41.451  -90.515  179 MLI Moline, IL                              
+ 41.538  -93.666  291 DSM Des Moines, IA                          
+ 41.594 -109.065 2060 RKS Rock Springs, WY                        
+ 41.589  -83.801  208 TOL Toledo, OH                              
+ 41.627  -73.884   50 POU Poughkeepsie, NY                        
+ 41.667 -115.783 1902 AWH Wildhorse Res, NV                       
+ 41.672  -70.270   15 HYA Hyannis, MA                             
+ 41.709  -86.319  244 SBN South Bend, IN                          
+ 41.724  -71.428   16 PVD Providence, RI                          
+ 41.784  -87.755  188 MDW Chicago Midway, IL                      
+ 41.799  -78.636  653 BFD Bradford, PA                            
+ 41.867 -103.586 1208 BFF Scottsbluff, NE                         
+ 41.883  -91.724  263 CID Cedar Rapids, IA                        
+ 41.938  -72.683   53 BDL Hartford/Bradley, CT                    
+ 41.950 -116.100 1645 OWY Owyhee, NV                              
+ 41.980  -87.904  203 ORD Chicago, IL                             
+ 41.981  -97.437  479 OFK Norfolk, NE                             
+ 42.080  -80.183  223 ERI Erie, PA                                
+ 42.083  -87.817  197 NBU Glenview, IL                            
+ 42.150  -79.267  525 JHW Jamestown, NY                           
+ 42.160  -72.713   82 BAF Westfield, MA                           
+ 42.193  -89.093  224 RFD Rockford, IL                            
+ 42.208  -75.981  496 BGM Binghamton, NY                          
+ 42.231  -83.331  194 DTW Detroit, MI                             
+ 42.271  -71.873  307 ORH Worcester, MA                           
+ 42.381 -122.872  405 MFR Medford, OR                             
+ 42.361  -71.011    6 BOS Boston, MA                              
+ 42.398  -90.704  328 DBQ Dubuque, IA                             
+ 42.402  -96.384  335 SUX Sioux City, IA                          
+ 42.433  -73.683   91 val Valatie (Cornell), NY                   
+ 42.450  -76.450  283 gfr Ithaca (Cornell), NY                    
+ 42.483  -76.450  335 ITH Ithaca, NY                              
+ 42.500  -89.017  223 BEL Beloit, WI                              
+ 42.554  -92.401  266 ALO Waterloo, IA                            
+ 42.747  -73.799   86 ALB Albany, NY                              
+ 42.780  -84.579  262 LAN Lansing, MI                             
+ 42.815 -108.728 1703 LND Lander, WY                              
+ 42.859 -100.551  789 VTN Valentine (AMOS), NE                    
+ 42.881  -85.523  242 GRR Grand Rapids, MI                        
+ 42.898 -106.473 1630 CPR Casper, WY                              
+ 42.920 -112.571 1356 PIH Pocatello, ID                           
+ 42.941  -78.736  220 BUF Buffalo, NY                             
+ 42.955  -87.904  220 MKE Milwaukee, WI                           
+ 42.967  -83.749  238 FNT Flint, MI                               
+ 43.033  -81.150  278 YXU London, ON                              
+ 43.083  -75.667  180 ONE Oneida, NY                              
+ 43.109  -76.103  128 SYR Syracuse, NY                            
+ 43.117  -77.677  170 ROC Rochester, NY                           
+ 43.141  -89.345  262 MSN Madison, WI                             
+ 43.145  -75.384  227 UCA Utica, NY                               
+ 43.158  -93.331  370 MCW Mason City, IA                          
+ 43.171  -86.237  191 MKG Muskegon, MI                            
+ 43.195  -71.501  105 CON Concord, NH                             
+ 43.233  -75.400  154 RME Rome/Griffiss AFB, NY                   
+ 43.283  -75.450  168 WES Westernville, NY                        
+ 43.341  -73.611  100 GFL Glens Falls, NY                         
+ 43.417 -124.250    4 OTH North Bend, OR                          
+ 43.533  -72.950  240 RUT Rutland, VT                             
+ 43.567 -116.241  871 BOI Boise, ID                               
+ 43.583  -75.400  387 TUG Tughill, NY                             
+ 43.577  -96.754  435 FSD Sioux Falls, SD                         
+ 43.595 -118.956 1263 BNO Burns (AMOS), OR                        
+ 43.627  -72.306  182 LEB Lebanon, NH                             
+ 43.642  -70.304   22 PWM Portsmouth, ME                          
+ 43.667  -79.633  173 YYZ Toronto, ON                             
+ 43.770  -88.486  246 FDL Fond Du Lac, WI                         
+ 43.833  -66.083   43 YQI Yarmouth, NS                            
+ 43.879  -91.257  199 LSE La Crosse, WI                           
+ 43.904  -92.492  401 RST Rochester, MN                           
+ 43.992  -76.022   99 ART Watertown, NY                           
+ 44.046 -103.054  976 RAP Rapid City, SD                          
+ 44.050  -75.733  207 GTB Fort Drum, NY                           
+ 44.133 -123.214  111 EUG Eugene, OR                              
+ 44.205  -72.566  355 MPV Montpelier, VT                          
+ 44.254 -121.150  938 RDM Redmond, OR                             
+ 44.250  -73.983  572 lkp Lake Placid (Cornell), NY               
+ 44.321  -69.797  107 AUG Augusta, ME                             
+ 44.351  -84.674  350 HTL Houghton Lake, MI                       
+ 44.383 -100.286  531 PIR Pierre, SD                              
+ 44.388  -98.228  392 HON Huron, SD                               
+ 44.468  -73.150  101 BTV Burlington, VT                          
+ 44.479  -88.137  211 GRB Green Bay, WI                           
+ 44.567  -75.117  122 can Canton (Cornell), NY                    
+ 44.650  -73.467   72 PBG Plattsburgh, NY                         
+ 44.737  -85.570  190 TVC Traverse City, MI                       
+ 44.750  -81.100  222 YVV Wiarton, ON                             
+ 44.769 -106.969 1225 SHR Sheridan, WY                            
+ 44.783  -89.667  389 CWA Mosinee, WI                             
+ 44.797  -68.819   58 BGR Bangor, ME                              
+ 44.865  -91.485  277 EAU Eau Claire, WI                          
+ 44.883  -73.433   48 czy Chazy (Cornell), NY                     
+ 44.883  -93.229  256 MSP Minneapolis, MN                         
+ 44.908 -122.995   64 SLE Salem, OR                               
+ 44.936  -74.846   66 MSS Massena, NY                             
+ 44.929  -89.627  366 AUW Wausau, WI                              
+ 44.967  -79.300  280 YQA Muskoka, ON                             
+ 45.072  -83.564  210 APN Alpena, MI                              
+ 45.333  -65.883  103 YSJ St John, NB                             
+ 45.317  -75.667  116 YOW Ottawa, ON                              
+ 45.443  -98.413  396 ABR Aberdeen, SD                            
+ 45.517  -73.417   27 YHU St Hubert, PQ                           
+ 45.545  -94.052  312 STC St Cloud, MN                            
+ 45.591 -122.600    8 PDX Portland, OR                            
+ 45.698 -118.834  455 PDT Pendleton (AMOS), OR                    
+ 45.683  -74.033   82 YMX Montreal/Mirabel, PQ                    
+ 45.807 -108.542 1112 BIL Billings, MT                            
+ 45.814  -88.109  360 IMT Iron Moutain, MI                        
+ 45.869  -95.394  434 AXN Alexandria, MN                          
+ 45.950  -77.317  130 YWA Petawawa(Can-Mil), ON                   
+ 46.095 -118.284  367 ALW Walla Walla, WA                         
+ 46.123  -67.792  149 HUL Houlton, ME                             
+ 46.157 -123.882    3 AST Astoria, OR                             
+ 46.350  -79.433  358 YYB North Bay, ON                           
+ 46.354  -87.396  372 SAW K.I. Sawyer AFB, MI                     
+ 46.375 -117.014  438 LWS Lewiston (AMOS), ID                     
+ 46.405  -94.131  373 BRD Branierd, MN                            
+ 13.450  -88.117   80 SSM Sault Ste Marie, MI                     
+ 46.533  -87.550  434 MQT Marquette, MI                           
+ 46.564 -120.534  333 YKM Yakima, WA                              
+ 46.606 -111.964 1180 HLN Helena, MT                              
+ 46.617  -80.800  348 YSB Sudbury, ON                             
+ 46.683  -68.050  163 PQI Presque Isle, ME                        
+ 46.782 -100.757  511 BIS Bismarck, ND                            
+ 46.800  -71.383   70 YQB Quebec City, PQ                         
+ 46.843  -92.226  435 DLH Duluth, MN                              
+ 46.867  -68.013  191 CAR Caribou, ME                             
+ 46.925  -96.811  274 FAR Fargo, ND                               
+ 46.921 -114.093  975 MSO Missoula, MT                            
+ 46.950  -67.883  227 LIZ Limestone, ME                           
+ 46.973 -122.903   62 OLM Olympia, WA                             
+ 47.445 -122.314  130 SEA Seattle-Tacoma, WA                      
+ 47.473 -111.382 1120 GTF Great Falls, MT                         
+ 47.621 -117.528  723 GEG Spokane, WA                             
+ 47.700  -79.850  243 YXR Earlton, ON                             
+ 47.817  -83.350  447 YLD Chapleau, ON                            
+ 47.938 -124.555   59 UIL Quillayute, WA                          
+ 47.948  -97.183  257 GFK Grand Forks, ND                         
+ 48.174 -103.637  604 ISN Williston, ND                           
+ 48.200  -78.833  301 YUY Rouyn, PQ                               
+ 48.214 -106.621  699 GGW Glasgow, MT                             
+ 48.259 -101.280  523 MOT Minot, ND                               
+ 48.304 -114.264  906 FCA Kalispell/Glacier, MT                   
+ 48.367  -89.317  199 YQT Thunder Bay, ON                         
+ 48.543 -109.763  789 HVR Havre (AMOS), MT                        
+ 48.567  -81.367  295 YTS Timmons, ON                             
+ 48.562  -93.398  361 INL International Falls, MN                 
+ 48.600  -68.217   48 YYY Mont Joli, PQ                           
+ 49.417  -82.467  227 YYU Kapuskasing, ON                         
+ 49.767  -74.533  388 YMT Chibougamoau-Chapais, PQ                
+ 49.783  -86.933  349 YGQ Geraldton, ON                           
+ 49.833  -92.750  413 YHD Dryden, ON                              
+ 51.267  -80.650   10 YMO Moosonee, ON                            
+ 51.450  -90.200  386 YPL Pickle Lake, ON                         
+ 51.890 -176.625    5 ADK Adak,  AK                               
+ 52.717  174.117   29 ASY Shemya,  AK                             
+ 55.221 -162.728   30 ACD Cold Bay, AK                            
+ 55.353 -131.722   26 AKT Ketchikan,  AK                          
+ 56.483 -132.367   13 AWG Wrangell,  AK                           
+ 57.048 -135.365    6 ASI Sitka,  AK                              
+ 58.356 -134.562    5 AJN Juneau,  AK                             
+ 58.650 -162.067  161 AEH Cape Newenham,  AK                      
+ 58.684 -156.654   17 AKN King Salmon,  AK                        
+ 59.050 -158.517   26 ADL Dillingham,  AK                         
+ 59.455 -136.323   13 ASG Skagway,  AK                            
+ 60.580 -151.239   28 AEN Kenai,  AK                              
+ 61.133 -146.267   37 AVD Valdez 2,  AK                           
+ 61.250 -149.800   65 AED Anchorage, AK                           
+ 61.783 -166.033  146 ACZ Cape Romanzoff,  AK                     
+ 62.900 -155.983  294 ATL Tatalina,  AK                           
+ 62.963 -141.936  523 AOR Northway,  AK                           
+ 64.000 -145.733  391 ABI Fort Greely,  AK                        
+ 64.512 -165.436   11 AOM Nome,  AK                               
+ 64.650 -147.067  167 AEI Fairbanks,  AK                          
+ 64.733 -156.933   46 AGA Galena,  AK                             
+ 64.804 -147.876  132 AFA Fairbanks,  AK                          
+ 65.567 -167.917   83 ATC Tin City,  AK                           
+ 66.567 -145.267  431 FYU Fort Yukon,  AK                         
+ 66.886 -162.604    3 AOT Kotzebue,  AK                           
+ 70.133 -143.633    2 ABA Barter Island,  AK                      
+ 70.200 -148.467   17 ASC Deadhorse,  AK                          
+ 71.284 -156.778   13 ABR Barrow, AK                              
+ 40.184 -112.922 1324 S01 DPG Ditto                               
+ 40.046 -113.208 1295 S02 DPG Callao Gate                         
+ 40.208 -113.339 1288 S03 DPG V-Grid                              
+ 40.046 -113.046 1326 S04 DPG Target S                            
+ 40.157 -112.894 1330 S05 DPG White Sage                          
+ 40.119 -112.954 1547 S06 DPG Camel Back Mtn                      
+ 40.227 -112.725 1459 S07 DPG English Village                     
+ 40.197 -113.167 1299 S08 DPG Horizontal Grid                     
+ 40.243 -113.093 1305 S09 DPG Playa Station                       
+ 40.182 -113.022 1309 S10 DPG Baker Lab                           
+ 40.103 -112.980 1325 S11 DPG Tower Grid                          
+ 40.091 -113.110 1318 S12 DPG Juliet Road                         
+ 40.107 -112.808 1383 S13 DPG Durand Road                         
+ 40.353 -113.076 1326 S14 DPG Wig Mountain                        
+ 40.341 -113.235 1300 S15 DPG Salt Flats                          
+ 40.367 -113.004 2149 S16 DPG Upper Cedar Mtn                     
+ 40.727 -113.469 1257 S17 DPG Interstate 80                       
+ 40.116 -113.533 1294 S18 DPG Causeway                            
+ 39.904 -113.344 1305 S19 DPG Fish Springs                        
+ 39.946 -113.701 1309 S20 DPG Callao                              
+ 39.919 -112.939 1416 S21 DPG Simpson Springs                     
+ 40.208 -112.960 1335 S22 DPG NW Decon Pad                        
+ 40.278 -112.981 1370 S23 DPG Lower Cedar Mountain                
+ 40.453 -113.472 1298 S24 DPG TS5                                 
+ 40.516 -113.746 1286 S25 DPG North Salt Flats                    
+ 40.282 -113.700 1291 S26 DPG West Salt Flats                     

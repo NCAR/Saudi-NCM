@@ -1,0 +1,1419 @@
+ &userin
+ titlecolor='dark.green', idotitle=1, title='GAMEP-WRF 72-hr Domain 2  Cycle=cycle'
+ flmin=.12, frmax=.88, fbmin=.12, ftmax=.88,
+ ptimes=plttime,
+ tacc=600., ntextq=0, ntextcd=1,
+ timezone=+3, iusdaylightrule=0,
+ iinittime=0, fcoffset=OFFSET,
+ icgmsplit=0, itrajcalc=0, maxfld=10,
+ ncarg_type='IMGFMT',
+ &end
+-----------------------------------------------------------------
+                           COLOR TABLE
+COLOR                | RED  | GREEN | BLUE |
+-----------------------------------------------------------------
+def.background       | 1.00 | 1.00  | 1.00 | (DEFAULT BACKGROUND)
+def.foreground       | 0.00 | 0.00  | 0.00 | (DEFAULT FOREGROUND)
+white                | 1.00 | 1.00  | 1.00 |
+light.gray           | 0.75 | 0.75  | 0.75 |
+med.gray             | 0.50 | 0.50  | 0.50 |
+dark.gray            | 0.25 | 0.25  | 0.25 |
+black                | 0.00 | 0.00  | 0.00 |
+very.light.red       | 1.00 | 0.85  | 0.85 |
+pastel.red           | 1.00 | 0.68  | 0.80 |
+red.coral            | 1.00 | 0.56  | 0.74 |
+dark.salmon          | 1.00 | 0.58  | 0.58 |
+light.red            | 1.00 | 0.50  | 0.50 |
+red                  | 1.00 | 0.00  | 0.00 |
+med.red              | 0.75 | 0.00  | 0.00 |
+dark.red             | 0.50 | 0.00  | 0.00 |
+light.orange         | 1.00 | 0.75  | 0.50 |
+orange               | 1.00 | 0.50  | 0.00 |
+desert.tan           | 0.88 | 0.67  | 0.39 |
+tan.leather          | 0.80 | 0.40  | 0.00 |
+desert.brown         | 0.63 | 0.46  | 0.30 |
+dark.desert.brown    | 0.37 | 0.27  | 0.18 |
+brown                | 0.50 | 0.25  | 0.00 |
+brown.green          | 0.47 | 0.61  | 0.19 |
+parchment            | 1.00 | 1.00  | 0.82 |
+light.yellow         | 1.00 | 1.00  | 0.50 |
+lemon                | 1.00 | 1.00  | 0.43 |
+yellow               | 1.00 | 1.00  | 0.00 |
+gold                 | 0.98 | 0.82  | 0.16 |
+mustard              | 1.00 | 0.93  | 0.14 |
+dark.yellow          | 0.50 | 0.50  | 0.00 |
+very.light.green     | 0.75 | 1.00  | 0.75 |
+light.green          | 0.50 | 1.00  | 0.50 |
+neon.green           | 0.57 | 1.00  | 0.14 |
+avocado              | 0.91 | 0.93  | 0.50 |
+leaf.green           | 0.55 | 1.00  | 0.49 |
+aqua                 | 0.38 | 0.94  | 0.84 |
+green                | 0.00 | 1.00  | 0.00 |
+forest.green         | 0.00 | 0.75  | 0.00 |
+dark.green           | 0.00 | 0.50  | 0.00 |
+very.light.blue      | 0.85 | 0.85  | 1.00 |
+lavender             | 0.75 | 0.75  | 1.00 |
+light.blue           | 0.50 | 0.50  | 1.00 |
+cyan                 | 0.00 | 1.00  | 1.00 |
+blue                 | 0.00 | 0.00  | 1.00 |
+light.cerulean       | 0.39 | 0.87  | 0.98 |
+med.blue             | 0.00 | 0.00  | 0.75 |
+dark.blue            | 0.00 | 0.00  | 0.50 |
+very.dark.blue       | 0.00 | 0.00  | 0.30 |
+dusty.violet         | 0.97 | 0.66  | 1.00 |
+light.purple         | 0.87 | 0.69  | 1.00 |
+purple               | 0.88 | 0.00  | 1.00 |
+grape                | 0.69 | 0.00  | 1.00 |
+very.light.violet    | 0.90 | 0.70  | 0.90 |
+light.violet         | 0.75 | 0.50  | 0.75 |
+violet               | 0.50 | 0.00  | 0.50 |
+magenta              | 0.60 | 0.00  | 0.50 |
+dark.violet          | 0.25 | 0.00  | 0.25 |
+neon.pink            | 1.00 | 0.00  | 0.56 |
+red1                 | 1.00 | 0.86  | 0.86 |
+red2                 | 1.00 | 0.74  | 0.74 |
+red3                 | 1.00 | 0.57  | 0.57 |
+red4                 | 0.98 | 0.38  | 0.38 |
+red5                 | 0.84 | 0.10  | 0.10 |
+red6                 | 0.64 | 0.00  | 0.00 |
+red7                 | 0.49 | 0.00  | 0.00 |
+red8                 | 0.36 | 0.00  | 0.00 |
+green1               | 0.86 | 1.00  | 0.86 |
+green2               | 0.73 | 0.96  | 0.73 |
+green3               | 0.55 | 0.92  | 0.55 |
+green4               | 0.36 | 0.82  | 0.36 |
+green5               | 0.00 | 0.72  | 0.00 |
+green6               | 0.00 | 0.57  | 0.00 |
+green7               | 0.00 | 0.41  | 0.00 |
+green8               | 0.00 | 0.30  | 0.00 |
+blue1                | 0.86 | 0.86  | 1.00 |
+blue2                | 0.76 | 0.76  | 0.98 |
+blue3                | 0.62 | 0.62  | 0.97 |
+blue4                | 0.51 | 0.51  | 1.00 |
+blue5                | 0.38 | 0.38  | 1.00 |
+blue6                | 0.25 | 0.25  | 0.91 |
+blue7                | 0.00 | 0.00  | 0.76 |
+blue8                | 0.00 | 0.00  | 0.58 |
+cyan1                | 0.87 | 0.98  | 0.96 |
+cyan2                | 0.76 | 0.96  | 0.93 |
+cyan3                | 0.61 | 0.90  | 0.85 |
+cyan4                | 0.44 | 0.80  | 0.75 |
+cyan5                | 0.17 | 0.72  | 0.64 |
+cyan6                | 0.00 | 0.61  | 0.52 |
+cyan7                | 0.00 | 0.47  | 0.40 |
+cyan8                | 0.00 | 0.36  | 0.31 |
+magenta1             | 0.98 | 0.89  | 0.94 |
+magenta2             | 0.97 | 0.80  | 0.90 |
+magenta3             | 0.96 | 0.68  | 0.84 |
+magenta4             | 0.94 | 0.54  | 0.76 |
+magenta5             | 0.85 | 0.36  | 0.64 |
+magenta6             | 0.74 | 0.00  | 0.51 |
+magenta7             | 0.60 | 0.00  | 0.42 |
+magenta8             | 0.46 | 0.00  | 0.32 |
+yellow1              | 1.00 | 0.99  | 0.84 |
+yellow2              | 0.99 | 0.95  | 0.66 |
+yellow3              | 0.99 | 0.93  | 0.50 |
+yellow4              | 0.89 | 0.82  | 0.00 |
+yellow5              | 0.78 | 0.73  | 0.17 |
+yellow6              | 0.63 | 0.59  | 0.00 | 
+yellow7              | 0.47 | 0.44  | 0.00 | 
+yellow8              | 0.33 | 0.32  | 0.00 |
+purple1              | 0.92 | 0.80  | 1.00 |
+purple2              | 0.87 | 0.69  | 1.00 |
+purple3              | 0.78 | 0.58  | 0.93 |
+purple4              | 0.73 | 0.44  | 0.93 |
+purple5              | 0.67 | 0.30  | 0.93 |
+purple6              | 0.54 | 0.20  | 0.78 |
+purple7              | 0.42 | 0.00  | 0.73 |
+purple8              | 0.33 | 0.00  | 0.57 |
+orange1              | 1.00 | 0.87  | 0.78 |
+orange2              | 0.99 | 0.78  | 0.63 |
+orange3              | 0.98 | 0.69  | 0.49 |
+orange4              | 0.91 | 0.56  | 0.31 |
+orange5              | 0.82 | 0.41  | 0.12 |
+orange6              | 0.73 | 0.30  | 0.00 |
+orange7              | 0.60 | 0.25  | 0.00 |
+orange8              | 0.45 | 0.19  | 0.00 |
+gray1                | 0.94 | 0.94  | 0.94 |
+gray2                | 0.87 | 0.87  | 0.87 |
+gray3                | 0.78 | 0.78  | 0.78 |
+gray4                | 0.67 | 0.67  | 0.67 |
+gray5                | 0.57 | 0.57  | 0.57 |
+gray6                | 0.47 | 0.47  | 0.47 |
+gray7                | 0.37 | 0.37  | 0.37 |
+gray8                | 0.29 | 0.29  | 0.29 |
+----------------------------------------------------------------
+===========================================================================
+----------------------    Plot Specification Table    ---------------------
+===========================================================================
+#
+# Surface Temp and Wind
+#
+feld=tsfc; ptyp=hc; cmth=both; cbeg=0; cend=48; cint=3; smth=0; hvbr=1; nohl; nolb;>
+   cosq=-32,neon.pink,-24,violet,-16,grape,-8,cyan,0,lavender,8,>
+   dark.green,16,light.green,24,yellow,32,brown,40,orange,48,med.red
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=U10,V10; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Surface Relative Humidity
+#
+feld=rhu; ptyp=hc; cmth=both; cbeg=10; cend=90; cint=10; smth=0; hvbr=1; nohl; nolb;>
+   vcor=s; levs=1fb;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Surface Wind Speed and Streamlines
+#
+feld=wspk; ptyp=hc; cmth=both; cbeg=10; cend=70; cint=10; smth=0; hvbr=1; nohl; nolb;>
+   vcor=s; levs=1fb;>
+   cosq=10,white,18.57,purple1,27.14,purple2,35.71,purple3,44.28,purple4,>
+   52.85,purple5,61.42,purple6,70,purple7
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=uuu,vvv; ptyp=hs; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=20;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Rainfall in past 1 hr (conv + explicit)
+#
+feld=rtot1h; ptyp=hc; cmth=fill; cbeg=0.1; cend=35; cint=0.5; smth=0; mult; hvbr=1; nohl; nolb;>
+   cosq=0.1,white,0.2,very.light.blue,0.3,cyan,0.6,blue,1.1,green,1.6,>
+   yellow,5.1,orange,15.1,red,25.1,magenta,55.1,black
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Simulated Radar Reflectivity
+#
+feld=maxdbz; ptyp=hc; cmth=cell; cbeg=5; cend=75; cint=5; smth=0; hvbr=1;>
+   cosq=5,white,5.01,cyan,20,blue,20.01,neon.green,25.01,green,35,>
+   dark.green,35.01,yellow,45.01,orange,50.01,red,65,med.red,65.01,>
+   magenta,70.01,light.violet,75.01,white
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Maximum CAPE
+#
+feld=mcap; ptyp=hc; cmth=both; cbeg=0; cend=5000; cint=200; smth=0; hvbr=1; nohl; nolb;>
+   cosq=0,white,333,cyan3,667,cyan4,999,cyan5,1000,purple2,1333,purple3,>
+   1666,purple4,1999,purple5,2000,green2,2333,green3,2666,green4,2999,>
+   green5,3000,magenta2,3333,magenta3,3666,magenta4,3999,magenta5,4000,>
+   yellow2,4333,yellow3,4667,yellow4,5000,yellow5
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Convective Inhibition
+#
+feld=mcin; ptyp=hc; cmth=both; cbeg=-600; cend=0; cint=50; smth=0; hvbr=1; nohl; nolb;>
+   cosq=-600,blue6,-500,blue5,-400,blue4,-300,blue3,-200,blue2,-100,blue1,>
+   0,white
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# MSLP and Wind
+#
+feld=wspk; ptyp=hc; cmth=both; cbeg=10; cend=70; cint=10; smth=0; hvbr=1; nohl; nolb;>
+   vcor=s; levs=1fb;>
+   cosq=10,white,18.57,purple1,27.14,purple2,35.71,purple3,44.28,purple4,>
+   52.85,purple5,61.42,purple6,70,purple7
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=slp; ptyp=hc; cmth=cont; cint=3; smth=3;>
+   linw=3; colr=brown; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 850 mb Temp, Wind, and Geopotential Height
+#
+feld=tmc; ptyp=hc; cmth=both; cbeg=-16; cend=48; cint=3; smth=0; hvbr=1; nohl; nolb;>
+   vcor=p; levs=850;>
+   cosq=-32,neon.pink,-24,violet,-16,grape,-8,cyan,0,lavender,8,>
+   dark.green,16,light.green,24,yellow,32,brown,40,orange,48,med.red
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=30; smth=3; vcor=p; levs=850;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 700 mb Temp, Wind, and Geopotential Height
+#
+feld=tmc; ptyp=hc; cmth=both; cbeg=-24; cend=40; cint=3; smth=0; hvbr=1; nohl; nolb;>
+   vcor=p; levs=700;>
+   cosq=-32,neon.pink,-24,violet,-16,grape,-8,cyan,0,lavender,8,>
+   dark.green,16,light.green,24,yellow,32,brown,40,orange,48,med.red
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=30; smth=3; vcor=p; levs=700;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 500 mb Temp, Wind, and Geopotential Height
+#
+feld=tmc; ptyp=hc; cmth=both; cbeg=-32; cend=32; cint=3; smth=0; hvbr=1; nohl; nolb;>
+   vcor=p; levs=500;>
+   cosq=-32,neon.pink,-24,violet,-16,grape,-8,cyan,0,lavender,8,>
+   dark.green,16,light.green,24,yellow,32,brown,40,orange,48,med.red
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=60; smth=3; vcor=p; levs=500;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 925 mb Rel. Hum. (w.r.t. water) and Wind
+#
+feld=rhu; ptyp=hc; cmth=both; cbeg=10; cend=90; cint=10; smth=1; hvbr=1; nohl; nolb;>
+   vcor=p; levs=925;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 850 mb Rel. Hum. (w.r.t. water) and Wind
+#
+feld=rhu; ptyp=hc; cmth=both; cbeg=10; cend=90; cint=10; smth=1; hvbr=1; nohl; nolb;>
+   vcor=p; levs=850;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 700 mb Rel. Hum. (w.r.t. water) and Wind
+#
+feld=rhu; ptyp=hc; cmth=both; cbeg=10; cend=90; cint=10; smth=1; hvbr=1; nohl; nolb;>
+   vcor=p; levs=700;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 500 mb Rel. Hum. (w.r.t. ice) and Wind
+#
+feld=rhi; ptyp=hc; cmth=both; cbeg=10; cend=90; cint=10; smth=1; hvbr=1; nohl; nolb;>
+   vcor=p; levs=500;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 700 mb Relative Vorticity, Height and Wind
+#
+feld=vor; ptyp=hc; cmth=both; cbeg=-30; cend=30; cint=5; smth=4; hvbr=1; nohl; nolb;>
+   vcor=p; levs=700;>
+   cosq=-30,blue6,-25,blue5,-20,blue4,-15,blue3,-10,blue2,-5,white,0,>
+   white,5,white,10,red2,15,red3,20,red4,25,red5,30,red6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=60; smth=3; vcor=p; levs=700;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 500 mb Relative Vorticity, Height and Wind
+#
+feld=vor; ptyp=hc; cmth=both; cbeg=-30; cend=30; cint=5; smth=4; hvbr=1; nohl; nolb;>
+   vcor=p; levs=500;>
+   cosq=-30,blue6,-25,blue5,-20,blue4,-15,blue3,-10,blue2,-5,white,0,>
+   white,5,white,10,red2,15,red3,20,red4,25,red5,30,red6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=60; smth=3; vcor=p; levs=500;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 300 mb Wind Speed, Height and Wind Barbs
+#
+feld=wspk; ptyp=hc; cmth=both; cbeg=70; cend=190; cint=20; smth=0; hvbr=1; nohl; nolb;>
+   vcor=p; levs=300;>
+   cosq=70,white,87.14,purple1,104.28,purple2,121.42,purple3,138.57,>
+   purple4,155.71,purple5,172.85,purple6,190,purple7
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=120; smth=3; vcor=p; levs=300;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# 200 mb Wind Speed, Height and Wind Barbs
+#
+feld=wspk; ptyp=hc; cmth=both; cbeg=70; cend=190; cint=20; smth=0; hvbr=1; nohl; nolb;>
+   vcor=p; levs=200;>
+   cosq=70,white,87.14,purple1,104.28,purple2,121.42,purple3,138.57,>
+   purple4,155.71,purple5,172.85,purple6,190,purple7
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=ght; ptyp=hc; cmth=cont; cint=120; smth=3; vcor=p; levs=200;>
+   linw=3; colr=blue8; nohl; pwlb=0; tslb=0.015; nsmm; mjsk=0
+feld=uuu,vvv; ptyp=hv; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=16;>
+   colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# IR satellite view (cloud top temperature)
+#
+feld=ctt; ptyp=hc; cmth=cell; cbeg=-70; cend=30; cint=5; smth=0; hvbr=1;>
+   cosq=-70,blue8,-55,blue5,-40,blue2,-40,green8,-20,green5,-0.01,green2,>
+   0,magenta8,10,magenta5,20,magenta2,30,white
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Surface Latent Heat Flux
+#
+feld=LH; ptyp=hc; cmth=cell; cbeg=-150; cend=600; cint=50; smth=0; hvbr=1;>
+   cosq=-150,blue4,0,white,150,red2,300,red4,450,red6,600,red8
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Surface Sensible Heat Flux
+#
+feld=HFX; ptyp=hc; cmth=cell; cbeg=-150; cend=600; cint=50; smth=0; hvbr=1;>
+   cosq=-150,blue4,0,white,150,red2,300,red4,450,red6,600,red8
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Soil Layer 1 Temperature
+#
+feld=TSLB01; ptyp=hc; cmth=cell; cbeg=248; cend=308; cint=3; smth=0; hvbr=1;>
+   cosq=248,blue5,256,blue3,259.99,blue2,260,green5,271,green3,275.99,>
+   green2,276,magenta5,287,magenta3,291.99,magenta2,292,yellow5,303,>
+   yellow3,307.99,yellow2,308,gray5,320,gray3,326,gray2
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Model Land Use Categories
+#
+feld=xlus; ptyp=hh; chfl; cosq=1,purple6,2,yellow1,3,yellow3,4,yellow4,>
+   5,yellow6,6,yellow8,7,cyan2,8,cyan4,9,cyan6,10,cyan8,11,green2,12,>
+   green4,13,green6,14,green8,15,dark.yellow,16,blue7,17,blue5,18,blue2,>
+   19,dark.desert.brown,20,magenta5,21,magenta4,22,magenta3,23,magenta2,24,>
+   magenta1,25,gray2,26,gray4,27,white,31,purple6,32,purple6,33,purple6
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Model Land Use Table
+#
+feld=bullet; ptyp=hb; linw=2; crsa=10,343.0; tslb=0.015; colr=purple6
+feld=bullet; ptyp=hb; linw=2; crsa= 70.4,343.0; titl=Urban_and_Built-Up_Land; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,329.9; tslb=0.015; colr=yellow1
+feld=bullet; ptyp=hb; linw=2; crsa= 78.8,329.9; titl=Dryland_Cropland_and_Pasture; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,316.8; tslb=0.015; colr=yellow3
+feld=bullet; ptyp=hb; linw=2; crsa= 82.1,316.8; titl=Irrigated_Cropland_and_Pasture; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,303.7; tslb=0.015; colr=yellow4
+feld=bullet; ptyp=hb; linw=2; crsa=105.6,303.7; titl=Mixed_Dryland/Irrigated_Cropland_and_Pasture; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,290.5; tslb=0.015; colr=yellow6
+feld=bullet; ptyp=hb; linw=2; crsa= 73.7,290.5; titl=Cropland/Grassland_Mosaic; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,277.4; tslb=0.015; colr=yellow8
+feld=bullet; ptyp=hb; linw=2; crsa= 72.1,277.4; titl=Cropland/Woodland_Mosaic; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,264.3; tslb=0.015; colr=cyan2
+feld=bullet; ptyp=hb; linw=2; crsa= 46.9,264.3; titl=Grassland; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,251.2; tslb=0.015; colr=cyan4
+feld=bullet; ptyp=hb; linw=2; crsa= 46.9,251.2; titl=Shrubland; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,238.1; tslb=0.015; colr=cyan6
+feld=bullet; ptyp=hb; linw=2; crsa= 73.7,238.1; titl=Mixed_Shrubland/Grassland; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,225.0; tslb=0.015; colr=cyan8
+feld=bullet; ptyp=hb; linw=2; crsa= 43.6,225.0; titl=Savanna; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,211.8; tslb=0.015; colr=green2
+feld=bullet; ptyp=hb; linw=2; crsa= 75.4,211.8; titl=Deciduous_Broadleaf_Forest; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,198.7; tslb=0.015; colr=green4
+feld=bullet; ptyp=hb; linw=2; crsa= 77.1,198.7; titl=Deciduous_Needleleaf_Forest; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,185.6; tslb=0.015; colr=green6
+feld=bullet; ptyp=hb; linw=2; crsa= 75.4,185.6; titl=Evergreen_Broadleaf_Forest; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,172.5; tslb=0.015; colr=green8
+feld=bullet; ptyp=hb; linw=2; crsa= 77.1,172.5; titl=Evergreen_Needleleaf_Forest; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,159.4; tslb=0.015; colr=dark.yellow
+feld=bullet; ptyp=hb; linw=2; crsa= 51.9,159.4; titl=Mixed_Forest; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,146.3; tslb=0.015; colr=blue7
+feld=bullet; ptyp=hb; linw=2; crsa= 51.9,146.3; titl=Water_Bodies; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,133.2; tslb=0.015; colr=blue5
+feld=bullet; ptyp=hb; linw=2; crsa= 62.0,133.2; titl=Herbaceous_Wetland; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,120.0; tslb=0.015; colr=blue2
+feld=bullet; ptyp=hb; linw=2; crsa= 55.3,120.0; titl=Wooded_Wetland; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10,106.9; tslb=0.015; colr=dark.desert.brown
+feld=bullet; ptyp=hb; linw=2; crsa= 78.8,106.9; titl=Barren_or_Sparsely_Vegetated; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10, 93.8; tslb=0.015; colr=magenta5
+feld=bullet; ptyp=hb; linw=2; crsa= 60.3, 93.8; titl=Herbaceous_Tundra; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10, 80.7; tslb=0.015; colr=magenta4
+feld=bullet; ptyp=hb; linw=2; crsa= 53.6, 80.7; titl=Wooded_Tundra; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10, 67.6; tslb=0.015; colr=magenta3
+feld=bullet; ptyp=hb; linw=2; crsa= 51.9, 67.6; titl=Mixed_Tundra; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10, 54.5; tslb=0.015; colr=magenta2
+feld=bullet; ptyp=hb; linw=2; crsa= 62.0, 54.5; titl=Bare_Ground_Tundra; tslb=0.0070; colr=black
+feld=bullet; ptyp=hb; linw=2; crsa=10, 41.3; tslb=0.015; colr=magenta1
+feld=bullet; ptyp=hb; linw=2; crsa= 50.3, 41.3; titl=Snow_or_Ice; tslb=0.0070; colr=black
+===========================================================================
+#
+# WRF Grid Configuration
+#
+feld=ter; ptyp=hc; cmth=fill; cbeg=0; cend=4000; cint=150; smth=1; nohl;>
+   nolb; nmsg; nsmm;>
+   cosq=0,white,350,gray1,700,gray2,1050,gray3,1400,light.gray,1750,gray4,>
+   2100,gray5,2450,med.gray,2800,gray6,3150,gray7,3500,gray8,3850,dark.gray
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=box; linw=2; colr=red; ptyp=hb; crsa=108,92; crsb=251,231
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.478lat,38.117lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# Cross Section Location(s)
+#
+feld=ter; ptyp=hc; cmth=fill; cbeg=0; cend=4000; cint=150; smth=1; nohl;>
+   nolb; nmsg; nsmm;>
+   cosq=0,white,350,gray1,700,gray2,1050,gray3,1400,light.gray,1750,gray4,>
+   2100,gray5,2450,med.gray,2800,gray6,3150,gray7,3500,gray8,3850,dark.gray
+feld=line; ptyp=hb; vcor=s; levs=1fb; linw=2; dash=31;>
+   colr=red; crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon
+feld=map; ptyp=hb; ouds=solid; cint=5; oulw=1.5; colr=black; outy=Earth..4
+feld=tic; ptyp=hb; linw=1; axlg=20; axtg=5
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,41.0971lon; titl=OESK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=29.78lat,40.1lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,37.5971lon; titl=OETB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=28.37lat,36.6lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,42.6771lon; titl=OEHL; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.43lat,41.68lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,46.5271lon; titl=OEKK; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=27.9lat,45.53lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,37.4671lon; titl=OEWJ; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.2lat,36.47lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,44.7671lon; titl=OEGS; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.3lat,43.77lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,50.7771lon; titl=OEDF; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.47lat,49.78lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,40.6971lon; titl=OEMA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.55lat,39.7lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,45.3471lon; titl=OEDM; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.5lat,44.35lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,47.7271lon; titl=OERY; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=24.72lat,46.73lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,40.1971lon; titl=OEJD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=21.5lat,39.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,42.6271lon; titl=OEBA; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.3lat,41.63lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,46.1971lon; titl=OEWD; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=20.5lat,45.2lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,43.6471lon; titl=OEAB; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=18.23lat,42.65lon; tslb=0.0100
+feld=bullet; ptyp=hb; linw=2; crsa=26.4780lat,38.1170lon; titl=OEAO; tslb=0.0080
+feld=bullet; ptyp=hb; linw=2; crsa=26.48lat,38.12lon; tslb=0.0100
+===========================================================================
+#
+# XS(s) of Potential Temperature and Winds
+#
+===========================================================================
+feld=the; ptyp=vc; cmth=both; cbeg=250; cend=400; cint=5; smth=0;>
+   vcor=z; vwin=0.,12.; nohl; hvbr=1; pwlb=2; mjsk=2;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   cosq=250,blue6,270,blue4,299.99,blue1,300,green7,325,green4,349.99,>
+   green1,350,magenta6,375,magenta4,400,magenta1
+feld=uuu,vvv; ptyp=vw; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=6;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   colr=black; vwin=0.,12.; vcor=z
+feld=tic; ptyp=vb; linw=1; axld=300; axtd=50; axlg=20; axtg=5
+===========================================================================
+#
+# XS(s) of Relative Humidity and Winds
+#
+===========================================================================
+feld=rhu; ptyp=vc; cmth=both; cbeg=10; cend=90; cint=10; smth=0;>
+   vcor=z; vwin=0.,12.; nohl; hvbr=1; nolb;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   cosq=10,yellow7,16.66,yellow6,23.33,yellow5,30,yellow4,36.66,yellow3,>
+   43.33,yellow2,50,white,56.66,blue1,63.33,blue2,70,blue3,76.66,blue4,>
+   83.33,blue5,90,blue6
+feld=uuu,vvv; ptyp=vw; vcmx=-1.5; fulb=10kts; linw=1; smth=0; intv=6;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   colr=black; vwin=0.,12.; vcor=z
+feld=tic; ptyp=vb; linw=1; axld=300; axtd=50; axlg=20; axtg=5
+===========================================================================
+#
+# XS(s) of Vert. Vel. and Wind into XS
+#
+===========================================================================
+feld=www; ptyp=vc; cmth=both; cbeg=-100; cend=100; cint=20; smth=0;>
+   vcor=z; vwin=0.,12.; nohl; hvbr=1; pwlb=2; mjsk=2;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   cosq=-100,blue6,-83.33,blue5,-66.66,blue4,-50,blue3,-33.33,blue2,>
+   -16.66,white,0,white,16.66,white,33.33,red2,50,red3,66.66,red4,83.33,>
+   red5,100,red6
+feld=xnt; ptyp=vc; linw=2; cint=4; vcor=z; colr=black;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon;>
+   smth=0; mjsk=0; orlb=2; nohl; nmsg; nttl; pwlb=0; tslb=.015; vwin=0.,12.;>
+   cbeg=0; cend=200
+feld=xnt; ptyp=vc; linw=2; cint=4; vcor=z; colr=black;>
+   crsa=21.5lat,39.20lon; crsb=26.43lat,49.80lon; dash=21;>
+   smth=0; mjsk=0; orlb=2; nohl; nmsg; nttl; pwlb=0; tslb=.015; vwin=0.,12.;>
+   cbeg=-100; cend=0
+feld=tic; ptyp=vb; linw=1; axld=300; axtd=50; axlg=20; axtg=5
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEAH ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEAH ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEAH ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEDF ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEDF ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEDF ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEDR ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEDR ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEDR ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEGS ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEGS ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEGS ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEGT ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEGT ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEGT ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEHL ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEHL ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEHL ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEKK ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEKK ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEKK ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OERF ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OERF ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OERF ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OERR ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OERR ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OERR ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OESH ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OESH ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OESH ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OESK ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OESK ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OESK ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OETB ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OETB ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OETB ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OETR ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OETR ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OETR ; colr=blue; linw=2
+===========================================================================
+feld=tic; ptyp=sb; sndg; hodo
+feld=uuu,vvv; ptyp=sv; colr=dark.green; fulb=5mps; vvms=.03; nttl; linw=1;>
+  sloc=OEWJ; sndg; hodo
+feld=tmc; ptyp=sc; sloc=OEWJ; colr=red; linw=2
+feld=tdp; ptyp=sc; sloc=OEWJ; colr=blue; linw=2
+===========================================================================
