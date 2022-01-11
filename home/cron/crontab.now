@@ -3,8 +3,6 @@ MAILTO=""
 
 #  ===== input data ==========
 
-#10,40 * * * * /home/x_fisherh/datbin/ingest/get_ncep_http.pl -m gfs4 >& /home/fisherh/datlog/get_gfs4.cron_output
-# another try to download GFS4 data with python script June 17 2013 W. Wu
 30 4,10,16,22 * * * /home/x_fisherh/datbin/ingest/downloadGFS.py 7 gfs4 >& /home/x_fisherh/datlog/get_gfs4.py_output
 
 50 22,23 * * * /home/x_fisherh/datbin/ingest/get_sst083.csh >& /home/x_fisherh/datlog/get_sst083.cron_output
@@ -16,23 +14,8 @@ MAILTO=""
 30 10 * * * /home/x_fisherh/datbin/ingest/getecmwf >& /home/x_fisherh/datlog/get_ecmwf.log
 30 20 * * * /home/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /home/x_fisherh/datlog/get_pmeobs.log
 
-#5,35 0,1,4,6,10,12,16,18,22 * * *  /home/x_fisherh/datbin/ingest/get_ncepPreBufr.csh >&! /home/x_fisherh/datlog/ncep_prebufr.cron_output
-
-#5 5,11,17,23 * * * /home/x_fisherh/datbin/ingest/decode_ncep_prepbufr.new.csh >& /home/x_fisherh/datlog/ncep_decode.new.log
-# decode the data 20 minutes before each cycle run kicks off and last second decoding, too -- W. WU 01/12/2013
-#25,45 2,8,14,20 * * * /home/x_fisherh/datbin/ingest/decode_ncep_prepbufr.new.csh >& /home/x_fisherh/datlog/ncep_decode.new.log
-
-# run the madis decoder
-#13,33,53 * * * * /home/x_fisherh/datbin/ingest/decoder/madis_decoder.pl >&! /home/x_fisherh/datlog/madis_decoder.cron_output
-#20,40,01 * * * * /home/x_fisherh/datbin/ingest/decoder/madis_decoder.pl lag 1 >&! /home/x_fisherh/datlog/madis_decoder_lag=1hr.cron_output
-#25,45,05 * * * * /home/x_fisherh/datbin/ingest/decoder/madis_decoder.pl lag 2 >&! /home/x_fisherh/datlog/madis_decoder_lag=2hr.cron_output
-
 # get the satellite radiance
 55 * * * * /home/x_fisherh/datbin/ingest/wget_satRadiance.pl >& /home/x_fisherh/datlog/wget_satRadiance.log
-
-# get pme obs from saudi-c2 and tar them after 7 days
-#0,15,30,45 * * * * /home/x_fisherh/datbin/ingest/get_pmeobs.pl >& /home/x_fisherh/datlog/get_pmeobs.cron_output
-#15 23 * * * /home/x_fisherh/datbin/archive/pmeobs_tar.sh /home/x_fisherh/datbin/archive/pmeobs_tar.cfg >& /home/x_fisherh/datlog/pmeobs_tar.log
 
 # get NCEP obs data, decode, scrub
 15,45 * * * * $HOME/datbin/ingest/getNcepObsFilesCurl.pl -params $HOME/datbin/params/getNcepObsFilesCurl.params.ops -runonce >& /dev/null
@@ -55,15 +38,12 @@ MAILTO=""
 
 30 2,14 * * * $HOME/distrib/push2webserver.sh >& /dev/null
 
-#35 3,9,15,21 * * * /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/logs/GWBLDR.cronlog
-#15 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWBLDR/logs/GWBLDR.coldstart
-
 40 3,9,15,21 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
-
-#25 22 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh -c 2019080618 >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
 
 16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
 
+30 10 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d112Z.pl >& /home/x_fisherh/datlog/dust_plots12Z.log
+35 10 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d212Z.pl >>& /home/x_fisherh/datlog/dust_plots12Z.log
 
-
-
+30 22 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d100Z.pl >& /home/x_fisherh/datlog/dust_plots00Z.log
+35 22 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d200Z.pl >>& /home/x_fisherh/datlog/dust_plots00Z.log
