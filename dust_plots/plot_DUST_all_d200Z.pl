@@ -11,10 +11,10 @@ ${cycle} = "${cymd}"."00";
 #${dir} = ${indir}.${cycle};
 ${dir} = ${indir};
 #${outdir} = ${indir}."plots/"."${cycle}";
-${outdir} = "/lustre/project/k1206/x_fisherh/distrib/DUST_plots/"."${cycle}";
+${outdir} = "/lustre/project/k1206/x_fisherh/distrib/GWPME/DUST_plots/"."${cycle}";
 print "$outdir \n";
 #${workdir} = ${indir}."plots/";
-${workdir} = "/lustre/project/k1206/x_fisherh/distrib/DUST_plots/";
+${workdir} = "/lustre/project/k1206/x_fisherh/distrib/GWPME/DUST_plots/";
 
 if (! -d "${outdir}") {system ("mkdir -p ${outdir}");}
 

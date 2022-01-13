@@ -33,7 +33,7 @@ MAILTO=""
 55 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/ncep_prepbufr_decoded >& /dev/null
 55 0 * * *   $HOME/bin/scrub 6 /lustre/project/k1206/datainput/ecmwf >& /dev/null
 55 0 * * *   $HOME/bin/scrub 3 /lustre/project/k1206/datainput/pme_obs >& /dev/null
-10 1 * * *   $HOME/bin/scrub -d 4 /lustre/project/k1206/x_fisherh/cycles/GWPME/GRM
+10 1 * * *   $HOME/bin/scrub -d 4 /scratch/x_fisherh/cycles/GWPME/GRM
 30 1 * * *   $HOME/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
 
 30 2,14 * * * $HOME/distrib/push2webserver.sh >& /dev/null
@@ -42,8 +42,6 @@ MAILTO=""
 
 16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
 
-30 10 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d112Z.pl >& /home/x_fisherh/datlog/dust_plots12Z.log
-35 10 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d212Z.pl >>& /home/x_fisherh/datlog/dust_plots12Z.log
+30 10 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /home/x_fisherh/datlog/dust_plots0Z.log"
+30 22 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /home/x_fisherh/datlog/dust_plots12Z.log"
 
-30 22 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d100Z.pl >& /home/x_fisherh/datlog/dust_plots00Z.log
-35 22 * * * /usr/bin/perl /lustre/project/k1206/x_fisherh/dust_plots/plot_DUST_all_d200Z.pl >>& /home/x_fisherh/datlog/dust_plots00Z.log

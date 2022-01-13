@@ -11,10 +11,10 @@ ${cycle} = "${cymd}"."00";
 #${dir} = ${indir}.${cycle};
 ${dir} = ${indir};
 #${outdir} = ${indir}."plots/"."${cycle}";
-${outdir} = "/lustre/project/k1206/x_fisherh/distrib/DUST_plots/"."${cycle}";
+${outdir} = "/lustre/project/k1206/x_fisherh/distrib/GWPME/DUST_plots/"."${cycle}";
 print "$outdir \n";
 #${workdir} = ${indir}."plots/";
-${workdir} = "/lustre/project/k1206/x_fisherh/distrib/DUST_plots/";
+${workdir} = "/lustre/project/k1206/x_fisherh/distrib/GWPME/DUST_plots/";
 
 if (! -d "${outdir}") {system ("mkdir -p ${outdir}");}
 
@@ -36,7 +36,12 @@ if ($ii<10) {$ii = "0".$ii};
 $ncl = "ncl 'file_in=\"${fs}\"' 'dom=1' 'indir=\"${indir}\"' 'cycle=\"${cycle}\"' 'nfcst=\"${ii}\"' plot_DUST_all.ncl >& DUSTlog_${cycle}.log";
 print "$ncl\n";
 system ("$ncl");
+#PLOT AOD
+$ncl = "ncl 'file_in=\"${fs}\"' 'dom=1' 'indir=\"${indir}\"' 'cycle=\"${cycle}\"' 'nfcst=\"${ii}\"' plot_AOD_600nm.ncl >& AODlog_${cycle}.log";
+print "$ncl\n";
+system ("$ncl");
+
 $ii = $ii + 1;
 }
-system ("mv d1_DUSTall*.png ${outdir}");
+system ("mv *.png ${outdir}");
 1;
