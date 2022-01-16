@@ -3,45 +3,46 @@ MAILTO=""
 
 #  ===== input data ==========
 
-30 4,10,16,22 * * * /home/x_fisherh/datbin/ingest/downloadGFS.py 7 gfs4 >& /home/x_fisherh/datlog/get_gfs4.py_output
+30 4,10,16,22 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/downloadGFS.py 7 gfs4 >& /lustre/project/k1206/x_fisherh/datlog/get_gfs4.py_output
 
-50 22,23 * * * /home/x_fisherh/datbin/ingest/get_sst083.csh >& /home/x_fisherh/datlog/get_sst083.cron_output
+50 22,23 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_sst083.csh >& /lustre/project/k1206/x_fisherh/datlog/get_sst083.cron_output
 
-10,30,50 * * * * /home/x_fisherh/datbin/ingest/curl_madis.pl >&! /home/x_fisherh/datlog/curl_madis.cron_output
+10,30,50 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/curl_madis.pl >&! /lustre/project/k1206/x_fisherh/datlog/curl_madis.cron_output
 
-56 * * * * /usr/bin/date > /home/x_fisherh/crontab.check
+56 * * * * /usr/bin/date > /lustre/project/k1206/x_fisherh/crontab.check
 
-30 10 * * * /home/x_fisherh/datbin/ingest/getecmwf >& /home/x_fisherh/datlog/get_ecmwf.log
-30 20 * * * /home/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /home/x_fisherh/datlog/get_pmeobs.log
+30 10 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getecmwf >& /lustre/project/k1206/x_fisherh/datlog/get_ecmwf.log
+30 20 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /lustre/project/k1206/x_fisherh/datlog/get_pmeobs.log
 
 # get the satellite radiance
-55 * * * * /home/x_fisherh/datbin/ingest/wget_satRadiance.pl >& /home/x_fisherh/datlog/wget_satRadiance.log
+55 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/wget_satRadiance.pl >& /lustre/project/k1206/x_fisherh/datlog/wget_satRadiance.log
 
 # get NCEP obs data, decode, scrub
-15,45 * * * * $HOME/datbin/ingest/getNcepObsFilesCurl.pl -params $HOME/datbin/params/getNcepObsFilesCurl.params.ops -runonce >& /dev/null
-0,30 * * * * $HOME/datbin/ingest/ncepObsDecode.pl -p $HOME/datbin/params/ncepObsDecode.xml >& /dev/null
-30 0 * * * $HOME/bin/scrub 6 /lustre/project/k1206/datainput/ncep_decoded >& /dev/null
+15,45 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getNcepObsFilesCurl.pl -params /lustre/project/k1206/x_fisherh/datbin/params/getNcepObsFilesCurl.params.ops -runonce >& /dev/null
+0,30 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/ncepObsDecode.pl -p /lustre/project/k1206/x_fisherh/datbin/params/ncepObsDecode.xml >& /dev/null
+30 0 * * * /lustre/project/k1206/x_fisherh/bin/scrub 6 /lustre/project/k1206/datainput/ncep_decoded >& /dev/null
 
 # scrub data input directories
-10 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/gfs4 >& /dev/null
-15 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/gfs3 >& /dev/null
-20 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/madis-input-nc >& /dev/null
-25 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/madis_decoded >& /dev/null
-30 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/sat_radiance >& /dev/null
-40 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/sst083 >& /dev/null
-50 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput_raw/ncep_prepbufr >& /dev/null
-55 0 * * *   $HOME/bin/scrub 2 /lustre/project/k1206/datainput/ncep_prepbufr_decoded >& /dev/null
-55 0 * * *   $HOME/bin/scrub 6 /lustre/project/k1206/datainput/ecmwf >& /dev/null
-55 0 * * *   $HOME/bin/scrub 3 /lustre/project/k1206/datainput/pme_obs >& /dev/null
-10 1 * * *   $HOME/bin/scrub -d 4 /scratch/x_fisherh/cycles/GWPME/GRM
-30 1 * * *   $HOME/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
+10 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/gfs4 >& /dev/null
+15 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/gfs3 >& /dev/null
+20 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/madis-input-nc >& /dev/null
+25 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/madis_decoded >& /dev/null
+30 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/sat_radiance >& /dev/null
+40 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/sst083 >& /dev/null
+50 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput_raw/ncep_prepbufr >& /dev/null
+55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/ncep_prepbufr_decoded >& /dev/null
+55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 6 /lustre/project/k1206/datainput/ecmwf >& /dev/null
+55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 3 /lustre/project/k1206/datainput/pme_obs >& /dev/null
 
-30 2,14 * * * $HOME/distrib/push2webserver.sh >& /dev/null
+10 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 4 /scratch/x_fisherh/cycles/GWPME/GRM
+30 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
+
+30 2,14 * * * /lustre/project/k1206/x_fisherh/datbin/distrib/push2webserver.sh >& /dev/null
 
 40 3,9,15,21 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
 
 16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
 
-30 10 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /home/x_fisherh/datlog/dust_plots0Z.log"
-30 22 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /home/x_fisherh/datlog/dust_plots12Z.log"
+30 10 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots0Z.log"
+30 22 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots12Z.log"
 
