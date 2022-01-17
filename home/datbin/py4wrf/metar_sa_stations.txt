@@ -1,0 +1,177 @@
+OEAB (41112) in Abha, Saudi Arabia
+Latitude: 18° 14' 25" N (deg min sec), 18.2404° (decimal), 1814.42N (LORAN)
+Longitude: 42° 39' 24" E (deg min sec), 42.6566° (decimal), 04239.40E (LORAN)
+Elevation: 2090 metres (6857 feet) -- validated against 2092 metres (6864 feet) from SRTM.C_20TO43_3
+WMO Id: 41112 
+Location: Abha, Saudi Arabia
+OEAH (40420) in Al Ahsa, Saudi Arabia
+Latitude: 25° 17' 7" N (deg min sec), 25.2853° (decimal), 2517.12N (LORAN)
+Longitude: 49° 29' 7" E (deg min sec), 49.4852° (decimal), 04929.11E (LORAN)
+Elevation: 179 metres (587 feet) -- validated against 180 metres (591 feet) from SRTM.C_20TO43_3
+WMO Id: 40420 
+Location: Al Ahsa, Saudi Arabia
+OEBA (41055) in Al Baha, Saudi Arabia
+Latitude: 20° 17' 46" N (deg min sec), 20.2961° (decimal), 2017.77N (LORAN)
+Longitude: 41° 38' 3" E (deg min sec), 41.6343° (decimal), 04138.06E (LORAN)
+Elevation: 1652 metres (5420 feet) -- validated against 1659 metres (5443 feet) from SRTM.C_20TO43_3
+WMO Id: 41055 
+Location: Al Baha, Saudi Arabia
+OEBH (41084) in Bisha, Saudi Arabia
+Latitude: 19° 59' 4" N (deg min sec), 19.9843° (decimal), 1959.06N (LORAN)
+Longitude: 42° 37' 15" E (deg min sec), 42.6209° (decimal), 04237.25E (LORAN)
+Elevation: 1167 metres (3829 feet) -- validated against 1167 metres (3829 feet) from SRTM.C_20TO43_3
+WMO Id: 41084 
+Location: Bisha, Saudi Arabia
+OEDF (40415) in Dammam-King Fahd International Airport, Saudi Arabia
+Latitude: 26° 26' 0" N (deg min sec), 26.4333° (decimal), 2626.00N (LORAN)
+Longitude: 49° 48' 0" E (deg min sec), 49.8000° (decimal), 04948.00E (LORAN)
+Elevation: 12 metres (39 feet) -- validated against 13 metres (43 feet) from SRTM 3 arc-second: Middle Latitudes
+WMO Id: 40415 
+Location: Dammam-King Fahd International Airport, Saudi Arabia
+OEDR (40416) in Dhahran, Saudi Arabia
+Latitude: 26° 15' 56" N (deg min sec), 26.2654° (decimal), 2615.93N (LORAN)
+Longitude: 50° 9' 7" E (deg min sec), 50.1520° (decimal), 05009.12E (LORAN)
+Elevation: 17 metres (56 feet) -- validated against 17 metres (56 feet) from SRTM.C_20TO43_3
+WMO Id: 40416 
+Location: Dhahran, Saudi Arabia
+OEGN (41140) in Gizan, Saudi Arabia
+Latitude: 16° 54' 4" N (deg min sec), 16.9011° (decimal), 1654.07N (LORAN)
+Longitude: 42° 35' 9" E (deg min sec), 42.5858° (decimal), 04235.15E (LORAN)
+Elevation: 6 metres (20 feet) -- validated against 5 metres (16 feet) from Google
+WMO Id: 41140 
+Location: Gizan, Saudi Arabia
+OEGS (40405) in Gassim, Saudi Arabia
+Latitude: 26° 18' 10" N (deg min sec), 26.3028° (decimal), 2618.17N (LORAN)
+Longitude: 43° 46' 28" E (deg min sec), 43.7744° (decimal), 04346.47E (LORAN)
+Elevation: 648 metres (2126 feet) -- validated against 647 metres (2123 feet) from SRTM.C_20TO43_3
+WMO Id: 40405 
+Location: Gassim, Saudi Arabia
+OEGT (40360) in Guriat, Saudi Arabia
+Latitude: 31° 24' 43" N (deg min sec), 31.4119° (decimal), 3124.72N (LORAN)
+Longitude: 37° 16' 46" E (deg min sec), 37.2795° (decimal), 03716.77E (LORAN)
+Elevation: 504 metres (1654 feet) -- validated against 512 metres (1680 feet) from SRTM.C_20TO43_3
+WMO Id: 40360 
+Location: Guriat, Saudi Arabia
+OEHL (40394) in Hail, Saudi Arabia
+Latitude: 27° 26' 17" N (deg min sec), 27.4379° (decimal), 2726.28N (LORAN)
+Longitude: 41° 41' 11" E (deg min sec), 41.6863° (decimal), 04141.18E (LORAN)
+Elevation: 1015 metres (3330 feet) -- validated against 1002 metres (3287 feet) from SRTM.C_20TO43_3
+WMO Id: 40394 
+Location: Hail, Saudi Arabia
+OEJB in Jubail Naval , Saudi Arabia
+Latitude: 27° 2' 21" N (deg min sec), 27.0390° (decimal), 2702.34N (LORAN)
+Longitude: 49° 24' 18" E (deg min sec), 49.4051° (decimal), 04924.30E (LORAN)
+Elevation: 8 metres (26 feet) -- validated against 6 metres (20 feet) from SRTM.C_20TO43_3
+Location: Jubail Naval , Saudi Arabia
+OEJN (41024) in Jeddah King Abdul Aziz International Airport , Saudi Arabia
+Latitude: 21° 42' 0" N (deg min sec), 21.7000° (decimal), 2142.00N (LORAN)
+Longitude: 39° 11' 0" E (deg min sec), 39.1833° (decimal), 03911.00E (LORAN)
+Elevation: 15 metres (49 feet) -- validated against 15 metres (49 feet) from SRTM.C_20TO43_3
+WMO Id: 41024 
+Location: Jeddah King Abdul Aziz International Airport , Saudi Arabia
+OEKK (40377) in Hafr Al-Batin, Saudi Arabia
+Latitude: 27° 54' 3" N (deg min sec), 27.9009° (decimal), 2754.06N (LORAN)
+Longitude: 45° 31' 41" E (deg min sec), 45.5282° (decimal), 04531.69E (LORAN)
+Elevation: 413 metres (1355 feet) -- validated against 420 metres (1378 feet) from SRTM.C_20TO43_3
+WMO Id: 40377 
+Location: Hafr Al-Batin, Saudi Arabia
+OEKJ in Al-Kharj, RD, Saudi Arabia
+Latitude: 24° 4' 0" N (deg min sec), 24.0667° (decimal), 2404.00N (LORAN)
+Longitude: 47° 35' 0" E (deg min sec), 47.5833° (decimal), 04735.00E (LORAN)
+Elevation: 500 metres (1640 feet) -- validated against 486 metres (1594 feet) from Google
+Location: Al-Kharj, RD, Saudi Arabia
+OEKM (41114) in Khamis Mushait, Saudi 
+Latitude: 18° 17' 50" N (deg min sec), 18.2973° (decimal), 1817.84N (LORAN)
+Longitude: 42° 48' 13" E (deg min sec), 42.8035° (decimal), 04248.21E (LORAN)
+Elevation: 2056 metres (6745 feet) -- validated against 2051 metres (6729 feet) from SRTM.C_20TO43_3
+WMO Id: 41114 
+Location: Khamis Mushait, Saudi Arabia
+OEMA (40430) in Madinah, Saudi Arabia
+Latitude: 24° 33' 12" N (deg min sec), 24.5534° (decimal), 2433.21N (LORAN)
+Longitude: 39° 42' 18" E (deg min sec), 39.7051° (decimal), 03942.30E (LORAN)
+Elevation: 636 metres (2087 feet) -- validated against 639 metres (2096 feet) from SRTM.C_20TO43_3
+WMO Id: 40430 
+Location: Madinah, Saudi Arabia
+OEMK in Makkah, Saudi Arabia
+Latitude: 21° 26' 21" N (deg min sec), 21.4393° (decimal), 2126.36N (LORAN)
+Longitude: 39° 59' 43" E (deg min sec), 39.9953° (decimal), 03959.72E (LORAN)
+Elevation: 369 metres (1211 feet)
+Location: Makkah, Saudi Arabia
+OENG (41128) in Najran, Saudi Arabia
+Latitude: 17° 36' 41" N (deg min sec), 17.6114° (decimal), 1736.69N (LORAN)
+Longitude: 44° 25' 9" E (deg min sec), 44.4192° (decimal), 04425.15E (LORAN)
+Elevation: 1212 metres (3976 feet) -- validated against 1210 metres (3970 feet) from SRTM.C_20TO43_3
+WMO Id: 41128 
+Location: Najran, Saudi Arabia
+OEPA (40373) in Al Qaysumah, Saudi Arabia
+Latitude: 28° 19' 0" N (deg min sec), 28.3167° (decimal), 2819.00N (LORAN)
+Longitude: 46° 8' 0" E (deg min sec), 46.1333° (decimal), 04608.00E (LORAN)
+Elevation: 358 metres (1175 feet) -- validated against 360 metres (1181 feet) from SRTM 3 arc-second: Middle Latitudes
+WMO Id: 40373 
+Location: Al Qaysumah, Saudi Arabia
+OERF (40362) in Rafha, Saudi Arabia
+Latitude: 29° 37' 35" N (deg min sec), 29.6264° (decimal), 2937.59N (LORAN)
+Longitude: 43° 29' 26" E (deg min sec), 43.4906° (decimal), 04329.44E (LORAN)
+Elevation: 449 metres (1473 feet) -- validated against 441 metres (1447 feet) from SRTM.C_20TO43_3
+WMO Id: 40362 
+Location: Rafha, Saudi Arabia
+OERK (40437) in King Khaled International Airport, Saudi Arabia
+Latitude: 24° 56' 0" N (deg min sec), 24.9333° (decimal), 2456.00N (LORAN)
+Longitude: 46° 43' 0" E (deg min sec), 46.7167° (decimal), 04643.00E (LORAN)
+Elevation: 612 metres (2008 feet) -- validated against 612 metres (2008 feet) from SRTM.C_20TO43_3
+WMO Id: 40437 
+Location: King Khaled International Airport, Saudi Arabia
+OERR (40357) in Arar, Saudi Arabia
+Latitude: 30° 54' 24" N (deg min sec), 30.9066° (decimal), 3054.40N (LORAN)
+Longitude: 41° 8' 18" E (deg min sec), 41.1382° (decimal), 04108.29E (LORAN)
+Elevation: 555 metres (1821 feet) -- validated against 554 metres (1818 feet) from SRTM.C_20TO43_3
+WMO Id: 40357 
+Location: Arar, Saudi Arabia
+OESH (41136) in Sharurah, Saudi Arabia
+Latitude: 17° 28' 1" N (deg min sec), 17.4669° (decimal), 1728.01N (LORAN)
+Longitude: 47° 7' 17" E (deg min sec), 47.1214° (decimal), 04707.29E (LORAN)
+Elevation: 720 metres (2362 feet) -- validated against 728 metres (2387 feet) from Google
+WMO Id: 41136 
+Location: Sharurah, Saudi Arabia
+OESK (40361) in Al-Jouf, Saudi Arabia
+Latitude: 29° 47' 6" N (deg min sec), 29.7851° (decimal), 2947.11N (LORAN)
+Longitude: 40° 6' 0" E (deg min sec), 40.1000° (decimal), 04006.00E (LORAN)
+Elevation: 689 metres (2260 feet) -- validated against 671 metres (2201 feet) from SRTM.C_20TO43_3
+WMO Id: 40361 
+Location: Al-Jouf, Saudi Arabia
+OETB (40375) in Tabuk, Saudi Arabia
+Latitude: 28° 23' 0" N (deg min sec), 28.3833° (decimal), 2823.00N (LORAN)
+Longitude: 36° 36' 0" E (deg min sec), 36.6000° (decimal), 03636.00E (LORAN)
+Elevation: 768 metres (2520 feet) -- validated against 770 metres (2526 feet) from SRTM 3 arc-second: Middle Latitudes
+WMO Id: 40375 
+Location: Tabuk, Saudi Arabia
+OETF (41036) in Taif, Saudi Arabia
+Latitude: 21° 29' 0" N (deg min sec), 21.4834° (decimal), 2129.01N (LORAN)
+Longitude: 40° 32' 40" E (deg min sec), 40.5443° (decimal), 04032.66E (LORAN)
+Elevation: 1478 metres (4849 feet) -- validated against 1463 metres (4800 feet) from SRTM.C_20TO43_3
+WMO Id: 41036 
+Location: Taif, Saudi Arabia
+OETR (40356) in Turaif, Saudi Arabia
+Latitude: 31° 41' 34" N (deg min sec), 31.6927° (decimal), 3141.56N (LORAN)
+Longitude: 38° 43' 52" E (deg min sec), 38.7312° (decimal), 03843.87E (LORAN)
+Elevation: 852 metres (2795 feet) -- validated against 854 metres (2802 feet) from SRTM.C_20TO43_3
+WMO Id: 40356 
+Location: Turaif, Saudi Arabia
+OEWD (41061) in Wadi Al Dawasser Airport, Saudi Arabia
+Latitude: 20° 30' 15" N (deg min sec), 20.5043° (decimal), 2030.26N (LORAN)
+Longitude: 45° 11' 58" E (deg min sec), 45.1996° (decimal), 04511.97E (LORAN)
+Elevation: 629 metres (2062 feet) -- validated against 629 metres (2064 feet) from SRTM 3 arc-second: Middle Latitudes
+WMO Id: 41061 
+Location: Wadi Al Dawasser Airport, Saudi Arabia
+OEWJ (40400) in Wejh, Saudi Arabia
+Latitude: 26° 11' 55" N (deg min sec), 26.1986° (decimal), 2611.91N (LORAN)
+Longitude: 36° 28' 35" E (deg min sec), 36.4764° (decimal), 03628.58E (LORAN)
+Elevation: 20 metres (66 feet) -- validated against 8 metres (26 feet) from SRTM.C_20TO43_3
+WMO Id: 40400 
+Location: Wejh, Saudi Arabia
+OEYN (40439) in Yenbo, Saudi Arabia
+Latitude: 24° 8' 39" N (deg min sec), 24.1442° (decimal), 2408.65N (LORAN)
+Longitude: 38° 3' 48" E (deg min sec), 38.0633° (decimal), 03803.80E (LORAN)
+Elevation: 8 metres (26 feet) -- validated against 20 metres (66 feet) from SRTM.C_20TO43_3
+WMO Id: 40439 
+Location: Yenbo, Saudi Arabia

@@ -1,0 +1,6 @@
+Creating a readme since the people who wrote this code did not
+
+# === process and plot meteograms after all forecasts available  domains 3 and 2  testing May 9 2013 ====
+35 0,12,18 * * * /home/pmefdda/py4wrf/meteograms14.py -f 6 -d 2 >& /d2/pmefdda/cycles/GWPME/GRM/meteograms/meteo14_d02.log
+10 7 * * * /home/pmefdda/py4wrf/meteograms14.py -f 7 -d 2 >& /d2/pmefdda/cycles/GWPME/GRM/meteograms/meteo14_d02.log
+

@@ -1,0 +1,34 @@
+ICAO	WMO-id	Lat	Long	Elevation	City	Contry
+OEAB Taf	41112	18-14N	042-39E	2090	Abha	Saudi Arabia
+OEAH Taf	40420	25-18N	049-29E	179	Al-Ahsa	Saudi Arabia
+OEBA Taf	41055	20-18N	041-38E	1652	Al-Baha	Saudi Arabia
+OEBH Taf	41084	19-59N	042-37E	1167	Bisha	Saudi Arabia
+OEDF Taf	40417	26-28N	049-47E	22	Dammam	Saudi Arabia
+OEDR Taf	40416	26-16N	050-09E	26	Dhahran	Saudi Arabia
+OEDW Taf	40435	24-30N	044-21E	990	Dawadmi	Saudi Arabia
+OEGN Taf	41140	16-54N	042-35E	6	Gizan	Saudi Arabia
+OEGS Taf	40405	26-18N	043-46E	648	Gassim	Saudi Arabia
+OEGT Taf	40360	31-24N	037-16E	509	Guriat	Saudi Arabia
+OEHL Taf	40394	27-26N	041-41E	1015	Hail	Saudi Arabia
+OEJB Taf	-----	27-03N	049-24E	8	Jubail Naval	Saudi Arabia
+OEJD Taf	41026	21-30N	039-12E	15	Jeddah	Saudi Arabia
+OEJN Taf	41024	21-42N	039-11E	15	Jeddah-Airport	Saudi Arabia
+OEKK Taf	40377	27-54N	045-32E	413	Hafr Al-Batin	Saudi Arabia
+OEKJ Taf	40445	24-15N	47-32E	439	Al-Kharj	Saudi Arabia
+OEKM Taf	41114	18-18N	042-48E	2066	Khamis Mushait	Saudi Arabia
+OEMA Taf	40430	24-33N	039-42E	654	Madinah	Saudi Arabia
+OEMK Taf	41030	21-26N	039-46E	310	Makkah	Saudi Arabia
+OENG Taf	41128	17-37N	044-25E	1212	Najran	Saudi Arabia
+OEPA Taf	40373	28-19N	046-07E	358	Al-Qaysumah	Saudi Arabia
+OERF Taf	40362	29-37N	043-29E	449	Rafha	Saudi Arabia
+OERK Taf	40437	24-56N	046-43E	614	King Khaled International Airport	Saudi Arabia
+OERR Taf	40357	30-54N	041-08E	555	Arar	Saudi Arabia
+OERY Taf	40438	24-43N	046-44E	635	Riyadh	Saudi Arabia
+OESH Taf	41136	17-28N	047-07E	720	Sharurah	Saudi Arabia
+OESK Taf	40361	29-47N	040-06E	689	Al-Jouf	Saudi Arabia
+OETB Taf	40375	28-22N	036-36E	778	Tabuk	Saudi Arabia
+OETF Taf	41036	21-29N	040-33E	1478	Taif	Saudi Arabia
+OETR Taf	40356	31-41N	038-44E	813	Turaif	Saudi Arabia
+OEWD Taf	41061	20-30N	045-12E	624	Wadi-Airport	Saudi Arabia
+OEWJ Taf	40400	26-12N	036-28E	20	Wejh	Saudi Arabia
+OEYN Taf	40439	24-09N	038-04E	8	Yenbo	Saudi Arabia
