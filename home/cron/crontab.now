@@ -3,7 +3,8 @@ MAILTO=""
 
 #  ===== input data ==========
 
-30 1,07,13,19 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/downloadGFS.py 7 gfs4 >& /lustre/project/k1206/x_fisherh/datlog/get_gfs4.py_output
+#Just download the 0Z and 12Z GFS, we don't need the 6 or 18
+30 8,20 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/downloadGFS.py 5 gfs4 >& /lustre/project/k1206/x_fisherh/datlog/get_gfs4.py_output
 
 50 22,23 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_sst083.csh >& /lustre/project/k1206/x_fisherh/datlog/get_sst083.cron_output
 
@@ -11,8 +12,8 @@ MAILTO=""
 
 56 * * * * /usr/bin/date > /lustre/project/k1206/x_fisherh/crontab.check
 
-30 10 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getecmwf >& /lustre/project/k1206/x_fisherh/datlog/get_ecmwf.log
-30 20 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /lustre/project/k1206/x_fisherh/datlog/get_pmeobs.log
+30 13 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getecmwf >& /lustre/project/k1206/x_fisherh/datlog/get_ecmwf.log
+30 23 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /lustre/project/k1206/x_fisherh/datlog/get_pmeobs.log
 
 # get the satellite radiance
 55 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/wget_satRadiance.pl >& /lustre/project/k1206/x_fisherh/datlog/wget_satRadiance.log
@@ -36,19 +37,19 @@ MAILTO=""
 
 10 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 4 /scratch/x_fisherh/cycles/GWPME/GRM
 30 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
+30 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 1 /scratch/x_fisherh/cycles/GWPME/GRM/web
 
-30 2,14 * * * /lustre/project/k1206/x_fisherh/datbin/distrib/push2webserver.sh >& /dev/null
+30 0,2,4,6,8,10,12,14,16,18,20,22 * * * /lustre/project/k1206/x_fisherh/datbin/distrib/push2webserver.sh >& /dev/null
 
-40 0,6,12,18 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
+50 3,9,15,21 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
 
 16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
 
-30 10 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots0Z.log"
-30 22 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots12Z.log"
+30 13 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots0Z.log"
+30 23 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots12Z.log"
 
-45 1,13,19 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 7 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
-15 8 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 8 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
-35 1,13,19 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/meteograms14.py -f 7 -d 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/meteograms/meteo14_d02.log
-10 8 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/meteograms14.py -f 8 -d 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/meteograms/meteo14_d02.log
-
-
+#45 4,17,22 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 7 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
+#15 11 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 8 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
+#This timing needs to be exact, i.e. the script assumes a launch time of +8 from the cycle start
+#Saudi is +3 from UTC so 0Z needs to start at 11
+35 5,11,17,23 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/run_meteos.sh >& /home/x_fisherh/meteo14_d02.log

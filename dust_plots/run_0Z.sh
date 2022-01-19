@@ -1,3 +1,4 @@
+!#/bin/bash -l
 #This script calls both d1 and d2 12Z dust plotting perl scripts
 #We need to do this in a shell because we need to load ncl first 
 module load ncl

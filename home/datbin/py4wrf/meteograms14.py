@@ -36,7 +36,7 @@ chr =  ptimeutc.strftime('%H')
 
 ptype = 'png'
 
-pysdir = '/home/x_fisherh/meteograms/py4wrf'
+pysdir = '/lustre/project/k1206/x_fisherh/datbin/py4wrf'
 topdir = '/scratch/x_fisherh/cycles/GWPME/GRM'
 outdir = topdir + '/meteograms'
 
