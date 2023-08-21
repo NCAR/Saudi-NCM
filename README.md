@@ -1,2 +1,2 @@
-# GAMEP
-GAMEP WRF and Dust modeling
+# NCM
+NCM WRF and Dust modeling
