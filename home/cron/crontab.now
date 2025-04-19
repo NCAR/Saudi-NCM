@@ -1,55 +1,38 @@
 SHELL = "/bin/bash"
 MAILTO=""
 
-#  ===== input data ==========
+# Get the GFS4 0.5 degree data
+30 4,10,16,22 * * * python3 /project/k10082/ncm_ops/datbin/ingest/downloadGFS.py 7 gfs4 >& /home/x_zhangy/datlog/get_gfs4.py_output
 
-#Just download the 0Z and 12Z GFS, we don't need the 6 or 18
-30 8,20 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/downloadGFS.py 5 gfs4 >& /lustre/project/k1206/x_fisherh/datlog/get_gfs4.py_output
+# Write a file every hour to check if crontab is running
+56 * * * * /usr/bin/date > /project/k10082/ncm_ops/crontab.check
 
-50 22,23 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_sst083.csh >& /lustre/project/k1206/x_fisherh/datlog/get_sst083.cron_output
+# Scrub data files, each entry scrubs a different directory
+10 0 * * * /project/k10082/ncm_ops/bin/scrub 2 /project/k10082/ncm_ops/datainput/gfs4 >& /dev/null
+10 1 * * * /project/k10082/ncm_ops/bin/scrub -d 4 /scratch/project/k10082/ncm_ops/cycles/GWPME/GRM
+30 1 * * * /project/k10082/ncm_ops/bin/scrub -d 1 /scratch/project/k10082/ncm_ops/distrib/GWPME
 
-10,30,50 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/curl_madis.pl >&! /lustre/project/k1206/x_fisherh/datlog/curl_madis.cron_output
+# Push image files and mobile grib files to the web server
+30 2,14 * * * /project/k10082/ncm_ops/distrib/push2webserver.sh >& /dev/null
 
-56 * * * * /usr/bin/date > /lustre/project/k1206/x_fisherh/crontab.check
+# Starts the WRF-RTFDDA cycling runs
+40 3,9,15,21 * * * /bin/csh -c "/scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/scripts/env_vars.csh >& /scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/logs/GWPME.cronlog"
 
-30 13 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getecmwf >& /lustre/project/k1206/x_fisherh/datlog/get_ecmwf.log
-30 23 * * * /lustre/project/k1206/x_fisherh/datbin/ingest/get_pmeobs_gamep >& /lustre/project/k1206/x_fisherh/datlog/get_pmeobs.log
+# Starts the WRF-RTFDDA cold-start runs once a week
+16 21 * * 0 /scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/scripts/coldstart.csh /scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/scripts/env_vars.csh >& /scratch/project/k10082/ncm_ops/GMODJOBS/GWPME/logs/GWPME.coldstart
 
-# get the satellite radiance
-55 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/wget_satRadiance.pl >& /lustre/project/k1206/x_fisherh/datlog/wget_satRadiance.log
+# Get the 00Z and 12Z GFS data for running dust model
+# This download is faster than using downloadGFS.py
+# so the dust model can be run earlier
+50 07 * * * csh /scratch/x_zhangy/datainput/gfs4/get_GFS_0p50_00Z.csh >&/scratch/x_zhangy/datainput/gfs4/get_GFS_0p50_00Z.info
+50 19 * * * csh /scratch/x_zhangy/datainput/gfs4/get_GFS_0p50_12Z.csh >&/scratch/x_zhangy/datainput/gfs4/get_GFS_0p50_12Z.info
 
-# get NCEP obs data, decode, scrub
-15,45 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/getNcepObsFilesCurl.pl -params /lustre/project/k1206/x_fisherh/datbin/params/getNcepObsFilesCurl.params.ops -runonce >& /dev/null
-0,30 * * * * /lustre/project/k1206/x_fisherh/datbin/ingest/ncepObsDecode.pl -p /lustre/project/k1206/x_fisherh/datbin/params/ncepObsDecode.xml >& /dev/null
-30 0 * * * /lustre/project/k1206/x_fisherh/bin/scrub 6 /lustre/project/k1206/datainput/ncep_decoded >& /dev/null
+# Do the 12Z GFS-driven dust run
+# and subset the dust variables and make dust plots
+30 20 * * * sh /scratch/x_zhangy/Dust_realtime/WPS12Z/submit_run_wps.sh
+00 21 * * * sh /scratch/x_zhangy/Dust_realtime/WRF12Z/submit_run_real_wrf.sh &> /scratch/x_zhangy/Dust_realtime/WRF12Z/submit_run_real_wrf.log
 
-# scrub data input directories
-10 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/gfs4 >& /dev/null
-15 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/gfs3 >& /dev/null
-20 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/madis-input-nc >& /dev/null
-25 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/madis_decoded >& /dev/null
-30 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/sat_radiance >& /dev/null
-40 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/sst083 >& /dev/null
-50 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput_raw/ncep_prepbufr >& /dev/null
-55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 2 /lustre/project/k1206/datainput/ncep_prepbufr_decoded >& /dev/null
-55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 6 /lustre/project/k1206/datainput/ecmwf >& /dev/null
-55 0 * * *   /lustre/project/k1206/x_fisherh/bin/scrub 3 /lustre/project/k1206/datainput/pme_obs >& /dev/null
-
-10 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 4 /scratch/x_fisherh/cycles/GWPME/GRM
-30 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 1 /lustre/project/k1206/x_fisherh/distrib/GWPME
-30 1 * * *   /lustre/project/k1206/x_fisherh/bin/scrub -d 1 /scratch/x_fisherh/cycles/GWPME/GRM/web
-
-30 0,2,4,6,8,10,12,14,16,18,20,22 * * * /lustre/project/k1206/x_fisherh/datbin/distrib/push2webserver.sh >& /dev/null
-
-50 3,9,15,21 * * * /bin/csh -c "/lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/submitCycleMM.csh -f /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.cronlog"
-
-16 21 * * 0 /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/coldstart.csh /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/scripts/env_vars.csh >& /lustre/project/k1206/x_fisherh/GMODJOBS/GWPME/logs/GWPME.coldstart
-
-30 13 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_0Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots0Z.log"
-30 23 * * * /bin/bash -c  "/lustre/project/k1206/x_fisherh/dust_plots/run_12Z.sh >& /lustre/project/k1206/x_fisherh/datlog/dust_plots12Z.log"
-
-#45 4,17,22 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 7 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
-#15 11 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/tscomparison.py 3 8 2 >& /scratch/x_fisherh/cycles/GWPME/GRM/timesgraphs/timesg_d02.log
-#This timing needs to be exact, i.e. the script assumes a launch time of +8 from the cycle start
-#Saudi is +3 from UTC so 0Z needs to start at 11
-35 5,11,17,23 * * * /lustre/project/k1206/x_fisherh/datbin/py4wrf/run_meteos.sh >& /home/x_fisherh/meteo14_d02.log
+# Do the 00Z ECMWF-driven dust run
+# and subset the dust variables and make dust plots
+50 11 * * * sh /scratch/x_zhangy/Dust_realtime/WPS00Z.ECMWF/submit_run_wps.sh
+20 12 * * * sh /scratch/x_zhangy/Dust_realtime/WRF00Z.ECMWF/submit_run_real_wrf.sh &> /scratch/x_zhangy/Dust_realtime/WRF00Z.ECMWF/submit_run_real_wrf.log
